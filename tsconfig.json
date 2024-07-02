@@ -9,5 +9,6 @@
       "@styles/*": ["./src/styles/*"],
       "@src/*": ["./src/*"]
     }
-  }
+  },
+  "include": ["src/**/*"]
 }
