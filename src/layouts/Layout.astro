@@ -1,5 +1,7 @@
 ---
 import { SEO } from "astro-seo";
+import "./global.css";
+
 interface Props {
   title?: string;
 }
@@ -33,17 +35,7 @@ const { title = "Adam Steciuk" } = Astro.props;
     <meta name="generator" content={Astro.generator} />
     <meta name="author" content="Adam Steciuk" />
   </head>
-  <body>
+  <body class="bg-background text-text">
     <slot />
-    <style is:global>
-      html {
-        font-family: system-ui, sans-serif;
-      }
-      code {
-        font-family: Menlo, Monaco, "Lucida Console", "Liberation Mono",
-          "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Courier New",
-          monospace;
-      }
-    </style>
   </body>
 </html>
