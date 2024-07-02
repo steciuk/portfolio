@@ -1,9 +1,12 @@
 ---
-import Layout from "../layouts/Layout.astro";
+import { Button } from "@components/ui/button";
+import Layout from "@layouts/Layout.astro";
+import ThemeSwitcher from "@components/ThemeSwitcher.svelte";
 ---
 
 <Layout title="Adam Steciuk">
   <main>
     <h1>Adam Steciuk</h1>
+    <ThemeSwitcher client:only />
   </main>
 </Layout>

@@ -1,6 +1,6 @@
 ---
 import { SEO } from "astro-seo";
-import "./global.css";
+import "@styles/app.css";
 
 interface Props {
   title?: string;
@@ -35,7 +35,31 @@ const { title = "Adam Steciuk" } = Astro.props;
     <meta name="generator" content={Astro.generator} />
     <meta name="author" content="Adam Steciuk" />
   </head>
-  <body class="bg-background text-text">
+  <body>
     <slot />
+    <script is:inline>
+      const isBrowser = typeof localStorage !== "undefined";
+      const getThemePreference = () => {
+        if (isBrowser && localStorage.getItem("theme")) {
+          return localStorage.getItem("theme");
+        }
+        return window.matchMedia("(prefers-color-scheme: dark)").matches
+          ? "dark"
+          : "light";
+      };
+      const isDark = getThemePreference() === "dark";
+      document.documentElement.classList[isDark ? "add" : "remove"]("dark");
+
+      if (isBrowser) {
+        const observer = new MutationObserver(() => {
+          const isDark = document.documentElement.classList.contains("dark");
+          localStorage.setItem("theme", isDark ? "dark" : "light");
+        });
+        observer.observe(document.documentElement, {
+          attributes: true,
+          attributeFilter: ["class"],
+        });
+      }
+    </script>
   </body>
 </html>
