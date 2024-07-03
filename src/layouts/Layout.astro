@@ -40,12 +40,13 @@ const { title = "Adam Steciuk" } = Astro.props;
     <script is:inline>
       const isBrowser = typeof localStorage !== "undefined";
       const getThemePreference = () => {
-        if (isBrowser && localStorage.getItem("theme")) {
-          return localStorage.getItem("theme");
+        const persistedPreference = isBrowser && localStorage.getItem("theme");
+        if (persistedPreference) {
+          return persistedPreference;
         }
-        return window.matchMedia("(prefers-color-scheme: dark)").matches
-          ? "dark"
-          : "light";
+        return window.matchMedia("(prefers-color-scheme: light)").matches
+          ? "light"
+          : "dark";
       };
       const isDark = getThemePreference() === "dark";
       document.documentElement.classList[isDark ? "add" : "remove"]("dark");

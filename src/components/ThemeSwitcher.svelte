@@ -12,7 +12,7 @@
   }
 </script>
 
-<Button on:click={toggleTheme}>
+<Button on:click={toggleTheme} size="icon">
   {#if isDark}
     <Sun />
   {:else}

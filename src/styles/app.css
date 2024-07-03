@@ -76,7 +76,17 @@
       color 0.2s ease-in-out,
       border-color 0.2s ease-in-out;
   }
+
+  html {
+    font-family: system-ui, sans-serif;
+  }
+
   body {
-    @apply text-foreground bg-background;
+    @apply bg-background text-foreground;
+  }
+
+  code {
+    font-family: Menlo, Monaco, "Lucida Console", "Liberation Mono",
+      "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Courier New", monospace;
   }
 }
