@@ -1,0 +1,33 @@
+---
+import { getCollection } from "astro:content";
+
+const educationEntries = await getCollection("education");
+const jobsEntries = await getCollection("jobs");
+---
+
+<section>
+  <h2>Education</h2>
+  <ul>
+    {
+      educationEntries.map((entry) => (
+        <li>
+          <h3>{entry.data.place}</h3>
+          <p>{entry.data.department}</p>
+          <p>{entry.data.role}</p>
+          <p>{entry.data.grade}</p>
+        </li>
+      ))
+    }
+  </ul>
+  <h2>Professional experience</h2>
+  <ul>
+    {
+      jobsEntries.map((entry) => (
+        <li>
+          <h3>{entry.data.place}</h3>
+          <p>{entry.data.role}</p>
+        </li>
+      ))
+    }
+  </ul>
+</section>
