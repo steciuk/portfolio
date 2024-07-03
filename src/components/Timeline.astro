@@ -3,31 +3,64 @@ import { getCollection } from "astro:content";
 
 const educationEntries = await getCollection("education");
 const jobsEntries = await getCollection("jobs");
+
+const allEntries = [...educationEntries, ...jobsEntries];
+const earliestStart = allEntries.reduce((earliest, entry) => {
+  const start = entry.data.start;
+  if (start.year < earliest.year) {
+    return start;
+  } else if (start.year === earliest.year && start.month < earliest.month) {
+    return start;
+  } else {
+    return earliest;
+  }
+}, allEntries[0].data.start);
+
+const latestEnd = allEntries.reduce((latest, entry) => {
+  const end = entry.data.end;
+
+  if (!end) {
+    return latest;
+  }
+
+  if (end.year > latest.year) {
+    return end;
+  } else if (end.year === latest.year && end.month > latest.month) {
+    return end;
+  } else {
+    return latest;
+  }
+}, earliestStart);
+
+const totalYears = latestEnd.year - earliestStart.year;
+const totalMonths = totalYears * 12 + latestEnd.month - earliestStart.month;
 ---
 
 <section>
-  <h2>Education</h2>
-  <ul>
+  <div class="container flex flex-col items-center">
     {
-      educationEntries.map((entry) => (
-        <li>
-          <h3>{entry.data.place}</h3>
-          <p>{entry.data.department}</p>
-          <p>{entry.data.role}</p>
-          <p>{entry.data.grade}</p>
-        </li>
-      ))
+      Array.from({ length: totalMonths }).map((_, i) => {
+        const month = (latestEnd.month - i) % 12 || 12;
+        const year = latestEnd.year - Math.floor(i / 12);
+        const dateDisplay = new Date(year, month - 1).toLocaleString("en-us", {
+          month: "long",
+          year: "numeric",
+        });
+        const entries = allEntries.filter((entry) => {
+          const start = entry.data.start;
+          const end = entry.data.end || {
+            year: latestEnd.year,
+            month: latestEnd.month,
+          };
+          return (
+            start.year < year ||
+            (start.year === year &&
+              start.month <= month &&
+              (end.year > year || (end.year === year && end.month >= month)))
+          );
+        });
+        return <div class="w-8 bg-primary">{dateDisplay}</div>;
+      })
     }
-  </ul>
-  <h2>Professional experience</h2>
-  <ul>
-    {
-      jobsEntries.map((entry) => (
-        <li>
-          <h3>{entry.data.place}</h3>
-          <p>{entry.data.role}</p>
-        </li>
-      ))
-    }
-  </ul>
+  </div>
 </section>
