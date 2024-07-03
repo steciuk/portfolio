@@ -1,0 +1,19 @@
+---
+interface Props {
+  bg: string;
+  fg?: string;
+}
+
+const { bg, fg } = Astro.props;
+---
+
+<div class={`bg-${bg} p-4 w-min`}>
+  {
+    fg && (
+      <>
+        <div class={`text-${fg}`}>{bg}</div>
+        <div class={`bg-${fg}`} />
+      </>
+    )
+  }
+</div>

@@ -1,0 +1,41 @@
+---
+import Color from "@components/Palette/Color.astro";
+import { Button } from "@components/ui/button";
+
+const colors = [
+  ["background", "foreground"],
+  ["primary", "primary-foreground"],
+  ["secondary", "secondary-foreground"],
+  ["destructive", "destructive-foreground"],
+  ["muted", "muted-foreground"],
+  ["accent", "accent-foreground"],
+  ["popover", "popover-foreground"],
+  ["card", "card-foreground"],
+  ["border"],
+  ["input"],
+  ["ring"],
+];
+
+const btnVariants = [
+  "default",
+  "secondary",
+  "destructive",
+  "link",
+  "outline",
+  "ghost",
+] as const;
+---
+
+<!-- '"secondary" | "destructive" | "link" | "default" | "outline" | "ghost" | undefined'. -->
+<div class="flex">
+  {colors.map(([bg, fg]) => <Color bg={bg} fg={fg} />)}
+</div>
+<div class="flex">
+  {btnVariants.map((variant) => <Button variant={variant}>{variant}</Button>)}
+</div>
+<div class="dark flex">
+  {colors.map(([bg, fg]) => <Color bg={bg} fg={fg} />)}
+</div>
+<div class="dark flex">
+  {btnVariants.map((variant) => <Button variant={variant}>{variant}</Button>)}
+</div>
