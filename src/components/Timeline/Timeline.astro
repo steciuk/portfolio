@@ -1,0 +1,128 @@
+---
+import { getCollection } from "astro:content";
+import Marker from "@components/Timeline/Marker.astro";
+import type { EntryMeasurements } from "@components/Timeline/types";
+
+const educationEntries = await getCollection("education");
+const jobsEntries = await getCollection("jobs");
+
+const allEntries = [...educationEntries, ...jobsEntries];
+
+allEntries.sort((a, b) => {
+  const aStart = a.data.start;
+  const bStart = b.data.start;
+
+  if (aStart.year < bStart.year) {
+    return -1;
+  } else if (aStart.year > bStart.year) {
+    return 1;
+  } else {
+    return aStart.month - bStart.month;
+  }
+});
+
+const earliestStart = allEntries[0].data.start;
+
+const latestEnd = allEntries.reduce((latest, entry) => {
+  const end = entry.data.end;
+
+  if (!end) {
+    return latest;
+  }
+
+  if (end.year > latest.year) {
+    return end;
+  } else if (end.year === latest.year && end.month > latest.month) {
+    return end;
+  } else {
+    return latest;
+  }
+}, earliestStart);
+
+const totalYears = latestEnd.year - earliestStart.year;
+const totalMonths = totalYears * 12 + latestEnd.month - earliestStart.month;
+
+const monthHeight = 40; // in pixels
+const lines: Array<[number, number][]> = [];
+
+const measuredEntries = allEntries.map((entry) => {
+  const start = entry.data.start;
+  const end = entry.data.end ?? latestEnd;
+  const startMonths =
+    (start.year - earliestStart.year) * 12 + start.month - earliestStart.month;
+  const endMonths =
+    (end.year - earliestStart.year) * 12 + end.month - earliestStart.month;
+  let durationMonths = endMonths - startMonths;
+  if (!entry.data.end) {
+    // Lasts until now, so add 2 'months' for '...' and 'Now' markers
+    durationMonths += 2;
+  }
+
+  const heightPx = durationMonths * monthHeight;
+  const startHeightPx = startMonths * monthHeight;
+
+  let line = lines.findIndex((line) => {
+    return line.every(([start, end]) => {
+      return start > endMonths || end < startMonths;
+    });
+  });
+
+  if (line === -1) {
+    line = lines.length;
+    lines.push([[startMonths, endMonths]]);
+  } else {
+    lines[line].push([startMonths, endMonths]);
+  }
+
+  return {
+    ...entry,
+    startHeightPx,
+    heightPx,
+    line,
+  };
+}) satisfies EntryMeasurements[];
+---
+
+<section>
+  <div class="container">
+    <div class="grid grid-cols-2">
+      <div>
+        <Marker text="Now" heightPx={monthHeight} />
+        <div class={`h-[${monthHeight}px]`}>...</div>
+        {
+          Array.from({ length: totalMonths }).map((_, i) => {
+            const month = (latestEnd.month - i) % 12 || 12;
+            const year = latestEnd.year - Math.floor(i / 12);
+            const dateDisplay = new Date(year, month - 1).toLocaleString(
+              "en-us",
+              {
+                month: "long",
+                year: "numeric",
+              }
+            );
+            return <Marker text={dateDisplay} heightPx={monthHeight} />;
+          })
+        }
+      </div>
+      <div class="relative">
+        {
+          measuredEntries.map((entry) => {
+            return (
+              <div
+                class="absolute w-8 bg-primary/50"
+                style={{
+                  height: `${entry.heightPx}px`,
+                  bottom: `${entry.startHeightPx}px`,
+                  left: `${entry.line * 42}px`,
+                }}
+              >
+                <h3>{entry.data.place}</h3>
+                <p>{entry.line}</p>
+              </div>
+            );
+          })
+        }
+      </div>
+    </div>
+  </div>
+</section>

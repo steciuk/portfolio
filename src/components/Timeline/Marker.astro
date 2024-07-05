@@ -1,0 +1,15 @@
+---
+interface Props {
+  text: string;
+  heightPx: number;
+}
+
+const { text, heightPx } = Astro.props;
+---
+
+<div class={`h-[${heightPx}px]`}>
+  <>
+    <div class="inline-block h-1 w-8 bg-primary"></div>
+    <span>{text}</span>
+  </>
+</div>
