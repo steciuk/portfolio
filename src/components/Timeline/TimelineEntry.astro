@@ -4,12 +4,23 @@ import { Image } from "astro:assets";
 import type { EntryMeasurements } from "./types";
 
 interface Props {
-  entry: CollectionEntry<"education" | "jobs"> & EntryMeasurements;
+  entry: CollectionEntry<"education" | "jobs" | "projects"> & EntryMeasurements;
 }
 
 const { entry } = Astro.props;
 
-const color = entry.collection === "education" ? "bg-primary" : "bg-secondary";
+let color = "bg-primary";
+switch (entry.collection) {
+  case "education":
+    color = "bg-primary";
+    break;
+  case "jobs":
+    color = "bg-secondary";
+    break;
+  case "projects":
+    color = "bg-primary/20";
+    break;
+}
 ---
 
 <div
@@ -31,7 +42,7 @@ const color = entry.collection === "education" ? "bg-primary" : "bg-secondary";
   }
   <div
     class:list={[
-      "entry__details relative z-10 w-min max-w-0 overflow-hidden rounded-sm",
+      "entry__details bg- relative z-10 w-min max-w-0 overflow-hidden rounded-sm",
       color,
     ]}
     style={{
@@ -39,9 +50,12 @@ const color = entry.collection === "education" ? "bg-primary" : "bg-secondary";
     }}
   >
     <div class="min-w-max p-2">
-      <h3 class="text-lg font-bold">{entry.data.place}</h3>
+      <!-- FIXME: split for projects and occupation -->
+      <h3 class="text-lg font-bold">{entry.data.place ?? entry.data.name}</h3>
       {entry.data.department && <p class="text-sm">{entry.data.department}</p>}
-      <p class="text-sm italic">{entry.data.role}</p>
+      <p class="text-sm italic">
+        {entry.data.role ?? entry.data.technology.join(", ")}
+      </p>
       <p class="text-sm">
         {entry.data.start.month}/{entry.data.start.year} - {
           entry.data.end

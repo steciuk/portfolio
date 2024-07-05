@@ -29,7 +29,54 @@ const jobsCollection = defineCollection({
   schema: ({ image }) => occupation(image),
 });
 
+const projectsCollection = defineCollection({
+  type: "content",
+  schema: z.object({
+    name: z.string(),
+    technology: z.array(
+      z.enum([
+        "React",
+        "Vue",
+        "Svelte",
+        "Astro",
+        "Angular",
+        "TypeScript",
+        "JavaScript",
+        "HTML",
+        "CSS",
+        "Tailwind CSS",
+        "Node.js",
+        "Express",
+        "MongoDB",
+        "Firebase",
+        "Vercel",
+        "Heroku",
+        "Docker",
+        "Kubernetes",
+        "Jest",
+        "Cypress",
+        "Vite",
+        "Vitest",
+        "Python",
+        "Flask",
+        "WebSockets",
+        "Chrome Extension",
+        "JWT",
+        "RxJS",
+        "Emotion",
+        "shadcn",
+        "Material UI",
+      ]),
+    ),
+    deployed: z.string().url().optional(),
+    repo: z.string().url().optional(),
+    start: monthDate,
+    end: monthDate.optional(),
+  }),
+});
+
 export const collections = {
   education: educationCollection,
   jobs: jobsCollection,
+  projects: projectsCollection,
 };

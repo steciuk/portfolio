@@ -6,8 +6,9 @@ import TimelineEntry from "@components/Timeline/TimelineEntry.astro";
 
 const educationEntries = await getCollection("education");
 const jobsEntries = await getCollection("jobs");
+const projectsEntries = await getCollection("projects");
 
-const allEntries = [...educationEntries, ...jobsEntries];
+const allEntries = [...educationEntries, ...jobsEntries, ...projectsEntries];
 
 allEntries.sort((a, b) => {
   const aStart = a.data.start;
@@ -23,6 +24,7 @@ allEntries.sort((a, b) => {
 });
 
 const earliestStart = allEntries[0].data.start;
+const latestStart = allEntries[allEntries.length - 1].data.start;
 
 const latestEnd = allEntries.reduce((latest, entry) => {
   const end = entry.data.end;
@@ -38,7 +40,7 @@ const latestEnd = allEntries.reduce((latest, entry) => {
   } else {
     return latest;
   }
-}, earliestStart);
+}, latestStart);
 
 const totalYears = latestEnd.year - earliestStart.year;
 const totalMonths = totalYears * 12 + latestEnd.month - earliestStart.month + 1;
