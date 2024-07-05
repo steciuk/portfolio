@@ -5,7 +5,7 @@ location:
   city: "Warsaw"
   country: "Poland"
 start:
-  month: 10
+  month: 9
   year: 2021
 end:
   month: 12

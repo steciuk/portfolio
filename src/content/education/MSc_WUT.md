@@ -1,6 +1,6 @@
 ---
 place: "Warsaw University of Technology"
-department: "department of Electronics and Information Technology"
+department: "Faculty of Electronics and Information Technology"
 role: "MSc in Computer Science"
 location:
   city: "Warsaw"

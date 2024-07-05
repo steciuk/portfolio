@@ -19,11 +19,7 @@ const occupation = z.object({
 
 const educationCollection = defineCollection({
   type: "content",
-  schema: z
-    .object({
-      grade: z.number().min(1).max(5),
-    })
-    .merge(occupation),
+  schema: occupation,
 });
 
 const jobsCollection = defineCollection({
@@ -35,3 +31,5 @@ export const collections = {
   education: educationCollection,
   jobs: jobsCollection,
 };
+
+export type Occupation = z.infer<typeof occupation>;

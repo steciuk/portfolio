@@ -2,6 +2,7 @@
 import { getCollection } from "astro:content";
 import Marker from "@components/Timeline/Marker.astro";
 import type { EntryMeasurements } from "@components/Timeline/types";
+import TimelineEntry from "@components/Timeline/TimelineEntry.astro";
 
 const educationEntries = await getCollection("education");
 const jobsEntries = await getCollection("jobs");
@@ -40,7 +41,7 @@ const latestEnd = allEntries.reduce((latest, entry) => {
 }, earliestStart);
 
 const totalYears = latestEnd.year - earliestStart.year;
-const totalMonths = totalYears * 12 + latestEnd.month - earliestStart.month;
+const totalMonths = totalYears * 12 + latestEnd.month - earliestStart.month + 1;
 
 const monthHeight = 40; // in pixels
 const lines: Array<[number, number][]> = [];
@@ -59,11 +60,11 @@ const measuredEntries = allEntries.map((entry) => {
   }
 
   const heightPx = durationMonths * monthHeight;
-  const startHeightPx = startMonths * monthHeight;
+  const startHeightPx = startMonths * monthHeight + monthHeight / 2;
 
   let line = lines.findIndex((line) => {
     return line.every(([start, end]) => {
-      return start > endMonths || end < startMonths;
+      return start >= endMonths || end <= startMonths;
     });
   });
 
@@ -91,8 +92,11 @@ const measuredEntries = allEntries.map((entry) => {
         <div class={`h-[${monthHeight}px]`}>...</div>
         {
           Array.from({ length: totalMonths }).map((_, i) => {
-            const month = (latestEnd.month - i) % 12 || 12;
-            const year = latestEnd.year - Math.floor(i / 12);
+            const month =
+              (totalMonths - i - 1 + earliestStart.month) % 12 || 12;
+
+            const year =
+              latestEnd.year - Math.floor((i + latestEnd.month) / 12);
             const dateDisplay = new Date(year, month - 1).toLocaleString(
               "en-us",
               {
@@ -105,23 +109,7 @@ const measuredEntries = allEntries.map((entry) => {
         }
       </div>
       <div class="relative">
-        {
-          measuredEntries.map((entry) => {
-            return (
-              <div
-                class="absolute w-8 bg-primary/50"
-                style={{
-                  height: `${entry.heightPx}px`,
-                  bottom: `${entry.startHeightPx}px`,
-                  left: `${entry.line * 42}px`,
-                }}
-              >
-                <h3>{entry.data.place}</h3>
-                <p>{entry.line}</p>
-              </div>
-            );
-          })
-        }
+        {measuredEntries.map((entry) => <TimelineEntry {entry} />)}
       </div>
     </div>
   </div>

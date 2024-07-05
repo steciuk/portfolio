@@ -1,0 +1,33 @@
+---
+import { getCollection, type CollectionEntry } from "astro:content";
+import type { Occupation } from "@content/config";
+import type { EntryMeasurements } from "./types";
+
+interface Props {
+  entry: CollectionEntry<"education" | "jobs"> & EntryMeasurements;
+}
+
+const { entry } = Astro.props;
+---
+
+<div
+  class="absolute w-8 bg-primary/50"
+  style={{
+    height: `${entry.heightPx}px`,
+    bottom: `${entry.startHeightPx}px`,
+    left: `${entry.line * 42}px`,
+  }}
+>
+  <div class="w-48">
+    <h3 class="text-lg font-bold">{entry.data.place}</h3>
+    {entry.data.department && <p class="text-sm">{entry.data.department}</p>}
+    <p class="text-sm">{entry.data.role}</p>
+    <p class="text-sm">
+      {entry.data.start.month}/{entry.data.start.year} - {
+        entry.data.end
+          ? `${entry.data.end.month}/${entry.data.end.year}`
+          : "Now"
+      }
+    </p>
+  </div>
+</div>
