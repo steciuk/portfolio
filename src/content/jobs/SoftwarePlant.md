@@ -1,5 +1,6 @@
 ---
 place: "SoftwarePlant"
+image: "./images/SoftwarePlant.png"
 role: "Intern Front-End Developer"
 location:
   city: "Warsaw"

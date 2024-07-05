@@ -1,6 +1,6 @@
 ---
-import { getCollection, type CollectionEntry } from "astro:content";
-import type { Occupation } from "@content/config";
+import { type CollectionEntry } from "astro:content";
+import { Image } from "astro:assets";
 import type { EntryMeasurements } from "./types";
 
 interface Props {
@@ -17,6 +17,15 @@ const { entry } = Astro.props;
     bottom: `${entry.startHeightPx}px`,
   }}
 >
+  {
+    entry.data.image && (
+      <Image
+        src={entry.data.image}
+        alt={`${entry.data.place} logo`}
+        quality="low"
+      />
+    )
+  }
   <div class="w-48">
     <h3 class="text-lg font-bold">{entry.data.place}</h3>
     {entry.data.department && <p class="text-sm">{entry.data.department}</p>}

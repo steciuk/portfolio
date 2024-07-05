@@ -1,5 +1,6 @@
 ---
 place: "GeoTec Energy Sp. z o. o."
+image: "./images/GeotecEnergy.jpeg"
 role: "Web Developer and IT Administrator"
 location:
   city: "(remote)"

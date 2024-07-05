@@ -1,5 +1,6 @@
 ---
 place: "Warsaw University of Technology"
+image: "./images/WUT.jpg"
 department: "Faculty of Electronics and Information Technology"
 role: "BSc in Computer Science"
 location:

@@ -1,5 +1,6 @@
 ---
 place: "Appfire (BigPicture)"
+image: "./images/Appfire.jpg"
 role: "Front-End Developer"
 location:
   city: "Warsaw"

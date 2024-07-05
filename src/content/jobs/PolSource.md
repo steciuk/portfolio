@@ -1,5 +1,6 @@
 ---
 place: "PolSource"
+image: "./images/PolSource.jpeg"
 role: "Intern Full-Stack Developer"
 location:
   city: "Warsaw"

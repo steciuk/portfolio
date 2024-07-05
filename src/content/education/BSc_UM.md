@@ -1,5 +1,6 @@
 ---
 place: "Universitat Politècnica de València"
+image: "./images/UM.jpg"
 department: "Escuela Técnica Superior de Ingeniería Informática"
 role: "ERASMUS+ program during BSc"
 location:
