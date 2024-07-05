@@ -44,9 +44,11 @@ const totalYears = latestEnd.year - earliestStart.year;
 const totalMonths = totalYears * 12 + latestEnd.month - earliestStart.month + 1;
 
 const monthHeight = 40; // in pixels
-const lines: Array<[number, number][]> = [];
+const lines: Array<
+  [number, number, (typeof allEntries)[number] & EntryMeasurements][]
+> = [];
 
-const measuredEntries = allEntries.map((entry) => {
+allEntries.forEach((entry) => {
   const start = entry.data.start;
   const end = entry.data.end ?? latestEnd;
   const startMonths =
@@ -68,28 +70,34 @@ const measuredEntries = allEntries.map((entry) => {
     });
   });
 
-  if (line === -1) {
-    line = lines.length;
-    lines.push([[startMonths, endMonths]]);
-  } else {
-    lines[line].push([startMonths, endMonths]);
-  }
-
-  return {
+  const entryWithMeasurements = {
     ...entry,
     startHeightPx,
     heightPx,
-    line,
   };
-}) satisfies EntryMeasurements[];
+
+  if (line === -1) {
+    line = lines.length;
+    lines.push([[startMonths, endMonths, entryWithMeasurements]]);
+  } else {
+    lines[line].push([startMonths, endMonths, entryWithMeasurements]);
+  }
+});
 ---
 
 <section>
-  <div class="container">
-    <div class="grid grid-cols-2">
-      <div>
+  <div class="container flex flex-col items-center">
+    <div class="flex gap-2">
+      <div class="flex flex-col items-end">
         <Marker text="Now" heightPx={monthHeight} />
-        <div class={`h-[${monthHeight}px]`}>...</div>
+        <div
+          class="flex items-center"
+          style={{
+            height: `${monthHeight}px`,
+          }}
+        >
+          ...
+        </div>
         {
           Array.from({ length: totalMonths }).map((_, i) => {
             const month =
@@ -108,8 +116,21 @@ const measuredEntries = allEntries.map((entry) => {
           })
         }
       </div>
-      <div class="relative">
-        {measuredEntries.map((entry) => <TimelineEntry {entry} />)}
+      <div
+        class="grid"
+        style={{
+          gridTemplateColumns: `repeat(${lines.length}, minmax(0, 1fr))`,
+        }}
+      >
+        {
+          lines.map((line) => (
+            <div class="relative w-8">
+              {line.map(([_, __, entry]) => {
+                return <TimelineEntry entry={entry} />;
+              })}
+            </div>
+          ))
+        }
       </div>
     </div>
   </div>

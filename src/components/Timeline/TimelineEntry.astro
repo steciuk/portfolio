@@ -11,11 +11,10 @@ const { entry } = Astro.props;
 ---
 
 <div
-  class="absolute w-8 bg-primary/50"
+  class="absolute w-full bg-primary/50"
   style={{
     height: `${entry.heightPx}px`,
     bottom: `${entry.startHeightPx}px`,
-    left: `${entry.line * 42}px`,
   }}
 >
   <div class="w-48">
