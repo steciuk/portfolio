@@ -8,10 +8,12 @@ interface Props {
 }
 
 const { entry } = Astro.props;
+
+const color = entry.collection === "education" ? "bg-primary" : "bg-secondary";
 ---
 
 <div
-  class="absolute w-full bg-primary/50"
+  class:list={["entry absolute w-full rounded-sm", color]}
   style={{
     height: `${entry.heightPx}px`,
     bottom: `${entry.startHeightPx}px`,
@@ -23,19 +25,38 @@ const { entry } = Astro.props;
         src={entry.data.image}
         alt={`${entry.data.place} logo`}
         quality="low"
+        class="p-2"
       />
     )
   }
-  <div class="w-48">
-    <h3 class="text-lg font-bold">{entry.data.place}</h3>
-    {entry.data.department && <p class="text-sm">{entry.data.department}</p>}
-    <p class="text-sm">{entry.data.role}</p>
-    <p class="text-sm">
-      {entry.data.start.month}/{entry.data.start.year} - {
-        entry.data.end
-          ? `${entry.data.end.month}/${entry.data.end.year}`
-          : "Now"
-      }
-    </p>
+  <div
+    class:list={[
+      "entry__details relative z-10 w-min max-w-0 overflow-hidden rounded-sm",
+      color,
+    ]}
+    style={{
+      transition: "max-width 0.3s ease-in-out",
+    }}
+  >
+    <div class="min-w-max p-2">
+      <h3 class="text-lg font-bold">{entry.data.place}</h3>
+      {entry.data.department && <p class="text-sm">{entry.data.department}</p>}
+      <p class="text-sm italic">{entry.data.role}</p>
+      <p class="text-sm">
+        {entry.data.start.month}/{entry.data.start.year} - {
+          entry.data.end
+            ? `${entry.data.end.month}/${entry.data.end.year}`
+            : "Now"
+        }
+      </p>
+    </div>
   </div>
 </div>
+
+<style lang="scss">
+  .entry:hover {
+    .entry__details {
+      max-width: 96rem;
+    }
+  }
+</style>
