@@ -1,6 +1,6 @@
 ---
 name: Card Game
-technology: ["Angular", "TypeScript", "RxJS", "WebSockets", "Node.js", "Express", "MongoDB", "JWT"]
+technology: ["Angular", "TypeScript", "RxJS", "Phaser", "WebSockets", "Node.js", "Express", "MongoDB", "JWT"]
 deployed: "https://cardgame.steciuk.dev/"
 repo: "https://github.com/steciuk/card-game"
 start:
