@@ -106,7 +106,7 @@ allEntries.forEach((entry) => {
               (totalMonths - i - 1 + earliestStart.month) % 12 || 12;
 
             const year =
-              latestEnd.year - Math.floor((i + latestEnd.month) / 12);
+              latestEnd.year - Math.floor((i + 12 - latestEnd.month) / 12);
             const dateDisplay = new Date(year, month - 1).toLocaleString(
               "en-us",
               {
