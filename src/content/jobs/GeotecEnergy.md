@@ -8,5 +8,8 @@ location:
 start:
   month: 12
   year: 2023
+end:
+  month: 5
+  year: 2024
 ---
 <!-- TODO: -->

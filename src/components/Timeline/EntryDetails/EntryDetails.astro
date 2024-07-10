@@ -8,10 +8,18 @@ import EntryRole from "@components/Timeline/EntryDetails/EntryRole.astro";
 interface Props {
   entry: CollectionEntry<"education" | "jobs" | "projects">;
 }
+
+function formatDate(date: { month: number; year: number }): string {
+  const month = date.month < 10 ? `0${date.month}` : date.month;
+
+  return `${month}/${date.year}`;
+}
+
 const { entry } = Astro.props;
 let dateString =
-  `${entry.data.start.month}/${entry.data.start.year} - ` +
-  (entry.data.end ? `${entry.data.end.month}/${entry.data.end.year}` : "Now");
+  formatDate(entry.data.start) +
+  " - " +
+  (entry.data.end ? formatDate(entry.data.end) : "Now");
 ---
 
 <div class="min-w-max p-2">
