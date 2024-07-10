@@ -1,0 +1,13 @@
+---
+interface Props {
+  role: string;
+  dateString: string;
+}
+
+const { role, dateString } = Astro.props;
+---
+
+<div class="flex justify-between gap-4">
+  <p class="text-sm italic">{role}</p>
+  <p class="text-sm italic">{dateString}</p>
+</div>

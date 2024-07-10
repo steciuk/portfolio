@@ -1,37 +1,41 @@
-import {
-  defineCollection,
-  z,
-  type Flatten,
-  type ImageFunction,
-} from "astro:content";
+import { defineCollection, z } from "astro:content";
 
 const monthDate = z.object({
   month: z.number().min(1).max(12),
   year: z.number().min(1900).max(2100),
 });
 
-const occupation = (image: ImageFunction) =>
-  z.object({
-    place: z.string(),
-    department: z.string().optional(),
-    role: z.string(),
-    location: z.object({
-      city: z.string(),
-      country: z.string(),
-    }),
-    image: image().optional(),
-    start: monthDate,
-    end: monthDate.optional(),
-  });
+const location = z.object({
+  city: z.string(),
+  country: z.string(),
+});
 
 const educationCollection = defineCollection({
   type: "content",
-  schema: ({ image }) => occupation(image),
+  schema: ({ image }) =>
+    z.object({
+      school: z.string(),
+      degree: z.string(),
+      faculty: z.string(),
+      logo: image(),
+      location: location,
+      start: monthDate,
+      end: monthDate,
+      grade: z.number().min(0).max(5),
+    }),
 });
 
 const jobsCollection = defineCollection({
   type: "content",
-  schema: ({ image }) => occupation(image),
+  schema: ({ image }) =>
+    z.object({
+      company: z.string(),
+      role: z.string(),
+      location: location,
+      logo: image(),
+      start: monthDate,
+      end: monthDate.optional(),
+    }),
 });
 
 const technologies = {

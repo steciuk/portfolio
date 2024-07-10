@@ -1,0 +1,63 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { Image } from "astro:assets";
+import EntryTitle from "@components/Timeline/EntryDetails/EntryTitle.astro";
+import EntrySubtitle from "@components/Timeline/EntryDetails/EntrySubtitle.astro";
+import EntryRole from "@components/Timeline/EntryDetails/EntryRole.astro";
+
+interface Props {
+  entry: CollectionEntry<"education" | "jobs" | "projects">;
+}
+const { entry } = Astro.props;
+let dateString =
+  `${entry.data.start.month}/${entry.data.start.year} - ` +
+  (entry.data.end ? `${entry.data.end.month}/${entry.data.end.year}` : "Now");
+---
+
+<div class="min-w-max p-2">
+  {
+    entry.collection === "education" ? (
+      <>
+        <EntryTitle>{entry.data.school}</EntryTitle>
+        <EntrySubtitle>{entry.data.faculty}</EntrySubtitle>
+        <EntryRole role={entry.data.degree} dateString={dateString} />
+        <Image
+          src={entry.data.logo}
+          alt={`${entry.data.school} logo`}
+          quality="low"
+          class="p-2"
+          width={56}
+          class="w-14"
+        />
+      </>
+    ) : entry.collection === "jobs" ? (
+      <>
+        <EntryTitle>{entry.data.company}</EntryTitle>
+        <EntryRole role={entry.data.role} dateString={dateString} />
+        <Image
+          src={entry.data.logo}
+          alt={`${entry.data.company} logo`}
+          quality="low"
+          width={56}
+          class="w-14"
+        />
+      </>
+    ) : entry.collection === "projects" ? (
+      <>
+        <EntryTitle>{entry.data.name}</EntryTitle>
+        {entry.data.repo && (
+          <EntrySubtitle>
+            <a href={entry.data.repo} target="_blank" rel="noopener noreferrer">
+              {entry.data.repo}
+            </a>
+          </EntrySubtitle>
+        )}
+        <EntrySubtitle>{entry.data.technology.join(", ")}</EntrySubtitle>
+      </>
+    ) : (
+      (() => {
+        throw new Error("Invalid entry collection");
+      })()
+    )
+  }
+</div>
