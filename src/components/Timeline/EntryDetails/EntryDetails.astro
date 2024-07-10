@@ -4,6 +4,8 @@ import { Image } from "astro:assets";
 import EntryTitle from "@components/Timeline/EntryDetails/EntryTitle.astro";
 import EntrySubtitle from "@components/Timeline/EntryDetails/EntrySubtitle.astro";
 import EntryRole from "@components/Timeline/EntryDetails/EntryRole.astro";
+import { Button } from "@components/ui/button";
+import Link from "@components/ui/Link.astro";
 
 interface Props {
   entry: CollectionEntry<"education" | "jobs" | "projects">;
@@ -53,13 +55,14 @@ let dateString =
     ) : entry.collection === "projects" ? (
       <>
         <EntryTitle>{entry.data.name}</EntryTitle>
-        {entry.data.repo && (
-          <EntrySubtitle>
-            <a href={entry.data.repo} target="_blank" rel="noopener noreferrer">
-              {entry.data.repo}
-            </a>
-          </EntrySubtitle>
-        )}
+        <div class="flex flex-col">
+          {entry.data.repo && (
+            <Link href={entry.data.repo}>{entry.data.repo}</Link>
+          )}
+          {entry.data.deployed && (
+            <Link href={entry.data.deployed}>{entry.data.deployed}</Link>
+          )}
+        </div>
         <EntrySubtitle>{entry.data.technology.join(", ")}</EntrySubtitle>
       </>
     ) : (
