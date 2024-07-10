@@ -1,0 +1,53 @@
+---
+import { type CollectionEntry } from "astro:content";
+import { Image } from "astro:assets";
+import type { EntryMeasurements } from "./types";
+import EntryDetails from "@components/Timeline/EntryDetails/EntryDetails.astro";
+
+interface Props {
+  entry: CollectionEntry<"education" | "jobs" | "projects"> & EntryMeasurements;
+}
+
+const { entry } = Astro.props;
+
+let bgColorClass = "bg-primary";
+switch (entry.collection) {
+  case "education":
+    bgColorClass = "bg-primary";
+    break;
+  case "jobs":
+    bgColorClass = "bg-secondary";
+    break;
+  case "projects":
+    bgColorClass = "bg-primary/20";
+    break;
+}
+---
+
+<div
+  class:list={["entry absolute w-full rounded-sm", bgColorClass]}
+  style={{
+    height: `${entry.heightPx}px`,
+    bottom: `${entry.startHeightPx}px`,
+  }}
+>
+  <div
+    class:list={[
+      "entry__details bg- relative z-10 w-min max-w-0 overflow-hidden rounded-sm",
+      bgColorClass,
+    ]}
+    style={{
+      transition: "max-width 0.3s ease-in-out",
+    }}
+  >
+    <EntryDetails entry={entry} />
+  </div>
+</div>
+
+<style lang="scss">
+  .entry:hover {
+    .entry__details {
+      max-width: 96rem;
+    }
+  }
+</style>

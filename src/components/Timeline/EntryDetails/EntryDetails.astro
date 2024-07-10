@@ -1,0 +1,74 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { Image } from "astro:assets";
+import EntryTitle from "@components/Timeline/EntryDetails/EntryTitle.astro";
+import EntrySubtitle from "@components/Timeline/EntryDetails/EntrySubtitle.astro";
+import EntryRole from "@components/Timeline/EntryDetails/EntryRole.astro";
+import { Button } from "@components/ui/button";
+import Link from "@components/ui/Link.astro";
+
+interface Props {
+  entry: CollectionEntry<"education" | "jobs" | "projects">;
+}
+
+function formatDate(date: { month: number; year: number }): string {
+  const month = date.month < 10 ? `0${date.month}` : date.month;
+
+  return `${month}/${date.year}`;
+}
+
+const { entry } = Astro.props;
+let dateString =
+  formatDate(entry.data.start) +
+  " - " +
+  (entry.data.end ? formatDate(entry.data.end) : "Now");
+---
+
+<div class="min-w-max p-2">
+  {
+    entry.collection === "education" ? (
+      <>
+        <EntryTitle>{entry.data.school}</EntryTitle>
+        <EntrySubtitle>{entry.data.faculty}</EntrySubtitle>
+        <EntryRole role={entry.data.degree} dateString={dateString} />
+        <Image
+          src={entry.data.logo}
+          alt={`${entry.data.school} logo`}
+          quality="low"
+          class="p-2"
+          width={56}
+          class="w-14"
+        />
+      </>
+    ) : entry.collection === "jobs" ? (
+      <>
+        <EntryTitle>{entry.data.company}</EntryTitle>
+        <EntryRole role={entry.data.role} dateString={dateString} />
+        <Image
+          src={entry.data.logo}
+          alt={`${entry.data.company} logo`}
+          quality="low"
+          width={56}
+          class="w-14"
+        />
+      </>
+    ) : entry.collection === "projects" ? (
+      <>
+        <EntryTitle>{entry.data.name}</EntryTitle>
+        <div class="flex flex-col">
+          {entry.data.repo && (
+            <Link href={entry.data.repo}>{entry.data.repo}</Link>
+          )}
+          {entry.data.deployed && (
+            <Link href={entry.data.deployed}>{entry.data.deployed}</Link>
+          )}
+        </div>
+        <EntrySubtitle>{entry.data.technology.join(", ")}</EntrySubtitle>
+      </>
+    ) : (
+      (() => {
+        throw new Error("Invalid entry collection");
+      })()
+    )
+  }
+</div>

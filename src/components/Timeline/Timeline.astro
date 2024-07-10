@@ -1,0 +1,139 @@
+---
+import { getCollection } from "astro:content";
+import Marker from "@components/Timeline/Marker.astro";
+import type { EntryMeasurements } from "@components/Timeline/types";
+import TimelineEntry from "@components/Timeline/TimelineEntry.astro";
+
+const educationEntries = await getCollection("education");
+const jobsEntries = await getCollection("jobs");
+const projectsEntries = await getCollection("projects");
+
+const allEntries = [...educationEntries, ...jobsEntries, ...projectsEntries];
+
+allEntries.sort((a, b) => {
+  const aStart = a.data.start;
+  const bStart = b.data.start;
+
+  if (aStart.year < bStart.year) {
+    return -1;
+  } else if (aStart.year > bStart.year) {
+    return 1;
+  } else {
+    return aStart.month - bStart.month;
+  }
+});
+
+const earliestStart = allEntries[0].data.start;
+const latestStart = allEntries[allEntries.length - 1].data.start;
+
+const latestEnd = allEntries.reduce((latest, entry) => {
+  const end = entry.data.end;
+
+  if (!end) {
+    return latest;
+  }
+
+  if (end.year > latest.year) {
+    return end;
+  } else if (end.year === latest.year && end.month > latest.month) {
+    return end;
+  } else {
+    return latest;
+  }
+}, latestStart);
+
+const totalYears = latestEnd.year - earliestStart.year;
+const totalMonths = totalYears * 12 + latestEnd.month - earliestStart.month + 1;
+
+const monthHeight = 40; // in pixels
+const lines: Array<
+  [number, number, (typeof allEntries)[number] & EntryMeasurements][]
+> = [];
+
+allEntries.forEach((entry) => {
+  const start = entry.data.start;
+  const end = entry.data.end ?? latestEnd;
+  const startMonths =
+    (start.year - earliestStart.year) * 12 + start.month - earliestStart.month;
+  const endMonths =
+    (end.year - earliestStart.year) * 12 + end.month - earliestStart.month;
+  let durationMonths = endMonths - startMonths;
+  if (!entry.data.end) {
+    // Lasts until now, so add 2 'months' for '...' and 'Now' markers
+    durationMonths += 2;
+  }
+
+  const heightPx = durationMonths * monthHeight;
+  const startHeightPx = startMonths * monthHeight + monthHeight / 2;
+
+  let line = lines.findIndex((line) => {
+    return line.every(([start, end]) => {
+      return start >= endMonths || end <= startMonths;
+    });
+  });
+
+  const entryWithMeasurements = {
+    ...entry,
+    startHeightPx,
+    heightPx,
+  };
+
+  if (line === -1) {
+    line = lines.length;
+    lines.push([[startMonths, endMonths, entryWithMeasurements]]);
+  } else {
+    lines[line].push([startMonths, endMonths, entryWithMeasurements]);
+  }
+});
+---
+
+<section>
+  <div class="container flex flex-col items-center">
+    <div class="flex gap-2">
+      <div class="flex flex-col items-end">
+        <Marker text="Now" heightPx={monthHeight} />
+        <div
+          class="flex items-center"
+          style={{
+            height: `${monthHeight}px`,
+          }}
+        >
+          ...
+        </div>
+        {
+          Array.from({ length: totalMonths }).map((_, i) => {
+            const month =
+              (totalMonths - i - 1 + earliestStart.month) % 12 || 12;
+
+            const year =
+              latestEnd.year - Math.floor((i + 12 - latestEnd.month) / 12);
+            const dateDisplay = new Date(year, month - 1).toLocaleString(
+              "en-us",
+              {
+                month: "long",
+                year: "numeric",
+              }
+            );
+            return <Marker text={dateDisplay} heightPx={monthHeight} />;
+          })
+        }
+      </div>
+      <div
+        class="grid gap-2"
+        style={{
+          gridTemplateColumns: `repeat(${lines.length}, minmax(0, 1fr))`,
+        }}
+      >
+        {
+          lines.map((line) => (
+            <div class="relative w-8">
+              {line.map(([_, __, entry]) => {
+                return <TimelineEntry entry={entry} />;
+              })}
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>

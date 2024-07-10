@@ -1,15 +1,14 @@
 ---
 import Layout from "@layouts/Layout.astro";
 import ThemeSwitcher from "@components/ThemeSwitcher.svelte";
-import Timeline from "@components/Timeline.astro";
+import Timeline from "@components/Timeline/Timeline.astro";
 import Palette from "@components/Palette/Palette.astro";
 ---
 
 <Layout title="Adam Steciuk">
-  <main>
+  <main class="mb-12">
     <h1>Adam Steciuk</h1>
     <ThemeSwitcher client:only="svelte" />
-    <!-- <Timeline /> -->
-    <Palette />
+    <Timeline />
   </main>
 </Layout>

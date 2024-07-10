@@ -1,7 +1,8 @@
 ---
-place: "Warsaw University of Technology"
-department: "department of Electronics and Information Technology"
-role: "BSc in Computer Science"
+school: "Warsaw University of Technology"
+logo: "./images/WUT.jpg"
+faculty: "Faculty of Electronics and Information Technology"
+degree: "BSc in Computer Science"
 location:
   city: "Warsaw"
   country: "Poland"
