@@ -1,0 +1,115 @@
+---
+import ContactItem from "@components/CV/ContactItem.astro";
+import ThemeSwitcher from "@components/ThemeSwitcher.svelte";
+import { formatLocation, sortByDate } from "@content/utils";
+import Layout from "@layouts/Layout.astro";
+import { getCollection } from "astro:content";
+import { Github, Globe, Linkedin, Mail, MapPin, Phone } from "lucide-svelte";
+
+const jobsEntries = await getCollection("jobs");
+const educationEntries = await getCollection("education");
+
+jobsEntries.sort((a, b) => {
+  return sortByDate(b.data.start, a.data.start);
+});
+---
+
+<Layout subtitle="CV">
+  <ThemeSwitcher client:only="svelte" />
+  <div class="page bg-background">
+    <header class="grid grid-cols-2">
+      <div class="flex flex-col justify-between">
+        <h1 class="text-3xl">Adam Steciuk</h1>
+        <p class="text-sm">
+          Frontend web developer with over 2 years of professional experience
+          and extensive work on personal and university projects. Passionate
+          about creating dynamic, user-friendly web applications. Curious and
+          ambitious, constantly seeking to enhance my skills and stay updated
+          with the latest industry trends.
+        </p>
+      </div>
+      <ul class="flex flex-col items-end gap-0.5">
+        <ContactItem>
+          <a href="mailto:a.t.steciuk@gmail.com">a.t.steciuk@gmail.com</a>
+          <Mail class="h-full" />
+        </ContactItem>
+        <ContactItem>
+          <span>+48 693 296 922</span>
+          <Phone />
+        </ContactItem>
+        <ContactItem>
+          <span>Gdańsk, Poland</span>
+          <MapPin />
+        </ContactItem>
+        <ContactItem>
+          <a
+            href="https://www.linedin.com/in/steciuk"
+            target="_blank"
+            rel="noopener"
+          >
+            linedin.com/in/steciuk
+          </a>
+          <Linkedin />
+        </ContactItem>
+        <ContactItem>
+          <a href="https://github.com/steciuk" target="_blank" rel="noopener">
+            github.com/steciuk
+          </a>
+          <Github />
+        </ContactItem>
+        <ContactItem>
+          <a href="https://steciuk.dev" target="_blank" rel="noopener">
+            steciuk.dev
+          </a>
+          <Globe />
+        </ContactItem>
+      </ul>
+    </header>
+    <main class="mt-2 grid grid-cols-2">
+      <div>
+        <section>
+          <h2 class="border-b-2 text-xl">Professional Experience</h2>
+          {
+            jobsEntries.map((job) => (
+              <div class="flex items-center justify-between">
+                <h3 class="text-lg">{job.data.company}</h3>
+                <p class="text-sm">{formatLocation(job.data.location)}</p>
+              </div>
+            ))
+          }
+        </section>
+      </div>
+      <div></div>
+    </main>
+  </div>
+</Layout>
+
+<style>
+  .page {
+    width: 21cm;
+    min-height: 29.7cm;
+    padding: 0.7cm;
+    margin: 1cm auto;
+    border: 1px #d3d3d3 solid;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  }
+
+  @page {
+    size: A4;
+    margin: 0;
+  }
+
+  @media print {
+    .page {
+      margin: 0;
+      border: initial;
+      border-radius: initial;
+      width: initial;
+      min-height: initial;
+      box-shadow: initial;
+      background: initial;
+      page-break-after: always;
+    }
+  }
+</style>

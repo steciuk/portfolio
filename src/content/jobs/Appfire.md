@@ -11,6 +11,7 @@ start:
 end:
   month: 12
   year: 2022
+group: "Appfire (BigPicture)"
 ---
 - Developed and refactored key Angular components used in an enterprise-class application.
 - Created, maintained, and refactored multiple Cypress E2E tests, which led to a noticeable improvement in application and CI/CD stability.

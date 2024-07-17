@@ -5,22 +5,14 @@ import EntryTitle from "@components/Timeline/EntryDetails/EntryTitle.astro";
 import EntrySubtitle from "@components/Timeline/EntryDetails/EntrySubtitle.astro";
 import EntryRole from "@components/Timeline/EntryDetails/EntryRole.astro";
 import Link from "@components/ui/Link.astro";
+import { formatPeriod } from "@content/utils";
 
 interface Props {
   entry: CollectionEntry<"education" | "jobs" | "projects">;
 }
 
-function formatDate(date: { month: number; year: number }): string {
-  const month = date.month < 10 ? `0${date.month}` : date.month;
-
-  return `${month}/${date.year}`;
-}
-
 const { entry } = Astro.props;
-let dateString =
-  formatDate(entry.data.start) +
-  " - " +
-  (entry.data.end ? formatDate(entry.data.end) : "Now");
+let dateString = formatPeriod(entry.data.start, entry.data.end);
 ---
 
 <div class="min-w-max p-2">

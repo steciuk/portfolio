@@ -30,6 +30,7 @@ const jobsCollection = defineCollection({
   schema: ({ image }) =>
     z.object({
       company: z.string(),
+      group: z.string().optional(),
       role: z.string(),
       location: location,
       logo: image(),
@@ -122,3 +123,6 @@ export const collections = {
   jobs: jobsCollection,
   projects: projectsCollection,
 };
+
+export type MonthDate = z.infer<typeof monthDate>;
+export type Location = z.infer<typeof location>;
