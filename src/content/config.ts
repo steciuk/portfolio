@@ -30,7 +30,7 @@ const jobsCollection = defineCollection({
   schema: ({ image }) =>
     z.object({
       company: z.string(),
-      group: z.string().optional(),
+      group: z.string(),
       role: z.string(),
       location: location,
       logo: image(),

@@ -11,5 +11,6 @@ start:
 end:
   month: 5
   year: 2024
+group: "GeoTec Energy Sp. z o. o."
 ---
 <!-- TODO: -->

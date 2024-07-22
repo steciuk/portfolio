@@ -1,7 +1,12 @@
 ---
 import ContactItem from "@components/CV/ContactItem.astro";
 import ThemeSwitcher from "@components/ThemeSwitcher.svelte";
-import { formatLocation, sortByDate } from "@content/utils";
+import { formatPeriod } from "@content/utils";
+import {
+  formatLocation,
+  groupEntriesByDataField,
+  sortByDate,
+} from "@content/utils";
 import Layout from "@layouts/Layout.astro";
 import { getCollection } from "astro:content";
 import { Github, Globe, Linkedin, Mail, MapPin, Phone } from "lucide-svelte";
@@ -12,6 +17,8 @@ const educationEntries = await getCollection("education");
 jobsEntries.sort((a, b) => {
   return sortByDate(b.data.start, a.data.start);
 });
+
+const groupedJobs = groupEntriesByDataField<"jobs">(jobsEntries, "group");
 ---
 
 <Layout subtitle="CV">
@@ -70,11 +77,24 @@ jobsEntries.sort((a, b) => {
         <section>
           <h2 class="border-b-2 text-xl">Professional Experience</h2>
           {
-            jobsEntries.map((job) => (
-              <div class="flex items-center justify-between">
-                <h3 class="text-lg">{job.data.company}</h3>
-                <p class="text-sm">{formatLocation(job.data.location)}</p>
-              </div>
+            Array.from(groupedJobs).map(([group, jobs]) => (
+              <>
+                <div class="flex items-center justify-between">
+                  <h3 class="text-lg">{group}</h3>
+                  <p class="text-sm">{formatLocation(jobs[0].data.location)}</p>
+                </div>
+                {jobs.map((job) => (
+                  <div class="flex items-center justify-between">
+                    <h4 class="text-sm italic">{job.data.role}</h4>
+                    <p class="text-sm">
+                      {formatPeriod(job.data.start, job.data.end)}
+                    </p>
+                  </div>
+                  <p>
+                    {job.body}
+                  </p>
+                ))}
+              </>
             ))
           }
         </section>
