@@ -11,6 +11,11 @@ const { entry, class: className } = Astro.props;
 const { Content } = await entry.render();
 ---
 
-<div class:list={["prose text-foreground", className]}>
+<div
+  class:list={[
+    "prose prose-code:font-regular prose-code:after:content-[none] prose-code:before:content-[none] prose-a:no-underline prose-a:font-normal text-foreground",
+    className,
+  ]}
+>
   <Content />
 </div>

@@ -1,6 +1,6 @@
 ---
 import ContactItem from "@components/CV/ContactItem.astro";
-import Prose from "@components/Prose.astro";
+import Prose from "@components/ui/Prose.astro";
 import ThemeSwitcher from "@components/ThemeSwitcher.svelte";
 import { formatPeriod } from "@content/utils";
 import {
@@ -23,7 +23,7 @@ const groupedJobs = groupEntriesByDataField<"jobs">(jobsEntries, "group");
 ---
 
 <Layout subtitle="CV">
-  <ThemeSwitcher client:only="svelte" />
+  <!-- <ThemeSwitcher client:only="svelte" /> -->
   <div class="page bg-background">
     <header class="grid grid-cols-2">
       <div class="flex flex-col justify-between">
