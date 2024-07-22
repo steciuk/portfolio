@@ -1,5 +1,6 @@
 ---
 import ContactItem from "@components/CV/ContactItem.astro";
+import Prose from "@components/Prose.astro";
 import ThemeSwitcher from "@components/ThemeSwitcher.svelte";
 import { formatPeriod } from "@content/utils";
 import {
@@ -90,9 +91,7 @@ const groupedJobs = groupEntriesByDataField<"jobs">(jobsEntries, "group");
                       {formatPeriod(job.data.start, job.data.end)}
                     </p>
                   </div>
-                  <p>
-                    {job.body}
-                  </p>
+                  <Prose entry={job} class="text-xs"/>
                 ))}
               </>
             ))

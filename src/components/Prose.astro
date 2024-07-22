@@ -1,0 +1,16 @@
+---
+import type { CollectionKey } from "astro:content";
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+  entry: CollectionEntry<CollectionKey>;
+  class?: string;
+}
+
+const { entry, class: className } = Astro.props;
+const { Content } = await entry.render();
+---
+
+<div class:list={["prose text-foreground", className]}>
+  <Content />
+</div>
