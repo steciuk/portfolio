@@ -14,6 +14,7 @@ import { Github, Globe, Linkedin, Mail, MapPin, Phone } from "lucide-svelte";
 import GroupHeader from "@components/CV/GroupHeader.astro";
 import GroupSubHeader from "@components/CV/GroupSubHeader.astro";
 import SpaceBetween from "@components/CV/SpaceBetween.astro";
+import { getEntry } from "astro:content";
 
 const jobsEntries = await getCollection("jobs");
 jobsEntries.sort((a, b) => {
@@ -29,8 +30,18 @@ const groupedEducation = groupEntriesByDataField<"education">(
   educationEntries,
   "school"
 );
-console.log(educationEntries)
-console.log(groupedEducation);
+
+const projectsToShow = [
+  "stateviz",
+  "freebici",
+  "qrnamic",
+  "vite-plugin-inline-imports",
+] as const;
+
+const projectsEntries = (await Promise.all(
+  projectsToShow.map((slug) => getEntry("projects", slug))
+)).filter((entry) => !!entry);
+
 ---
 
 <Layout subtitle="CV">
@@ -127,6 +138,11 @@ console.log(groupedEducation);
             </>
           ))
         }
+        <GroupHeader>Projects</GroupHeader>
+        {
+          projectsEntries.map((entry) => (
+            <GroupSubHeader>{entry.data.name}</GroupSubHeader>
+        ))}
       </div>
     </main>
   </div>
