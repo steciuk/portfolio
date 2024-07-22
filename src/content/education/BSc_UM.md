@@ -1,5 +1,5 @@
 ---
-school: "Universitat Politècnica de València"
+school: "Universitat Politècnica de Málaga"
 logo: "./images/UM.jpg"
 faculty: "Escuela Técnica Superior de Ingeniería Informática"
 degree: "ERASMUS+ program during BSc"
@@ -14,3 +14,4 @@ end:
   year: 2020
 grade: 4.82
 ---
+- Average grade: 4.82/5.00

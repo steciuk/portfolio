@@ -11,19 +11,30 @@ import {
 import Layout from "@layouts/Layout.astro";
 import { getCollection } from "astro:content";
 import { Github, Globe, Linkedin, Mail, MapPin, Phone } from "lucide-svelte";
+import GroupHeader from "@components/CV/GroupHeader.astro";
+import GroupSubHeader from "@components/CV/GroupSubHeader.astro";
+import SpaceBetween from "@components/CV/SpaceBetween.astro";
 
 const jobsEntries = await getCollection("jobs");
-const educationEntries = await getCollection("education");
-
 jobsEntries.sort((a, b) => {
   return sortByDate(b.data.start, a.data.start);
 });
-
 const groupedJobs = groupEntriesByDataField<"jobs">(jobsEntries, "group");
+
+const educationEntries = await getCollection("education");
+educationEntries.sort((a, b) => {
+  return sortByDate(b.data.end, a.data.end);
+});
+const groupedEducation = groupEntriesByDataField<"education">(
+  educationEntries,
+  "school"
+);
+console.log(educationEntries)
+console.log(groupedEducation);
 ---
 
 <Layout subtitle="CV">
-  <!-- <ThemeSwitcher client:only="svelte" /> -->
+  <ThemeSwitcher client:only="svelte" />
   <div class="page bg-background">
     <header class="grid grid-cols-2">
       <div class="flex flex-col justify-between">
@@ -73,24 +84,24 @@ const groupedJobs = groupEntriesByDataField<"jobs">(jobsEntries, "group");
         </ContactItem>
       </ul>
     </header>
-    <main class="mt-2 grid grid-cols-2">
+    <main class="mt-2 grid grid-cols-2 gap-3">
       <div>
         <section>
-          <h2 class="border-b-2 text-xl">Professional Experience</h2>
+          <GroupHeader>Professional Experience</GroupHeader>
           {
             Array.from(groupedJobs).map(([group, jobs]) => (
               <>
-                <div class="flex items-center justify-between">
-                  <h3 class="text-lg">{group}</h3>
-                  <p class="text-sm">{formatLocation(jobs[0].data.location)}</p>
-                </div>
+                <SpaceBetween>
+                  <GroupSubHeader slot="left">{group}</GroupSubHeader>
+                  <p class="text-sm" slot="right">{formatLocation(jobs[0].data.location)}</p>
+                </SpaceBetween>
                 {jobs.map((job) => (
-                  <div class="flex items-center justify-between">
-                    <h4 class="text-sm italic">{job.data.role}</h4>
-                    <p class="text-sm">
+                  <SpaceBetween>
+                    <h4 class="text-sm italic" slot="left">{job.data.role}</h4>
+                    <p class="text-sm" slot="right">
                       {formatPeriod(job.data.start, job.data.end)}
                     </p>
-                  </div>
+                  </SpaceBetween>
                   <Prose entry={job} class="text-xs"/>
                 ))}
               </>
@@ -98,7 +109,25 @@ const groupedJobs = groupEntriesByDataField<"jobs">(jobsEntries, "group");
           }
         </section>
       </div>
-      <div></div>
+      <div>
+        <GroupHeader>Education</GroupHeader>
+        {
+          Array.from(groupedEducation).map(([group, education]) => (
+            <>
+              <GroupSubHeader>{group}</GroupSubHeader>
+              {education.map((entry) => (
+                <SpaceBetween>
+                  <h4 class="text-sm italic" slot="left">{entry.data.degree}</h4>
+                  <p class="text-sm" slot="right">
+                    {formatPeriod(entry.data.start, entry.data.end)}
+                  </p>
+                </SpaceBetween>
+                <Prose entry={entry} class="text-xs"/>
+              ))}
+            </>
+          ))
+        }
+      </div>
     </main>
   </div>
 </Layout>

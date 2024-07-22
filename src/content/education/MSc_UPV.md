@@ -12,5 +12,6 @@ start:
 end:
   month: 2
   year: 2024
-grade: 4.87
+grade: 4.94
 ---
+- Average grade: 4.94/5.00
