@@ -60,7 +60,7 @@ const technologies = {
     "Seaborn",
     "SciPy",
   ],
-  web: ["JavaScript", "TypeScript", "HTML", "CSS", "EJS"],
+  web: ["JavaScript", "TypeScript", "HTML", "CSS", "EJS", "Sass"],
   frontFrameworks: [
     "React",
     "React Native",
@@ -80,7 +80,7 @@ const technologies = {
     "AG Grid",
     "OpenStreetMap",
     "Leaflet",
-    "Chrome Extension",
+    "Chrome Extensions",
     "JWT",
     "Phaser",
     "WebSockets",

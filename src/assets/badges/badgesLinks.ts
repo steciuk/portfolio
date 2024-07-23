@@ -80,8 +80,8 @@ export const badgesLinks = {
   OpenStreetMap: null,
   Leaflet:
     "https://img.shields.io/badge/Leaflet-199900?logo=leaflet&logoColor=fff&style=flat-square",
-  "Chrome Extension":
-    "https://img.shields.io/badge/Chrome%20Web%20Store-4285F4?logo=chromewebstore&logoColor=fff&style=flat-square",
+  "Chrome Extensions":
+    "https://img.shields.io/badge/Chrome%20Extensions-4285F4?logo=chromewebstore&logoColor=fff&style=flat-square",
   JWT: "https://img.shields.io/badge/JSON%20Web%20Tokens-000?logo=jsonwebtokens&logoColor=fff&style=flat-square",
   Phaser: null,
   WebSockets: null,
@@ -101,4 +101,8 @@ export const badgesLinks = {
   Linux:
     "https://img.shields.io/badge/Linux-FCC624?logo=linux&logoColor=000&style=flat-square",
   Minix: null,
+  Git: "https://img.shields.io/badge/Git-F05032?logo=git&logoColor=fff&style=flat-square",
+  Gerrit:
+    "https://img.shields.io/badge/Gerrit-EEE?logo=gerrit&logoColor=000&style=flat-square",
+  Sass: "https://img.shields.io/badge/Sass-C69?logo=sass&logoColor=fff&style=flat-square",
 } as const;

@@ -11,12 +11,13 @@ import {
 import Layout from "@layouts/Layout.astro";
 import { getCollection } from "astro:content";
 import { Github, Globe, Linkedin, Mail, MapPin, Phone } from "lucide-svelte";
-import GroupHeader from "@components/CV/GroupHeader.astro";
 import GroupSubHeader from "@components/CV/GroupSubHeader.astro";
 import SpaceBetween from "@components/CV/SpaceBetween.astro";
 import { getEntry } from "astro:content";
 import Prose from "@components/ui/Prose.astro";
 import Side from "@components/CV/Side.astro";
+import Section from "@components/CV/Section.astro";
+import { badgesLinks } from "@assets/badges/badgesLinks";
 
 const jobsEntries = await getCollection("jobs");
 jobsEntries.sort((a, b) => {
@@ -43,10 +44,76 @@ const projectsToShow = [
   // "bwt"
 ] as const;
 
-const projectsEntries = (await Promise.all(
-  projectsToShow.map((slug) => getEntry("projects", slug))
-)).filter((entry) => !!entry);
+const projectsEntries = (
+  await Promise.all(projectsToShow.map((slug) => getEntry("projects", slug)))
+).filter((entry) => !!entry);
 
+const techSkills: Array<{
+  group: string;
+  skills: Array<keyof typeof badgesLinks>;
+}> = [
+  {
+    group: "Web development",
+    skills: [
+      "React",
+      "Angular",
+      "Astro",
+      "Svelte",
+      "TypeScript",
+      "JavaScript",
+      "Tailwind CSS",
+      "HTML",
+      "CSS",
+      "Sass",
+      "RxJS",
+      "Vite",
+      "Vitest",
+      "Jest",
+      "Cypress",
+      // "React Native",
+      "EJS",
+      "Chrome Extensions",
+      "Express",
+      "Phaser"
+    ],
+  },
+  {
+    group: "Data science & analytics",
+    skills: [
+      "Python",
+      "pandas",
+      "NumPy",
+      "Matplotlib",
+      "Seaborn",
+      "scikit-learn",
+      "Jupyter",
+      "NetworkX"
+    ],
+  },
+  {
+    group: "Other",
+    skills: ["Git", "Gerrit", "Firestore", "MongoDB", "Linux", "Docker"],
+  },
+];
+
+const skills = [
+  ...techSkills,
+  {
+    group: "Languages",
+    skills: ["Polish (native)", "English (fluent)", "Spanish (intermediate)", "Russian (elementary)"],
+  },
+];
+
+const interests = [
+  "Web development",
+  "Software architecture",
+  "Tech novelties",
+  "Alpine skiing",
+  "Paragliding",
+  "Kitesurfing",
+  "Sailing",
+  "Hitchhiking",
+]
 ---
 
 <Layout subtitle="CV">
@@ -54,9 +121,12 @@ const projectsEntries = (await Promise.all(
     <ThemeSwitcher client:only="svelte" />
   </div>
   <div class="page bg-background">
-    <header class="grid" style={{
-      gridTemplateColumns: "2fr 1fr",
-    }}>
+    <header
+      class="grid"
+      style={{
+        gridTemplateColumns: "2fr 1fr",
+      }}
+    >
       <div class="flex flex-col justify-between">
         <h1 class="text-4xl">Adam Steciuk</h1>
         <p class="text-sm">
@@ -70,7 +140,7 @@ const projectsEntries = (await Promise.all(
       <ul class="flex flex-col items-end">
         <ContactItem>
           <a href="mailto:a.t.steciuk@gmail.com">a.t.steciuk@gmail.com</a>
-          <Mail/>
+          <Mail />
         </ContactItem>
         <ContactItem>
           <span>+48 693 296 922</span>
@@ -106,15 +176,16 @@ const projectsEntries = (await Promise.all(
     </header>
     <main class="mt-1 grid grid-cols-2 gap-3">
       <div>
-        <section>
-          <GroupHeader>Professional Experience</GroupHeader>
+        <Section title="Professional Experience">
           {
             Array.from(groupedJobs).map(([group, jobs]) => (
-              <>
-                <SpaceBetween>
-                  <GroupSubHeader slot="left">{group}</GroupSubHeader>
-                  <Side slot="right">{formatLocation(jobs[0].data.location)}</Side>
-                </SpaceBetween>
+              <SpaceBetween>
+                <GroupSubHeader slot="left">{group}</GroupSubHeader>
+                <Side slot="right">
+                  {formatLocation(jobs[0].data.location)}
+                </Side>
+              </SpaceBetween>
+              <div>
                 {jobs.map((job) => (
                   <SpaceBetween>
                     <h4 class="text-sm italic" slot="left">{job.data.role}</h4>
@@ -124,22 +195,40 @@ const projectsEntries = (await Promise.all(
                   </SpaceBetween>
                   <ProseEntry entry={job} class="text-xs"/>
                 ))}
-              </>
+              </div>
             ))
           }
-        </section>
+        </Section>
+        <Section title="Skills">
+          <div class="space-y-1">
+            {skills.map(({ group, skills }) => (
+              <div>
+                <h3 class="mt-1 text-sm">{group}</h3>
+                <div class="text-2xs">
+                  {skills.join(" ∙ ")}
+                </div>
+              </div>
+            ))}
+          </div>
+        </Section>
+        <Section title="Interests">
+          <div class="text-2xs">
+            {interests.join(" ∙ ")}
+          </div>
+        </Section>
       </div>
       <div>
-        <GroupHeader>Education</GroupHeader>
-        {
-          Array.from(groupedEducation).map(([group, education]) => (
-            <>
+        <Section title="Education">
+          {
+            Array.from(groupedEducation).map(([group, education]) => (
               <GroupSubHeader>{group}</GroupSubHeader>
               <div class="space-y-1">
                 {education.map((entry) => (
                   <div>
                     <SpaceBetween>
-                      <h4 class="text-sm italic" slot="left">{entry.data.degree}</h4>
+                      <h4 class="text-sm italic" slot="left">
+                        {entry.data.degree}
+                      </h4>
                       <Side slot="right">
                         {formatPeriod(entry.data.start, entry.data.end)}
                       </Side>
@@ -149,37 +238,50 @@ const projectsEntries = (await Promise.all(
                         <li>Average grade: {entry.data.grade}/5.00.</li>
                       </ul>
                     </Prose>
-                    <ProseEntry entry={entry} class="text-xs prose-li:my-0"/>
+                    <ProseEntry entry={entry} class="text-xs prose-li:my-0" />
                   </div>
                 ))}
               </div>
-            </>
-          ))
-        }
-        <GroupHeader>Relevant Projects</GroupHeader>
-        {projectsEntries.map((entry) => (
-          <h3 class="text-sm mt-1">{entry.data.name}</h3>
-          <ProseEntry entry={entry} class="text-2xs prose-li:my-0"/>
-          <Prose class="text-2xs prose-li:my-0">
-            <ul>
-              {entry.data.repo && (
-                <li>
-                  <a href={entry.data.repo} target="_blank" rel="noopener">
-                    {entry.data.repo}
-                  </a>
-                </li>
-              )}
-              {entry.data.deployed && (
-                <li>
-                  <a href={entry.data.deployed} target="_blank" rel="noopener">
-                    {entry.data.deployed}
-                  </a>
-                </li>
-              )}
-              <li >{entry.data.technology.join(", ")}</li>
-            </ul>
-          </Prose>
-        ))}
+            ))
+          }
+        </Section>
+        <Section title="Relevant Projects">
+          {
+            projectsEntries.map((entry) => (
+              <>
+                <h3 class="mt-1 text-sm">{entry.data.name}</h3>
+                <ProseEntry entry={entry} class="text-2xs prose-li:my-0" />
+                <Prose class="text-2xs prose-li:my-0">
+                  <ul>
+                    {entry.data.repo && (
+                      <li>
+                        <a
+                          href={entry.data.repo}
+                          target="_blank"
+                          rel="noopener"
+                        >
+                          {entry.data.repo}
+                        </a>
+                      </li>
+                    )}
+                    {entry.data.deployed && (
+                      <li>
+                        <a
+                          href={entry.data.deployed}
+                          target="_blank"
+                          rel="noopener"
+                        >
+                          {entry.data.deployed}
+                        </a>
+                      </li>
+                    )}
+                    <li>{entry.data.technology.join(", ")}</li>
+                  </ul>
+                </Prose>
+              </>
+            ))
+          }
+        </Section>
       </div>
     </main>
   </div>

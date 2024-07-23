@@ -1,6 +1,6 @@
 ---
 name: "StateViz"
-technology: ["React", "Svelte", "TypeScript", "Tailwind CSS", "Vite", "Vitest", "Chrome Extension"]
+technology: ["React", "Svelte", "TypeScript", "Tailwind CSS", "Vite", "Vitest", "Chrome Extensions"]
 deployed: "https://chromewebstore.google.com/detail/stateviz/fckfpalhoncacipdeapifooaljchalin"
 repo: "https://github.com/steciuk/StateViz"
 start:
