@@ -18,6 +18,7 @@ import Prose from "@components/ui/Prose.astro";
 import Side from "@components/CV/Side.astro";
 import Section from "@components/CV/Section.astro";
 import { badgesLinks } from "@assets/badges/badgesLinks";
+import Link from "@components/ui/Link.astro";
 
 const jobsEntries = await getCollection("jobs");
 jobsEntries.sort((a, b) => {
@@ -246,6 +247,12 @@ const interests = [
           }
         </Section>
         <Section title="Relevant Projects">
+          <p class="text-2xs"slot="right">See other at<span>
+              <a href="https://steciuk.dev" target="_blank" rel="noopener" class="underline text-primary">
+                steciuk.dev
+              </a>
+            </span>
+          </p>
           {
             projectsEntries.map((entry) => (
               <>
