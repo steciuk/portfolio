@@ -247,9 +247,9 @@ const interests = [
           }
         </Section>
         <Section title="Relevant Projects">
-          <p class="text-2xs"slot="right">See other at<span>
+          <p class="text-2xs"slot="right">See other projects at{" "}
               <a href="https://steciuk.dev" target="_blank" rel="noopener" class="underline text-primary">
-                https://steciuk.dev
+                steciuk.dev
               </a>
             </span>
           </p>
@@ -261,28 +261,24 @@ const interests = [
                 <Prose class="text-2xs prose-li:my-0">
                   <ul>
                     {entry.data.repo && (
-                      <li>
+                      <li>Repository:{" "}
                         <a
                           href={entry.data.repo}
                           target="_blank"
                           rel="noopener"
-                        >
-                          {entry.data.repo}
-                        </a>
+                        >{entry.data.repo}</a>.
                       </li>
                     )}
                     {entry.data.deployed && (
-                      <li>
+                      <li>Avaliable at:{" "}
                         <a
                           href={entry.data.deployed}
                           target="_blank"
                           rel="noopener"
-                        >
-                          {entry.data.deployed}
-                        </a>
+                        >{entry.data.deployed}</a>.
                       </li>
                     )}
-                    <li>{entry.data.technology.join(", ")}</li>
+                    <li>{entry.data.technology.join(", ")}.</li>
                   </ul>
                 </Prose>
               </>

@@ -1,7 +1,7 @@
 ---
 name: Card Game
 technology: ["Angular", "TypeScript", "RxJS", "Phaser", "WebSockets", "Node.js", "Express", "MongoDB", "JWT", "Sass"]
-deployed: "https://cardgame.steciuk.dev/"
+deployed: "https://cardgame.steciuk.dev"
 repo: "https://github.com/steciuk/card-game"
 start:
   month: 8
