@@ -10,3 +10,4 @@ end:
   month: 6
   year: 2022
 ---
+- Full-stack card game application with real-time multiplayer functionality and user authentication.

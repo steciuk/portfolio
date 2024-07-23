@@ -10,3 +10,4 @@ end:
   month: 11
   year: 2023
 ---
+- Vite plugin forcing inline imports for specified modules.

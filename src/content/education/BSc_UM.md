@@ -14,4 +14,3 @@ end:
   year: 2020
 grade: 4.82
 ---
-- Average grade: 4.82/5.00

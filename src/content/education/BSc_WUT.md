@@ -14,7 +14,4 @@ end:
   year: 2022
 grade: 4.87
 ---
-- Average grade: 4.87/5.00
-- Final thesis: "Multiplayer card game in a web browser"
-  - The thesis received the highest grade and was awarded a distinction.
-  - https://github.com/steciuk/card-game
+- Final thesis *"Multiplayer card game in a web browser"* (https://github.com/steciuk/card-game) received the highest grade and was awarded a distinction.

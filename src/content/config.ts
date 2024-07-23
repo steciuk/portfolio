@@ -1,3 +1,4 @@
+import type { badgesLinks } from "@assets/badges/badgesLinks";
 import { defineCollection, z } from "astro:content";
 
 const monthDate = z.object({
@@ -44,7 +45,7 @@ const technologies = {
     "Python",
     "Flask",
     "Jupyter",
-    "Pandas",
+    "pandas",
     "NumPy",
     "Pytest",
     "Plotly",
@@ -69,10 +70,10 @@ const technologies = {
     "Angular",
   ],
   backFrameworks: ["Node.js", "Express"],
-  databases: ["MongoDB", "Firebase"],
+  databases: ["MongoDB", "Firestore"],
   devops: ["Vercel", "Heroku", "Docker", "Kubernetes", "Vite", "Nx", "Expo"],
   testing: ["Jest", "Cypress", "Vitest"],
-  cssLibraries: ["Tailwind CSS", "Emotion", "shadcn", "Material UI"],
+  cssLibraries: ["Tailwind CSS", "Emotion", "shadcn", "MUI"],
   other: [
     "RxJS",
     "D3.js",
@@ -89,7 +90,7 @@ const technologies = {
   c: ["C", "C++", "OpenGL", "Allegro", "Ncurses"],
   java: ["Java", "Robocode", "Encog", "JGAP"],
   os: ["Linux", "Minix"],
-} as const;
+} as const satisfies { [key: string]: Array<keyof typeof badgesLinks> };
 
 const projectsCollection = defineCollection({
   type: "content",

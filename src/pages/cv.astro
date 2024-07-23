@@ -1,6 +1,6 @@
 ---
 import ContactItem from "@components/CV/ContactItem.astro";
-import Prose from "@components/ui/Prose.astro";
+import ProseEntry from "@components/ui/ProseEntry.astro";
 import ThemeSwitcher from "@components/ThemeSwitcher.svelte";
 import { formatPeriod } from "@content/utils";
 import {
@@ -15,6 +15,8 @@ import GroupHeader from "@components/CV/GroupHeader.astro";
 import GroupSubHeader from "@components/CV/GroupSubHeader.astro";
 import SpaceBetween from "@components/CV/SpaceBetween.astro";
 import { getEntry } from "astro:content";
+import Prose from "@components/ui/Prose.astro";
+import Side from "@components/CV/Side.astro";
 
 const jobsEntries = await getCollection("jobs");
 jobsEntries.sort((a, b) => {
@@ -36,6 +38,9 @@ const projectsToShow = [
   "freebici",
   "qrnamic",
   "vite-plugin-inline-imports",
+  "card-game",
+  "quote-shake",
+  // "bwt"
 ] as const;
 
 const projectsEntries = (await Promise.all(
@@ -45,11 +50,15 @@ const projectsEntries = (await Promise.all(
 ---
 
 <Layout subtitle="CV">
-  <ThemeSwitcher client:only="svelte" />
+  <div class="no-print">
+    <ThemeSwitcher client:only="svelte" />
+  </div>
   <div class="page bg-background">
-    <header class="grid grid-cols-2">
+    <header class="grid" style={{
+      gridTemplateColumns: "2fr 1fr",
+    }}>
       <div class="flex flex-col justify-between">
-        <h1 class="text-3xl">Adam Steciuk</h1>
+        <h1 class="text-4xl">Adam Steciuk</h1>
         <p class="text-sm">
           Frontend web developer with over 2 years of professional experience
           and extensive work on personal and university projects. Passionate
@@ -58,19 +67,19 @@ const projectsEntries = (await Promise.all(
           with the latest industry trends.
         </p>
       </div>
-      <ul class="flex flex-col items-end gap-0.5">
+      <ul class="flex flex-col items-end">
         <ContactItem>
           <a href="mailto:a.t.steciuk@gmail.com">a.t.steciuk@gmail.com</a>
-          <Mail class="h-full" />
+          <Mail/>
         </ContactItem>
         <ContactItem>
           <span>+48 693 296 922</span>
           <Phone />
         </ContactItem>
-        <ContactItem>
+        <!-- <ContactItem>
           <span>Gdańsk, Poland</span>
           <MapPin />
-        </ContactItem>
+        </ContactItem> -->
         <ContactItem>
           <a
             href="https://www.linedin.com/in/steciuk"
@@ -95,7 +104,7 @@ const projectsEntries = (await Promise.all(
         </ContactItem>
       </ul>
     </header>
-    <main class="mt-2 grid grid-cols-2 gap-3">
+    <main class="mt-1 grid grid-cols-2 gap-3">
       <div>
         <section>
           <GroupHeader>Professional Experience</GroupHeader>
@@ -104,16 +113,16 @@ const projectsEntries = (await Promise.all(
               <>
                 <SpaceBetween>
                   <GroupSubHeader slot="left">{group}</GroupSubHeader>
-                  <p class="text-sm" slot="right">{formatLocation(jobs[0].data.location)}</p>
+                  <Side slot="right">{formatLocation(jobs[0].data.location)}</Side>
                 </SpaceBetween>
                 {jobs.map((job) => (
                   <SpaceBetween>
                     <h4 class="text-sm italic" slot="left">{job.data.role}</h4>
-                    <p class="text-sm" slot="right">
+                    <Side slot="right">
                       {formatPeriod(job.data.start, job.data.end)}
-                    </p>
+                    </Side>
                   </SpaceBetween>
-                  <Prose entry={job} class="text-xs"/>
+                  <ProseEntry entry={job} class="text-xs"/>
                 ))}
               </>
             ))
@@ -126,22 +135,50 @@ const projectsEntries = (await Promise.all(
           Array.from(groupedEducation).map(([group, education]) => (
             <>
               <GroupSubHeader>{group}</GroupSubHeader>
-              {education.map((entry) => (
-                <SpaceBetween>
-                  <h4 class="text-sm italic" slot="left">{entry.data.degree}</h4>
-                  <p class="text-sm" slot="right">
-                    {formatPeriod(entry.data.start, entry.data.end)}
-                  </p>
-                </SpaceBetween>
-                <Prose entry={entry} class="text-xs"/>
-              ))}
+              <div class="space-y-1">
+                {education.map((entry) => (
+                  <div>
+                    <SpaceBetween>
+                      <h4 class="text-sm italic" slot="left">{entry.data.degree}</h4>
+                      <Side slot="right">
+                        {formatPeriod(entry.data.start, entry.data.end)}
+                      </Side>
+                    </SpaceBetween>
+                    <Prose class="text-xs prose-li:my-0">
+                      <ul>
+                        <li>Average grade: {entry.data.grade}/5.00.</li>
+                      </ul>
+                    </Prose>
+                    <ProseEntry entry={entry} class="text-xs prose-li:my-0"/>
+                  </div>
+                ))}
+              </div>
             </>
           ))
         }
-        <GroupHeader>Projects</GroupHeader>
-        {
-          projectsEntries.map((entry) => (
-            <GroupSubHeader>{entry.data.name}</GroupSubHeader>
+        <GroupHeader>Relevant Projects</GroupHeader>
+        {projectsEntries.map((entry) => (
+          <h3 class="text-sm mt-1">{entry.data.name}</h3>
+          <ProseEntry entry={entry} class="text-2xs prose-li:my-0"/>
+          <Prose class="text-2xs prose-li:my-0">
+            <ul>
+              {entry.data.repo && (
+                <li>
+                  <a href={entry.data.repo} target="_blank" rel="noopener">
+                    {entry.data.repo}
+                  </a>
+                </li>
+              )}
+              {entry.data.deployed && (
+                <li>
+                  <a href={entry.data.deployed} target="_blank" rel="noopener">
+                    {entry.data.deployed}
+                  </a>
+                </li>
+              )}
+              <li >{entry.data.technology.join(", ")}</li>
+            </ul>
+          </Prose>
         ))}
       </div>
     </main>
@@ -151,7 +188,7 @@ const projectsEntries = (await Promise.all(
 <style>
   .page {
     width: 21cm;
-    min-height: 29.7cm;
+    height: 29.7cm;
     padding: 0.7cm;
     margin: 1cm auto;
     border: 1px #d3d3d3 solid;
@@ -166,6 +203,7 @@ const projectsEntries = (await Promise.all(
 
   @media print {
     .page {
+      overflow: hidden;
       margin: 0;
       border: initial;
       border-radius: initial;
@@ -174,6 +212,10 @@ const projectsEntries = (await Promise.all(
       box-shadow: initial;
       background: initial;
       page-break-after: always;
+    }
+
+    .no-print {
+      display: none;
     }
   }
 </style>

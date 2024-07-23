@@ -22,6 +22,9 @@ const config = {
       fontFamily: {
         sans: [...fontFamily.sans],
       },
+      fontSize: {
+        "2xs": ["0.625rem", "0.875rem"],
+      },
     },
     colors: {
       border: "hsl(var(--border) / <alpha-value>)",

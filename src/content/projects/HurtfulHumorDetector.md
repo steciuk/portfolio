@@ -1,6 +1,6 @@
 ---
 name: "Hurtful Humor Detector"
-technology: ["Python", "Jupyter", "NLTK", "PyTorch", "scikit-learn", "Matplotlib", "Pandas", "NumPy"]
+technology: ["Python", "Jupyter", "NLTK", "PyTorch", "scikit-learn", "Matplotlib", "pandas", "NumPy"]
 repo: "https://github.com/steciuk/LNR-hurftul-humor-detector"
 start:
   month: 3

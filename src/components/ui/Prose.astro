@@ -1,21 +1,16 @@
 ---
-import type { CollectionKey } from "astro:content";
-import type { CollectionEntry } from "astro:content";
-
 interface Props {
-  entry: CollectionEntry<CollectionKey>;
   class?: string;
 }
 
-const { entry, class: className } = Astro.props;
-const { Content } = await entry.render();
+const { class: className } = Astro.props;
 ---
 
 <div
   class:list={[
-    "prose prose-code:font-regular prose-a:font-normal prose-a:text-primary prose-li:my-1 prose-ul:my-1 text-foreground",
+    "prose-code:font-regular prose text-foreground prose-a:font-normal prose-a:text-primary",
     className,
   ]}
 >
-  <Content />
+  <slot />
 </div>

@@ -1,6 +1,6 @@
 ---
 name: "Recommendation System"
-technology: ["Python", "Pandas", "NumPy", "scikit-learn", "SciPy", "Flask"]
+technology: ["Python", "pandas", "NumPy", "scikit-learn", "SciPy", "Flask"]
 repo: "https://github.com/steciuk/IUM-recommendation-system"
 start:
   month: 11
