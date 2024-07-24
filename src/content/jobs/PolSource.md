@@ -11,5 +11,6 @@ start:
 end:
   month: 6
   year: 2021
+group: "PolSource"
 ---
-- Learning of Salesforce ecosystem through Trailhead platform.
+- Was learning Salesforce ecosystem through Trailhead platform.

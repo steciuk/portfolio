@@ -1,0 +1,57 @@
+---
+import Layout from "@layouts/Layout.astro";
+import { Button } from "@components/ui/button";
+import Header from "@components/CV/Header/Header.astro";
+import ThemeSwitcher from "@components/ThemeSwitcher.svelte";
+import Experience from "@components/CV/sections/Experience.astro";
+import Skills from "@components/CV/sections/Skills.astro";
+import Interests from "@components/CV/sections/Interests.astro";
+import Education from "@components/CV/sections/Education.astro";
+import Projects from "@components/CV/sections/Projects.astro";
+import { Fragment } from "astro/jsx-runtime";
+---
+
+<Layout subtitle="CV">
+  <div class="my-4 flex justify-center print:hidden">
+    <ThemeSwitcher client:only="svelte" />
+    <Button href="/Adam_Steciuk_CV.pdf" variant="default" target="_blank">
+      Download PDF
+    </Button>
+  </div>
+  <div
+    class="page w-a4 min-h-a4 max-w-a4 screen-max-a4:w-auto screen-max-a4:p-2 print:h-a4 screen-max-a4:mx-1 mx-auto my-4 rounded-sm border-2 bg-background p-[0.7cm] shadow-md print:m-0 print:overflow-hidden print:rounded-none print:border-0 print:bg-[#fff] print:shadow-none"
+  >
+    <Header />
+    <main class="screen-max-a4:hidden mt-1 grid grid-cols-2 gap-3">
+      <div>
+        <Experience />
+        <Skills />
+        <Interests />
+      </div>
+      <div>
+        <Education />
+        <Projects />
+      </div>
+    </main>
+    <main class="a4:hidden mt-1 print:hidden">
+      <Experience />
+      <Education />
+      <Projects />
+      <Skills />
+      <Interests />
+    </main>
+  </div>
+</Layout>
+
+<style>
+  @page {
+    size: A4;
+    margin: 0;
+  }
+
+  @media print {
+    .page {
+      page-break-after: always;
+    }
+  }
+</style>

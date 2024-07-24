@@ -1,7 +1,7 @@
 ---
 name: Card Game
-technology: ["Angular", "TypeScript", "RxJS", "Phaser", "WebSockets", "Node.js", "Express", "MongoDB", "JWT"]
-deployed: "https://cardgame.steciuk.dev/"
+technology: ["Angular", "TypeScript", "RxJS", "Phaser", "WebSockets", "Node.js", "Express", "MongoDB", "JWT", "Sass"]
+deployed: "https://cardgame.steciuk.dev"
 repo: "https://github.com/steciuk/card-game"
 start:
   month: 8
@@ -10,3 +10,4 @@ end:
   month: 6
   year: 2022
 ---
+- Full-stack card game application with real-time multiplayer functionality and user authentication.

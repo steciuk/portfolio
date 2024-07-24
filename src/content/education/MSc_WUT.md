@@ -14,5 +14,4 @@ end:
   year: 2024
 grade: 4.96
 ---
-<!-- TODO: add info about thesis -->
-<!-- Final thesis: "Analysis of structure and data flow in modern web applications " -->
+- Final thesis *"Analysis of structure and data flow in modern web applications"* (https://github.com/steciuk/StateViz) received the highest grade and was awarded a distinction.

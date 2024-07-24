@@ -1,6 +1,6 @@
 ---
 name: "Connect Dots"
-technology: ["Python", "SciPy", "Matplotlib", "Pandas", "NumPy", "scikit-learn"]
+technology: ["Python", "SciPy", "Matplotlib", "pandas", "NumPy", "scikit-learn"]
 repo: "https://github.com/steciuk/ALHE-Connect-Dots"
 start:
   month: 4

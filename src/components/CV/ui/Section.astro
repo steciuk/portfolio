@@ -1,0 +1,20 @@
+---
+import SpaceBetween from "@components/CV/ui/SpaceBetween.astro";
+
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<section class="mt-2">
+  <SpaceBetween>
+    <h2 class="text-lg/[22px] uppercase" slot="left">
+      {title}
+    </h2>
+    <slot name="right" slot="right" />
+  </SpaceBetween>
+  <hr class="border-t-2 border-foreground/50" />
+  <slot />
+</section>

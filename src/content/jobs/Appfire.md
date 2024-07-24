@@ -11,8 +11,9 @@ start:
 end:
   month: 12
   year: 2022
+group: "Appfire (BigPicture)"
 ---
-- Developed and refactored key Angular components used in an enterprise-class application.
-- Created, maintained, and refactored multiple Cypress E2E tests, which led to a noticeable improvement in application and CI/CD stability.
-- Helped with the development of unified big volume data-managing infrastructure used across the entire application.
-- In a team of 3, during a one-week internal hackathon, developed a library that allows drawing links between draggable HTML DOM elements, significantly increasing app performance in comparison to the third-party library used before.
+- Developed and refactored key Angular components for an enterprise-class application, enhancing functionality and performance.
+- Created, maintained, and refactored multiple Cypress E2E tests, leading to significant improvements in application stability and CI/CD processes.
+- Contributed to the development of a unified big volume data-management infrastructure, optimizing data handling across the entire application.
+- Collaborated in a team of three during a one-week internal hackathon to develop a library for drawing links between draggable HTML DOM elements, significantly boosting app performance compared to the previous third-party library.

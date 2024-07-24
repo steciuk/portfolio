@@ -3,6 +3,7 @@ import { getCollection } from "astro:content";
 import Marker from "@components/Timeline/Marker.astro";
 import type { EntryMeasurements } from "@components/Timeline/types";
 import TimelineEntry from "@components/Timeline/TimelineEntry.astro";
+import { sortByDate } from "@content/utils";
 
 const educationEntries = await getCollection("education");
 const jobsEntries = await getCollection("jobs");
@@ -11,16 +12,7 @@ const projectsEntries = await getCollection("projects");
 const allEntries = [...educationEntries, ...jobsEntries, ...projectsEntries];
 
 allEntries.sort((a, b) => {
-  const aStart = a.data.start;
-  const bStart = b.data.start;
-
-  if (aStart.year < bStart.year) {
-    return -1;
-  } else if (aStart.year > bStart.year) {
-    return 1;
-  } else {
-    return aStart.month - bStart.month;
-  }
+  return sortByDate(a.data.start, b.data.start);
 });
 
 const earliestStart = allEntries[0].data.start;

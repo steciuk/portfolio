@@ -1,6 +1,6 @@
 ---
 name: "Reddit Bipartite Network Analysis"
-technology: ["Python", "Jupyter", "NetworkX", "Pandas", "Matplotlib", "Seaborn", "PRAW", "Gephi", "Cytoscape"]
+technology: ["Python", "Jupyter", "NetworkX", "pandas", "Matplotlib", "Seaborn", "PRAW", "Gephi", "Cytoscape"]
 deployed: "https://steciuk.github.io/SNA-reddit-bipartite-analysis/"
 repo: "https://github.com/steciuk/SNA-reddit-bipartite-analysis"
 start:

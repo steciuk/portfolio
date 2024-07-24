@@ -1,5 +1,5 @@
 ---
-school: "Universitat Politècnica de València"
+school: "Universitat Politècnica de Málaga"
 logo: "./images/UM.jpg"
 faculty: "Escuela Técnica Superior de Ingeniería Informática"
 degree: "ERASMUS+ program during BSc"

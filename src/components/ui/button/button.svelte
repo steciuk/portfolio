@@ -11,6 +11,10 @@
   export let size: $$Props["size"] = "default";
   export let builders: $$Props["builders"] = [];
   export { className as class };
+
+  if ($$restProps.target === "_blank") {
+    $$restProps.rel = "noopener";
+  }
 </script>
 
 <ButtonPrimitive.Root

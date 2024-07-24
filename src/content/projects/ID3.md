@@ -1,6 +1,6 @@
 ---
 name: "ID3 tree classifier implementation"
-technology: ["Python", "Pandas", "NumPy"]
+technology: ["Python", "pandas", "NumPy"]
 repo: "https://github.com/steciuk/PSZT-ID3-algortihm"
 start:
   month: 12

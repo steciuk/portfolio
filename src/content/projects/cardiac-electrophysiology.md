@@ -1,6 +1,6 @@
 ---
 name: "Cardiac Electrophysiology"
-technology: ["Python", "Dash", "Plotly", "Pandas", "NumPy"]
+technology: ["Python", "Dash", "Plotly", "pandas", "NumPy"]
 repo: "https://github.com/steciuk/PS2-cardiac-electrophysiology"
 start:
   month: 1

@@ -3,12 +3,16 @@ import { SEO } from "astro-seo";
 import "@styles/app.css";
 
 interface Props {
-  title?: string;
+  subtitle?: string;
 }
 
 const description = "// TODO: Add a description";
 
-const { title = "Adam Steciuk" } = Astro.props;
+const { subtitle } = Astro.props;
+const title =
+  subtitle && subtitle.trim() !== "Adam Steciuk"
+    ? `${subtitle} | Adam Steciuk`
+    : "Adam Steciuk";
 ---
 
 <!doctype html>

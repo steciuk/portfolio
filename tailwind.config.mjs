@@ -22,6 +22,33 @@ const config = {
       fontFamily: {
         sans: [...fontFamily.sans],
       },
+      fontSize: {
+        "2xs": ["0.625rem", "0.875rem"],
+      },
+      width: {
+        a4: "21cm",
+      },
+      height: {
+        a4: "29.7cm",
+      },
+      maxWidth: {
+        a4: "21cm",
+      },
+      minHeight: {
+        a4: "29.7cm",
+      },
+      screens: {
+        a4: "21cm",
+        "max-a4": { max: "21cm" },
+        "screen-max-a4": { raw: "only screen and (max-width: 21cm)" },
+      },
+      typography: {
+        DEFAULT: {
+          css: {
+            maxWidth: "80ch",
+          },
+        },
+      },
     },
     colors: {
       border: "hsl(var(--border) / <alpha-value>)",
@@ -59,6 +86,7 @@ const config = {
       },
     },
   },
+  plugins: [require("@tailwindcss/typography")],
 };
 
 export default config;
