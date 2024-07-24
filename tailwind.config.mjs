@@ -46,6 +46,14 @@ const config = {
       screens: {
         a4: "21cm",
         "max-a4": { max: "21cm" },
+        "screen-max-a4": { raw: "only screen and (max-width: 21cm)" },
+      },
+      typography: {
+        DEFAULT: {
+          css: {
+            maxWidth: "80ch",
+          },
+        },
       },
     },
     colors: {

@@ -19,10 +19,10 @@ import { Fragment } from "astro/jsx-runtime";
     </Button>
   </div>
   <div
-    class="page w-a4 min-h-a4 max-w-a4 max-a4:w-auto max-a4:p-2 print:w-a4 print:h-a4 mx-auto my-4 rounded-sm border-2 bg-background p-[0.7cm] shadow-md print:m-0 print:overflow-hidden print:rounded-none print:border-0 print:bg-[#fff] print:p-[0.7cm] print:shadow-none"
+    class="page w-a4 min-h-a4 max-w-a4 screen-max-a4:w-auto screen-max-a4:p-2 print:h-a4 screen-max-a4:mx-1 mx-auto my-4 rounded-sm border-2 bg-background p-[0.7cm] shadow-md print:m-0 print:overflow-hidden print:rounded-none print:border-0 print:bg-[#fff] print:shadow-none"
   >
     <Header />
-    <main class="max-a4:hidden mt-1 grid grid-cols-2 gap-3 print:grid">
+    <main class="screen-max-a4:hidden mt-1 grid grid-cols-2 gap-3">
       <div>
         <Experience />
         <Skills />

@@ -34,9 +34,12 @@ const projectsEntries = (
   {
     projectsEntries.map((entry) => (
       <>
-        <h3 class="mt-1 text-sm">{entry.data.name}</h3>
-        <ProseEntry entry={entry} class="text-2xs prose-li:my-0" />
-        <Prose class="text-2xs prose-li:my-0">
+        <h3 class="screen-max-a4:text-base mt-1 text-sm">{entry.data.name}</h3>
+        <ProseEntry
+          entry={entry}
+          class="screen-max-a4:text-xs a4:prose-li:my-0 text-2xs print:prose-li:my-0"
+        />
+        <Prose class="screen-max-a4:text-xs a4:prose-li:my-0 text-2xs print:prose-li:my-0">
           <ul>
             {entry.data.repo && (
               <li>

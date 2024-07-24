@@ -38,12 +38,15 @@ const groupedEducation = groupEntriesByDataField<"education">(
                   {formatPeriod(entry.data.start, entry.data.end)}
                 </Side>
               </SpaceBetween>
-              <Prose class="text-xs prose-li:my-0">
+              <Prose class="a4:prose-li:my-0 text-xs print:prose-li:my-0">
                 <ul>
                   <li>Average grade: {entry.data.grade}/5.00.</li>
                 </ul>
               </Prose>
-              <ProseEntry entry={entry} class="text-xs prose-li:my-0" />
+              <ProseEntry
+                entry={entry}
+                class="a4:prose-li:my-0 text-xs print:prose-li:my-0"
+              />
             </div>
           ))}
         </div>

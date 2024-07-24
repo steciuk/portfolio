@@ -4,14 +4,14 @@ import { Github, Globe, Linkedin, Mail, Phone } from "lucide-svelte";
 ---
 
 <header
-  class="grid"
+  class="screen-max-a4:block grid"
   style={{
     gridTemplateColumns: "2fr 1fr",
   }}
 >
   <div class="flex flex-col justify-between">
     <h1 class="text-4xl">Adam Steciuk</h1>
-    <p class="text-sm">
+    <p class="screen-max-a4:max-w-[80ch] text-justify text-sm">
       Frontend web developer with over 2 years of professional experience and
       extensive work on personal and university projects. Passionate about
       creating dynamic, user-friendly web applications. Curious and ambitious,
@@ -19,7 +19,7 @@ import { Github, Globe, Linkedin, Mail, Phone } from "lucide-svelte";
       industry trends.
     </p>
   </div>
-  <ul class="flex flex-col items-end">
+  <ul class="screen-max-a4:mt-2 flex flex-col items-end">
     <ContactItem>
       <a href="mailto:a.t.steciuk@gmail.com">a.t.steciuk@gmail.com</a>
       <Mail />
