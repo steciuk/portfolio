@@ -1,0 +1,65 @@
+---
+import Section from "@components/CV/ui/Section.astro";
+import Prose from "@components/ui/Prose.astro";
+import ProseEntry from "@components/ui/ProseEntry.astro";
+import { getEntry } from "astro:content";
+
+const projectsToShow = [
+  "stateviz",
+  "freebici",
+  "qrnamic",
+  "vite-plugin-inline-imports",
+  "card-game",
+  "quote-shake",
+  // "bwt"
+] as const;
+
+const projectsEntries = (
+  await Promise.all(projectsToShow.map((slug) => getEntry("projects", slug)))
+).filter((entry) => !!entry);
+---
+
+<Section title="Relevant Projects">
+  <p class="text-2xs" slot="right">
+    See other projects at{" "}
+    <a
+      href="https://steciuk.dev"
+      target="_blank"
+      rel="noopener"
+      class="text-primary underline"
+    >
+      steciuk.dev
+    </a>
+  </p>
+  {
+    projectsEntries.map((entry) => (
+      <>
+        <h3 class="mt-1 text-sm">{entry.data.name}</h3>
+        <ProseEntry entry={entry} class="text-2xs prose-li:my-0" />
+        <Prose class="text-2xs prose-li:my-0">
+          <ul>
+            {entry.data.repo && (
+              <li>
+                Repository:{" "}
+                <a href={entry.data.repo} target="_blank" rel="noopener">
+                  {entry.data.repo}
+                </a>
+                .
+              </li>
+            )}
+            {entry.data.deployed && (
+              <li>
+                Avaliable at:{" "}
+                <a href={entry.data.deployed} target="_blank" rel="noopener">
+                  {entry.data.deployed}
+                </a>
+                .
+              </li>
+            )}
+            <li>{entry.data.technology.join(", ")}.</li>
+          </ul>
+        </Prose>
+      </>
+    ))
+  }
+</Section>

@@ -25,6 +25,28 @@ const config = {
       fontSize: {
         "2xs": ["0.625rem", "0.875rem"],
       },
+      width: {
+        a4: "21cm",
+      },
+      maxWidth: {
+        a4: "21cm",
+      },
+      minWidth: {
+        a4: "21cm",
+      },
+      height: {
+        a4: "29.7cm",
+      },
+      maxHeight: {
+        a4: "29.7cm",
+      },
+      minHeight: {
+        a4: "29.7cm",
+      },
+      screens: {
+        a4: "21cm",
+        "max-a4": { max: "21cm" },
+      },
     },
     colors: {
       border: "hsl(var(--border) / <alpha-value>)",

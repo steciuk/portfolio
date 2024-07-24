@@ -1,0 +1,53 @@
+---
+import GroupSubHeader from "@components/CV/ui/GroupSubHeader.astro";
+import Section from "@components/CV/ui/Section.astro";
+import Side from "@components/CV/ui/Side.astro";
+import SpaceBetween from "@components/CV/ui/SpaceBetween.astro";
+import Prose from "@components/ui/Prose.astro";
+import ProseEntry from "@components/ui/ProseEntry.astro";
+import {
+  sortByDate,
+  groupEntriesByDataField,
+  formatPeriod,
+} from "@content/utils";
+import { getCollection } from "astro:content";
+
+const educationEntries = await getCollection("education");
+educationEntries.sort((a, b) => {
+  return sortByDate(b.data.end, a.data.end);
+});
+const groupedEducation = groupEntriesByDataField<"education">(
+  educationEntries,
+  "school"
+);
+---
+
+<Section title="Education">
+  {
+    Array.from(groupedEducation).map(([group, education]) => (
+      <>
+        <GroupSubHeader>{group}</GroupSubHeader>
+        <div class="space-y-1">
+          {education.map((entry) => (
+            <div>
+              <SpaceBetween>
+                <h4 class="text-sm italic" slot="left">
+                  {entry.data.degree}
+                </h4>
+                <Side slot="right">
+                  {formatPeriod(entry.data.start, entry.data.end)}
+                </Side>
+              </SpaceBetween>
+              <Prose class="text-xs prose-li:my-0">
+                <ul>
+                  <li>Average grade: {entry.data.grade}/5.00.</li>
+                </ul>
+              </Prose>
+              <ProseEntry entry={entry} class="text-xs prose-li:my-0" />
+            </div>
+          ))}
+        </div>
+      </>
+    ))
+  }
+</Section>

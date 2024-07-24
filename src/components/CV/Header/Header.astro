@@ -1,0 +1,62 @@
+---
+import ContactItem from "@components/CV/Header/ContactItem.astro";
+import { Github, Globe, Linkedin, Mail, Phone } from "lucide-svelte";
+---
+
+<header
+  class="grid"
+  style={{
+    gridTemplateColumns: "2fr 1fr",
+  }}
+>
+  <div class="flex flex-col justify-between">
+    <h1 class="text-4xl">Adam Steciuk</h1>
+    <p class="text-sm">
+      Frontend web developer with over 2 years of professional experience and
+      extensive work on personal and university projects. Passionate about
+      creating dynamic, user-friendly web applications. Curious and ambitious,
+      constantly seeking to enhance my skills and stay updated with the latest
+      industry trends.
+    </p>
+  </div>
+  <ul class="flex flex-col items-end">
+    <ContactItem>
+      <a href="mailto:a.t.steciuk@gmail.com">a.t.steciuk@gmail.com</a>
+      <Mail />
+    </ContactItem>
+    <ContactItem>
+      <span>+48 693 296 922</span>
+      <Phone />
+    </ContactItem>
+    {
+      /*
+      <ContactItem>
+        <span>Gdańsk, Poland</span>
+        <MapPin />
+      </ContactItem>
+      */
+    }
+    <ContactItem>
+      <a
+        href="https://www.linedin.com/in/steciuk"
+        target="_blank"
+        rel="noopener"
+      >
+        linedin.com/in/steciuk
+      </a>
+      <Linkedin />
+    </ContactItem>
+    <ContactItem>
+      <a href="https://github.com/steciuk" target="_blank" rel="noopener">
+        github.com/steciuk
+      </a>
+      <Github />
+    </ContactItem>
+    <ContactItem>
+      <a href="https://steciuk.dev" target="_blank" rel="noopener">
+        steciuk.dev
+      </a>
+      <Globe />
+    </ContactItem>
+  </ul>
+</header>

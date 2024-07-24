@@ -1,0 +1,78 @@
+---
+import type { badgesLinks } from "@assets/badges/badgesLinks";
+import Section from "@components/CV/ui/Section.astro";
+
+const techSkills: Array<{
+  group: string;
+  skills: Array<keyof typeof badgesLinks>;
+}> = [
+  {
+    group: "Web development",
+    skills: [
+      "React",
+      "Angular",
+      "Astro",
+      "Svelte",
+      "TypeScript",
+      "JavaScript",
+      "Tailwind CSS",
+      "HTML",
+      "CSS",
+      "Sass",
+      "RxJS",
+      "Vite",
+      "Vitest",
+      "Jest",
+      "Cypress",
+      // "React Native",
+      "EJS",
+      "Chrome Extensions",
+      "Express",
+      "Phaser",
+    ],
+  },
+  {
+    group: "Data science & analytics",
+    skills: [
+      "Python",
+      "pandas",
+      "NumPy",
+      "Matplotlib",
+      "Seaborn",
+      "scikit-learn",
+      "Jupyter",
+      "NetworkX",
+    ],
+  },
+  {
+    group: "Other",
+    skills: ["Git", "Gerrit", "Firestore", "MongoDB", "Linux", "Docker"],
+  },
+];
+
+const skills = [
+  ...techSkills,
+  {
+    group: "Languages",
+    skills: [
+      "Polish (native)",
+      "English (fluent)",
+      "Spanish (intermediate)",
+      "Russian (elementary)",
+    ],
+  },
+];
+---
+
+<Section title="Skills">
+  <div class="space-y-1">
+    {
+      skills.map(({ group, skills }) => (
+        <div>
+          <h3 class="mt-1 text-sm">{group}</h3>
+          <div class="text-2xs">{skills.join(" ∙ ")}</div>
+        </div>
+      ))
+    }
+  </div>
+</Section>

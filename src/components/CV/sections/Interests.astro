@@ -1,0 +1,20 @@
+---
+import Section from "@components/CV/ui/Section.astro";
+
+const interests = [
+  "Web development",
+  "Software architecture",
+  "Tech novelties",
+  "Alpine skiing",
+  "Paragliding",
+  "Kitesurfing",
+  "Sailing",
+  "Hitchhiking",
+];
+---
+
+<Section title="Interests">
+  <div class="text-2xs">
+    {interests.join(" ∙ ")}
+  </div>
+</Section>
