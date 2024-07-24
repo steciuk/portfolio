@@ -28,17 +28,11 @@ const config = {
       width: {
         a4: "21cm",
       },
-      maxWidth: {
-        a4: "21cm",
-      },
-      minWidth: {
-        a4: "21cm",
-      },
       height: {
         a4: "29.7cm",
       },
-      maxHeight: {
-        a4: "29.7cm",
+      maxWidth: {
+        a4: "21cm",
       },
       minHeight: {
         a4: "29.7cm",
