@@ -4,8 +4,8 @@ import { Image } from "astro:assets";
 import EntryTitle from "@components/Timeline/EntryDetails/EntryTitle.astro";
 import EntrySubtitle from "@components/Timeline/EntryDetails/EntrySubtitle.astro";
 import EntryRole from "@components/Timeline/EntryDetails/EntryRole.astro";
-import Link from "@components/ui/Link.astro";
 import { formatPeriod } from "@content/utils";
+import { Button } from "@components/ui/button";
 
 interface Props {
   entry: CollectionEntry<"education" | "jobs" | "projects">;
@@ -48,10 +48,24 @@ let dateString = formatPeriod(entry.data.start, entry.data.end);
         <EntryTitle>{entry.data.name}</EntryTitle>
         <div class="flex flex-col">
           {entry.data.repo && (
-            <Link href={entry.data.repo}>{entry.data.repo}</Link>
+            <Button
+              href={entry.data.repo}
+              target="_blank"
+              variant="link"
+              size="inline"
+            >
+              {entry.data.repo}
+            </Button>
           )}
           {entry.data.deployed && (
-            <Link href={entry.data.deployed}>{entry.data.deployed}</Link>
+            <Button
+              href={entry.data.deployed}
+              target="_blank"
+              variant="link"
+              size="inline"
+            >
+              {entry.data.deployed}
+            </Button>
           )}
         </div>
         <EntrySubtitle>{entry.data.technology.join(", ")}</EntrySubtitle>
