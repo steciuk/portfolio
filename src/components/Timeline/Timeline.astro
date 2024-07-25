@@ -80,8 +80,8 @@ allEntries.forEach((entry) => {
 ---
 
 <section>
-  <div class="container flex flex-col items-center">
-    <div class="flex gap-2">
+  <div class="container">
+    <div class="flex w-full justify-center gap-2">
       <div class="flex flex-col items-end">
         <Marker text="Now" heightPx={monthHeight} />
         <div
@@ -99,14 +99,31 @@ allEntries.forEach((entry) => {
 
             const year =
               latestEnd.year - Math.floor((i + 12 - latestEnd.month) / 12);
-            const dateDisplay = new Date(year, month - 1).toLocaleString(
+            const monthDispaly = new Date(year, month - 1).toLocaleString(
               "en-us",
               {
                 month: "long",
-                year: "numeric",
               }
             );
-            return <Marker text={dateDisplay} heightPx={monthHeight} />;
+            if (month === 1) {
+              return (
+                <div class="relative">
+                  <Marker text={monthDispaly} heightPx={monthHeight} />
+                  <div
+                    class="pointer-events-none absolute flex min-h-max origin-center -translate-y-1/2 rotate-180 gap-2 text-7xl font-bold text-foreground/10"
+                    style={{
+                      writingMode: "vertical-lr",
+                      textOrientation: "sideways",
+                    }}
+                  >
+                    <span>{year - 1}</span>
+                    <span class="font-thin">|</span>
+                    <span>{year}</span>
+                  </div>
+                </div>
+              );
+            }
+            return <Marker text={monthDispaly} heightPx={monthHeight} />;
           })
         }
       </div>
