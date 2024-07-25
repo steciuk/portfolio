@@ -22,12 +22,25 @@
 
   let modalOpen = false;
   let element: Element | undefined;
-  let boundingRect: DOMRect | undefined;
+  let dotPos: { x: number; y: number } | undefined;
+  let windowHeight: number | undefined;
+
+  function updateDotPos(domRect: DOMRect) {
+    dotPos = {
+      x: domRect.x + domRect.width / 2,
+      y: domRect.y + domRect.height / 2,
+    };
+  }
+
+  function updateWindowHeight() {
+    windowHeight = window.innerHeight;
+  }
 
   function closeModal() {
     modalOpen = false;
     document.removeEventListener("keydown", handlEscapeKey);
     document.removeEventListener("scroll", updateOnScroll);
+    document.removeEventListener("resize", updateWindowHeight);
   }
 
   function handlEscapeKey(event: KeyboardEvent) {
@@ -37,19 +50,32 @@
     }
   }
 
+  let scrollTicking = false;
   function updateOnScroll() {
-    boundingRect = element?.getBoundingClientRect();
-    console.log(boundingRect);
+    if (!scrollTicking) {
+      window.requestAnimationFrame(() => {
+        const boundingRect = element?.getBoundingClientRect();
+        if (boundingRect) {
+          updateDotPos(boundingRect);
+        }
+        scrollTicking = false;
+      });
+
+      scrollTicking = true;
+    }
   }
 
   function handleOpenClick() {
     modalOpen = true;
-    boundingRect = element?.getBoundingClientRect();
-    console.log(boundingRect);
+    const boundingRect = element?.getBoundingClientRect();
+    if (boundingRect) {
+      updateDotPos(boundingRect);
+    }
+    updateWindowHeight();
 
     document.addEventListener("keydown", handlEscapeKey);
     document.addEventListener("scroll", updateOnScroll);
-    // TODO: https://developer.mozilla.org/en-US/docs/Web/API/Document/scroll_event
+    document.addEventListener("resize", updateWindowHeight);
   }
 </script>
 
@@ -66,13 +92,21 @@
     transition:fade={{ duration: 200 }}
   >
     <svg class="h-full w-full bg-[#ff000041]">
-      {#if boundingRect}
-        <circle
-          cx="{boundingRect.x}px"
-          cy="{boundingRect.y}px"
-          r="10px"
-          fill="red"
-        />
+      {#if dotPos && windowHeight}
+        {#if dotPos.y < 0}
+          <polygon
+            points="{dotPos.x - 10},15 {dotPos.x},0 {dotPos.x + 10},15"
+            fill="red"
+          />
+        {:else if dotPos.y > window.innerHeight}
+          <polygon
+            points="{dotPos.x - 10},{windowHeight -
+              15} {dotPos.x},{windowHeight} {dotPos.x + 10},{windowHeight - 15}"
+            fill="red"
+          />
+        {:else}
+          <circle cx={dotPos.x} cy={dotPos.y} r="10" fill="red" />
+        {/if}
       {/if}
     </svg>
     <!-- svelte-ignore a11y-click-events-have-key-events -->
