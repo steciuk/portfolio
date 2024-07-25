@@ -2,8 +2,9 @@
 import { getCollection } from "astro:content";
 import Marker from "@components/Timeline/Marker.astro";
 import type { EntryMeasurements } from "@components/Timeline/types";
-import TimelineEntry from "@components/Timeline/TimelineEntry.astro";
+import TimelineEntry from "@components/Timeline/TimelineEntry.svelte";
 import { sortByDate } from "@content/utils";
+import EntryDetails from "@components/Timeline/EntryDetails/EntryDetails.astro";
 
 const educationEntries = await getCollection("education");
 const jobsEntries = await getCollection("jobs");
@@ -137,7 +138,11 @@ allEntries.forEach((entry) => {
           lines.map((line) => (
             <div class="relative w-8">
               {line.map(([_, __, entry]) => {
-                return <TimelineEntry entry={entry} />;
+                return (
+                  <TimelineEntry entry={entry} client:visible>
+                    <EntryDetails entry={entry} />
+                  </TimelineEntry>
+                );
               })}
             </div>
           ))

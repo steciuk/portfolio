@@ -15,7 +15,7 @@ const { entry } = Astro.props;
 let dateString = formatPeriod(entry.data.start, entry.data.end);
 ---
 
-<div class="min-w-max p-2">
+<div class="min-w-max p-2 text-left">
   {
     entry.collection === "education" ? (
       <>
