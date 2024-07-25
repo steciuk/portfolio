@@ -13,7 +13,7 @@ import { Fragment } from "astro/jsx-runtime";
 
 <Layout subtitle="CV">
   <div class="my-4 flex justify-center print:hidden">
-    <ThemeSwitcher client:only="svelte" />
+    <ThemeSwitcher client:load />
     <Button href="/Adam_Steciuk_CV.pdf" variant="default" target="_blank">
       Download PDF
     </Button>

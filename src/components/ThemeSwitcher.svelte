@@ -2,8 +2,13 @@
   import { Sun } from "lucide-svelte";
   import { Moon } from "lucide-svelte";
   import { Button } from "@components/ui/button";
+  import { onMount } from "svelte";
 
-  let isDark = document.documentElement.classList.contains("dark");
+  let isDark: boolean | undefined = undefined;
+
+  onMount(() => {
+    isDark = document.documentElement.classList.contains("dark");
+  });
 
   function toggleTheme() {
     document.documentElement.classList.toggle("dark");
@@ -13,9 +18,9 @@
 </script>
 
 <Button on:click={toggleTheme} size="icon">
-  {#if isDark}
+  {#if isDark === true}
     <Sun />
-  {:else}
+  {:else if isDark === false}
     <Moon />
   {/if}
 </Button>
