@@ -19,7 +19,7 @@ switch (entry.collection) {
     bgColorClass = "bg-secondary";
     break;
   case "projects":
-    bgColorClass = "bg-primary/20";
+    bgColorClass = "bg-accent";
     break;
 }
 ---
@@ -33,7 +33,7 @@ switch (entry.collection) {
 >
   <div
     class:list={[
-      "entry__details bg- relative z-10 w-min max-w-0 overflow-hidden rounded-sm",
+      "entry__details relative z-10 w-min max-w-0 overflow-hidden rounded-sm",
       bgColorClass,
     ]}
     style={{
