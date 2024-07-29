@@ -39,7 +39,7 @@
 {#if isCurrentEntry}
   <div
     class="fixed bottom-4 z-10 rounded-sm {bgColorClass} left-1/2 w-11/12 -translate-x-1/2 cursor-auto"
-    transition:fade={{ duration: 200 }}
+    transition:fade={{ duration: 100 }}
   >
     <slot />
   </div>

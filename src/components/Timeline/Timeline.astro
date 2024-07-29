@@ -6,6 +6,7 @@ import { sortByDate } from "@content/utils";
 import EntryDetails from "@components/Timeline/EntryDetails/EntryDetails.astro";
 import EntryDeselector from "@components/Timeline/EntryDeselector.svelte";
 import Marker from "@components/Timeline/Marker.svelte";
+import Markers from "@components/Timeline/Markers/Markers.svelte";
 
 const educationEntries = await getCollection("education");
 const jobsEntries = await getCollection("jobs");
@@ -39,7 +40,7 @@ const latestEnd = allEntries.reduce((latest, entry) => {
 const totalYears = latestEnd.year - earliestStart.year;
 const totalMonths = totalYears * 12 + latestEnd.month - earliestStart.month + 1;
 
-const monthHeight = 40; // in pixels
+const monthHeightPx = 40; // in pixels
 const lines: Array<
   [number, number, (typeof allEntries)[number] & EntryMeasurements][]
 > = [];
@@ -57,8 +58,8 @@ allEntries.forEach((entry) => {
     durationMonths += 2;
   }
 
-  const heightPx = durationMonths * monthHeight;
-  const startHeightPx = startMonths * monthHeight + monthHeight / 2;
+  const heightPx = durationMonths * monthHeightPx;
+  const startHeightPx = startMonths * monthHeightPx + monthHeightPx / 2;
 
   let line = lines.findIndex((line) => {
     return line.every(([start, end]) => {
@@ -85,61 +86,13 @@ allEntries.forEach((entry) => {
 <section>
   <div class="container">
     <div class="flex w-full justify-center gap-2">
-      <div class="flex flex-col items-end">
-        <Marker monthDate="now" heightPx={monthHeight} client:visible />
-        <div
-          class="flex items-center"
-          style={{
-            height: `${monthHeight}px`,
-          }}
-        >
-          ...
-        </div>
-        {
-          Array.from({ length: totalMonths }).map((_, i) => {
-            const month =
-              (totalMonths - i - 1 + earliestStart.month) % 12 || 12;
-
-            const year =
-              latestEnd.year - Math.floor((i + 12 - latestEnd.month) / 12);
-            const monthDispaly = new Date(year, month - 1).toLocaleString(
-              "en-us",
-              {
-                month: "long",
-              }
-            );
-            if (month === 1) {
-              return (
-                <div class="relative">
-                  <Marker
-                    monthDate={{ month, year }}
-                    heightPx={monthHeight}
-                    client:visible
-                  />
-                  <div
-                    class="pointer-events-none absolute bottom-0 right-2 flex min-h-max origin-center translate-y-1/2 rotate-180 select-none gap-2 text-7xl font-bold text-foreground/10"
-                    style={{
-                      writingMode: "vertical-lr",
-                      textOrientation: "sideways",
-                    }}
-                  >
-                    <span>{year - 1}</span>
-                    <span class="font-thin">|</span>
-                    <span>{year}</span>
-                  </div>
-                </div>
-              );
-            }
-            return (
-              <Marker
-                monthDate={{ month, year }}
-                heightPx={monthHeight}
-                client:visible
-              />
-            );
-          })
-        }
-      </div>
+      <Markers
+        {totalMonths}
+        {monthHeightPx}
+        {earliestStart}
+        {latestEnd}
+        client:load
+      />
       <div
         class="grid gap-2"
         style={{
@@ -151,8 +104,8 @@ allEntries.forEach((entry) => {
             <div class="relative w-8">
               {line.map(([_, __, entry]) => {
                 return (
-                  <TimelineEntry entry={entry} client:visible>
-                    <EntryDetails entry={entry} />
+                  <TimelineEntry {entry} client:visible>
+                    <EntryDetails {entry} />
                   </TimelineEntry>
                 );
               })}
