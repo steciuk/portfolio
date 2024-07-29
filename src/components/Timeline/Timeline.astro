@@ -1,10 +1,11 @@
 ---
 import { getCollection } from "astro:content";
-import Marker from "@components/Timeline/Marker.astro";
 import type { EntryMeasurements } from "@components/Timeline/types";
 import TimelineEntry from "@components/Timeline/TimelineEntry.svelte";
 import { sortByDate } from "@content/utils";
 import EntryDetails from "@components/Timeline/EntryDetails/EntryDetails.astro";
+import EntryDeselector from "@components/Timeline/EntryDeselector.svelte";
+import Marker from "@components/Timeline/Marker.svelte";
 
 const educationEntries = await getCollection("education");
 const jobsEntries = await getCollection("jobs");
@@ -80,11 +81,12 @@ allEntries.forEach((entry) => {
 });
 ---
 
+<EntryDeselector client:load />
 <section>
   <div class="container">
     <div class="flex w-full justify-center gap-2">
       <div class="flex flex-col items-end">
-        <Marker text="Now" heightPx={monthHeight} />
+        <Marker monthDate="now" heightPx={monthHeight} client:visible />
         <div
           class="flex items-center"
           style={{
@@ -109,9 +111,13 @@ allEntries.forEach((entry) => {
             if (month === 1) {
               return (
                 <div class="relative">
-                  <Marker text={monthDispaly} heightPx={monthHeight} />
+                  <Marker
+                    monthDate={{ month, year }}
+                    heightPx={monthHeight}
+                    client:visible
+                  />
                   <div
-                    class="pointer-events-none absolute flex min-h-max origin-center -translate-y-1/2 rotate-180 select-none gap-2 text-7xl font-bold text-foreground/10"
+                    class="pointer-events-none absolute bottom-0 right-2 flex min-h-max origin-center translate-y-1/2 rotate-180 select-none gap-2 text-7xl font-bold text-foreground/10"
                     style={{
                       writingMode: "vertical-lr",
                       textOrientation: "sideways",
@@ -124,7 +130,13 @@ allEntries.forEach((entry) => {
                 </div>
               );
             }
-            return <Marker text={monthDispaly} heightPx={monthHeight} />;
+            return (
+              <Marker
+                monthDate={{ month, year }}
+                heightPx={monthHeight}
+                client:visible
+              />
+            );
           })
         }
       </div>
