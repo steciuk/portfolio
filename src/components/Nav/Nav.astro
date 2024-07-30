@@ -1,5 +1,16 @@
 ---
 import ThemeSwitcher from "@components/ThemeSwitcher.svelte";
+import { Button } from "@components/ui/button";
+import me from "@assets/me.jpg";
+import { Image } from "astro:assets";
+import { Github, Linkedin, Mail } from "lucide-svelte";
+import { email, github, linkedin } from "@src/links";
+
+const links = [
+  { href: "/", text: "Home" },
+  { href: "/cv", text: "CV" },
+  { href: "/projects", text: "Projects" },
+];
 ---
 
 <div
@@ -8,19 +19,62 @@ import ThemeSwitcher from "@components/ThemeSwitcher.svelte";
   data-nav="closed"
 >
   <aside
-    class="pointer-events-auto flex h-full w-56 -translate-x-full flex-col bg-card text-card-foreground shadow-2xl transition-transform lg:translate-x-0 lg:border-r lg:shadow-none"
+    class="pointer-events-auto flex h-full w-56 -translate-x-full flex-col justify-between bg-card px-4 pt-6 text-card-foreground shadow-2xl transition-transform lg:translate-x-0 lg:border-r lg:shadow-none xl:w-72"
   >
-    <nav>
-      <ul>
-        <li>
-          <a href="/">Home</a>
-        </li>
-        <li>
-          <a href="/cv">CV</a>
-        </li>
-      </ul>
-    </nav>
-    <ThemeSwitcher client:idle />
+    <div class="flex w-full flex-col items-center gap-6">
+      <Image
+        src={me}
+        alt="Adam Steciuk"
+        class="aspect-square w-full max-w-40 rounded-full object-cover shadow-sm"
+        width={240}
+        quality="high"
+      />
+      <nav class="w-full">
+        <ul class="space-y-2">
+          {
+            links.map(({ href, text }) => (
+              <li>
+                <Button class="w-full" variant="outline" href={href}>
+                  {text}
+                </Button>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+      <ThemeSwitcher client:idle />
+    </div>
+    <div class="flex justify-center gap-2 pb-2">
+      <Button
+        href={`mailto:${email}`}
+        variant="link"
+        size="icon"
+        aria-label="Email"
+        class="text-card-foreground"
+      >
+        <Mail />
+      </Button>
+      <Button
+        href={github}
+        target="_blank"
+        variant="link"
+        size="icon"
+        aria-label="GitHub"
+        class="text-card-foreground"
+      >
+        <Github />
+      </Button>
+      <Button
+        href={linkedin}
+        target="_blank"
+        variant="link"
+        size="icon"
+        aria-label="LinkedIn"
+        class="text-card-foreground"
+      >
+        <Linkedin />
+      </Button>
+    </div>
   </aside>
   <button
     class="pointer-events-auto flex-grow bg-border/50 backdrop-blur-sm lg:hidden"

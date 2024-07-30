@@ -19,7 +19,13 @@
   }
 </script>
 
-<Button on:click={toggleTheme} size="icon" class="grid">
+<Button
+  on:click={toggleTheme}
+  size="icon"
+  class="grid"
+  variant="outline"
+  aria-label="Toggle theme"
+>
   {#if isDark === true}
     <div class="col-start-1 row-start-1" transition:fade={{ duration: 100 }}>
       <Sun />
