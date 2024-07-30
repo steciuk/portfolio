@@ -1,4 +1,3 @@
-import type { badgesLinks } from "@assets/badges/badgesLinks";
 import { defineCollection, z } from "astro:content";
 
 const monthDate = z.object({
@@ -40,78 +39,97 @@ const jobsCollection = defineCollection({
     }),
 });
 
-const technologies = {
-  python: [
-    "Python",
-    "Flask",
-    "Jupyter",
-    "pandas",
-    "NumPy",
-    "Pytest",
-    "Plotly",
-    "Dash",
-    "scikit-learn",
-    "NLTK",
-    "Matplotlib",
-    "Transformers",
-    "PyTorch",
-    "PRAW",
-    "NetworkX",
-    "Seaborn",
-    "SciPy",
-  ],
-  web: ["JavaScript", "TypeScript", "HTML", "CSS", "EJS", "Sass"],
-  frontFrameworks: [
-    "React",
-    "React Native",
-    "Vue",
-    "Svelte",
-    "Astro",
-    "Angular",
-  ],
-  backFrameworks: ["Node.js", "Express"],
-  databases: ["MongoDB", "Firestore"],
-  devops: ["Vercel", "Heroku", "Docker", "Kubernetes", "Vite", "Nx", "Expo"],
-  testing: ["Jest", "Cypress", "Vitest"],
-  cssLibraries: ["Tailwind CSS", "Emotion", "shadcn", "MUI"],
-  other: [
-    "RxJS",
-    "D3.js",
-    "AG Grid",
-    "OpenStreetMap",
-    "Leaflet",
-    "Chrome Extensions",
-    "JWT",
-    "Phaser",
-    "WebSockets",
-    "Gephi",
-    "Cytoscape",
-  ],
-  c: ["C", "C++", "OpenGL", "Allegro", "Ncurses"],
-  java: ["Java", "Robocode", "Encog", "JGAP"],
-  os: ["Linux", "Minix"],
-} as const satisfies { [key: string]: Array<keyof typeof badgesLinks> };
+export const technologies = [
+  // Python
+  "Python",
+  "Flask",
+  "Jupyter",
+  "pandas",
+  "NumPy",
+  "Pytest",
+  "Plotly",
+  "Dash",
+  "scikit-learn",
+  "NLTK",
+  "Matplotlib",
+  "Transformers",
+  "PyTorch",
+  "PRAW",
+  "NetworkX",
+  "Seaborn",
+  "SciPy",
+  // Web
+  "JavaScript",
+  "TypeScript",
+  "HTML",
+  "CSS",
+  "EJS",
+  "Sass",
+  // Front-end frameworks
+  "React",
+  "React Native",
+  "Vue",
+  "Svelte",
+  "Astro",
+  "Angular",
+  // Back-end frameworks
+  "Node.js",
+  "Express",
+  // Databases:
+  "MongoDB",
+  "Firestore",
+  // Devops:
+  "Vercel",
+  "Heroku",
+  "Docker",
+  "Kubernetes",
+  "Vite",
+  "Nx",
+  "Expo",
+  // Testing:
+  "Jest",
+  "Cypress",
+  "Vitest",
+  // CSS libraries:
+  "Tailwind CSS",
+  "Emotion",
+  "shadcn",
+  "MUI",
+  // Other:
+  "Git",
+  "Gerrit",
+  "RxJS",
+  "D3.js",
+  "AG Grid",
+  "OpenStreetMap",
+  "Leaflet",
+  "Chrome Extensions",
+  "JWT",
+  "Phaser",
+  "WebSockets",
+  "Gephi",
+  "Cytoscape",
+  // C
+  "C",
+  "C++",
+  "OpenGL",
+  "Allegro",
+  "Ncurses",
+  // Java
+  "Java",
+  "Robocode",
+  "Encog",
+  "JGAP",
+  // OS
+  "Linux",
+  "Minix",
+] as const;
 
 const projectsCollection = defineCollection({
   type: "content",
   schema: z.object({
     name: z.string(),
-    technology: z.array(
-      z.enum([
-        ...technologies.python,
-        ...technologies.web,
-        ...technologies.frontFrameworks,
-        ...technologies.backFrameworks,
-        ...technologies.databases,
-        ...technologies.devops,
-        ...technologies.testing,
-        ...technologies.cssLibraries,
-        ...technologies.other,
-        ...technologies.c,
-        ...technologies.java,
-        ...technologies.os,
-      ]),
-    ),
+    technology: z.array(z.enum(technologies)),
     deployed: z.string().url().optional(),
     repo: z.string().url().optional(),
     start: monthDate,
@@ -127,3 +145,4 @@ export const collections = {
 
 export type MonthDate = z.infer<typeof monthDate>;
 export type Location = z.infer<typeof location>;
+export type Technology = (typeof technologies)[number];

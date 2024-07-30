@@ -1,10 +1,10 @@
 ---
-import type { badgesLinks } from "@assets/badges/badgesLinks";
 import Section from "@components/CV/ui/Section.astro";
+import type { Technology } from "@content/config";
 
 const techSkills: Array<{
   group: string;
-  skills: Array<keyof typeof badgesLinks>;
+  skills: Technology[];
 }> = [
   {
     group: "Web development",
@@ -69,8 +69,8 @@ const skills = [
     {
       skills.map(({ group, skills }) => (
         <div>
-          <h3 class="screen-max-a4:text-base mt-1 text-sm">{group}</h3>
-          <div class="screen-max-a4:text-xs text-2xs">{skills.join(" ∙ ")}</div>
+          <h3 class="mt-1 text-sm screen-max-a4:text-base">{group}</h3>
+          <div class="text-2xs screen-max-a4:text-xs">{skills.join(" ∙ ")}</div>
         </div>
       ))
     }

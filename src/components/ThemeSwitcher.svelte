@@ -10,7 +10,8 @@
     isDark = document.documentElement.classList.contains("dark");
   });
 
-  function toggleTheme() {
+  function toggleTheme(e: MouseEvent) {
+    e.stopPropagation();
     document.documentElement.classList.toggle("dark");
     isDark = !isDark;
     localStorage.setItem("theme", isDark ? "dark" : "light");
