@@ -1,6 +1,8 @@
 ---
 import { SEO } from "astro-seo";
 import "@styles/app.css";
+import Nav from "@components/Nav/Nav.astro";
+import Header from "@components/Header.astro";
 
 interface Props {
   subtitle?: string;
@@ -40,7 +42,13 @@ const title =
     <meta name="author" content="Adam Steciuk" />
   </head>
   <body>
-    <slot />
+    <Header />
+    <div class="flex">
+      <Nav />
+      <div class="flex-grow">
+        <slot />
+      </div>
+    </div>
     <script is:inline>
       const isBrowser = typeof localStorage !== "undefined";
       const getThemePreference = () => {

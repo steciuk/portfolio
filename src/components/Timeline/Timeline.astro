@@ -81,16 +81,16 @@ allEntries.forEach((entry) => {
 });
 ---
 
-<EntryDeselector client:load />
+<EntryDeselector client:idle />
 <section>
   <div class="container">
-    <div class="flex w-full justify-center gap-2">
+    <div class="flex w-full justify-center gap-2 overflow-hidden">
       <Markers
         {totalMonths}
         {monthHeightPx}
         {earliestStart}
         {latestEnd}
-        client:load
+        client:visible
       />
       <div
         class="grid gap-2"

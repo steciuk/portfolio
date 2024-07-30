@@ -3,6 +3,7 @@
   import { Moon } from "lucide-svelte";
   import { Button } from "@components/ui/button";
   import { onMount } from "svelte";
+  import { fade } from "svelte/transition";
 
   let isDark: boolean | undefined = undefined;
 
@@ -18,10 +19,14 @@
   }
 </script>
 
-<Button on:click={toggleTheme} size="icon">
+<Button on:click={toggleTheme} size="icon" class="grid">
   {#if isDark === true}
-    <Sun />
+    <div class="col-start-1 row-start-1" transition:fade={{ duration: 100 }}>
+      <Sun />
+    </div>
   {:else if isDark === false}
-    <Moon />
+    <div class="col-start-1 row-start-1" transition:fade={{ duration: 100 }}>
+      <Moon />
+    </div>
   {/if}
 </Button>

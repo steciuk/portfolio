@@ -6,6 +6,10 @@ import svelte from "@astrojs/svelte";
 
 // https://astro.build/config
 export default defineConfig({
-  integrations: [tailwind({ applyBaseStyles: false }), sitemap(), svelte()],
+  integrations: [
+    tailwind({ applyBaseStyles: false, nesting: true }),
+    sitemap(),
+    svelte(),
+  ],
   site: "https://steciuk.dev",
 });

@@ -1,0 +1,90 @@
+---
+import ThemeSwitcher from "@components/ThemeSwitcher.svelte";
+---
+
+<div
+  class="pointer-events-none fixed left-0 top-0 z-30 flex h-screen w-screen overflow-hidden lg:sticky lg:w-max"
+  id="main-nav-container"
+  data-nav="closed"
+>
+  <aside
+    class="pointer-events-auto flex h-full w-56 -translate-x-full flex-col bg-card text-card-foreground shadow-2xl transition-transform lg:translate-x-0 lg:border-r lg:shadow-none"
+  >
+    <nav>
+      <ul>
+        <li>
+          <a href="/">Home</a>
+        </li>
+        <li>
+          <a href="/cv">CV</a>
+        </li>
+      </ul>
+    </nav>
+    <ThemeSwitcher client:idle />
+  </aside>
+  <button
+    class="pointer-events-auto flex-grow bg-border/50 backdrop-blur-sm lg:hidden"
+    id="close-main-nav-btn"
+    aria-label="Close main navigation"></button>
+</div>
+
+<style lang="scss">
+  #close-main-nav-btn {
+    animation: fadeIn 0.3s forwards;
+  }
+
+  #main-nav-container[data-nav="closed"] {
+    #close-main-nav-btn {
+      display: none;
+    }
+  }
+
+  #main-nav-container[data-nav="closing"] {
+    #close-main-nav-btn {
+      animation: fadeOut 0.3s forwards;
+    }
+  }
+
+  #main-nav-container[data-nav="open"] {
+    aside {
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes fadeOut {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+</style>
+
+<script>
+  const closeMainNavBtn = document.getElementById("close-main-nav-btn");
+  const mainNavContainer = document.getElementById("main-nav-container");
+
+  if (closeMainNavBtn && mainNavContainer) {
+    closeMainNavBtn.addEventListener("click", () => {
+      mainNavContainer.dataset.nav = "closing";
+
+      closeMainNavBtn.addEventListener(
+        "animationend",
+        () => {
+          mainNavContainer.dataset.nav = "closed";
+        },
+        { once: true }
+      );
+    });
+  }
+</script>
