@@ -1,0 +1,29 @@
+---
+import type { ImageMetadata } from "astro";
+import type { Technology } from "@content/config";
+import { Image } from "astro:assets";
+
+interface Props {
+  name: Technology;
+  class?: string;
+}
+
+const { name, class: className } = Astro.props;
+const path = `/src/assets/badges/${name}.svg`;
+
+const images = import.meta.glob<{ default: ImageMetadata }>(
+  "@assets/badges/*.svg"
+);
+
+if (!images[path])
+  throw new Error(`"${name}" does not exist in glob: "src/assets/*.svg}"`);
+---
+
+<Image
+  src={images[path]()}
+  alt={`${name} badge`}
+  class={className}
+  quality="low"
+  height={20}
+  format="svg"
+/>

@@ -36,7 +36,7 @@
   }
 </script>
 
-<div class="flex flex-col items-end">
+<div class="flex min-w-[110px] flex-col items-end">
   <Marker
     monthDate="now"
     heightPx={monthHeightPx}

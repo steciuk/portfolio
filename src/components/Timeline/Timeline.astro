@@ -5,7 +5,6 @@ import TimelineEntry from "@components/Timeline/TimelineEntry.svelte";
 import { sortByDate } from "@content/utils";
 import EntryDetails from "@components/Timeline/EntryDetails/EntryDetails.astro";
 import EntryDeselector from "@components/Timeline/EntryDeselector.svelte";
-import Marker from "@components/Timeline/Marker.svelte";
 import Markers from "@components/Timeline/Markers/Markers.svelte";
 
 const educationEntries = await getCollection("education");
@@ -40,7 +39,7 @@ const latestEnd = allEntries.reduce((latest, entry) => {
 const totalYears = latestEnd.year - earliestStart.year;
 const totalMonths = totalYears * 12 + latestEnd.month - earliestStart.month + 1;
 
-const monthHeightPx = 40; // in pixels
+const monthHeightPx = 40;
 const lines: Array<
   [number, number, (typeof allEntries)[number] & EntryMeasurements][]
 > = [];
@@ -101,7 +100,7 @@ allEntries.forEach((entry) => {
       >
         {
           lines.map((line) => (
-            <div class="relative w-8">
+            <div class="xs:w-8 relative w-6">
               {line.map(([_, __, entry]) => {
                 return (
                   <TimelineEntry {entry} client:visible>
