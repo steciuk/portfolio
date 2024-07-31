@@ -24,12 +24,13 @@ import { Menu } from "lucide-svelte";
 </header>
 
 <script>
-  const openMainNavBtn = document.getElementById("open-main-nav-btn");
-  const mainNavContainer = document.getElementById("main-nav-container");
+  import { navOpen } from "@components/Nav/navOpenStore";
 
-  if (openMainNavBtn && mainNavContainer) {
+  const openMainNavBtn = document.getElementById("open-main-nav-btn");
+
+  if (openMainNavBtn) {
     openMainNavBtn.addEventListener("click", () => {
-      mainNavContainer.dataset.nav = "open";
+      navOpen.set(true);
     });
   }
 </script>

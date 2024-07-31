@@ -11,13 +11,18 @@ const links = [
   { href: "/cv", text: "CV" },
   { href: "/projects", text: "Projects" },
 ];
+// TODO: Change the width in the script and in EntryDeselector if main breakpoint changes
 ---
 
 <div
-  class="pointer-events-none fixed left-0 top-0 z-30 flex h-dvh w-screen overflow-hidden lg:sticky lg:w-max"
+  class="pointer-events-none fixed left-0 top-0 z-30 h-dvh w-screen overflow-hidden lg:sticky lg:w-max"
   id="main-nav-container"
   data-nav="closed"
 >
+  <button
+    class="pointer-events-auto absolute inset-0 bg-border/50 backdrop-blur-sm lg:hidden"
+    id="close-main-nav-btn"
+    aria-label="Close main navigation"></button>
   <aside
     class="pointer-events-auto flex h-full w-56 -translate-x-full flex-col justify-between bg-card px-4 pt-6 text-card-foreground shadow-2xl transition-transform lg:translate-x-0 lg:border-r lg:shadow-none xl:w-72"
   >
@@ -76,10 +81,6 @@ const links = [
       </Button>
     </div>
   </aside>
-  <button
-    class="pointer-events-auto flex-grow bg-border/50 backdrop-blur-sm lg:hidden"
-    id="close-main-nav-btn"
-    aria-label="Close main navigation"></button>
 </div>
 
 <style lang="scss">
@@ -125,20 +126,40 @@ const links = [
 </style>
 
 <script>
+  import { navOpen } from "@components/Nav/navOpenStore";
   const closeMainNavBtn = document.getElementById("close-main-nav-btn");
   const mainNavContainer = document.getElementById("main-nav-container");
 
-  if (closeMainNavBtn && mainNavContainer) {
+  if (closeMainNavBtn) {
     closeMainNavBtn.addEventListener("click", () => {
-      mainNavContainer.dataset.nav = "closing";
-
-      closeMainNavBtn.addEventListener(
-        "animationend",
-        () => {
-          mainNavContainer.dataset.nav = "closed";
-        },
-        { once: true }
-      );
+      navOpen.set(false);
     });
   }
+
+  if (mainNavContainer) {
+    navOpen.subscribe((isOpen) => {
+      if (isOpen) {
+        mainNavContainer.dataset.nav = "open";
+      } else {
+        if (closeMainNavBtn) {
+          mainNavContainer.dataset.nav = "closing";
+          closeMainNavBtn.addEventListener(
+            "animationend",
+            () => {
+              mainNavContainer.dataset.nav = "closed";
+            },
+            { once: true }
+          );
+        } else {
+          mainNavContainer.dataset.nav = "closed";
+        }
+      }
+    });
+  }
+
+  window.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && navOpen.get() && window.innerWidth < 1024) {
+      navOpen.set(false);
+    }
+  });
 </script>
