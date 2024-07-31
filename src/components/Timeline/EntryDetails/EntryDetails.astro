@@ -1,5 +1,4 @@
 ---
-import type { CollectionEntry } from "astro:content";
 import { Image } from "astro:assets";
 import EntryTitle from "@components/Timeline/EntryDetails/EntryTitle.astro";
 import EntrySubtitle from "@components/Timeline/EntryDetails/EntrySubtitle.astro";
@@ -7,16 +6,17 @@ import EntryRole from "@components/Timeline/EntryDetails/EntryRole.astro";
 import { formatPeriod } from "@content/utils";
 import { Button } from "@components/ui/button";
 import Badge from "@components/ui/Badge.astro";
+import type { TimelinableEntry } from "@components/Timeline/types";
 
 interface Props {
-  entry: CollectionEntry<"education" | "jobs" | "projects">;
+  entry: TimelinableEntry;
 }
 
 const { entry } = Astro.props;
 let dateString = formatPeriod(entry.data.start, entry.data.end);
 ---
 
-<div class="min-w-max p-2 text-left">
+<div class="p-2 text-left">
   {
     entry.collection === "education" ? (
       <>

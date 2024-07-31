@@ -10,4 +10,8 @@
 </script>
 
 <svelte:window on:keydown={handleKeyDown} />
-<svelte:document on:click={selectedEntry.clear} />
+<button
+  class="fixed inset-0 cursor-auto"
+  on:click|stopPropagation={selectedEntry.clear}
+  aria-label="Deselect timeline entry"
+/>

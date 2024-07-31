@@ -1,0 +1,53 @@
+---
+import EntryDetails from "@components/Timeline/EntryDetails/EntryDetails.astro";
+import type { TimelinableEntry } from "@components/Timeline/types";
+import { getEntryBgColorClass } from "@components/Timeline/utils";
+import { getEntryDetailsElementId } from "@components/Timeline/entryId";
+
+interface Props {
+  entries: TimelinableEntry[];
+}
+
+const { entries } = Astro.props;
+---
+
+<div
+  class="pointer-events-none sticky top-16 col-start-1 row-start-1 grid h-[calc(100vh-4rem)] items-end pb-4 lg:top-0 lg:col-start-2 lg:h-screen lg:items-center lg:pb-0"
+>
+  {
+    entries.map((entry) => {
+      const bgColorClass = getEntryBgColorClass(entry);
+      const id = getEntryDetailsElementId(entry);
+
+      return (
+        <div
+          {id}
+          class="entry-details pointer-events-auto col-start-1 row-start-1 hidden w-full min-w-0 rounded-sm"
+          class:list={[bgColorClass]}
+        >
+          <EntryDetails {entry} />
+        </div>
+      );
+    })
+  }
+</div>
+
+<script>
+  import { getEntryDetailsElementId } from "@components/Timeline/entryId";
+  import { selectedEntry } from "@components/Timeline/selectedEntryStore";
+  const entryDetailsElements = document.querySelectorAll(".entry-details");
+
+  selectedEntry.subscribe((entry) => {
+    if (entry === null) {
+      entryDetailsElements.forEach((element) => {
+        element.classList.add("hidden");
+      });
+    } else {
+      entryDetailsElements.forEach((element) => {
+        element.id === getEntryDetailsElementId(entry)
+          ? element.classList.remove("hidden")
+          : element.classList.add("hidden");
+      });
+    }
+  });
+</script>

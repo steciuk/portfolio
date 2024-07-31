@@ -1,13 +1,12 @@
-import type { CollectionEntry, ContentCollectionKey } from "astro:content";
-import { writable } from "svelte/store";
+import type { CollectionEntry, CollectionKey } from "astro:content";
+import { atom } from "nanostores";
 
 function createSelectedEntryStore() {
-  const { subscribe, set } =
-    writable<null | CollectionEntry<ContentCollectionKey>>(null);
+  const selectedEntry = atom<CollectionEntry<CollectionKey> | null>(null);
+
   return {
-    subscribe,
-    set,
-    clear: () => set(null),
+    ...selectedEntry,
+    clear: () => selectedEntry.set(null),
   };
 }
 

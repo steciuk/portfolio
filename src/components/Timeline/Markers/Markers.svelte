@@ -1,5 +1,5 @@
 <script lang="ts">
-  import Marker from "@components/Timeline/Marker.svelte";
+  import Marker from "@components/Timeline/Markers/Marker.svelte";
   import { selectedEntry } from "@components/Timeline/selectedEntryStore";
   import type { MonthDate } from "@content/config";
   import type { CollectionEntry, CollectionKey } from "astro:content";
