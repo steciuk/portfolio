@@ -1,17 +1,18 @@
 ---
 import ContactItem from "@components/CV/Header/ContactItem.astro";
+import { email, github, linkedin, website } from "@src/links";
 import { Github, Globe, Linkedin, Mail, Phone } from "lucide-svelte";
 ---
 
 <header
-  class="screen-max-a4:block grid"
+  class="grid screen-max-a4:block"
   style={{
     gridTemplateColumns: "2fr 1fr",
   }}
 >
   <div class="flex flex-col justify-between">
     <h1 class="text-4xl">Adam Steciuk</h1>
-    <p class="screen-max-a4:max-w-[80ch] text-justify text-sm">
+    <p class="text-justify text-sm screen-max-a4:max-w-[80ch]">
       Frontend web developer with over 2 years of professional experience and
       extensive work on personal and university projects. Passionate about
       creating dynamic, user-friendly web applications. Curious and ambitious,
@@ -19,9 +20,9 @@ import { Github, Globe, Linkedin, Mail, Phone } from "lucide-svelte";
       industry trends.
     </p>
   </div>
-  <ul class="screen-max-a4:mt-2 flex flex-col items-end">
+  <ul class="flex flex-col items-end screen-max-a4:mt-2">
     <ContactItem>
-      <a href="mailto:a.t.steciuk@gmail.com">a.t.steciuk@gmail.com</a>
+      <a href={`mailto:${email}`}>{email}</a>
       <Mail />
     </ContactItem>
     <ContactItem>
@@ -37,25 +38,17 @@ import { Github, Globe, Linkedin, Mail, Phone } from "lucide-svelte";
       */
     }
     <ContactItem>
-      <a
-        href="https://www.linedin.com/in/steciuk"
-        target="_blank"
-        rel="noopener"
-      >
+      <a href={linkedin} target="_blank" rel="noopener">
         linedin.com/in/steciuk
       </a>
       <Linkedin />
     </ContactItem>
     <ContactItem>
-      <a href="https://github.com/steciuk" target="_blank" rel="noopener">
-        github.com/steciuk
-      </a>
+      <a href={github} target="_blank" rel="noopener"> github.com/steciuk </a>
       <Github />
     </ContactItem>
     <ContactItem>
-      <a href="https://steciuk.dev" target="_blank" rel="noopener">
-        steciuk.dev
-      </a>
+      <a href={website} target="_blank" rel="noopener"> steciuk.dev </a>
       <Globe />
     </ContactItem>
   </ul>

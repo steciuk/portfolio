@@ -1,25 +1,15 @@
 <script lang="ts">
+  import { getEntryId } from "@components/Timeline/entryId";
   import { selectedEntry } from "@components/Timeline/selectedEntryStore";
-  import type { EntryMeasurements } from "@components/Timeline/types";
-  import { getEntryId } from "@components/Timeline/utils";
-  import type { CollectionEntry } from "astro:content";
-  import { fade } from "svelte/transition";
+  import type {
+    EntryMeasurements,
+    TimelinableEntry,
+  } from "@components/Timeline/types";
+  import { getEntryBgColorClass } from "@components/Timeline/utils";
 
-  export let entry: CollectionEntry<"education" | "jobs" | "projects"> &
-    EntryMeasurements;
+  export let entry: TimelinableEntry & EntryMeasurements;
 
-  let bgColorClass = "bg-primary";
-  switch (entry.collection) {
-    case "education":
-      bgColorClass = "bg-primary";
-      break;
-    case "jobs":
-      bgColorClass = "bg-secondary";
-      break;
-    case "projects":
-      bgColorClass = "bg-accent";
-      break;
-  }
+  const bgColorClass = getEntryBgColorClass(entry);
 
   function handleOpenClick() {
     selectedEntry.set(entry);
@@ -36,11 +26,3 @@
     : 'border-primary/0'}"
   style="height: {entry.heightPx}px; bottom: {entry.startHeightPx}px; transition: border-color 0.2s"
 />
-{#if isCurrentEntry}
-  <div
-    class="fixed bottom-4 z-10 rounded-sm {bgColorClass} left-1/2 w-11/12 -translate-x-1/2 cursor-auto"
-    transition:fade={{ duration: 100 }}
-  >
-    <slot />
-  </div>
-{/if}

@@ -1,6 +1,8 @@
 ---
 import { SEO } from "astro-seo";
 import "@styles/app.css";
+import Nav from "@components/Nav/Nav.astro";
+import Header from "@components/Header.astro";
 
 interface Props {
   subtitle?: string;
@@ -34,13 +36,19 @@ const title =
         },
       }}
     />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     <meta name="author" content="Adam Steciuk" />
   </head>
   <body>
-    <slot />
+    <Header />
+    <div class="flex">
+      <Nav />
+      <div class="flex-grow">
+        <slot />
+      </div>
+    </div>
     <script is:inline>
       const isBrowser = typeof localStorage !== "undefined";
       const getThemePreference = () => {
@@ -54,17 +62,6 @@ const title =
       };
       const isDark = getThemePreference() === "dark";
       document.documentElement.classList[isDark ? "add" : "remove"]("dark");
-
-      if (isBrowser) {
-        const observer = new MutationObserver(() => {
-          const isDark = document.documentElement.classList.contains("dark");
-          localStorage.setItem("theme", isDark ? "dark" : "light");
-        });
-        observer.observe(document.documentElement, {
-          attributes: true,
-          attributeFilter: ["class"],
-        });
-      }
     </script>
   </body>
 </html>

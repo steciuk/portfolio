@@ -1,4 +1,5 @@
 import { fontFamily } from "tailwindcss/defaultTheme";
+import defaultTheme from "tailwindcss/defaultTheme";
 
 /** @type {import('tailwindcss').Config} */
 const config = {
@@ -12,6 +13,13 @@ const config = {
       screens: {
         "2xl": "1400px",
       },
+    },
+    screens: {
+      xs: "375px",
+      ...defaultTheme.screens,
+      a4: "21cm",
+      "max-a4": { max: "21cm" },
+      "screen-max-a4": { raw: "only screen and (max-width: 21cm)" },
     },
     extend: {
       borderRadius: {
@@ -36,12 +44,6 @@ const config = {
       },
       minHeight: {
         a4: "29.7cm",
-      },
-      screens: {
-        xs: "375px",
-        a4: "21cm",
-        "max-a4": { max: "21cm" },
-        "screen-max-a4": { raw: "only screen and (max-width: 21cm)" },
       },
       typography: {
         DEFAULT: {

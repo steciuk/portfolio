@@ -1,0 +1,36 @@
+---
+import { Button } from "@components/ui/button";
+import { Menu } from "lucide-svelte";
+---
+
+<header
+  class="bg-white sticky top-0 z-20 bg-primary/30 shadow-md backdrop-blur-md lg:hidden"
+>
+  <div class="container flex justify-between p-2">
+    <div>
+      <Button
+        size="icon"
+        id="open-main-nav-btn"
+        aria-label="Open main navigation"
+      >
+        <Menu />
+      </Button>
+    </div>
+    <Button variant="ghost" href="/" class="text-xl font-bold">
+      Adam Steciuk
+    </Button>
+    <div></div>
+  </div>
+</header>
+
+<script>
+  import { navOpen } from "@components/Nav/navOpenStore";
+
+  const openMainNavBtn = document.getElementById("open-main-nav-btn");
+
+  if (openMainNavBtn) {
+    openMainNavBtn.addEventListener("click", () => {
+      navOpen.set(true);
+    });
+  }
+</script>

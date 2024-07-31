@@ -2,7 +2,6 @@
 import Layout from "@layouts/Layout.astro";
 import { Button } from "@components/ui/button";
 import Header from "@components/CV/Header/Header.astro";
-import ThemeSwitcher from "@components/ThemeSwitcher.svelte";
 import Experience from "@components/CV/sections/Experience.astro";
 import Skills from "@components/CV/sections/Skills.astro";
 import Interests from "@components/CV/sections/Interests.astro";
@@ -13,16 +12,15 @@ import { Fragment } from "astro/jsx-runtime";
 
 <Layout subtitle="CV">
   <div class="my-4 flex justify-center print:hidden">
-    <ThemeSwitcher client:load />
     <Button href="/Adam_Steciuk_CV.pdf" variant="default" target="_blank">
       Download PDF
     </Button>
   </div>
   <div
-    class="page w-a4 min-h-a4 max-w-a4 screen-max-a4:w-auto screen-max-a4:p-2 print:h-a4 screen-max-a4:mx-1 mx-auto my-4 rounded-sm border-2 bg-background p-[0.7cm] shadow-md print:m-0 print:overflow-hidden print:rounded-none print:border-0 print:bg-[#fff] print:shadow-none"
+    class="page mx-auto my-4 min-h-a4 w-a4 max-w-a4 rounded-sm border-2 bg-background p-[0.7cm] shadow-md screen-max-a4:mx-1 screen-max-a4:w-auto screen-max-a4:p-2 print:m-0 print:h-a4 print:overflow-hidden print:rounded-none print:border-0 print:bg-[#fff] print:shadow-none"
   >
     <Header />
-    <main class="screen-max-a4:hidden mt-1 grid grid-cols-2 gap-3">
+    <main class="mt-1 grid grid-cols-2 gap-3 screen-max-a4:hidden">
       <div>
         <Experience />
         <Skills />
@@ -33,7 +31,7 @@ import { Fragment } from "astro/jsx-runtime";
         <Projects />
       </div>
     </main>
-    <main class="a4:hidden mt-1 print:hidden">
+    <main class="mt-1 a4:hidden print:hidden">
       <Experience />
       <Education />
       <Projects />

@@ -1,8 +1,12 @@
-import type { EntryId } from "@components/Timeline/types";
-import type { CollectionEntry, ContentCollectionKey } from "astro:content";
+import type { TimelinableEntry } from "@components/Timeline/types";
 
-export function getEntryId(
-  entry: CollectionEntry<ContentCollectionKey>,
-): EntryId {
-  return `${entry.collection}_${entry.id}`;
+export function getEntryBgColorClass(entry: TimelinableEntry): string {
+  switch (entry.collection) {
+    case "education":
+      return "bg-primary";
+    case "jobs":
+      return "bg-secondary";
+    case "projects":
+      return "bg-accent";
+  }
 }

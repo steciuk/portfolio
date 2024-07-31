@@ -3,9 +3,9 @@ import { getCollection } from "astro:content";
 import type { EntryMeasurements } from "@components/Timeline/types";
 import TimelineEntry from "@components/Timeline/TimelineEntry.svelte";
 import { sortByDate } from "@content/utils";
-import EntryDetails from "@components/Timeline/EntryDetails/EntryDetails.astro";
 import EntryDeselector from "@components/Timeline/EntryDeselector.svelte";
 import Markers from "@components/Timeline/Markers/Markers.svelte";
+import EntryDetailsPortal from "@components/Timeline/EntryDetails/EntryDetailsPortal.astro";
 
 const educationEntries = await getCollection("education");
 const jobsEntries = await getCollection("jobs");
@@ -81,16 +81,18 @@ allEntries.forEach((entry) => {
 });
 ---
 
-<EntryDeselector client:load />
+<EntryDeselector client:idle />
 <section>
-  <div class="container">
-    <div class="flex w-full justify-center gap-2">
+  <div class="container grid gap-4 lg:grid-cols-[auto_1fr]">
+    <div
+      class="col-start-1 row-start-1 flex w-full justify-center gap-2 overflow-hidden lg:justify-start"
+    >
       <Markers
         {totalMonths}
         {monthHeightPx}
         {earliestStart}
         {latestEnd}
-        client:load
+        client:visible
       />
       <div
         class="grid gap-2"
@@ -100,18 +102,27 @@ allEntries.forEach((entry) => {
       >
         {
           lines.map((line) => (
-            <div class="xs:w-8 relative w-6">
+            <div class="line relative w-6 md:w-10 xs:w-8">
               {line.map(([_, __, entry]) => {
-                return (
-                  <TimelineEntry {entry} client:visible>
-                    <EntryDetails {entry} />
-                  </TimelineEntry>
-                );
+                return <TimelineEntry {entry} client:visible />;
               })}
             </div>
           ))
         }
       </div>
     </div>
+    <EntryDetailsPortal entries={allEntries} />
   </div>
 </section>
+
+<script>
+  import { selectedEntry } from "@components/Timeline/selectedEntryStore";
+
+  const lines = document.querySelectorAll(".line");
+  lines.forEach((line) => {
+    line.addEventListener("click", (event) => {
+      event.stopPropagation();
+      selectedEntry.clear();
+    });
+  });
+</script>

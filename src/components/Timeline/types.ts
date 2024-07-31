@@ -1,8 +1,10 @@
-import type { ContentCollectionKey } from "astro:content";
+import type { CollectionEntry } from "astro:content";
 
 export type EntryMeasurements = {
   startHeightPx: number;
   heightPx: number;
 };
 
-export type EntryId = `${ContentCollectionKey}_${string}`;
+export type TimelinableEntry = CollectionEntry<
+  "education" | "jobs" | "projects"
+>;

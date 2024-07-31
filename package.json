@@ -20,6 +20,7 @@
     "bits-ui": "^0.21.11",
     "clsx": "^2.1.1",
     "lucide-svelte": "^0.399.0",
+    "nanostores": "^0.10.3",
     "svelte": "^4.2.18",
     "tailwind-merge": "^2.3.0",
     "tailwind-variants": "^0.2.1",
