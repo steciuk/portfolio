@@ -7,6 +7,7 @@ import { formatPeriod } from "@content/utils";
 import { Button } from "@components/ui/button";
 import Badge from "@components/ui/Badge.astro";
 import type { TimelinableEntry } from "@components/Timeline/types";
+import { Github, Globe } from "lucide-svelte";
 
 interface Props {
   entry: TimelinableEntry;
@@ -47,32 +48,32 @@ let dateString = formatPeriod(entry.data.start, entry.data.end);
     ) : entry.collection === "projects" ? (
       <>
         <EntryTitle>{entry.data.name}</EntryTitle>
-        <div class="flex flex-col">
+        <div class="flex w-full flex-wrap gap-1">
+          {entry.data.technology.map((tech) => (
+            <Badge name={tech} />
+          ))}
+        </div>
+        <div class="flex gap-2">
           {entry.data.repo && (
             <Button
               href={entry.data.repo}
               target="_blank"
-              variant="link"
-              size="inline"
+              size="icon"
+              aria-label="Github"
             >
-              {entry.data.repo}
+              <Github />
             </Button>
           )}
           {entry.data.deployed && (
             <Button
               href={entry.data.deployed}
               target="_blank"
-              variant="link"
-              size="inline"
+              size="icon"
+              aria-label="Deployed site"
             >
-              {entry.data.deployed}
+              <Globe />
             </Button>
           )}
-        </div>
-        <div class="flex flex-wrap gap-1">
-          {entry.data.technology.map((tech) => (
-            <Badge name={tech} />
-          ))}
         </div>
       </>
     ) : (

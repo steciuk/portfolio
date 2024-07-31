@@ -1,10 +1,13 @@
 ---
 import { Button } from "@components/ui/button";
 import { Menu } from "lucide-svelte";
+
+const isCv = Astro.url.pathname === "/cv";
 ---
 
 <header
   class="bg-white sticky top-0 z-20 bg-primary/30 shadow-md backdrop-blur-md lg:hidden"
+  class:list={{ "print:hidden": isCv }}
 >
   <div class="container flex justify-between p-2">
     <div>
