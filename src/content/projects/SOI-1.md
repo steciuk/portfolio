@@ -8,5 +8,6 @@ start:
 end:
   month: 11
   year: 2019
+description: "Kernel compilation and system call implementation in Minix system."
 ---
   

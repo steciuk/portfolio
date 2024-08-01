@@ -8,4 +8,5 @@ start:
 end:
   month: 5
   year: 2020
+description: "Neural network implementation that approximates length of the battle in Robocode environment using Encog library."
 ---

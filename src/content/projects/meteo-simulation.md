@@ -8,4 +8,8 @@ start:
 end:
   month: 1
   year: 2021
+description: "Simulation of real-time system gathering temperatures from geo-distributed meteorological stations."
+image:
+  src: "./images/meteo-simulation.png"
+  alt: "Application screenshot"
 ---

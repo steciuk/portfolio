@@ -8,4 +8,5 @@ start:
 end:
   month: 4
   year: 2019
+description: "Simple hash table implementation in C++."
 ---

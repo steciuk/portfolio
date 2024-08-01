@@ -8,4 +8,5 @@ start:
 end:
   month: 2
   year: 2021
+description: "Evaluation and comparison of 3 different recommendations models for web shopping service simulation."
 ---

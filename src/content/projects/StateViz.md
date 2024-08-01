@@ -9,7 +9,7 @@ start:
 end:
   month: 5
   year: 2024
-description: "A universal Chrome extension for analyzing web apps, with real-time state inspection, structure visualization, and DOM highlighting."
+description: "Universal Chrome extension for analyzing web apps, with real-time state inspection, structure visualization, and DOM highlighting."
 image:
   src: "./images/StateViz.png"
   alt: "StateViz screenshot"

@@ -8,4 +8,8 @@ start:
 end:
   month: 6
   year: 2020
+description: "Implementation of A* path search algorithm in Robocode environment."
+image:
+  src: "./images/robocode-a-star.png"
+  alt: "Robocode A* Pathfinder screenshot"
 ---
