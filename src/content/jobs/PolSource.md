@@ -1,6 +1,8 @@
 ---
 company: "PolSource"
-logo: "./images/PolSource.jpeg"
+logo: 
+  src: "./images/PolSource.jpeg"
+  alt: "PolSource logo"
 role: "Intern Full-Stack Developer"
 location:
   city: "Warsaw"

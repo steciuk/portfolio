@@ -1,6 +1,8 @@
 ---
 school: "Universitat Politècnica de València"
-logo: "./images/UPV.png"
+logo: 
+  src: "./images/UPV.png"
+  alt: "Universitat Politècnica de València logo"
 faculty: "Escuela Técnica Superior de Ingeniería Informática"
 degree: "ERASMUS+ program during MSc"
 location:

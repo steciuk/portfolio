@@ -9,5 +9,8 @@ start:
 end:
   month: 12
   year: 2022
+description: "Implements dECLAT and ECLAT algorithms to discover frequent itemsets from social media posts. Includes data retrieval, preprocessing, algorithmic implementation, and result visualization."
+image:
+  src: "./images/dEclat.png"
+  alt: "dEclat and Eclat results visualization screenshot"
 ---
-Implements dECLAT and ECLAT algorithms to discover frequent itemsets from social media posts. Includes data retrieval, preprocessing, algorithmic implementation, and result visualization. 

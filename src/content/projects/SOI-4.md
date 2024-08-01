@@ -8,4 +8,5 @@ start:
 end:
   month: 1
   year: 2020
+description: "Implementation of process synchronization using monitors in Linux."
 ---

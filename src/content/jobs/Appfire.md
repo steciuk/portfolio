@@ -1,6 +1,8 @@
 ---
 company: "Appfire (BigPicture)"
-logo: "./images/Appfire.jpg"
+logo: 
+  src: "./images/Appfire.jpg"
+  alt: "Appfire logo"
 role: "Front-End Developer"
 location:
   city: "Warsaw"

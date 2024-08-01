@@ -1,6 +1,6 @@
 ---
 name: "Animation Interpreter"
-technology: ["JavaScript"]
+technology: ["JavaScript", "HTML", "CSS"]
 repo: "https://github.com/steciuk/TKOM-animation-interpreter"
 start:
   month: 3
@@ -8,4 +8,8 @@ start:
 end:
   month: 6
   year: 2021
+description: "Interpreter for a custom animation language."
+image:
+  src: "./images/AnimationInterpreter.png"
+  alt: "Screenshot of the animation code and its result in the browser"
 ---

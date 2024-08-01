@@ -8,4 +8,5 @@ start:
 end:
   month: 1
   year: 2021
+description: "In depth analysis of computational complexity of hashing table element insertion, serach and removal."
 ---

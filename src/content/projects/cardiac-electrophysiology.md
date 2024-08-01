@@ -8,5 +8,8 @@ start:
 end:
   month: 2
   year: 2024
+description: "Cardiac recordings plotting and analysis tool for electrophysiology research."
+image:
+  src: "./images/cardiac-electrophysiology.png"
+  alt: "Cardiac Electrophysiology screenshot"
 ---
-Cardiac recordings plotting and analysis tool for electrophysiology research.

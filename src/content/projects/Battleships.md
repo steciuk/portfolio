@@ -8,4 +8,5 @@ start:
 end:
   month: 1
   year: 2019
+description: "Advanced text-based battleships game with computer opponent and multiplayer support."
 ---

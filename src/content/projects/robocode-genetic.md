@@ -8,4 +8,5 @@ start:
 end:
   month: 4
   year: 2020
+description: "Optimization of performance of a robot using JGAP library in Robocode environment."
 ---

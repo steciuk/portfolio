@@ -8,4 +8,5 @@ start:
 end:
   month: 6
   year: 2019
+description: "Sports club management system with boost testing module."
 ---

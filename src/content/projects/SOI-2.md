@@ -8,4 +8,5 @@ start:
 end:
   month: 12
   year: 2019
+description: "Implementation of process rescheduling in Minix operating system."
 ---

@@ -8,4 +8,5 @@ start:
 end:
   month: 5
   year: 2023
+description: "Multiple machine learning models for detecting hurtful humor in text."
 ---

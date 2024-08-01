@@ -8,4 +8,5 @@ start:
 end:
   month: 1
   year: 2021
+description: "Classification of mushrooms using decision tree in ID3 implementation with entropy and information gain."
 ---

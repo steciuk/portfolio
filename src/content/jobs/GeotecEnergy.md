@@ -1,6 +1,8 @@
 ---
 company: "GeoTec Energy Sp. z o. o."
-logo: "./images/GeotecEnergy.jpeg"
+logo: 
+  src: "./images/GeotecEnergy.jpeg"
+  alt: "GeoTec Energy logo"
 role: "Web Developer and IT Administrator"
 location:
   city: "(remote)"

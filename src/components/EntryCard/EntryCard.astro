@@ -1,0 +1,64 @@
+---
+import type { ImageObject } from "@content/config";
+import { Image } from "astro:assets";
+
+interface Props {
+  image?: ImageObject;
+  class?: string;
+  isTimeline?: boolean;
+}
+
+const { image, class: className, isTimeline } = Astro.props;
+---
+
+<div class="@container">
+  <div
+    class="flex flex-col gap-2 rounded-sm p-2 text-left"
+    class:list={[
+      className,
+      { "@2xl:flex-row": !isTimeline, "sm:flex-row lg:flex-col": isTimeline },
+    ]}
+  >
+    <div
+      class="aspect-video w-full max-w-full flex-shrink-0 overflow-hidden rounded-sm"
+      class:list={{
+        "@2xl:max-w-[13rem]": !isTimeline,
+        "sm:max-w-[13rem] lg:max-w-full": isTimeline,
+      }}
+    >
+      {
+        image ? (
+          <Image
+            src={image.src}
+            alt={image.alt}
+            quality="high"
+            width={720}
+            height={405}
+            class="h-full w-full max-w-full object-cover"
+          />
+        ) : (
+          <div class="h-full w-full bg-primary p-4">
+            <div class="image-placeholder h-full w-full" />
+          </div>
+        )
+      }
+    </div>
+    <div class="flex-grow">
+      <slot />
+    </div>
+  </div>
+</div>
+
+<style>
+  .image-placeholder {
+    background-image: url("/logo-dark.svg");
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.5;
+  }
+
+  :global(.dark) .image-placeholder {
+    background-image: url("/logo-light.svg");
+  }
+</style>
