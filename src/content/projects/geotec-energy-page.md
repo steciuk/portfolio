@@ -8,4 +8,7 @@ start:
 end:
   month: 2
   year: 2024
+image:
+  src: "./images/geotec-energy-page.png"
+  alt: "GeoTec Energy home page screenshot"
 ---

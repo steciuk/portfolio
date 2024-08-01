@@ -14,7 +14,7 @@ projects.sort((a, b) => sortByDate(b.data.end, a.data.end));
     <div class="flex flex-col gap-2">
       {
         projects.map((entry) => (
-          <ProjectCard entry={entry} class="bg-primary/50" />
+          <ProjectCard entry={entry} class="bg-card text-card-foreground" />
         ))
       }
     </div>

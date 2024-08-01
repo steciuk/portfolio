@@ -10,4 +10,7 @@ end:
   month: 6
   year: 2022
 description: "Full-stack card game application with real-time multiplayer functionality and user authentication."
+image:
+  src: "./images/card-game.png"
+  alt: "Screenshot of the game board in the Card Game application"
 ---

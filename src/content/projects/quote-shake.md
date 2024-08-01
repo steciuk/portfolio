@@ -9,4 +9,7 @@ end:
   month: 12
   year: 2023
 description: "Simple mobile app for fetching and saving quotes."
+image:
+  src: "./images/quote-shake.png"
+  alt: "Quote Shake logo"
 ---

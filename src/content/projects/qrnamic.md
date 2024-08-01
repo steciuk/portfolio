@@ -10,4 +10,7 @@ end:
   month: 1
   year: 2023
 description: "Static and dynamic QR code generator with a user-friendly interface."
+image:
+  src: "./images/qrnamic.png"
+  alt: "QRnamic screenshot"
 ---

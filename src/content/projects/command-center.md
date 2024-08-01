@@ -8,4 +8,8 @@ start:
 end:
   month: 5
   year: 2024
+image: {
+  src: "./images/command-center.png",
+  alt: "Command Center screenshot"
+}
 ---

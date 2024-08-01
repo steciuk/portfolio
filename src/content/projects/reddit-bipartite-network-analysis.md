@@ -9,4 +9,7 @@ start:
 end:
   month: 6
   year: 2023
+image:
+  src: "./images/reddit-bipartite-network-analysis.png"
+  alt: "Part of one of the network visualizations created in the project"
 ---
