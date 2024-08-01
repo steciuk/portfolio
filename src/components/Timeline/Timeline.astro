@@ -6,6 +6,7 @@ import { sortByDate } from "@content/utils";
 import EntryDeselector from "@components/Timeline/EntryDeselector.svelte";
 import Markers from "@components/Timeline/Markers/Markers.svelte";
 import EntryDetailsPortal from "@components/Timeline/EntryDetails/EntryDetailsPortal.astro";
+import Footer from "@components/Footer.astro";
 
 const educationEntries = await getCollection("education");
 const jobsEntries = await getCollection("jobs");
@@ -85,7 +86,7 @@ allEntries.forEach((entry) => {
 <section>
   <div class="container grid gap-4 lg:grid-cols-[auto_1fr]">
     <div
-      class="col-start-1 row-start-1 flex w-full justify-center gap-2 overflow-hidden lg:justify-start"
+      class="col-start-1 row-start-1 mb-44 flex w-full justify-center gap-2 lg:justify-start"
     >
       <Markers
         {totalMonths}
@@ -102,7 +103,7 @@ allEntries.forEach((entry) => {
       >
         {
           lines.map((line) => (
-            <div class="line relative w-6 md:w-10 xs:w-8">
+            <div class="line relative w-6 xs:w-8 md:w-10">
               {line.map(([_, __, entry]) => {
                 return <TimelineEntry {entry} client:visible />;
               })}

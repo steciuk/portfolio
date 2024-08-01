@@ -17,6 +17,7 @@
 <svelte:window on:keydown={handleKeyDown} />
 <button
   class="fixed inset-0 cursor-auto"
+  class:hidden={$selectedEntry === null}
   on:click|stopPropagation={selectedEntry.clear}
   aria-label="Deselect timeline entry"
 />
