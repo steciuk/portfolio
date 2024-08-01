@@ -16,13 +16,13 @@ const { image, class: className, isTimeline } = Astro.props;
     class="flex flex-col gap-2 rounded-sm p-2 text-left"
     class:list={[
       className,
-      { "@xl:flex-row": !isTimeline, "sm:flex-row lg:flex-col": isTimeline },
+      { "@2xl:flex-row": !isTimeline, "sm:flex-row lg:flex-col": isTimeline },
     ]}
   >
     <div
       class="aspect-video w-full max-w-full flex-shrink-0 overflow-hidden rounded-sm"
       class:list={{
-        "@xl:max-w-[13rem]": !isTimeline,
+        "@2xl:max-w-[13rem]": !isTimeline,
         "sm:max-w-[13rem] lg:max-w-full": isTimeline,
       }}
     >
