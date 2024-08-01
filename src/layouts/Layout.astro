@@ -3,6 +3,7 @@ import { SEO } from "astro-seo";
 import "@styles/app.css";
 import Nav from "@components/Nav/Nav.astro";
 import Header from "@components/Header.astro";
+import BackgroundPattern from "@components/BackgroundPattern.svelte";
 
 interface Props {
   subtitle?: string;
@@ -42,6 +43,7 @@ const title =
     <meta name="author" content="Adam Steciuk" />
   </head>
   <body>
+    <BackgroundPattern client:visible />
     <Header />
     <div class="flex">
       <Nav />

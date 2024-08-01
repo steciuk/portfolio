@@ -23,15 +23,25 @@
 
   const items: { x: number; y: number; depth: number }[] = [
     {
-      x: 80,
+      x: 90,
       y: 20,
       depth: 0.8,
     },
     { x: 70, y: 70, depth: 1.5 },
     {
-      x: 40,
-      y: 40,
+      x: 25,
+      y: 70,
       depth: 2,
+    },
+    {
+      x: 35,
+      y: 10,
+      depth: 1,
+    },
+    {
+      x: 55,
+      y: 40,
+      depth: 1.8,
     },
     {
       x: 60,
