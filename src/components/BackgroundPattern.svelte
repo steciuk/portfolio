@@ -11,14 +11,25 @@
     return 1 / (1 + Math.exp(-x * SIGMOID_SQUISH)) - 0.5;
   }
 
+  let isTicking = false;
   function updatePosition(e: MouseEvent) {
-    const xRatio = (e.clientX / window.innerWidth - 0.5) * 2;
-    const yRatio = (e.clientY / window.innerHeight - 0.5) * 2;
+    console.log(isTicking);
 
-    bgPos = {
-      x: -sigmoid(xRatio) * MOVEMENT_RATE * 100,
-      y: -sigmoid(yRatio) * MOVEMENT_RATE * 100,
-    };
+    if (!isTicking) {
+      window.requestAnimationFrame(() => {
+        const xRatio = (e.clientX / window.innerWidth - 0.5) * 2;
+        const yRatio = (e.clientY / window.innerHeight - 0.5) * 2;
+
+        bgPos = {
+          x: -sigmoid(xRatio) * MOVEMENT_RATE * 100,
+          y: -sigmoid(yRatio) * MOVEMENT_RATE * 100,
+        };
+
+        isTicking = false;
+      });
+
+      isTicking = true;
+    }
   }
 
   const items: { x: number; y: number; depth: number }[] = [
