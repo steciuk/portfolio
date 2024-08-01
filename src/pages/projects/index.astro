@@ -10,7 +10,8 @@ projects.sort((a, b) => sortByDate(b.data.end, a.data.end));
 
 <Layout subtitle="Projects">
   <main class="container">
-    <h1>Projects</h1>
+    <!-- TODO: style the h1 -->
+    <h1 class="text-6xl font-bold">Projects</h1>
     <div class="flex flex-col gap-2">
       {
         projects.map((entry) => (

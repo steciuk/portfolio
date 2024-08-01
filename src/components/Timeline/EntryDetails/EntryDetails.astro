@@ -2,8 +2,10 @@
 import EntryRole from "@components/Timeline/EntryDetails/EntryRole.astro";
 import { formatPeriod } from "@content/utils";
 import type { TimelinableEntry } from "@components/Timeline/types";
-import EntryCard from "@components/EntryCard.astro";
+import EntryCard from "@components/EntryCard/EntryCard.astro";
 import ProjectCard from "@components/ProjectCard.astro";
+import EntryDescription from "@components/EntryCard/EntryDescription.astro";
+import EntryTitle from "@components/EntryCard/EntryTitle.astro";
 
 interface Props {
   entry: TimelinableEntry;
@@ -15,31 +17,15 @@ let dateString = formatPeriod(entry.data.start, entry.data.end);
 
 {
   entry.collection === "education" ? (
-    <EntryCard
-      title={entry.data.school}
-      subtitle={entry.data.faculty}
-      image={entry.data.logo}
-      class="bg-primary"
-      isTimeline={true}
-    >
-      <EntryRole
-        role={entry.data.degree}
-        dateString={dateString}
-        slot="subheader"
-      />
+    <EntryCard image={entry.data.logo} class="bg-primary" isTimeline={true}>
+      <EntryTitle>{entry.data.school}</EntryTitle>
+      <EntryDescription>{entry.data.faculty}</EntryDescription>
+      <EntryRole role={entry.data.degree} dateString={dateString} />
     </EntryCard>
   ) : entry.collection === "jobs" ? (
-    <EntryCard
-      title={entry.data.company}
-      image={entry.data.logo}
-      class="bg-secondary"
-      isTimeline={true}
-    >
-      <EntryRole
-        role={entry.data.role}
-        dateString={dateString}
-        slot="subheader"
-      />
+    <EntryCard image={entry.data.logo} class="bg-secondary" isTimeline={true}>
+      <EntryTitle>{entry.data.role}</EntryTitle>
+      <EntryRole role={entry.data.role} dateString={dateString} />
     </EntryCard>
   ) : entry.collection === "projects" ? (
     <ProjectCard entry={entry} class="bg-accent" isTimeline={true} />

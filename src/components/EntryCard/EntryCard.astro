@@ -3,14 +3,12 @@ import type { ImageObject } from "@content/config";
 import { Image } from "astro:assets";
 
 interface Props {
-  title: string;
-  subtitle?: string;
   image?: ImageObject;
   class?: string;
   isTimeline?: boolean;
 }
 
-const { title, subtitle, image, class: className, isTimeline } = Astro.props;
+const { image, class: className, isTimeline } = Astro.props;
 ---
 
 <div class="@container">
@@ -22,7 +20,7 @@ const { title, subtitle, image, class: className, isTimeline } = Astro.props;
     ]}
   >
     <div
-      class="aspect-video w-full max-w-full overflow-hidden rounded-sm"
+      class="aspect-video w-full max-w-full flex-shrink-0 overflow-hidden rounded-sm"
       class:list={{
         "@xl:max-w-[13rem]": !isTimeline,
         "sm:max-w-[13rem] lg:max-w-full": isTimeline,
@@ -45,12 +43,8 @@ const { title, subtitle, image, class: className, isTimeline } = Astro.props;
         )
       }
     </div>
-
     <div class="flex-grow">
-      <h3 class="text-lg font-bold">{title}</h3>
-      {subtitle && <p class="text-sm">{subtitle}</p>}
-      <slot name="subheader" />
-      <slot name="content" />
+      <slot />
     </div>
   </div>
 </div>
