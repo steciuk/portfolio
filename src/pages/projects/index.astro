@@ -1,0 +1,16 @@
+---
+import ProjectCard from "@components/ProjectCard.astro";
+import { sortByDate } from "@content/utils";
+import Layout from "@layouts/Layout.astro";
+import { getCollection } from "astro:content";
+
+const projects = await getCollection("projects");
+projects.sort((a, b) => sortByDate(b.data.end, a.data.end));
+---
+
+<Layout subtitle="Projects">
+  <main class="container">
+    <h1>Projects</h1>
+    {projects.map((entry) => <ProjectCard entry={entry} />)}
+  </main>
+</Layout>

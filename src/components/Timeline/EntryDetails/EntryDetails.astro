@@ -1,13 +1,9 @@
 ---
-import { Image } from "astro:assets";
-import EntryTitle from "@components/Timeline/EntryDetails/EntryTitle.astro";
-import EntrySubtitle from "@components/Timeline/EntryDetails/EntrySubtitle.astro";
 import EntryRole from "@components/Timeline/EntryDetails/EntryRole.astro";
 import { formatPeriod } from "@content/utils";
-import { Button } from "@components/ui/button";
-import Badge from "@components/ui/Badge.astro";
 import type { TimelinableEntry } from "@components/Timeline/types";
-import { Github, Globe } from "lucide-svelte";
+import EntryCard from "@components/EntryCard.astro";
+import ProjectCard from "@components/ProjectCard.astro";
 
 interface Props {
   entry: TimelinableEntry;
@@ -17,69 +13,39 @@ const { entry } = Astro.props;
 let dateString = formatPeriod(entry.data.start, entry.data.end);
 ---
 
-<div class="p-2 text-left">
-  {
-    entry.collection === "education" ? (
-      <>
-        <EntryTitle>{entry.data.school}</EntryTitle>
-        <EntrySubtitle>{entry.data.faculty}</EntrySubtitle>
-        <EntryRole role={entry.data.degree} dateString={dateString} />
-        <Image
-          src={entry.data.logo}
-          alt={`${entry.data.school} logo`}
-          quality="low"
-          class="p-2"
-          width={56}
-          class="w-14"
-        />
-      </>
-    ) : entry.collection === "jobs" ? (
-      <>
-        <EntryTitle>{entry.data.company}</EntryTitle>
-        <EntryRole role={entry.data.role} dateString={dateString} />
-        <Image
-          src={entry.data.logo}
-          alt={`${entry.data.company} logo`}
-          quality="low"
-          width={56}
-          class="w-14"
-        />
-      </>
-    ) : entry.collection === "projects" ? (
-      <>
-        <EntryTitle>{entry.data.name}</EntryTitle>
-        <div class="flex w-full flex-wrap gap-1">
-          {entry.data.technology.map((tech) => (
-            <Badge name={tech} />
-          ))}
-        </div>
-        <div class="flex gap-2">
-          {entry.data.repo && (
-            <Button
-              href={entry.data.repo}
-              target="_blank"
-              size="icon"
-              aria-label="Github"
-            >
-              <Github />
-            </Button>
-          )}
-          {entry.data.deployed && (
-            <Button
-              href={entry.data.deployed}
-              target="_blank"
-              size="icon"
-              aria-label="Deployed site"
-            >
-              <Globe />
-            </Button>
-          )}
-        </div>
-      </>
-    ) : (
-      (() => {
-        throw new Error("Invalid entry collection");
-      })()
-    )
-  }
-</div>
+{
+  entry.collection === "education" ? (
+    <EntryCard
+      title={entry.data.school}
+      subtitle={entry.data.faculty}
+      image={entry.data.logo}
+      class="bg-primary"
+      isTimeline={true}
+    >
+      <EntryRole
+        role={entry.data.degree}
+        dateString={dateString}
+        slot="subheader"
+      />
+    </EntryCard>
+  ) : entry.collection === "jobs" ? (
+    <EntryCard
+      title={entry.data.company}
+      image={entry.data.logo}
+      class="bg-secondary"
+      isTimeline={true}
+    >
+      <EntryRole
+        role={entry.data.role}
+        dateString={dateString}
+        slot="subheader"
+      />
+    </EntryCard>
+  ) : entry.collection === "projects" ? (
+    <ProjectCard entry={entry} class="bg-accent" isTimeline={true} />
+  ) : (
+    (() => {
+      throw new Error("Invalid entry collection");
+    })()
+  )
+}

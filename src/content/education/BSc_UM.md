@@ -1,6 +1,8 @@
 ---
 school: "Universitat Politècnica de Málaga"
-logo: "./images/UM.jpg"
+logo: 
+  src: "./images/UM.jpg"
+  alt: "Universitat Politècnica de Málaga logo"
 faculty: "Escuela Técnica Superior de Ingeniería Informática"
 degree: "ERASMUS+ program during BSc"
 location:

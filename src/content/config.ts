@@ -1,4 +1,4 @@
-import { defineCollection, z } from "astro:content";
+import { defineCollection, z, type ImageFunction } from "astro:content";
 
 const monthDate = z.object({
   month: z.number().min(1).max(12),
@@ -10,6 +10,12 @@ const location = z.object({
   country: z.string(),
 });
 
+const imageObject = (image: ImageFunction) =>
+  z.object({
+    src: image(),
+    alt: z.string(),
+  });
+
 const educationCollection = defineCollection({
   type: "content",
   schema: ({ image }) =>
@@ -17,7 +23,7 @@ const educationCollection = defineCollection({
       school: z.string(),
       degree: z.string(),
       faculty: z.string(),
-      logo: image(),
+      logo: imageObject(image),
       location: location,
       start: monthDate,
       end: monthDate,
@@ -33,7 +39,7 @@ const jobsCollection = defineCollection({
       group: z.string(),
       role: z.string(),
       location: location,
-      logo: image(),
+      logo: imageObject(image),
       start: monthDate,
       end: monthDate.optional(),
     }),
@@ -127,14 +133,17 @@ export const technologies = [
 
 const projectsCollection = defineCollection({
   type: "content",
-  schema: z.object({
-    name: z.string(),
-    technology: z.array(z.enum(technologies)),
-    deployed: z.string().url().optional(),
-    repo: z.string().url().optional(),
-    start: monthDate,
-    end: monthDate.optional(),
-  }),
+  schema: ({ image }) =>
+    z.object({
+      name: z.string(),
+      technology: z.array(z.enum(technologies)),
+      deployed: z.string().url().optional(),
+      repo: z.string().url().optional(),
+      start: monthDate,
+      end: monthDate.optional(),
+      description: z.string().optional(),
+      image: imageObject(image).optional(),
+    }),
 });
 
 export const collections = {
@@ -146,3 +155,4 @@ export const collections = {
 export type MonthDate = z.infer<typeof monthDate>;
 export type Location = z.infer<typeof location>;
 export type Technology = (typeof technologies)[number];
+export type ImageObject = z.infer<ReturnType<typeof imageObject>>;

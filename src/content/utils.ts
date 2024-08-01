@@ -13,7 +13,14 @@ export function formatPeriod(
   return `${formatDate(start)} - ${end ? formatDate(end) : "Now"}`;
 }
 
-export function sortByDate(a: MonthDate, b: MonthDate): number {
+export function sortByDate(
+  a: MonthDate | undefined,
+  b: MonthDate | undefined,
+): number {
+  if (!a || !b) {
+    return a ? -1 : b ? 1 : 0;
+  }
+
   return a.year === b.year ? a.month - b.month : a.year - b.year;
 }
 

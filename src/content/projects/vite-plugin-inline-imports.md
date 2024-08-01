@@ -9,5 +9,5 @@ start:
 end:
   month: 11
   year: 2023
+description: "Vite plugin forcing inline imports for specified modules."
 ---
-- Vite plugin forcing inline imports for specified modules.

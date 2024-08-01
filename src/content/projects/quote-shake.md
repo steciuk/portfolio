@@ -8,5 +8,5 @@ start:
 end:
   month: 12
   year: 2023
+description: "Simple mobile app for fetching and saving quotes."
 ---
-- Simple mobile app for fetching and saving quotes.

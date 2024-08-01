@@ -13,8 +13,6 @@
 
   let isTicking = false;
   function updatePosition(e: MouseEvent) {
-    console.log(isTicking);
-
     if (!isTicking) {
       window.requestAnimationFrame(() => {
         const xRatio = (e.clientX / window.innerWidth - 0.5) * 2;

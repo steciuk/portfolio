@@ -1,0 +1,53 @@
+---
+import EntryCard from "@components/EntryCard.astro";
+import Badge from "@components/ui/Badge.astro";
+import { Button } from "@components/ui/button";
+import type { CollectionEntry } from "astro:content";
+import { Github, Globe } from "lucide-svelte";
+
+interface Props {
+  entry: CollectionEntry<"projects">;
+  class?: string;
+  isTimeline?: boolean;
+}
+
+const { entry, class: className, isTimeline } = Astro.props;
+---
+
+<EntryCard
+  title={entry.data.name}
+  subtitle={entry.data.description}
+  image={entry.data.image}
+  class={className}
+  {isTimeline}
+>
+  <div class="flex w-full flex-wrap gap-1" slot="subheader">
+    {entry.data.technology.map((tech) => <Badge name={tech} />)}
+  </div>
+  <div class="flex gap-2" slot="content">
+    {
+      entry.data.repo && (
+        <Button
+          href={entry.data.repo}
+          target="_blank"
+          size="icon"
+          aria-label="Github"
+        >
+          <Github />
+        </Button>
+      )
+    }
+    {
+      entry.data.deployed && (
+        <Button
+          href={entry.data.deployed}
+          target="_blank"
+          size="icon"
+          aria-label="Deployed site"
+        >
+          <Globe />
+        </Button>
+      )
+    }
+  </div>
+</EntryCard>

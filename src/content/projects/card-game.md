@@ -9,5 +9,5 @@ start:
 end:
   month: 6
   year: 2022
+description: "Full-stack card game application with real-time multiplayer functionality and user authentication."
 ---
-- Full-stack card game application with real-time multiplayer functionality and user authentication.
