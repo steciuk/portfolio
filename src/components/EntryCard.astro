@@ -39,7 +39,9 @@ const { title, subtitle, image, class: className, isTimeline } = Astro.props;
             class="h-full w-full max-w-full object-cover"
           />
         ) : (
-          <div class="h-full w-full bg-primary" />
+          <div class="h-full w-full bg-primary p-4">
+            <div class="image-placeholder h-full w-full" />
+          </div>
         )
       }
     </div>
@@ -48,8 +50,21 @@ const { title, subtitle, image, class: className, isTimeline } = Astro.props;
       <h3 class="text-lg font-bold">{title}</h3>
       {subtitle && <p class="text-sm">{subtitle}</p>}
       <slot name="subheader" />
-
       <slot name="content" />
     </div>
   </div>
 </div>
+
+<style>
+  .image-placeholder {
+    background-image: url("/logo-dark.svg");
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.5;
+  }
+
+  :global(.dark) .image-placeholder {
+    background-image: url("/logo-light.svg");
+  }
+</style>
