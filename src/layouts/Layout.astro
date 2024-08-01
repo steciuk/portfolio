@@ -4,14 +4,18 @@ import "@styles/app.css";
 import Nav from "@components/Nav/Nav.astro";
 import Header from "@components/Header.astro";
 import BackgroundPattern from "@components/BackgroundPattern.svelte";
+import Footer from "@components/Footer.astro";
 
 interface Props {
   subtitle?: string;
+  headerClass?: string;
+  navClass?: string;
+  footerClass?: string;
 }
 
 const description = "// TODO: Add a description";
 
-const { subtitle } = Astro.props;
+const { subtitle, headerClass, navClass, footerClass } = Astro.props;
 const title =
   subtitle && subtitle.trim() !== "Adam Steciuk"
     ? `${subtitle} | Adam Steciuk`
@@ -44,11 +48,12 @@ const title =
   </head>
   <body>
     <BackgroundPattern client:visible />
-    <Header />
+    <Header class={headerClass} />
     <div class="flex">
-      <Nav />
-      <div class="flex-grow">
+      <Nav class={navClass} />
+      <div class="relative flex-grow">
         <slot />
+        <Footer class={footerClass} />
       </div>
     </div>
     <script is:inline>

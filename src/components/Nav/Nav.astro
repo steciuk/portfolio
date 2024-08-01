@@ -6,20 +6,24 @@ import { Image } from "astro:assets";
 import { Github, Linkedin, Mail } from "lucide-svelte";
 import { email, github, linkedin } from "@src/links";
 
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+
 const links = [
   { href: "/", text: "Home" },
   { href: "/cv", text: "CV" },
   { href: "/projects", text: "Projects" },
 ];
 
-const isCv = Astro.url.pathname === "/cv";
-
 // TODO: Change the width in the script and in EntryDeselector if main breakpoint changes
 ---
 
 <div
   class="pointer-events-none fixed left-0 top-0 z-30 h-dvh w-screen flex-shrink-0 overflow-hidden lg:sticky lg:w-max"
-  class:list={{ "print:hidden": isCv }}
+  class:list={className}
   id="main-nav-container"
   data-nav="closed"
 >

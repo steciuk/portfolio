@@ -10,7 +10,12 @@ import Projects from "@components/CV/sections/Projects.astro";
 import { Fragment } from "astro/jsx-runtime";
 ---
 
-<Layout subtitle="CV">
+<Layout
+  subtitle="CV"
+  headerClass="print:hidden"
+  navClass="print:hidden"
+  footerClass="print:hidden"
+>
   <div class="my-4 flex justify-center print:hidden">
     <Button href="/Adam_Steciuk_CV.pdf" variant="default" target="_blank">
       Download PDF
