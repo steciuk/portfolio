@@ -1,0 +1,32 @@
+---
+import { Button } from "@components/ui/button";
+import { Moon, Sun } from "lucide-svelte";
+---
+
+<Button
+  size="icon"
+  class="theme-switcher__btn grid"
+  variant="outline"
+  aria-label="Toggle theme"
+>
+  <div class="theme-switcher__sun col-start-1 row-start-1 hidden dark:block">
+    <Sun />
+  </div>
+  <div class="theme-switcher__moon col-start-1 row-start-1 dark:hidden">
+    <Moon />
+  </div>
+</Button>
+
+<script>
+  document.addEventListener("astro:page-load", () => {
+    const themeSwitcherBtn = document.querySelector(".theme-switcher__btn");
+
+    if (!themeSwitcherBtn) return;
+
+    themeSwitcherBtn.addEventListener("click", () => {
+      const isDark = document.documentElement.classList.contains("dark");
+      document.documentElement.classList.toggle("dark");
+      localStorage.setItem("theme", isDark ? "light" : "dark");
+    });
+  });
+</script>

@@ -1,10 +1,10 @@
 ---
-import ThemeSwitcher from "@components/ThemeSwitcher.svelte";
 import { Button } from "@components/ui/button";
 import me from "@assets/me.jpg";
 import { Image } from "astro:assets";
 import { Github, Linkedin, Mail } from "lucide-svelte";
 import { email, github, linkedin } from "@src/links";
+import ThemeSwitcher from "@components/ThemeSwitcher.astro";
 
 interface Props {
   class?: string;
@@ -61,7 +61,7 @@ const currentHref = Astro.url.pathname;
           }
         </ul>
       </nav>
-      <ThemeSwitcher client:idle />
+      <ThemeSwitcher />
     </div>
     <div class="flex justify-center gap-2 pb-2">
       <Button
