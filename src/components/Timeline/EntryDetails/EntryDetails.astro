@@ -6,6 +6,9 @@ import EntryCard from "@components/EntryCard/EntryCard.astro";
 import ProjectCard from "@components/ProjectCard.astro";
 import EntryDescription from "@components/EntryCard/EntryDescription.astro";
 import EntryTitle from "@components/EntryCard/EntryTitle.astro";
+import Prose from "@components/ui/Prose.astro";
+import ProseEntry from "@components/ui/ProseEntry.astro";
+import { Button } from "@components/ui/button";
 
 interface Props {
   entry: TimelinableEntry;
@@ -17,18 +20,48 @@ let dateString = formatPeriod(entry.data.start, entry.data.end);
 
 {
   entry.collection === "education" ? (
-    <EntryCard image={entry.data.logo} class="bg-primary" isTimeline={true}>
+    <EntryCard
+      image={entry.data.logo}
+      class="bg-primary text-primary-foreground"
+      isTimeline={true}
+    >
       <EntryTitle>{entry.data.school}</EntryTitle>
       <EntryDescription>{entry.data.faculty}</EntryDescription>
       <EntryRole role={entry.data.degree} dateString={dateString} />
+      <ul>
+        <li>Average grade: {entry.data.grade}/5.00.</li>
+        {entry.data.thesis && (
+          <li>
+            Final thesis{" "}
+            <Button
+              href={entry.data.thesis.url}
+              target="_blank"
+              variant="link"
+              size="inline"
+              class="italic"
+            >
+              "{entry.data.thesis.title}"
+            </Button>{" "}
+            received the highest grade and was awarded a distinction.
+          </li>
+        )}
+      </ul>
     </EntryCard>
   ) : entry.collection === "jobs" ? (
-    <EntryCard image={entry.data.logo} class="bg-secondary" isTimeline={true}>
+    <EntryCard
+      image={entry.data.logo}
+      class="bg-secondary text-secondary-foreground"
+      isTimeline={true}
+    >
       <EntryTitle>{entry.data.role}</EntryTitle>
       <EntryRole role={entry.data.role} dateString={dateString} />
     </EntryCard>
   ) : entry.collection === "projects" ? (
-    <ProjectCard entry={entry} class="bg-accent" isTimeline={true} />
+    <ProjectCard
+      entry={entry}
+      class="bg-accent text-accent-foreground"
+      isTimeline={true}
+    />
   ) : (
     (() => {
       throw new Error("Invalid entry collection");

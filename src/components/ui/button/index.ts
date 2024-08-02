@@ -20,7 +20,7 @@ const buttonVariants = tv({
       sm: "text-sm h-9 rounded-md px-3",
       lg: "text-sm h-11 rounded-md px-8",
       icon: "text-sm h-10 w-10",
-      inline: "inline h-auto p-0 p-0 m-0",
+      inline: "inline h-auto p-0 p-0 m-0 whitespace-normal",
     },
   },
   defaultVariants: {

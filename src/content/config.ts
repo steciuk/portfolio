@@ -28,6 +28,12 @@ const educationCollection = defineCollection({
       start: monthDate,
       end: monthDate,
       grade: z.number().min(0).max(5),
+      thesis: z
+        .object({
+          title: z.string(),
+          url: z.string().url(),
+        })
+        .optional(),
     }),
 });
 
