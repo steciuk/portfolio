@@ -19,7 +19,10 @@ const links = [
   { href: "/projects", text: "Projects" },
 ];
 
-const currentHref = Astro.url.pathname;
+let currentHref = Astro.url.pathname;
+if (currentHref !== "/") {
+  currentHref = currentHref.replace(/\/$/, "");
+}
 // TODO: Change the width in the script and in EntryDeselector if main breakpoint changes
 ---
 
