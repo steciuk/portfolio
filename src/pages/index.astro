@@ -1,17 +1,41 @@
 ---
+import Logo from "@components/ui/Logo.astro";
 import Layout from "@layouts/Layout.astro";
-import Timeline from "@components/Timeline/Timeline.astro";
+
+const text = "Adam Steciuk".split("");
+console.log(text);
 ---
 
-<Layout
-  subtitle="Timeline"
-  footerClass="absolute bottom-0 left-1/2 -translate-x-1/2 -z-10"
->
-  <main
-    class:list={[
-      "before:fixed before:left-1/2 before:top-1/2 before:-z-10 before:h-3/4 before:w-3/4 before:animate-[spin_45s_linear_infinite] before:rounded-bl-full before:rounded-tr-full before:bg-primary/50 before:blur-3xl after:fixed after:left-3/4 after:top-3/4 after:-z-10 after:h-1/2 after:w-1/2 after:animate-[spin_40s_linear_infinite_reverse] after:rounded-br-full after:rounded-tl-full after:bg-secondary after:blur-3xl",
-    ]}
-  >
-    <Timeline />
+<Layout>
+  <main class="container flex min-h-svh flex-col items-center justify-center">
+    <h1 class="text-8xl font-bold">
+      {
+        text.map((letter, index) => (
+          <span
+            class="letter inline-block"
+            style={{ animationDelay: `${index * 0.1}s` }}
+          >
+            {letter === " " ? "\u00A0" : letter}
+          </span>
+        ))
+      }
+    </h1>
+    <div class="logo" style={{ animationDelay: `${text.length * 0.1}s` }}>
+      <Logo class="mt-4 h-64 w-64" />
+    </div>
   </main>
 </Layout>
+
+<style>
+  .letter,
+  .logo {
+    animation: fadeIn 0.2s ease-in-out forwards;
+    opacity: 0;
+  }
+
+  @keyframes fadeIn {
+    to {
+      opacity: 1;
+    }
+  }
+</style>

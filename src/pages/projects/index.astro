@@ -1,5 +1,6 @@
 ---
 import ProjectCard from "@components/ProjectCard.astro";
+import H1 from "@components/ui/H1.astro";
 import { sortByDate } from "@content/utils";
 import Layout from "@layouts/Layout.astro";
 import { getCollection } from "astro:content";
@@ -11,13 +12,13 @@ projects.sort((a, b) => sortByDate(b.data.end, a.data.end));
 <Layout subtitle="Projects">
   <main class="container">
     <!-- TODO: style the h1 -->
-    <h1 class="text-6xl font-bold">Projects</h1>
-    <div class="flex flex-col gap-2">
+    <H1>Projects</H1>
+    <section class="flex flex-col gap-2">
       {
         projects.map((entry) => (
           <ProjectCard entry={entry} class="bg-card text-card-foreground" />
         ))
       }
-    </div>
+    </section>
   </main>
 </Layout>

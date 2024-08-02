@@ -1,0 +1,22 @@
+---
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+---
+
+<div class="logo" class:list={className}></div>
+
+<style>
+  .logo {
+    background-image: url("/logo-dark.svg");
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  :global(.dark) .logo {
+    background-image: url("/logo-light.svg");
+  }
+</style>

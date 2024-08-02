@@ -5,6 +5,7 @@ import Nav from "@components/Nav/Nav.astro";
 import Header from "@components/Header.astro";
 import BackgroundPattern from "@components/BackgroundPattern.svelte";
 import Footer from "@components/Footer.astro";
+import Logo from "@components/ui/Logo.astro";
 
 interface Props {
   subtitle?: string;
@@ -46,8 +47,10 @@ const title =
     <meta name="generator" content={Astro.generator} />
     <meta name="author" content="Adam Steciuk" />
   </head>
-  <body>
-    <BackgroundPattern client:visible />
+  <body class="grid min-h-svh grid-rows-[auto_1fr]">
+    <BackgroundPattern client:visible>
+      <Logo class="h-full w-full opacity-5 dark:opacity-10" />
+    </BackgroundPattern>
     <Header class={headerClass} />
     <div class="flex">
       <Nav class={navClass} />
