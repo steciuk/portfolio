@@ -1,40 +1,109 @@
 ---
 import Logo from "@components/ui/Logo.astro";
 import Layout from "@layouts/Layout.astro";
-
-const text = "Adam Steciuk".split("");
+import { Image } from "astro:assets";
 ---
 
 <Layout>
-  <main class="container flex min-h-svh flex-col items-center justify-center">
-    <h1 class="text-8xl font-bold">
-      {
-        text.map((letter, index) => (
-          <span
-            class="letter inline-block"
-            style={{ animationDelay: `${index * 0.1}s` }}
-          >
-            {letter === " " ? "\u00A0" : letter}
-          </span>
-        ))
-      }
-    </h1>
-    <div class="logo" style={{ animationDelay: `${text.length * 0.1}s` }}>
-      <Logo class="mt-4 h-64 w-64" />
+  <main class="container relative min-h-svh overflow-hidden">
+    <div class="animation">
+      <div class="symbol lt-symbol"></div><div class="steciuk-text">
+        <div class="steciuk-character">s</div><div class="steciuk-character">
+          t
+        </div><div class="steciuk-character">e</div><div
+          class="steciuk-character"
+        >
+          c
+        </div><div class="steciuk-character">i</div><div
+          class="steciuk-character"
+        >
+          u
+        </div><div class="steciuk-character">k</div><div
+          class="steciuk-character"
+        >
+          .
+        </div>
+      </div><div class="dev-text">dev/</div><div class="symbol gt-symbol"></div>
     </div>
   </main>
 </Layout>
 
-<style>
-  .letter,
-  .logo {
-    animation: fadeIn 0.2s ease-in-out forwards;
+<style lang="scss">
+  .dev-text {
+    display: inline-block;
+  }
+
+  .symbol {
+    display: inline-block;
+    width: 0.8em;
+    height: 0.8em;
+  }
+
+  .animation {
+    border: 1px solid red;
+    white-space: nowrap;
+
+    font-size: 4rem;
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  $symbol-x-translate: 115px;
+  $animation-delay: 2s;
+
+  .lt-symbol {
+    background-image: url("/lt.svg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: right;
+    animation: lt-to-middle 1s forwards $animation-delay;
+  }
+
+  .gt-symbol {
+    background-image: url("/gt.svg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: left;
+    animation: gt-to-middle 1s forwards $animation-delay;
+  }
+
+  .steciuk-text {
+  }
+
+  .steciuk-character {
+    display: inline-block;
     opacity: 0;
   }
 
-  @keyframes fadeIn {
+  @for $i from 1 through 8 {
+    .steciuk-character:nth-child(#{$i}) {
+      animation: letter-appear 0.01s forwards ($animation-delay + 0.1s * $i);
+    }
+  }
+
+  @keyframes letter-appear {
     to {
       opacity: 1;
+    }
+  }
+
+  @keyframes lt-to-middle {
+    to {
+      transform: translate($symbol-x-translate, -112px);
+    }
+  }
+
+  @keyframes gt-to-middle {
+    to {
+      transform: translate(calc($symbol-x-translate * -1), -80px);
     }
   }
 </style>
