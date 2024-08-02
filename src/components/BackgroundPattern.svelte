@@ -73,26 +73,14 @@
 <div class="fixed left-0 top-0 -z-10 h-screen w-screen">
   {#each items as item}
     <div
-      class="background-pattern absolute aspect-square"
+      class="absolute aspect-square"
       style="
         top: {item.y + bgPos.y / item.depth}%;
         left: {item.x + bgPos.x / item.depth}%;
         width: {80 / item.depth}px;
       "
-    />
+    >
+      <slot />
+    </div>
   {/each}
 </div>
-
-<style>
-  .background-pattern {
-    background-image: url("/logo-dark.svg");
-    background-size: contain;
-    opacity: 0.05;
-    background-repeat: no-repeat;
-  }
-
-  :global(.dark) .background-pattern {
-    background-image: url("/logo-light.svg");
-    opacity: 0.1;
-  }
-</style>
