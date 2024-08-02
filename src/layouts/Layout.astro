@@ -6,6 +6,7 @@ import Header from "@components/Header.astro";
 import BackgroundPattern from "@components/BackgroundPattern.svelte";
 import Footer from "@components/Footer.astro";
 import Logo from "@components/ui/Logo.astro";
+import { ViewTransitions } from "astro:transitions";
 
 interface Props {
   subtitle?: string;
@@ -46,9 +47,10 @@ const title =
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     <meta name="author" content="Adam Steciuk" />
+    <ViewTransitions />
   </head>
   <body class="grid min-h-svh grid-rows-[auto_1fr]">
-    <BackgroundPattern client:visible>
+    <BackgroundPattern client:visible transition:persist>
       <Logo class="h-full w-full opacity-5 dark:opacity-10" />
     </BackgroundPattern>
     <Header class={headerClass} />
@@ -72,6 +74,13 @@ const title =
       };
       const isDark = getThemePreference() === "dark";
       document.documentElement.classList[isDark ? "add" : "remove"]("dark");
+    </script>
+    <script>
+      document.addEventListener("astro:before-swap", (event) => {
+        if (document.documentElement.classList.contains("dark")) {
+          event.newDocument.documentElement.classList.add("dark");
+        }
+      });
     </script>
   </body>
 </html>

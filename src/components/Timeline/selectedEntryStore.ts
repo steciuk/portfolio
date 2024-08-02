@@ -2,7 +2,7 @@ import type { CollectionEntry, CollectionKey } from "astro:content";
 import { atom } from "nanostores";
 
 function createSelectedEntryStore() {
-  const selectedEntry = atom<CollectionEntry<CollectionKey> | null>(null);
+  const selectedEntry = atom<SelectedEntry>(null);
 
   return {
     ...selectedEntry,
@@ -11,3 +11,4 @@ function createSelectedEntryStore() {
 }
 
 export const selectedEntry = createSelectedEntryStore();
+export type SelectedEntry = CollectionEntry<CollectionKey> | null

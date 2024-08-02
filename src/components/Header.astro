@@ -33,11 +33,10 @@ const { class: className } = Astro.props;
 <script>
   import { navOpen } from "@components/Nav/navOpenStore";
 
-  const openMainNavBtn = document.getElementById("open-main-nav-btn");
-
-  if (openMainNavBtn) {
-    openMainNavBtn.addEventListener("click", () => {
+  document.addEventListener("astro:page-load", () => {
+    const openMainNavBtn = document.getElementById("open-main-nav-btn");
+    openMainNavBtn?.addEventListener("click", () => {
       navOpen.set(true);
     });
-  }
+  });
 </script>

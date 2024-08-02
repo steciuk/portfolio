@@ -19,9 +19,8 @@ const links = [
   { href: "/projects", text: "Projects" },
 ];
 
-// TODO: Change the width in the script and in EntryDeselector if main breakpoint changes
-
 const currentHref = Astro.url.pathname;
+// TODO: Change the width in the script and in EntryDeselector if main breakpoint changes
 ---
 
 <div
@@ -100,40 +99,56 @@ const currentHref = Astro.url.pathname;
 
 <script>
   import { navOpen } from "@components/Nav/navOpenStore";
-  const closeMainNavBtn = document.getElementById("close-main-nav-btn");
-  const mainNavContainer = document.getElementById("main-nav-container");
+  let closeMainNavBtn: HTMLElement | null | undefined;
+  let mainNavContainer: HTMLElement | null | undefined;
 
-  if (closeMainNavBtn) {
-    closeMainNavBtn.addEventListener("click", () => {
+  document.addEventListener("astro:page-load", () => {
+    closeMainNavBtn = document.getElementById("close-main-nav-btn");
+    mainNavContainer = document.getElementById("main-nav-container");
+
+    closeMainNavBtn?.addEventListener("click", () => {
       navOpen.set(false);
     });
-  }
 
-  if (mainNavContainer) {
-    navOpen.subscribe((isOpen) => {
-      if (isOpen) {
-        mainNavContainer.dataset.nav = "open";
+    navOpen.set(false);
+  });
+
+  navOpen.subscribe((isOpen) => {
+    if (!mainNavContainer) return;
+    const navContainer = mainNavContainer;
+
+    if (isOpen) {
+      navContainer.dataset.nav = "open";
+    } else {
+      if (closeMainNavBtn) {
+        navContainer.dataset.nav = "closing";
+        closeMainNavBtn.addEventListener(
+          "animationend",
+          () => {
+            navContainer.dataset.nav = "closed";
+          },
+          { once: true }
+        );
       } else {
-        if (closeMainNavBtn) {
-          mainNavContainer.dataset.nav = "closing";
-          closeMainNavBtn.addEventListener(
-            "animationend",
-            () => {
-              mainNavContainer.dataset.nav = "closed";
-            },
-            { once: true }
-          );
-        } else {
-          mainNavContainer.dataset.nav = "closed";
-        }
+        navContainer.dataset.nav = "closed";
       }
-    });
-  }
+    }
+  });
 
   window.addEventListener("keydown", (event) => {
     if (event.key === "Escape" && navOpen.get() && window.innerWidth < 1024) {
       event.stopImmediatePropagation();
       navOpen.set(false);
+    }
+  });
+
+  document.addEventListener("astro:before-swap", (event) => {
+    const newNavContainer =
+      event.newDocument.getElementById("main-nav-container");
+
+    if (newNavContainer) {
+      newNavContainer.dataset.nav = "open";
+      navOpen.set(true);
     }
   });
 </script>

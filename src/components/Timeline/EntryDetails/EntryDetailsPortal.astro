@@ -31,20 +31,30 @@ const { entries } = Astro.props;
 
 <script>
   import { getEntryDetailsElementId } from "@components/Timeline/entryId";
-  import { selectedEntry } from "@components/Timeline/selectedEntryStore";
-  const entryDetailsElements = document.querySelectorAll(".entry-details");
+  import {
+    selectedEntry,
+    type SelectedEntry,
+  } from "@components/Timeline/selectedEntryStore";
+  let entryDetailsElements: NodeListOf<Element> | undefined;
 
-  selectedEntry.subscribe((entry) => {
+  document.addEventListener("astro:page-load", () => {
+    entryDetailsElements = document.querySelectorAll(".entry-details");
+    updateDetailElements(selectedEntry.get());
+  });
+
+  function updateDetailElements(entry: SelectedEntry) {
     if (entry === null) {
-      entryDetailsElements.forEach((element) => {
+      entryDetailsElements?.forEach((element) => {
         element.classList.add("hidden");
       });
     } else {
-      entryDetailsElements.forEach((element) => {
+      entryDetailsElements?.forEach((element) => {
         element.id === getEntryDetailsElementId(entry)
           ? element.classList.remove("hidden")
           : element.classList.add("hidden");
       });
     }
-  });
+  }
+
+  selectedEntry.subscribe(updateDetailElements);
 </script>

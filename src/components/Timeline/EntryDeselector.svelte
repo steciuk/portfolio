@@ -3,7 +3,6 @@
   import { selectedEntry } from "@components/Timeline/selectedEntryStore";
 
   function handleKeyDown(event: KeyboardEvent) {
-    console.log(navOpen.get());
     if (
       $selectedEntry !== null &&
       event.key === "Escape" &&
