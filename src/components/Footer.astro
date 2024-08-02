@@ -7,10 +7,11 @@ interface Props {
 }
 
 const { class: className } = Astro.props;
+const year = new Date().getFullYear();
 ---
 
 <div class="mt-8 p-2 text-center" class:list={className}>
-  &copy; <span id="footer-year">2024</span>
+  &copy; <span id="footer-year">{year}</span>
   <Button href={website} size="inline" variant="link" class="font-semibold">
     Adam Steciuk
   </Button>

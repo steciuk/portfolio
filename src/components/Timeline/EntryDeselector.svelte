@@ -3,12 +3,12 @@
   import { selectedEntry } from "@components/Timeline/selectedEntryStore";
 
   function handleKeyDown(event: KeyboardEvent) {
+    console.log(navOpen.get());
     if (
       $selectedEntry !== null &&
       event.key === "Escape" &&
       (!navOpen.get() || window.innerWidth > 1024) // TODO: Change the width if main breakpoint changes
     ) {
-      event.preventDefault();
       selectedEntry.clear();
     }
   }

@@ -14,11 +14,14 @@ const { class: className } = Astro.props;
 
 const links = [
   { href: "/", text: "Home" },
+  { href: "/timeline", text: "Timeline" },
   { href: "/cv", text: "CV" },
   { href: "/projects", text: "Projects" },
 ];
 
 // TODO: Change the width in the script and in EntryDeselector if main breakpoint changes
+
+const currentHref = Astro.url.pathname;
 ---
 
 <div
@@ -47,7 +50,11 @@ const links = [
           {
             links.map(({ href, text }) => (
               <li>
-                <Button class="w-full" variant="outline" href={href}>
+                <Button
+                  class="w-full"
+                  variant={href === currentHref ? "default" : "outline"}
+                  href={href}
+                >
                   {text}
                 </Button>
               </li>
@@ -91,6 +98,46 @@ const links = [
   </aside>
 </div>
 
+<script>
+  import { navOpen } from "@components/Nav/navOpenStore";
+  const closeMainNavBtn = document.getElementById("close-main-nav-btn");
+  const mainNavContainer = document.getElementById("main-nav-container");
+
+  if (closeMainNavBtn) {
+    closeMainNavBtn.addEventListener("click", () => {
+      navOpen.set(false);
+    });
+  }
+
+  if (mainNavContainer) {
+    navOpen.subscribe((isOpen) => {
+      if (isOpen) {
+        mainNavContainer.dataset.nav = "open";
+      } else {
+        if (closeMainNavBtn) {
+          mainNavContainer.dataset.nav = "closing";
+          closeMainNavBtn.addEventListener(
+            "animationend",
+            () => {
+              mainNavContainer.dataset.nav = "closed";
+            },
+            { once: true }
+          );
+        } else {
+          mainNavContainer.dataset.nav = "closed";
+        }
+      }
+    });
+  }
+
+  window.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && navOpen.get() && window.innerWidth < 1024) {
+      event.stopImmediatePropagation();
+      navOpen.set(false);
+    }
+  });
+</script>
+
 <style lang="scss">
   #close-main-nav-btn {
     animation: fadeIn 0.3s forwards;
@@ -132,42 +179,3 @@ const links = [
     }
   }
 </style>
-
-<script>
-  import { navOpen } from "@components/Nav/navOpenStore";
-  const closeMainNavBtn = document.getElementById("close-main-nav-btn");
-  const mainNavContainer = document.getElementById("main-nav-container");
-
-  if (closeMainNavBtn) {
-    closeMainNavBtn.addEventListener("click", () => {
-      navOpen.set(false);
-    });
-  }
-
-  if (mainNavContainer) {
-    navOpen.subscribe((isOpen) => {
-      if (isOpen) {
-        mainNavContainer.dataset.nav = "open";
-      } else {
-        if (closeMainNavBtn) {
-          mainNavContainer.dataset.nav = "closing";
-          closeMainNavBtn.addEventListener(
-            "animationend",
-            () => {
-              mainNavContainer.dataset.nav = "closed";
-            },
-            { once: true }
-          );
-        } else {
-          mainNavContainer.dataset.nav = "closed";
-        }
-      }
-    });
-  }
-
-  window.addEventListener("keydown", (event) => {
-    if (event.key === "Escape" && navOpen.get() && window.innerWidth < 1024) {
-      navOpen.set(false);
-    }
-  });
-</script>

@@ -1,7 +1,6 @@
 ---
 import EntryDetails from "@components/Timeline/EntryDetails/EntryDetails.astro";
 import type { TimelinableEntry } from "@components/Timeline/types";
-import { getEntryBgColorClass } from "@components/Timeline/utils";
 import { getEntryDetailsElementId } from "@components/Timeline/entryId";
 
 interface Props {
@@ -16,7 +15,6 @@ const { entries } = Astro.props;
 >
   {
     entries.map((entry) => {
-      const bgColorClass = getEntryBgColorClass(entry);
       const id = getEntryDetailsElementId(entry);
 
       return (
