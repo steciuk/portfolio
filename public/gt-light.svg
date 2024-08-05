@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+<svg width="262.25607" height="360.92667" viewBox="0 0 262.25607 360.92667" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+  <g>
+    <path transform="translate(-123.22099,-151.07333)"
+      d="M 123.22099,512 385.47706,356.20432 V 312.06221 L 123.22099,151.07333 v 59.07254 l 207.61192,123.79399 c 0,0 -163.57634,97.29216 -207.61191,123.53165 z"
+      id="text1-6" aria-label="&lt;" />
+  </g>
+  <style>
+    path {
+      fill: #fff;
+    }
+  </style>
+</svg>
