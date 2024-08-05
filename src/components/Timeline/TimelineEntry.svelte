@@ -21,8 +21,13 @@
 
 <button
   on:click|stopPropagation={handleOpenClick}
-  class="entry absolute w-full rounded-sm border-2 shadow-md transition-transform {bgColorClass} {isCurrentEntry
-    ? 'border-primary'
-    : 'border-primary/0'}"
-  style="height: {entry.heightPx}px; bottom: {entry.startHeightPx}px; transition: border-color 0.2s"
-/>
+  class="entry absolute w-full rounded-sm p-px"
+  style="height: {entry.heightPx}px; bottom: {entry.startHeightPx}px;"
+>
+  <div
+    class="h-full w-full rounded-sm border-2 shadow-md {bgColorClass} {isCurrentEntry
+      ? 'border-ring'
+      : 'border-ring/0'}"
+    style="transition: border-color 0.2s;"
+  />
+</button>

@@ -70,36 +70,44 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%; /* hsl(0, 0%, 100%) */
-    --foreground: 222.2 84% 4.9%; /*hsl(222.2, 84%, 4.9%) */
+    --background: 180 20% 98%; /* hsl(180 20% 98%) */
+    --foreground: 222.2 84% 4.9%; /*hsl(222.2 84% 4.9%) */
 
-    --card: 28 87% 97%; /* hsl(28, 87%, 97%) */
-    --card-foreground: 24 83% 7%; /* hsl(24, 83%, 7%) */
+    --card: 150 40% 96%; /* hsl(150 40% 96%) */
+    --card-foreground: 266 66% 21%; /* hsl(266 66% 21%) */
 
-    --popover: 28 87% 97%; /* hsl(28, 87%, 97%) */
-    --popover-foreground: 24 83% 7%; /* hsl(24, 83%, 7%) */
+    /* --popover: 28 87% 97%;
+    --popover-foreground: 24 83% 7%; */
 
-    --primary: 24 83% 54%; /* hsl(24, 83%, 54%) */
-    --primary-foreground: 24 83% 7%; /* hsl(24, 83%, 7%) */
+    --primary: 183 100% 50%; /* hsl(183, 100%, 50%) */
+    --primary-foreground: 24 83% 7%; /* hsl(24 83% 7%) TODO: */
 
-    --secondary: 167 83% 73%; /* hsl(167, 83%, 73%) */
-    --secondary-foreground: 24 83% 7%; /* hsl(24, 83%, 7%) */
+    --secondary: 147 100% 50%; /* hsl(147, 100%, 50%) */
+    --secondary-foreground: 24 83% 7%; /* hsl(24 83% 7%) TODO: */
 
-    --muted: 28 86% 20%; /* hsl(28, 86%, 20%) */
-    --muted-foreground: 24 83% 70%; /* hsl(24, 83%, 70%) */
+    --third: 183 57% 50%; /* hsl(183, 57%, 50%) */
+    --third-foreground: 222.2 47.4% 11.2%; /* hsl(222.2 47.4% 11.2%) TODO: */
 
-    --accent: 210 40% 96.1%; /* hsl(210, 40%, 96.1%) */
-    --accent-foreground: 222.2 47.4% 11.2%; /* hsl(222.2, 47.4%, 11.2%) */
+    /* --muted: 28 86% 20%;  hsl(28 86% 20%) 
+    --muted-foreground: 24 83% 70%;  hsl(24 83% 70%)  */
 
-    --destructive: 0 85% 60%; /* hsl(0, 85%, 60%) */
-    --destructive-foreground: 24 83% 7%; /* hsl(24, 83%, 7%) */
+    --accent: 210 40% 96.1%; /* hsl(210 40% 96.1%) */
+    --accent-foreground: 222.2 47.4% 11.2%; /* hsl(222.2 47.4% 11.2%) */
 
-    --border: 214.3 31.8% 91.4%; /* hsl(214.3, 31.8%, 91.4%) */
-    --input: 214.3 31.8% 91.4%; /* hsl(214.3, 31.8%, 91.4%) */
-    --ring: 209 83% 40%; /* hsl(209, 83%, 40%) */
+    --destructive: 0 85% 60%; /* hsl(0 85% 60%) */
+    --destructive-foreground: 24 83% 7%; /* hsl(24 83% 7%) */
+
+    --border: 214.3 31.8% 91.4%; /* hsl(214.3 31.8% 91.4%) */
+    --input: 214.3 31.8% 91.4%; /* hsl(214.3 31.8% 91.4%) */
+    --ring: 266 100% 50%; /* hsl(266 100% 50%) */
 
     --radius: 0.5rem;
   }
+
+  /* hsl(147, 100%, 50%)
+hsl(183, 57%, 50%)
+hsl(183, 100%, 50%)
+hsl(266, 100%, 50%) */
 
   .dark {
     --background: 222.2 84% 4.9%; /* hsl(222.2, 84%, 4.9%) */

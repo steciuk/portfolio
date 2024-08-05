@@ -36,7 +36,7 @@
   }
 </script>
 
-<div class="flex min-w-[110px] flex-col items-end">
+<div class="flex w-[145px] flex-col items-end overflow-hidden">
   <Marker
     monthDate="now"
     heightPx={monthHeightPx}
@@ -54,7 +54,7 @@
           selected={isSelected($selectedEntry, month, year)}
         />
         <div
-          class="pointer-events-none absolute bottom-0 right-2 flex min-h-max origin-center translate-y-1/2 rotate-180 select-none gap-2 text-7xl font-bold text-foreground/10"
+          class="pointer-events-none absolute bottom-0 right-4 flex min-h-max origin-center translate-y-1/2 rotate-180 select-none gap-2 text-7xl font-bold text-foreground/10 md:right-6"
           style="writing-mode: vertical-lr; text-orientation: sideways;"
         >
           <span>{year - 1}</span>

@@ -15,12 +15,12 @@
         });
 </script>
 
-<div class={"flex items-center gap-2"} style="height: {heightPx}px;">
+<div class={"flex items-center gap-2 md:gap-4"} style="height: {heightPx}px;">
   <div
-    class="relative origin-right text-right transition-transform"
+    class="relative origin-right text-right transition-transform md:text-lg"
     class:font-thin={!selected}
     class:scale-75={anySelected && !selected}
-    class:scale-110={selected}
+    class:scale-125={selected}
     class:font-bold={selected}
   >
     {text}

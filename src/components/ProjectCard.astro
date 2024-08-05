@@ -17,35 +17,24 @@ const { entry, class: className, isTimeline } = Astro.props;
 ---
 
 <EntryCard image={entry.data.image} class={className} {isTimeline}>
-  <div>
-    <EntryTitle>{entry.data.name}</EntryTitle>
-    <EntryDescription>{entry.data.description}</EntryDescription>
-    <div class="flex w-full flex-wrap gap-1">
-      {entry.data.technology.map((tech) => <Badge name={tech} />)}
-    </div>
+  <div class="flex w-full flex-wrap gap-2">
+    {entry.data.technology.map((tech) => <Badge name={tech} />)}
   </div>
-  <div class="flex gap-2">
+  <EntryTitle>{entry.data.name}</EntryTitle>
+  <EntryDescription>{entry.data.description}</EntryDescription>
+
+  <div class="flex justify-center gap-2">
     {
       entry.data.repo && (
-        <Button
-          href={entry.data.repo}
-          target="_blank"
-          aria-label="Github"
-          size="icon"
-        >
-          <Github />
+        <Button href={entry.data.repo} target="_blank">
+          <Github class="mr-2" /> GitHub
         </Button>
       )
     }
     {
       entry.data.deployed && (
-        <Button
-          href={entry.data.deployed}
-          target="_blank"
-          aria-label="Deployed site"
-          size="icon"
-        >
-          <Globe />
+        <Button href={entry.data.deployed} target="_blank">
+          <Globe class="mr-2" /> Live
         </Button>
       )
     }

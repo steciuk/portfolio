@@ -18,11 +18,7 @@ let dateString = formatPeriod(entry.data.start, entry.data.end);
 
 {
   entry.collection === "education" ? (
-    <EntryCard
-      image={entry.data.logo}
-      class="bg-primary text-primary-foreground"
-      isTimeline={true}
-    >
+    <EntryCard image={entry.data.logo} isTimeline={true}>
       <EntryTitle>{entry.data.school}</EntryTitle>
       <EntryDescription>{entry.data.faculty}</EntryDescription>
       <EntryRole role={entry.data.degree} dateString={dateString} />
@@ -46,20 +42,12 @@ let dateString = formatPeriod(entry.data.start, entry.data.end);
       </ul>
     </EntryCard>
   ) : entry.collection === "jobs" ? (
-    <EntryCard
-      image={entry.data.logo}
-      class="bg-secondary text-secondary-foreground"
-      isTimeline={true}
-    >
+    <EntryCard image={entry.data.logo} isTimeline={true}>
       <EntryTitle>{entry.data.role}</EntryTitle>
       <EntryRole role={entry.data.role} dateString={dateString} />
     </EntryCard>
   ) : entry.collection === "projects" ? (
-    <ProjectCard
-      entry={entry}
-      class="bg-accent text-accent-foreground"
-      isTimeline={true}
-    />
+    <ProjectCard entry={entry} isTimeline={true} />
   ) : (
     (() => {
       throw new Error("Invalid entry collection");

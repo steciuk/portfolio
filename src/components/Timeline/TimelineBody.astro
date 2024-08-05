@@ -39,7 +39,7 @@ const latestEnd = allEntries.reduce((latest, entry) => {
 const totalYears = latestEnd.year - earliestStart.year;
 const totalMonths = totalYears * 12 + latestEnd.month - earliestStart.month + 1;
 
-const monthHeightPx = 40;
+const monthHeightPx = 60;
 const lines: Array<
   [number, number, (typeof allEntries)[number] & EntryMeasurements][]
 > = [];
@@ -85,7 +85,7 @@ allEntries.forEach((entry) => {
 <section>
   <div class="container grid gap-4 lg:grid-cols-[auto_1fr]">
     <div
-      class="col-start-1 row-start-1 mb-44 flex w-full justify-center gap-2 lg:justify-start"
+      class="col-start-1 row-start-1 mb-20 flex w-full justify-center gap-2 md:gap-4 lg:justify-start"
     >
       <Markers
         {totalMonths}
@@ -95,7 +95,7 @@ allEntries.forEach((entry) => {
         client:visible
       />
       <div
-        class="grid gap-2"
+        class="grid gap-4"
         style={{
           gridTemplateColumns: `repeat(${lines.length}, minmax(0, 1fr))`,
         }}
