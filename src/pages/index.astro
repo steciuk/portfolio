@@ -1,109 +1,245 @@
 ---
-import Logo from "@components/ui/Logo.astro";
 import Layout from "@layouts/Layout.astro";
-import { Image } from "astro:assets";
 ---
 
 <Layout>
-  <main class="container relative min-h-svh overflow-hidden">
-    <div class="animation">
-      <div class="symbol lt-symbol"></div><div class="steciuk-text">
-        <div class="steciuk-character">s</div><div class="steciuk-character">
-          t
-        </div><div class="steciuk-character">e</div><div
-          class="steciuk-character"
-        >
-          c
-        </div><div class="steciuk-character">i</div><div
-          class="steciuk-character"
-        >
-          u
-        </div><div class="steciuk-character">k</div><div
-          class="steciuk-character"
-        >
-          .
+  <main class="container relative flex min-h-svh items-center justify-center">
+    <div
+      class="animation relative flex w-max select-none overflow-hidden font-mono"
+    >
+      <div class="symbol-wrapper">
+        <div class="symbol lt-symbol"></div>
+      </div>
+      <div class="flex items-center">
+        <div class="text-wrapper text-wrapper-steciuk">
+          <span class="character">
+            <span class="character-s">s</span>
+          </span>
+          <span class="character">t</span>
+          <span class="character">e</span>
+          <span class="character">c</span>
+          <span class="character">i</span>
+          <span class="character">u</span>
+          <span class="character">k</span>
+          <span class="character">.</span>
         </div>
-      </div><div class="dev-text">dev/</div><div class="symbol gt-symbol"></div>
+        <div class="text-wrapper text-wrapper-dev">
+          <span class="character">d</span>
+          <span class="character">e</span>
+          <span class="character">v</span>
+          <span class="character">
+            <span class="character-slash">/</span>
+          </span>
+        </div><>
+          <span class="animation-cursor-wrapper">
+            <span class="animation-cursor-wrapper-2">
+              <span class="animation-cursor">|</span>
+            </span>
+          </span>
+        </>
+        <div class="symbol-wrapper">
+          <div class="symbol gt-symbol"></div>
+        </div>
+      </div>
     </div>
   </main>
+
+  <style lang="scss">
+    $font-size: 4rem;
+
+    .animation {
+      font-size: $font-size;
+      line-height: 1;
+    }
+
+    $num-letters-steciuk: 8;
+    $num-letters-dev: 4;
+    $num-letters-total: $num-letters-steciuk + $num-letters-dev;
+
+    $letter-appear-time: 0.1s;
+    $symbol-animation-time: 1s;
+    $cursor-move-time: 1s;
+
+    $animation-delay: 2s; // at the beggining
+    $slash-delay: $animation-delay + $letter-appear-time * $num-letters-dev + 3s; // after dev
+    $cursor-move-delay: $slash-delay + $letter-appear-time + 0.8s; // after slash
+    $steciuk-delay: $cursor-move-delay + $cursor-move-time; // after cursor
+    $symbol-delay: $steciuk-delay + $letter-appear-time * $num-letters-steciuk +
+      1s; // after steciuk
+
+    .animation-cursor-wrapper {
+      position: absolute;
+      right: 0.5ch;
+      animation: cursor-move $cursor-move-time forwards $cursor-move-delay;
+    }
+
+    $cursor-move-jump: 2%;
+    $num-leters-dev-without-slash: $num-letters-dev - 1;
+    @keyframes cursor-move {
+      @for $i from 0 through $num-leters-dev-without-slash - 1 {
+        #{calc($i * 100% / $num-leters-dev-without-slash)} {
+          transform: translateX($i * -1ch);
+        }
+        #{calc($i * 100% / $num-leters-dev-without-slash + $cursor-move-jump)} {
+          transform: translateX(($i + 1) * -1ch);
+        }
+      }
+      100% {
+        transform: translateX($num-leters-dev-without-slash * -1ch);
+      }
+    }
+
+    .animation-cursor-wrapper-2 {
+      animation: fade-away 1s forwards $symbol-delay;
+    }
+
+    .animation-cursor {
+      animation: blink 0.95s infinite;
+    }
+
+    .symbol-wrapper {
+      display: inline-block;
+      width: 1ch;
+      height: 1em;
+    }
+
+    .symbol {
+      display: inline-block;
+      width: 1ch;
+      height: 1ch;
+
+      animation-duration: $symbol-animation-time;
+      animation-delay: $symbol-delay;
+      animation-fill-mode: forwards;
+
+      background-size: contain;
+      background-repeat: no-repeat;
+    }
+
+    .lt-symbol {
+      background-image: url("/lt-dark.svg");
+      background-position: left;
+      animation-name: lt-move;
+    }
+
+    .gt-symbol {
+      background-image: url("/gt-dark.svg");
+      background-position: right;
+      animation-name: gt-move;
+    }
+
+    :global(.dark) {
+      .lt-symbol {
+        background-image: url("/lt-light.svg");
+      }
+
+      .gt-symbol {
+        background-image: url("/gt-light.svg");
+      }
+    }
+
+    .text-wrapper {
+      font-size: 0;
+
+      & > * {
+        display: inline-block;
+        font-size: $font-size;
+      }
+    }
+
+    .character {
+      opacity: 0;
+      position: absolute;
+    }
+
+    .character-s {
+      animation: fade-away 1s forwards $symbol-delay;
+    }
+
+    @for $i from 1 through $num-letters-steciuk {
+      .text-wrapper-steciuk > .character:nth-child(#{$i}) {
+        animation: letter-appear
+          0.01s
+          forwards
+          ($steciuk-delay + $letter-appear-time * $i);
+      }
+    }
+
+    @for $i from 1 through $num-letters-dev {
+      .text-wrapper-dev > .character:nth-child(#{$i}) {
+        animation: letter-appear
+          0.01s
+          forwards
+          ($animation-delay + $letter-appear-time * $i);
+      }
+    }
+
+    .character-slash {
+      animation: letter-disappear $letter-appear-time forwards $slash-delay;
+    }
+
+    @keyframes fade-away {
+      to {
+        opacity: 0;
+      }
+    }
+
+    @keyframes letter-disappear {
+      98% {
+        opacity: 1;
+        position: static;
+      }
+      99% {
+        opacity: 0;
+        position: static;
+      }
+      100% {
+        opacity: 0;
+        position: absolute;
+      }
+    }
+
+    @keyframes letter-appear {
+      98% {
+        opacity: 0;
+        position: absolute;
+      }
+      99% {
+        opacity: 0;
+        position: static;
+      }
+      100% {
+        opacity: 1;
+        position: static;
+      }
+    }
+
+    $symbol-distance-x: 0.03ch;
+    $symbol-distance-y: 0.2ch;
+    $symbol-left-offset: 0.1ch;
+    @keyframes lt-move {
+      to {
+        transform: translate(
+          1ch - $symbol-distance-x - $symbol-left-offset,
+          $symbol-distance-y * -1
+        );
+      }
+    }
+
+    @keyframes gt-move {
+      to {
+        transform: translate(
+          ($num-letters-total - 1) * -1ch + $symbol-distance-x -
+            $symbol-left-offset,
+          $symbol-distance-y
+        );
+      }
+    }
+
+    @keyframes blink {
+      50% {
+        opacity: 0;
+      }
+    }
+  </style>
 </Layout>
-
-<style lang="scss">
-  .dev-text {
-    display: inline-block;
-  }
-
-  .symbol {
-    display: inline-block;
-    width: 0.8em;
-    height: 0.8em;
-  }
-
-  .animation {
-    border: 1px solid red;
-    white-space: nowrap;
-
-    font-size: 4rem;
-    width: 100%;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-
-  $symbol-x-translate: 115px;
-  $animation-delay: 2s;
-
-  .lt-symbol {
-    background-image: url("/lt.svg");
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: right;
-    animation: lt-to-middle 1s forwards $animation-delay;
-  }
-
-  .gt-symbol {
-    background-image: url("/gt.svg");
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: left;
-    animation: gt-to-middle 1s forwards $animation-delay;
-  }
-
-  .steciuk-text {
-  }
-
-  .steciuk-character {
-    display: inline-block;
-    opacity: 0;
-  }
-
-  @for $i from 1 through 8 {
-    .steciuk-character:nth-child(#{$i}) {
-      animation: letter-appear 0.01s forwards ($animation-delay + 0.1s * $i);
-    }
-  }
-
-  @keyframes letter-appear {
-    to {
-      opacity: 1;
-    }
-  }
-
-  @keyframes lt-to-middle {
-    to {
-      transform: translate($symbol-x-translate, -112px);
-    }
-  }
-
-  @keyframes gt-to-middle {
-    to {
-      transform: translate(calc($symbol-x-translate * -1), -80px);
-    }
-  }
-</style>
