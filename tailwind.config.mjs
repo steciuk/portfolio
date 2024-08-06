@@ -20,6 +20,12 @@ const config = {
       "max-a4": { max: "21cm" },
       "screen-max-a4": { raw: "only screen and (max-width: 21cm)" },
     },
+    fontWeight: {
+      thin: 100,
+      normal: 400,
+      medium: 500,
+      bold: 700,
+    },
     extend: {
       borderRadius: {
         lg: "var(--radius)",
@@ -27,7 +33,7 @@ const config = {
         sm: "calc(var(--radius) - 4px)",
       },
       fontFamily: {
-        sans: [...defaultTheme.fontFamily.sans],
+        sans: ["Prompt", ...defaultTheme.fontFamily.sans],
         mono: [...defaultTheme.fontFamily.mono],
       },
       fontSize: {
