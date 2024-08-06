@@ -9,7 +9,7 @@ export function getEntryBgColorClass(
     case "jobs":
       return "bg-secondary";
     case "projects":
-      return "bg-third";
+      return "bg-accent";
   }
 }
 

@@ -34,7 +34,7 @@ const config = {
       },
       fontFamily: {
         sans: ["Prompt", ...defaultTheme.fontFamily.sans],
-        mono: [...defaultTheme.fontFamily.mono],
+        mono: ["Victor Mono Variable", ...defaultTheme.fontFamily.mono],
       },
       fontSize: {
         "2xs": ["0.625rem", "0.875rem"],
@@ -65,6 +65,7 @@ const config = {
       ring: "hsl(var(--ring) / <alpha-value>)",
       background: "hsl(var(--background) / <alpha-value>)",
       foreground: "hsl(var(--foreground) / <alpha-value>)",
+      "background-tint": "hsl(var(--background-tint) / <alpha-value>)",
       primary: {
         DEFAULT: "hsl(var(--primary) / <alpha-value>)",
         foreground: "hsl(var(--primary-foreground) / <alpha-value>)",
@@ -72,10 +73,6 @@ const config = {
       secondary: {
         DEFAULT: "hsl(var(--secondary) / <alpha-value>)",
         foreground: "hsl(var(--secondary-foreground) / <alpha-value>)",
-      },
-      third: {
-        DEFAULT: "hsl(var(--third) / <alpha-value>)",
-        foreground: "hsl(var(--third-foreground) / <alpha-value>)",
       },
       destructive: {
         DEFAULT: "hsl(var(--destructive) / <alpha-value>)",

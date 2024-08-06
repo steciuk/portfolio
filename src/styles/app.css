@@ -68,75 +68,59 @@
   }
 } */
 
+/* https://www.realtimecolors.com/?colors=040703-fafdf7-70c24c-8dd5d8-6b98cc&fonts=Archivo-Archivo */
+
 @layer base {
   :root {
-    --background: 180 20% 98%; /* hsl(180 20% 98%) */
-    --foreground: 222.2 84% 4.9%; /*hsl(222.2 84% 4.9%) */
+    --background: 90 60% 98%; /* hsl(90 60% 98%) */
+    --foreground: 105 40% 2%; /* hsl(105 40% 2%) */
 
-    --card: 150 40% 96%; /* hsl(150 40% 96%) */
-    --card-foreground: 266 66% 21%; /* hsl(266 66% 21%) */
+    --background-tint: 90 30% 95%; /* hsl(90 60% 95%) */
 
-    /* --popover: 28 87% 97%;
-    --popover-foreground: 24 83% 7%; */
+    --card: 90 60% 95%; /* hsl(90 60% 98%) */
+    --card-foreground: 105 40% 2%; /* hsl(105 40% 2%) */
 
-    --primary: 183 100% 50%; /* hsl(183, 100%, 50%) */
-    --primary-foreground: 24 83% 7%; /* hsl(24 83% 7%) TODO: */
+    --primary: 102 49% 53%; /* hsl(102 49% 53%) */
+    --primary-foreground: 105 40% 2%; /* hsl(105 40% 2%) */
 
-    --secondary: 147 100% 50%; /* hsl(147, 100%, 50%) */
-    --secondary-foreground: 24 83% 7%; /* hsl(24 83% 7%) TODO: */
+    --secondary: 182 49% 70%; /* hsl(182 49% 70%) */
+    --secondary-foreground: 105 40% 2%; /* hsl(105 40% 2%) */
 
-    --third: 183 57% 50%; /* hsl(183, 57%, 50%) */
-    --third-foreground: 222.2 47.4% 11.2%; /* hsl(222.2 47.4% 11.2%) TODO: */
-
-    /* --muted: 28 86% 20%;  hsl(28 86% 20%) 
-    --muted-foreground: 24 83% 70%;  hsl(24 83% 70%)  */
-
-    --accent: 210 40% 96.1%; /* hsl(210 40% 96.1%) */
-    --accent-foreground: 222.2 47.4% 11.2%; /* hsl(222.2 47.4% 11.2%) */
+    --accent: 212 49% 61%; /* hsl(212 49% 61%) */
+    --accent-foreground: 105 40% 2%; /* hsl(105 40% 2%) */
 
     --destructive: 0 85% 60%; /* hsl(0 85% 60%) */
-    --destructive-foreground: 24 83% 7%; /* hsl(24 83% 7%) */
+    --destructive-foreground: 105 40% 2%; /* hsl(105 40% 2%) */
 
-    --border: 214.3 31.8% 91.4%; /* hsl(214.3 31.8% 91.4%) */
-    --input: 214.3 31.8% 91.4%; /* hsl(214.3 31.8% 91.4%) */
-    --ring: 266 100% 50%; /* hsl(266 100% 50%) */
+    --border: 105 20% 85%; /* hsl(90 61% 20%) */
+    --ring: 212 49% 40%; /* hsl(212 49% 40%) */
 
     --radius: 0.5rem;
   }
 
-  /* hsl(147, 100%, 50%)
-hsl(183, 57%, 50%)
-hsl(183, 100%, 50%)
-hsl(266, 100%, 50%) */
-
   .dark {
-    --background: 222.2 84% 4.9%; /* hsl(222.2, 84%, 4.9%) */
-    --foreground: 210 40% 98%; /* hsl(210, 40%, 98%) */
+    --background: 90 60% 2%; /* hsl(90 60% 2%) */
+    --foreground: 105 40% 98%; /* hsl(105 40% 98%) */
 
-    --card: 28 87% 3%; /* hsl(28, 87%, 3%) */
-    --card-foreground: 24 83% 93%; /* hsl(24, 83%, 93%) */
+    --background-tint: 90 60% 5%; /* hsl(90 60% 5%) */
 
-    --popover: 28 87% 3%; /* hsl(28, 87%, 3%) */
-    --popover-foreground: 24 83% 93%; /* hsl(24, 83%, 93%) */
+    --card: 90 60% 2%; /* hsl(90 60% 2%) */
+    --card-foreground: 105 40% 98%; /* hsl(105 40% 98%) */
 
-    --primary: 24 83% 46%; /* hsl(24, 83%, 46%) */
-    --primary-foreground: 28 87% 3%; /* hsl(28, 87%, 3%) */
+    --primary: 102 49% 47%; /* hsl(102 49% 47%) */
+    --primary-foreground: 90 60% 2%; /* hsl(90 60% 2%) */
 
-    --secondary: 167 83% 27%; /* hsl(167, 83%, 27%) */
-    --secondary-foreground: 28 87% 3%; /* hsl(28, 87%, 3%) */
+    --secondary: 182 49% 30%; /* hsl(182 49% 30%) */
+    --secondary-foreground: 105 40% 98%; /* hsl(105 40% 98%) */
 
-    --muted: 28 86% 80%; /* hsl(28, 86%, 80%) */
-    --muted-foreground: 24 83% 93%; /* hsl(24, 83%, 93%) */
+    --accent: 212 49% 50%; /* hsl(212 49% 39%) */
+    --accent-foreground: 105 40% 98%; /* hsl(105 40% 98%) */
 
-    --accent: 217.2 32.6% 17.5%; /* hsl(217.2, 32.6%, 17.5%) */
-    --accent-foreground: 210 40% 98%; /* hsl(210, 40%, 98%) */
+    --destructive: 0 62% 30%; /* hsl(0 62% 30%) */
+    --destructive-foreground: 106 41% 10%; /* hsl(106 41% 10%) */
 
-    --destructive: 0 62% 30%; /* hsl(0, 62%, 30%) */
-    --destructive-foreground: 24 84% 10%; /* hsl(24, 84%, 10%) */
-
-    --border: 217.2 32.6% 17.5%; /* hsl(217.2, 32.6%, 17.5%) */
-    --input: 217.2 32.6% 17.5%; /* hsl(217.2, 32.6%, 17.5%) */
-    --ring: 209 83% 60%; /* hsl(209, 83%, 60%) */
+    --border: 105 15% 20%; /* hsl(105 20% 25%) */
+    --ring: 212 49% 60%; /* hsl(212 49% 60%) */
   }
 }
 

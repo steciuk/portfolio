@@ -5,6 +5,8 @@ import "@fontsource/prompt/400.css";
 import "@fontsource/prompt/500.css";
 import "@fontsource/prompt/700.css";
 import "@fontsource/prompt/400-italic.css";
+// Supports weights 100-700
+import "@fontsource-variable/victor-mono";
 import { SEO } from "astro-seo";
 import Nav from "@components/Nav/Nav.astro";
 import Header from "@components/Header.astro";
@@ -58,7 +60,7 @@ const title =
   <body class="grid min-h-svh grid-rows-[auto_1fr]">
     <div transition:persist>
       <BackgroundPattern client:visible>
-        <Logo class="h-full w-full dark:opacity-10" />
+        <Logo class="h-full w-full opacity-10" />
       </BackgroundPattern>
     </div>
     <Header class={headerClass} />

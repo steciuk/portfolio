@@ -43,7 +43,7 @@ let dateString = formatPeriod(entry.data.start, entry.data.end);
     </EntryCard>
   ) : entry.collection === "jobs" ? (
     <EntryCard image={entry.data.logo} isTimeline={true}>
-      <EntryTitle>{entry.data.role}</EntryTitle>
+      <EntryTitle>{entry.data.company}</EntryTitle>
       <EntryRole role={entry.data.role} dateString={dateString} />
     </EntryCard>
   ) : entry.collection === "projects" ? (
