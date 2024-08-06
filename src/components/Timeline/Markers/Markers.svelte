@@ -5,7 +5,6 @@
   import type { CollectionEntry, CollectionKey } from "astro:content";
 
   export let totalMonths: number;
-  export let monthHeightPx: number;
   export let latestEnd: MonthDate;
   export let earliestStart: MonthDate;
 
@@ -34,41 +33,48 @@
       return true;
     return false;
   }
+
+  const markerContainerClass =
+    "col-start-1 relative translate-y-1/2 self-end justify-self-end";
 </script>
 
-<div class="flex flex-col items-end">
-  <Marker
-    monthDate="now"
-    heightPx={monthHeightPx}
-    anySelected={!!$selectedEntry}
-    selected={!!$selectedEntry && $selectedEntry.data.end === undefined}
-  />
-  <div class="flex items-center" style="height: {monthHeightPx}px;">...</div>
-  {#each monthDates as { month, year }}
-    {#if month === 1}
-      <div class="relative">
-        <Marker
-          monthDate={{ month, year }}
-          heightPx={monthHeightPx}
-          anySelected={!!$selectedEntry}
-          selected={isSelected($selectedEntry, month, year)}
-        />
-        <div
-          class="pointer-events-none absolute bottom-0 right-4 flex min-h-max origin-center translate-y-1/2 rotate-180 select-none gap-2 text-7xl font-bold text-foreground/10 md:right-6"
-          style="writing-mode: vertical-lr; text-orientation: sideways;"
-        >
-          <span>{`${year - 1}`.slice(2)}</span>
-          <span class="font-thin">|</span>
-          <span>{`${year}`.slice(2)}</span>
-        </div>
-      </div>
-    {:else}
+<div
+  class="col-start-1 grid grid-cols-1 grid-rows-subgrid gap-y-0"
+  style="grid-row: 1 / -1;"
+>
+  <div class="row-start-1 {markerContainerClass}">
+    <Marker
+      monthDate="now"
+      anySelected={!!$selectedEntry}
+      selected={!!$selectedEntry && $selectedEntry.data.end === undefined}
+    />
+  </div>
+  <div class="row-start-2 {markerContainerClass}">...</div>
+  {#each monthDates as { month, year }, i}
+    <!-- {#if month === 1}
+    <div class="relative">
       <Marker
         monthDate={{ month, year }}
-        heightPx={monthHeightPx}
         anySelected={!!$selectedEntry}
         selected={isSelected($selectedEntry, month, year)}
       />
-    {/if}
+      <div
+        class="pointer-events-none absolute bottom-0 right-4 flex min-h-max origin-center translate-y-1/2 rotate-180 select-none gap-2 text-7xl font-bold text-foreground/10 md:right-6"
+        style="writing-mode: vertical-lr; text-orientation: sideways;"
+      >
+        <span>{`${year - 1}`.slice(2)}</span>
+        <span class="font-thin">|</span>
+        <span>{`${year}`.slice(2)}</span>
+      </div>
+    </div>
+  {:else} -->
+    <div class={markerContainerClass} style="grid-row-start: {i + 3};">
+      <Marker
+        monthDate={{ month, year }}
+        anySelected={!!$selectedEntry}
+        selected={isSelected($selectedEntry, month, year)}
+      />
+    </div>
+    <!-- {/if} -->
   {/each}
 </div>

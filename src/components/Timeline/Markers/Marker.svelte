@@ -2,7 +2,6 @@
   import type { MonthDate } from "@content/config";
   import { scale } from "svelte/transition";
 
-  export let heightPx: number;
   export let monthDate: MonthDate | "now";
   export let selected: boolean;
   export let anySelected: boolean;
@@ -15,7 +14,7 @@
         });
 </script>
 
-<div class={"flex items-center gap-2 md:gap-4"} style="height: {heightPx}px;">
+<div class="flex min-w-[80px] items-center justify-end gap-2 md:gap-4">
   <div
     class="relative origin-right text-right transition-transform md:text-lg"
     class:font-thin={!selected}

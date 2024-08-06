@@ -1,6 +1,5 @@
 ---
 import { getCollection } from "astro:content";
-import type { EntryMeasurements } from "@components/Timeline/types";
 import TimelineEntry from "@components/Timeline/TimelineEntry.svelte";
 import { sortByDate } from "@content/utils";
 import EntryDeselector from "@components/Timeline/EntryDeselector.svelte";
@@ -39,90 +38,73 @@ const latestEnd = allEntries.reduce((latest, entry) => {
 const totalYears = latestEnd.year - earliestStart.year;
 const totalMonths = totalYears * 12 + latestEnd.month - earliestStart.month + 1;
 
-const monthHeightPx = 60;
-const lines: Array<
-  [number, number, (typeof allEntries)[number] & EntryMeasurements][]
-> = [];
+const lines: Array<[number, number, (typeof allEntries)[number]][]> = [];
 
 allEntries.forEach((entry) => {
   const start = entry.data.start;
   const end = entry.data.end ?? latestEnd;
-  const startMonths =
-    (start.year - earliestStart.year) * 12 + start.month - earliestStart.month;
-  const endMonths =
-    (end.year - earliestStart.year) * 12 + end.month - earliestStart.month;
-  let durationMonths = endMonths - startMonths;
-  if (!entry.data.end) {
-    // Lasts until now, so add 2 'months' for '...' and 'Now' markers
-    durationMonths += 2;
-  }
+  const startRow =
+    (start.year - earliestStart.year) * 12 +
+    start.month -
+    earliestStart.month +
+    1; // 1 based
+  let endRow =
+    (end.year - earliestStart.year) * 12 + end.month - earliestStart.month + 1; // 1 based
 
-  const heightPx = durationMonths * monthHeightPx;
-  const startHeightPx = startMonths * monthHeightPx + monthHeightPx / 2;
+  if (!entry.data.end) {
+    // Lasts until now, so add 2 rows for '...' and 'Now' markers
+    endRow += 2;
+  }
 
   let line = lines.findIndex((line) => {
     return line.every(([start, end]) => {
-      return start >= endMonths || end <= startMonths;
+      return start >= endRow || end <= startRow;
     });
-  });
-
-  const entryWithMeasurements = {
-    ...entry,
-    startHeightPx,
-    heightPx,
-  };
+  }); // 0 based
 
   if (line === -1) {
     line = lines.length;
-    lines.push([[startMonths, endMonths, entryWithMeasurements]]);
+    lines.push([[startRow, endRow, entry]]);
   } else {
-    lines[line].push([startMonths, endMonths, entryWithMeasurements]);
+    lines[line].push([startRow, endRow, entry]);
   }
 });
+
+const numLines = lines.length;
+const numRows = totalMonths + 2; // +2 for '...' and 'Now' rows
 ---
 
 <EntryDeselector client:idle />
-<section>
-  <div class="container grid gap-4 lg:grid-cols-[auto_1fr]">
-    <div
-      class="col-start-1 row-start-1 mb-20 flex w-full justify-center gap-2 md:gap-4 lg:justify-start"
-    >
-      <Markers
-        {totalMonths}
-        {monthHeightPx}
-        {earliestStart}
-        {latestEnd}
-        client:visible
-      />
-      <div
-        class="grid gap-2 md:gap-4"
-        style={{
-          gridTemplateColumns: `repeat(${lines.length}, minmax(0, 1fr))`,
-        }}
-      >
-        {
-          lines.map((line) => (
-            <div class="line relative w-6 xs:w-8 md:w-10">
-              {line.map(([_, __, entry]) => {
-                return <TimelineEntry {entry} client:visible />;
-              })}
+<section class="container grid gap-4 lg:grid-cols-[auto_1fr]">
+  <div class="main-timeline-grid col-start-1 row-start-1 my-16 justify-center">
+    <Markers {totalMonths} {earliestStart} {latestEnd} client:visible />
+    {
+      lines.map((line, numLine) =>
+        line.map(([startRow, endRow, entry]) => {
+          return (
+            <div
+              class="relative"
+              style={{
+                gridColumn: numLine + 2,
+                gridRow: `${-startRow} / ${-endRow}`,
+              }}
+            >
+              <TimelineEntry {entry} client:visible />
             </div>
-          ))
-        }
-      </div>
-    </div>
-    <EntryDetailsPortal entries={allEntries} />
+          );
+        })
+      )
+    }
   </div>
+  <EntryDetailsPortal entries={allEntries} />
 </section>
 
-<script>
-  import { selectedEntry } from "@components/Timeline/selectedEntryStore";
-
-  const lines = document.querySelectorAll(".line");
-  lines.forEach((line) => {
-    line.addEventListener("click", (event) => {
-      event.stopPropagation();
-      selectedEntry.clear();
-    });
-  });
-</script>
+<style define:vars={{ numLines, numRows }} lang="scss">
+  .main-timeline-grid {
+    display: grid;
+    column-gap: 1rem;
+    row-gap: 2px;
+    grid-template-columns: auto repeat(var(--numLines), 2rem);
+    grid-template-rows: repeat(var(--numRows), 60px);
+  }
+</style>
