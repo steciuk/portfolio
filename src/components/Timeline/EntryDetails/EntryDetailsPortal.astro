@@ -17,9 +17,9 @@ const entriesTypes = (["jobs", "education", "projects"] as const).map(
 ---
 
 <div
-  class="pointer-events-none sticky top-16 col-start-1 row-start-1 grid h-[calc(100vh-4rem)] items-end pb-4 lg:top-0 lg:col-start-2 lg:h-screen lg:items-center lg:pb-0"
+  class="pointer-events-none sticky top-0 col-start-1 row-start-1 grid h-screen items-end border-2 border-primary pb-4 lg:top-0 lg:col-start-2 lg:h-screen lg:items-center lg:pb-0"
 >
-  <ul class="absolute right-4 top-4">
+  <ul class="absolute right-0 top-4">
     {
       entriesTypes.map((type) => (
         <li>
