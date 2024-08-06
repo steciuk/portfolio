@@ -29,7 +29,7 @@
     {text}
     {#if selected && monthDate !== "now"}
       <div
-        class="absolute right-0 top-3/4 text-xs text-primary"
+        class="absolute right-0 top-3/4 text-xs text-accent"
         transition:scale={{ duration: 100 }}
       >
         {monthDate.year}

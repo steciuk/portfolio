@@ -5,7 +5,7 @@ import Layout from "@layouts/Layout.astro";
 <Layout>
   <main class="container relative flex min-h-svh items-center justify-center">
     <div
-      class="animation relative flex w-max select-none justify-center overflow-hidden font-mono"
+      class="animation relative flex w-max select-none items-end justify-center font-mono"
     >
       <div class="symbol-wrapper">
         <div class="symbol lt-symbol"></div>
@@ -42,13 +42,17 @@ import Layout from "@layouts/Layout.astro";
   </main>
 </Layout>
 
+<script>
+  document.addEventListener("astro:page-load", () => {
+    const animationBox = document.querySelector(".animation");
+    if (animationBox) {
+      animationBox.setAttribute("data-start", "");
+    }
+  });
+</script>
+
 <style lang="scss">
   $font-size: 4rem;
-
-  .animation {
-    font-size: $font-size;
-    line-height: 1;
-  }
 
   $num-letters-steciuk: 8;
   $num-letters-dev: 4;
@@ -58,7 +62,7 @@ import Layout from "@layouts/Layout.astro";
   $symbol-animation-time: 1s;
   $cursor-move-time: 1s;
 
-  $animation-delay: 2s; // at the beggining
+  $animation-delay: 1s; // at the beggining
   $slash-delay: $animation-delay + $letter-appear-time * $num-letters-dev + 1s; // after dev
   $cursor-move-delay: $slash-delay + $letter-appear-time + 0.8s; // after slash
   $steciuk-delay: $cursor-move-delay + $cursor-move-time; // after cursor
@@ -68,7 +72,6 @@ import Layout from "@layouts/Layout.astro";
   .animation-cursor-wrapper {
     position: absolute;
     right: 0.5ch;
-    animation: cursor-move $cursor-move-time forwards $cursor-move-delay;
   }
 
   $cursor-move-jump: 2%;
@@ -85,10 +88,6 @@ import Layout from "@layouts/Layout.astro";
     100% {
       transform: translateX($num-leters-dev-without-slash * -1ch);
     }
-  }
-
-  .animation-cursor-wrapper-2 {
-    animation: fade-away 1s forwards $symbol-delay;
   }
 
   .animation-cursor {
@@ -117,13 +116,11 @@ import Layout from "@layouts/Layout.astro";
   .lt-symbol {
     background-image: url("/lt-dark.svg");
     background-position: left;
-    animation-name: lt-move;
   }
 
   .gt-symbol {
     background-image: url("/gt-dark.svg");
     background-position: right;
-    animation-name: gt-move;
   }
 
   :global(.dark) {
@@ -150,32 +147,6 @@ import Layout from "@layouts/Layout.astro";
     position: absolute;
   }
 
-  .character-s {
-    animation: fade-away 1s forwards $symbol-delay;
-  }
-
-  @for $i from 1 through $num-letters-steciuk {
-    .text-wrapper-steciuk > .character:nth-child(#{$i}) {
-      animation: letter-appear
-        0.01s
-        forwards
-        ($steciuk-delay + $letter-appear-time * $i);
-    }
-  }
-
-  @for $i from 1 through $num-letters-dev {
-    .text-wrapper-dev > .character:nth-child(#{$i}) {
-      animation: letter-appear
-        0.01s
-        forwards
-        ($animation-delay + $letter-appear-time * $i);
-    }
-  }
-
-  .character-slash {
-    animation: letter-disappear $letter-appear-time forwards $slash-delay;
-  }
-
   @keyframes fade-away {
     to {
       opacity: 0;
@@ -198,11 +169,11 @@ import Layout from "@layouts/Layout.astro";
   }
 
   @keyframes letter-appear {
-    98% {
+    80% {
       opacity: 0;
       position: absolute;
     }
-    99% {
+    95% {
       opacity: 0;
       position: static;
     }
@@ -237,6 +208,55 @@ import Layout from "@layouts/Layout.astro";
   @keyframes blink {
     50% {
       opacity: 0;
+    }
+  }
+
+  .animation {
+    font-size: $font-size;
+    line-height: 1;
+
+    &[data-start] {
+      .animation-cursor-wrapper {
+        animation: cursor-move $cursor-move-time forwards $cursor-move-delay;
+      }
+
+      .character-slash {
+        animation: letter-disappear $letter-appear-time forwards $slash-delay;
+      }
+
+      .animation-cursor-wrapper-2 {
+        animation: fade-away 1s forwards $symbol-delay;
+      }
+
+      .character-s {
+        animation: fade-away 1s forwards $symbol-delay;
+      }
+
+      @for $i from 1 through $num-letters-steciuk {
+        .text-wrapper-steciuk > .character:nth-child(#{$i}) {
+          animation: letter-appear
+            0.01s
+            forwards
+            ($steciuk-delay + $letter-appear-time * $i);
+        }
+      }
+
+      @for $i from 1 through $num-letters-dev {
+        .text-wrapper-dev > .character:nth-child(#{$i}) {
+          animation: letter-appear
+            0.01s
+            forwards
+            ($animation-delay + $letter-appear-time * $i);
+        }
+      }
+
+      .lt-symbol {
+        animation-name: lt-move;
+      }
+
+      .gt-symbol {
+        animation-name: gt-move;
+      }
     }
   }
 </style>

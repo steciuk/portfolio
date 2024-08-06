@@ -55,9 +55,10 @@ if (currentHref !== "/") {
                 <Button
                   class="relative w-full dark:text-foreground"
                   class:list={{
-                    "bg-primary/30 hover:bg-primary/35": href === currentHref,
+                    "bg-secondary/30 hover:bg-secondary/40 dark:bg-secondary/20 dark:hover:bg-secondary/25":
+                      href === currentHref,
                   }}
-                  variant={href === currentHref ? "default" : "outline"}
+                  variant="outline"
                   href={href}
                 >
                   {text}

@@ -3,6 +3,7 @@
   import { selectedEntry } from "@components/Timeline/selectedEntryStore";
   import type { TimelinableEntry } from "@components/Timeline/types";
   import { getEntryBgColorClass } from "@components/Timeline/utils";
+  import { scale } from "svelte/transition";
 
   export let entry: TimelinableEntry;
 
@@ -18,9 +19,8 @@
 
 <button
   on:click|stopPropagation={handleOpenClick}
-  class="h-full w-full rounded-sm border-2 shadow-md {bgColorClass} {isCurrentEntry
-    ? 'border-ring'
-    : 'border-ring/0'}"
-  style="transition: border-color 0.2s;"
+  class="h-full w-full rounded-sm shadow-sm transition-all {bgColorClass}"
+  class:scale-x-[140%]={isCurrentEntry}
+  class:shadow-xl={isCurrentEntry}
 >
 </button>

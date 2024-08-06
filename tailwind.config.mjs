@@ -34,7 +34,7 @@ const config = {
       },
       fontFamily: {
         sans: ["Prompt", ...defaultTheme.fontFamily.sans],
-        mono: ["Victor Mono Variable", ...defaultTheme.fontFamily.mono],
+        mono: [...defaultTheme.fontFamily.mono],
       },
       fontSize: {
         "2xs": ["0.625rem", "0.875rem"],
