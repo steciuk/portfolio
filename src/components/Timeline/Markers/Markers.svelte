@@ -36,7 +36,7 @@
   }
 </script>
 
-<div class="flex w-[145px] flex-col items-end overflow-hidden">
+<div class="flex flex-col items-end">
   <Marker
     monthDate="now"
     heightPx={monthHeightPx}
@@ -57,9 +57,9 @@
           class="pointer-events-none absolute bottom-0 right-4 flex min-h-max origin-center translate-y-1/2 rotate-180 select-none gap-2 text-7xl font-bold text-foreground/10 md:right-6"
           style="writing-mode: vertical-lr; text-orientation: sideways;"
         >
-          <span>{year - 1}</span>
+          <span>{`${year - 1}`.slice(2)}</span>
           <span class="font-thin">|</span>
-          <span>{year}</span>
+          <span>{`${year}`.slice(2)}</span>
         </div>
       </div>
     {:else}

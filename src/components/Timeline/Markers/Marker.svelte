@@ -11,7 +11,7 @@
     monthDate === "now"
       ? "Now"
       : new Date(monthDate.year, monthDate.month - 1).toLocaleString("en-us", {
-          month: "long",
+          month: "short",
         });
 </script>
 

@@ -21,7 +21,7 @@
 
 <button
   on:click|stopPropagation={handleOpenClick}
-  class="entry absolute w-full rounded-sm p-px"
+  class="entry absolute w-full rounded-sm py-px"
   style="height: {entry.heightPx}px; bottom: {entry.startHeightPx}px;"
 >
   <div
