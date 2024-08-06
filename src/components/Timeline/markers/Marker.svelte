@@ -20,7 +20,7 @@
   style="grid-row-start: {rowNum};"
 >
   <div
-    class="relative origin-right text-right transition-transform md:text-lg"
+    class="relative origin-right text-right text-lg transition-transform"
     class:font-thin={!selected}
     class:scale-75={anySelected && !selected}
     class:scale-125={selected}

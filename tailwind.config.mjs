@@ -1,4 +1,3 @@
-import { fontFamily } from "tailwindcss/defaultTheme";
 import defaultTheme from "tailwindcss/defaultTheme";
 
 /** @type {import('tailwindcss').Config} */
@@ -28,7 +27,8 @@ const config = {
         sm: "calc(var(--radius) - 4px)",
       },
       fontFamily: {
-        sans: [...fontFamily.sans],
+        sans: [...defaultTheme.fontFamily.sans],
+        mono: [...defaultTheme.fontFamily.mono],
       },
       fontSize: {
         "2xs": ["0.625rem", "0.875rem"],
@@ -55,7 +55,7 @@ const config = {
     },
     colors: {
       border: "hsl(var(--border) / <alpha-value>)",
-      input: "hsl(var(--input) / <alpha-value>)",
+      // input: "hsl(var(--input) / <alpha-value>)",
       ring: "hsl(var(--ring) / <alpha-value>)",
       background: "hsl(var(--background) / <alpha-value>)",
       foreground: "hsl(var(--foreground) / <alpha-value>)",

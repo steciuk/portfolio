@@ -145,16 +145,7 @@ hsl(266, 100%, 50%) */
     @apply border-border;
   }
 
-  html {
-    font-family: system-ui, sans-serif;
-  }
-
   body {
     @apply bg-background text-foreground;
-  }
-
-  code {
-    font-family: Menlo, Monaco, "Lucida Console", "Liberation Mono",
-      "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Courier New", monospace;
   }
 }
