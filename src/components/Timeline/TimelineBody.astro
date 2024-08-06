@@ -5,6 +5,7 @@ import { sortByDate } from "@content/utils";
 import EntryDeselector from "@components/Timeline/EntryDeselector.svelte";
 import MonthMarkers from "@components/Timeline/markers/MonthMarkers.svelte";
 import EntryDetailsPortal from "@components/Timeline/EntryDetails/EntryDetailsPortal.astro";
+import YearMarkers from "@components/Timeline/markers/YearMarkers.astro";
 
 const educationEntries = await getCollection("education");
 const jobsEntries = await getCollection("jobs");
@@ -86,6 +87,7 @@ const monthDates = Array.from({ length: totalMonths }).map((_, i) => {
   <div
     class="col-span-full row-[2_/_-2] grid grid-cols-subgrid grid-rows-subgrid"
   >
+    <YearMarkers {monthDates} />
     <MonthMarkers {monthDates} client:visible />
     {
       lines.map((line, numLine) =>
