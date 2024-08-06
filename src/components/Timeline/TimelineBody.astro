@@ -3,7 +3,7 @@ import { getCollection } from "astro:content";
 import TimelineEntry from "@components/Timeline/TimelineEntry.svelte";
 import { sortByDate } from "@content/utils";
 import EntryDeselector from "@components/Timeline/EntryDeselector.svelte";
-import Markers from "@components/Timeline/Markers/Markers.svelte";
+import MonthMarkers from "@components/Timeline/markers/MonthMarkers.svelte";
 import EntryDetailsPortal from "@components/Timeline/EntryDetails/EntryDetailsPortal.astro";
 
 const educationEntries = await getCollection("education");
@@ -72,12 +72,21 @@ allEntries.forEach((entry) => {
 
 const numLines = lines.length;
 const numRows = totalMonths + 2; // +2 for '...' and 'Now' rows
+
+const monthDates = Array.from({ length: totalMonths }).map((_, i) => {
+  const month = (totalMonths - i - 1 + earliestStart.month) % 12 || 12;
+  const year = latestEnd.year - Math.floor((i + 12 - latestEnd.month) / 12);
+
+  return { month, year };
+});
 ---
 
 <EntryDeselector client:idle />
-<section class="container grid gap-4 lg:grid-cols-[auto_1fr]">
-  <div class="main-timeline-grid col-start-1 row-start-1 my-16 justify-center">
-    <Markers {totalMonths} {earliestStart} {latestEnd} client:visible />
+<section class="timeline-overgrid container grid gap-x-4 gap-y-0.5">
+  <div
+    class="col-span-full row-[2_/_-2] grid grid-cols-subgrid grid-rows-subgrid"
+  >
+    <MonthMarkers {monthDates} client:visible />
     {
       lines.map((line, numLine) =>
         line.map(([startRow, endRow, entry]) => {
@@ -96,15 +105,14 @@ const numRows = totalMonths + 2; // +2 for '...' and 'Now' rows
       )
     }
   </div>
-  <EntryDetailsPortal entries={allEntries} />
+  <div class="col-span-full row-span-full row-start-1 lg:-col-start-2">
+    <EntryDetailsPortal entries={allEntries} />
+  </div>
 </section>
 
 <style define:vars={{ numLines, numRows }} lang="scss">
-  .main-timeline-grid {
-    display: grid;
-    column-gap: 1rem;
-    row-gap: 2px;
-    grid-template-columns: auto repeat(var(--numLines), 2rem);
-    grid-template-rows: repeat(var(--numRows), 60px);
+  .timeline-overgrid {
+    grid-template-columns: auto repeat(var(--numLines), 2rem) 1fr;
+    grid-template-rows: 0 repeat(var(--numRows), 60px) 2rem;
   }
 </style>

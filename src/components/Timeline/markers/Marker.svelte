@@ -5,6 +5,7 @@
   export let monthDate: MonthDate | "now";
   export let selected: boolean;
   export let anySelected: boolean;
+  export let rowNum: number;
 
   const text =
     monthDate === "now"
@@ -14,7 +15,10 @@
         });
 </script>
 
-<div class="flex min-w-[80px] items-center justify-end gap-2 md:gap-4">
+<div
+  class="relative flex min-w-[80px] translate-y-1/2 items-center justify-end gap-2 self-end justify-self-end md:gap-4"
+  style="grid-row-start: {rowNum};"
+>
   <div
     class="relative origin-right text-right transition-transform md:text-lg"
     class:font-thin={!selected}
