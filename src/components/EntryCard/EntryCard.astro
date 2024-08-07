@@ -14,7 +14,7 @@ const { image, class: className, isTimeline } = Astro.props;
 
 <div class="@container">
   <div
-    class="flex flex-col gap-2 rounded-sm bg-card p-2 text-left text-card-foreground md:p-4"
+    class="flex flex-col gap-2 rounded-sm bg-card p-2 text-left text-card-foreground shadow-md md:p-4"
     class:list={[
       className,
       isTimeline ? "sm:flex-row lg:flex-col" : "@2xl:flex-row",
