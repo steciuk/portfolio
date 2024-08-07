@@ -18,12 +18,14 @@ interface Props {
   headerClass?: string;
   navClass?: string;
   footerClass?: string;
+  forceBurger?: boolean;
 }
 
 const description =
   "Frontend web developer with over 2 years of professional experience and extensive work on personal and university projects.";
 
-const { subtitle, headerClass, navClass, footerClass } = Astro.props;
+const { subtitle, headerClass, navClass, footerClass, forceBurger } =
+  Astro.props;
 const title =
   subtitle && subtitle.trim() !== "Adam Steciuk"
     ? `${subtitle} | Adam Steciuk`
@@ -61,9 +63,9 @@ const title =
         <Logo class="h-full w-full opacity-10 dark:opacity-15" />
       </BackgroundPattern>
     </div>
-    <Header class={headerClass} />
+    <Header class={headerClass} {forceBurger} />
     <div class="flex">
-      <Nav class={navClass} />
+      <Nav class={navClass} {forceBurger} />
       <div class="relative flex-grow">
         <slot />
         <Footer class={footerClass} />

@@ -1,17 +1,24 @@
 ---
 import { Button } from "@components/ui/button";
+import { cn } from "@src/utils";
 import { Menu } from "lucide-svelte";
 
 interface Props {
   class?: string;
+  forceBurger?: boolean;
 }
 
-const { class: className } = Astro.props;
+const { class: className, forceBurger } = Astro.props;
 ---
 
 <header
-  class="fixed left-0 top-0 z-20 inline-block lg:hidden"
-  class:list={className}
+  class={cn(
+    "fixed left-0 top-0 z-20 inline-block",
+    {
+      "lg:hidden": !forceBurger,
+    },
+    className
+  )}
 >
   <Button
     size="icon"

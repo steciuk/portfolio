@@ -5,12 +5,14 @@ import { Image } from "astro:assets";
 import { ArrowRight, Github, Linkedin, Mail } from "lucide-svelte";
 import { email, github, linkedin } from "@src/links";
 import ThemeSwitcher from "@components/ThemeSwitcher.astro";
+import { cn } from "@src/utils";
 
 interface Props {
   class?: string;
+  forceBurger?: boolean;
 }
 
-const { class: className } = Astro.props;
+const { class: className, forceBurger } = Astro.props;
 
 const links = [
   { href: "/", text: "Home" },
@@ -27,17 +29,30 @@ if (currentHref !== "/") {
 ---
 
 <div
-  class="pointer-events-none fixed left-0 top-0 z-30 h-dvh w-screen flex-shrink-0 overflow-hidden lg:sticky lg:w-max"
-  class:list={className}
+  class={cn(
+    "pointer-events-none fixed left-0 top-0 z-30 h-dvh w-screen flex-shrink-0 overflow-hidden",
+    { "lg:sticky lg:w-max": !forceBurger },
+    className
+  )}
   id="main-nav-container"
   data-nav="closed"
 >
   <button
-    class="pointer-events-auto absolute inset-0 bg-border/50 backdrop-blur-sm lg:hidden"
+    class={cn(
+      "pointer-events-auto absolute inset-0 bg-border/50 backdrop-blur-sm",
+      {
+        "lg:hidden": !forceBurger,
+      }
+    )}
     id="close-main-nav-btn"
     aria-label="Close main navigation"></button>
   <aside
-    class="pointer-events-auto flex h-full w-56 -translate-x-full flex-col justify-between bg-card px-4 pt-6 text-card-foreground shadow-2xl transition-transform lg:translate-x-0 lg:border-r lg:shadow-none xl:w-72"
+    class={cn(
+      "pointer-events-auto flex h-full w-56 -translate-x-full flex-col justify-between bg-card px-4 pt-6 text-card-foreground shadow-2xl transition-transform xl:w-72",
+      {
+        "lg:translate-x-0 lg:border-r lg:shadow-none": !forceBurger,
+      }
+    )}
   >
     <div class="flex w-full flex-col items-center gap-6">
       <Image
