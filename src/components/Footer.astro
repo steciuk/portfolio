@@ -12,7 +12,12 @@ const year = new Date().getFullYear();
 
 <div class="mt-8 p-2 text-center" class:list={className}>
   &copy; <span id="footer-year">{year}</span>
-  <Button href={website} size="inline" variant="link" class="font-medium">
+  <Button
+    href={website}
+    size="inline"
+    variant="link"
+    class="whitespace-nowrap font-medium"
+  >
     Adam Steciuk
   </Button>
 </div>

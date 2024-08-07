@@ -1,14 +1,13 @@
 <script lang="ts">
   import { getEntryId } from "@components/Timeline/entryId";
   import { selectedEntry } from "@components/Timeline/selectedEntryStore";
-  import type { TimelinableEntry } from "@components/Timeline/types";
-  import { getEntryBgColorClass } from "@components/Timeline/utils";
-  import { scale } from "svelte/transition";
+  import type { TimelineableEntry } from "@components/Timeline/types";
+  import { getEntryAssociatedColor } from "@components/Timeline/utils";
 
-  export let entry: TimelinableEntry;
+  export let entry: TimelineableEntry;
 
-  const bgColorClass = getEntryBgColorClass(entry);
-
+  const bgColorClass = getEntryAssociatedColor(entry.collection).bgClass;
+  getEntryAssociatedColor;
   function handleOpenClick() {
     selectedEntry.set(entry);
   }

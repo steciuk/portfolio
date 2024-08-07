@@ -1,7 +1,7 @@
 ---
 import EntryRole from "@components/Timeline/EntryDetails/EntryRole.astro";
 import { formatPeriod } from "@content/utils";
-import type { TimelinableEntry } from "@components/Timeline/types";
+import type { TimelineableEntry } from "@components/Timeline/types";
 import EntryCard from "@components/EntryCard/EntryCard.astro";
 import ProjectCard from "@components/ProjectCard.astro";
 import EntryDescription from "@components/EntryCard/EntryDescription.astro";
@@ -9,7 +9,7 @@ import EntryTitle from "@components/EntryCard/EntryTitle.astro";
 import { Button } from "@components/ui/button";
 
 interface Props {
-  entry: TimelinableEntry;
+  entry: TimelineableEntry;
 }
 
 const { entry } = Astro.props;

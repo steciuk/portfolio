@@ -1,40 +1,18 @@
 ---
 import EntryDetails from "@components/Timeline/EntryDetails/EntryDetails.astro";
-import type { TimelinableEntry } from "@components/Timeline/types";
+import type { TimelineableEntry } from "@components/Timeline/types";
 import { getEntryDetailsElementId } from "@components/Timeline/entryId";
-import { getEntryBgColorClass } from "@components/Timeline/utils";
 
 interface Props {
-  entries: TimelinableEntry[];
+  entries: TimelineableEntry[];
 }
 
 const { entries } = Astro.props;
-const entriesTypes = (["jobs", "education", "projects"] as const).map(
-  (type) => ({
-    collection: type,
-  })
-);
 ---
 
 <div
-  class="pointer-events-none sticky top-0 grid h-screen items-end pb-4 lg:h-screen lg:items-center lg:pb-0"
+  class="sticky top-0 grid h-screen items-end pb-4 lg:h-screen lg:items-center lg:pb-0"
 >
-  <ul class="absolute right-0 top-4">
-    {
-      entriesTypes.map((type) => (
-        <li>
-          <span
-            class="inline-block h-4 w-8 rounded-sm"
-            class:list={getEntryBgColorClass(type)}
-          />
-          <span> - </span>
-          <span>
-            {type.collection.charAt(0).toUpperCase() + type.collection.slice(1)}
-          </span>
-        </li>
-      ))
-    }
-  </ul>
   {
     entries.map((entry) => {
       const id = getEntryDetailsElementId(entry);
