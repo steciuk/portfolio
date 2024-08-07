@@ -5,23 +5,10 @@ export function getEntryBgColorClass(
 ): string {
   switch (entry.collection) {
     case "education":
-      return "bg-primary";
-    case "jobs":
       return "bg-secondary";
+    case "jobs":
+      return "bg-primary";
     case "projects":
       return "bg-accent";
-  }
-}
-
-export function getEntryTextColorClass(
-  entry: Partial<TimelinableEntry> & Pick<TimelinableEntry, "collection">,
-): string {
-  switch (entry.collection) {
-    case "education":
-      return "text-primary";
-    case "jobs":
-      return "text-secondary";
-    case "projects":
-      return "text-third";
   }
 }
