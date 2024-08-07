@@ -14,18 +14,17 @@ const { image, class: className, isTimeline } = Astro.props;
 
 <div class="@container">
   <div
-    class="rounded-sm bg-card p-2 text-left text-card-foreground md:p-4"
+    class="flex flex-col gap-2 rounded-sm bg-card p-2 text-left text-card-foreground md:p-4"
     class:list={[
       className,
-      { "@2xl:flex-row": !isTimeline, "sm:flex-row lg:flex-col": isTimeline },
+      isTimeline ? "sm:flex-row lg:flex-col" : "@2xl:flex-row",
     ]}
   >
     <div
-      class="mb-2 aspect-video w-full max-w-full flex-shrink-0 overflow-hidden rounded-sm md:mb-4"
-      class:list={{
-        "@2xl:max-w-[13rem]": !isTimeline,
-        "sm:max-w-[13rem] lg:max-w-full": isTimeline,
-      }}
+      class="aspect-video w-full max-w-full flex-shrink-0 overflow-hidden rounded-sm"
+      class:list={[
+        isTimeline ? "sm:max-w-[13rem] lg:max-w-full" : "@2xl:max-w-[13rem]",
+      ]}
     >
       {
         image ? (
@@ -44,6 +43,8 @@ const { image, class: className, isTimeline } = Astro.props;
         )
       }
     </div>
-    <slot />
+    <div>
+      <slot />
+    </div>
   </div>
 </div>
