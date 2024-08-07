@@ -75,8 +75,6 @@
     --background: 90 60% 98%; /* hsl(90 60% 98%) */
     --foreground: 105 40% 2%; /* hsl(105 40% 2%) */
 
-    --background-tint: 90 30% 95%; /* hsl(90 60% 95%) */
-
     --card: 90 60% 95%; /* hsl(90 60% 98%) */
     --card-foreground: 105 40% 2%; /* hsl(105 40% 2%) */
 
@@ -101,8 +99,6 @@
   .dark {
     --background: 90 60% 2%; /* hsl(90 60% 2%) */
     --foreground: 105 40% 98%; /* hsl(105 40% 98%) */
-
-    --background-tint: 90 60% 5%; /* hsl(90 60% 5%) */
 
     --card: 90 60% 4%; /* hsl(90 60% 2%) */
     --card-foreground: 105 40% 98%; /* hsl(105 40% 98%) */

@@ -52,15 +52,7 @@ if (currentHref !== "/") {
           {
             links.map(({ href, text }) => (
               <li>
-                <Button
-                  class="relative w-full dark:text-foreground"
-                  class:list={{
-                    "bg-secondary/30 hover:bg-secondary/40 dark:bg-secondary/20 dark:hover:bg-secondary/25":
-                      href === currentHref,
-                  }}
-                  variant="outline"
-                  href={href}
-                >
+                <Button class="relative w-full" variant="outline" href={href}>
                   {text}
                 </Button>
               </li>
