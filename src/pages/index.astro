@@ -6,12 +6,16 @@ import Layout from "@layouts/Layout.astro";
 
 <Layout forceBurger={true}>
   <main
-    class="container relative flex min-h-svh flex-col items-center justify-center gap-8"
+    class="container relative flex min-h-svh flex-col items-center justify-center gap-16"
   >
     <LogoAnimation />
-    <div class="flex gap-4">
-      <Button variant="secondary" href="/cv">View my CV</Button>
-      <Button href="/timeline">View my timeline</Button>
+    <div class="flex flex-col-reverse gap-4 sm:flex-row lg:gap-8">
+      <Button class="lg:px-8 lg:py-6 lg:text-lg" variant="outline" href="/cv"
+        >View my CV</Button
+      >
+      <Button class="lg:px-8 lg:py-6 lg:text-lg" href="/timeline"
+        >View my timeline</Button
+      >
     </div>
   </main>
 </Layout>

@@ -76,9 +76,31 @@
   });
 </script>
 
-<style lang="scss">
-  $font-size: 4rem;
+<style>
+  .animation {
+    --font-size: 2rem;
+  }
 
+  @media screen(xs) {
+    .animation {
+      --font-size: 2.5rem;
+    }
+  }
+
+  @media screen(md) {
+    .animation {
+      --font-size: 4rem;
+    }
+  }
+
+  @media screen(lg) {
+    .animation {
+      --font-size: 6rem;
+    }
+  }
+</style>
+
+<style lang="scss">
   $num-letters-steciuk: 8;
   $num-letters-dev: 4;
   $num-letters-total: $num-letters-steciuk + $num-letters-dev;
@@ -138,7 +160,7 @@
 
     & > * {
       display: inline-block;
-      font-size: $font-size;
+      font-size: var(--font-size);
     }
   }
 
@@ -220,7 +242,7 @@
   }
 
   .animation {
-    font-size: $font-size;
+    font-size: var(--font-size);
     line-height: 1;
 
     &[data-start] {
