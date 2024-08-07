@@ -2,7 +2,7 @@
 import { Button } from "@components/ui/button";
 import me from "@assets/me.jpg";
 import { Image } from "astro:assets";
-import { Github, Linkedin, Mail } from "lucide-svelte";
+import { ArrowRight, Github, Linkedin, Mail } from "lucide-svelte";
 import { email, github, linkedin } from "@src/links";
 import ThemeSwitcher from "@components/ThemeSwitcher.astro";
 
@@ -53,6 +53,9 @@ if (currentHref !== "/") {
             links.map(({ href, text }) => (
               <li>
                 <Button class="relative w-full" variant="outline" href={href}>
+                  {currentHref === href && (
+                    <ArrowRight class="absolute right-2" />
+                  )}
                   {text}
                 </Button>
               </li>
@@ -65,7 +68,7 @@ if (currentHref !== "/") {
     <div class="flex justify-center gap-2 pb-2">
       <Button
         href={`mailto:${email}`}
-        variant="link"
+        variant="ghost"
         size="icon"
         aria-label="Email"
         class="text-card-foreground"
@@ -75,7 +78,7 @@ if (currentHref !== "/") {
       <Button
         href={github}
         target="_blank"
-        variant="link"
+        variant="ghost"
         size="icon"
         aria-label="GitHub"
         class="text-card-foreground"
@@ -85,7 +88,7 @@ if (currentHref !== "/") {
       <Button
         href={linkedin}
         target="_blank"
-        variant="link"
+        variant="ghost"
         size="icon"
         aria-label="LinkedIn"
         class="text-card-foreground"

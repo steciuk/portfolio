@@ -83,7 +83,7 @@ const monthDates = Array.from({ length: totalMonths }).map((_, i) => {
 ---
 
 <EntryDeselector client:idle />
-<section class="timeline-overgrid container grid gap-x-4 gap-y-0.5">
+<section class="timeline-overgrid container grid gap-x-2 gap-y-0.5 sm:gap-x-4">
   <div
     class="col-span-full row-[2_/_-2] grid grid-cols-subgrid grid-rows-subgrid"
   >
@@ -112,9 +112,22 @@ const monthDates = Array.from({ length: totalMonths }).map((_, i) => {
   </div>
 </section>
 
-<style define:vars={{ numLines, numRows }} lang="scss">
+<style define:vars={{ numLines, numRows }}>
   .timeline-overgrid {
-    grid-template-columns: auto repeat(var(--numLines), 2rem) 1fr;
+    --timeline-line-width: 1.7rem;
+
+    grid-template-columns:
+      minmax(max-content, auto) repeat(
+        var(--numLines),
+        var(--timeline-line-width)
+      )
+      1fr;
     grid-template-rows: 0 repeat(var(--numRows), 60px) 2rem;
+  }
+
+  @media screen(sm) {
+    .timeline-overgrid {
+      --timeline-line-width: 2rem;
+    }
   }
 </style>
