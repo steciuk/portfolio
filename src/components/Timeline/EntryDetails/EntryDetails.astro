@@ -42,12 +42,10 @@ let dateString = formatPeriod(entry.data.start, entry.data.end);
       <EntryTitle>{entry.data.company}</EntryTitle>
       <EntryRole role={entry.data.role} dateString={dateString} />
       {(async () => (
-        <li>
-          <ProseEntry
-            entry={await getEntry(entry.data.descriptionReference.page)}
-            class="prose-a:no-underline prose-a:hover:underline"
-          />
-        </li>
+        <ProseEntry
+          entry={await getEntry(entry.data.descriptionReference.page)}
+          class="prose-a:no-underline prose-a:hover:underline"
+        />
       ))()}
     </EntryCard>
   ) : entry.collection === "projects" ? (
