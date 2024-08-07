@@ -15,8 +15,7 @@ end:
   month: 7
   year: 2022
 grade: 4.87
-thesis:
-  title: "Multiplayer card game in a web browser"
-  url: "https://github.com/steciuk/card-game"
+descriptionReference:
+  cv: "bsc-wut-cv"
+  page: "bsc-wut-page"
 ---
-- Final thesis *"Multiplayer card game in a web browser"* (https://github.com/steciuk/card-game) received the highest grade and was awarded a distinction.

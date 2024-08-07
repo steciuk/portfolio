@@ -10,6 +10,7 @@ import {
   groupEntriesByDataField,
   formatPeriod,
 } from "@content/utils";
+import { getEntry } from "astro:content";
 import { getCollection } from "astro:content";
 
 const educationEntries = await getCollection("education");
@@ -28,7 +29,7 @@ const groupedEducation = groupEntriesByDataField<"education">(
       <>
         <GroupSubHeader>{group}</GroupSubHeader>
         <div class="space-y-1">
-          {education.map((entry) => (
+          {education.map(async (entry) => (
             <div>
               <SpaceBetween>
                 <h4 class="text-sm italic" slot="left">
@@ -38,15 +39,17 @@ const groupedEducation = groupEntriesByDataField<"education">(
                   {formatPeriod(entry.data.start, entry.data.end)}
                 </Side>
               </SpaceBetween>
-              <Prose class="a4:prose-li:my-0 text-xs print:prose-li:my-0">
+              <Prose class="text-xs a4:prose-li:my-0 print:prose-li:my-0">
                 <ul>
                   <li>Average grade: {entry.data.grade}/5.00.</li>
                 </ul>
               </Prose>
-              <ProseEntry
-                entry={entry}
-                class="a4:prose-li:my-0 text-xs print:prose-li:my-0"
-              />
+              {entry.data.descriptionReference && (
+                <ProseEntry
+                  entry={await getEntry(entry.data.descriptionReference.cv)}
+                  class="text-xs a4:prose-li:my-0 print:prose-li:my-0"
+                />
+              )}
             </div>
           ))}
         </div>

@@ -4,14 +4,18 @@ import type { CollectionKey } from "astro:content";
 import type { CollectionEntry } from "astro:content";
 
 interface Props {
-  entry: CollectionEntry<CollectionKey>;
+  entry?: CollectionEntry<CollectionKey>;
   class?: string;
 }
 
 const { entry, class: className } = Astro.props;
-const { Content } = await entry.render();
+const Render = await entry?.render();
 ---
 
-<Prose class={className}>
-  <Content />
-</Prose>
+{
+  Render && (
+    <Prose class={className}>
+      <Render.Content />
+    </Prose>
+  )
+}

@@ -14,8 +14,7 @@ end:
   month: 5
   year: 2024
 group: "GeoTec Energy Sp. z o. o."
+descriptionReference:
+  cv: "geotecenergy-cv"
+  page: "geotecenergy-page"
 ---
-- Designed, developed and maintained the company's website (https://www.geotecenergy.pro) ensuring a seamless user experience and optimal performance.
-- Managed the company's domain and hosting services.
-- Set up and managed Microsoft 365 Business accounts for the company.
-- Developed internal tools to enhance operational efficiency.

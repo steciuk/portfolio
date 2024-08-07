@@ -1,0 +1,1 @@
+Final thesis [*"Multiplayer card game in a web browser"*](https://github.com/steciuk/card-game) received the highest grade and was awarded a distinction.

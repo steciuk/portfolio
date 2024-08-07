@@ -1,4 +1,9 @@
-import { defineCollection, z, type ImageFunction } from "astro:content";
+import {
+  defineCollection,
+  reference,
+  z,
+  type ImageFunction,
+} from "astro:content";
 
 const monthDate = z.object({
   month: z.number().min(1).max(12),
@@ -28,10 +33,10 @@ const educationCollection = defineCollection({
       start: monthDate,
       end: monthDate,
       grade: z.number().min(0).max(5),
-      thesis: z
+      descriptionReference: z
         .object({
-          title: z.string(),
-          url: z.string().url(),
+          cv: reference("descriptions"),
+          page: reference("descriptions"),
         })
         .optional(),
     }),
@@ -48,6 +53,10 @@ const jobsCollection = defineCollection({
       logo: imageObject(image),
       start: monthDate,
       end: monthDate.optional(),
+      descriptionReference: z.object({
+        cv: reference("descriptions"),
+        page: reference("descriptions"),
+      }),
     }),
 });
 
@@ -152,10 +161,13 @@ const projectsCollection = defineCollection({
     }),
 });
 
+const descriptionsCollection = defineCollection({ type: "content" });
+
 export const collections = {
   education: educationCollection,
   jobs: jobsCollection,
   projects: projectsCollection,
+  descriptions: descriptionsCollection,
 };
 
 export type MonthDate = z.infer<typeof monthDate>;

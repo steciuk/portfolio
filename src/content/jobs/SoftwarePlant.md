@@ -14,5 +14,7 @@ end:
   month: 10
   year: 2021
 group: "Appfire (BigPicture)"
+descriptionReference:
+  cv: "softwareplant"
+  page: "softwareplant"
 ---
-- Was responsible for enabling typescript strict mode in a significant part of a large Angular application.
