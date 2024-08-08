@@ -1,6 +1,7 @@
 ---
 import Section from "@components/CV/ui/Section.astro";
-import Prose from "@components/ui/Prose.astro";
+import Prose from "@components/ui/prose/Prose.astro";
+import { breakifyLink } from "@src/utils";
 import { getEntry } from "astro:content";
 
 const projectsToShow = [
@@ -41,18 +42,16 @@ const projectsEntries = (
               <li>
                 Repository:{" "}
                 <a href={entry.data.repo} target="_blank" rel="noopener">
-                  {entry.data.repo}
+                  <Fragment set:html={breakifyLink(entry.data.repo)} />
                 </a>
-                .
               </li>
             )}
             {entry.data.deployed && (
               <li>
                 Avaliable at:{" "}
                 <a href={entry.data.deployed} target="_blank" rel="noopener">
-                  {entry.data.deployed}
+                  <Fragment set:html={breakifyLink(entry.data.deployed)} />
                 </a>
-                .
               </li>
             )}
             <li>{entry.data.technology.join(", ")}.</li>

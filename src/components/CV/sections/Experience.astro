@@ -3,14 +3,14 @@ import GroupSubHeader from "@components/CV/ui/GroupSubHeader.astro";
 import Section from "@components/CV/ui/Section.astro";
 import Side from "@components/CV/ui/Side.astro";
 import SpaceBetween from "@components/CV/ui/SpaceBetween.astro";
-import ProseEntry from "@components/ui/ProseEntry.astro";
+import ProseEntry from "@components/ui/prose/ProseEntry.astro";
 import {
   sortByDate,
   groupEntriesByDataField,
   formatLocation,
   formatPeriod,
 } from "@content/utils";
-import { getCollection, getEntry } from "astro:content";
+import { getCollection, getEntry } from "astro:content"; 
 
 const jobsEntries = await getCollection("jobs");
 jobsEntries.sort((a, b) => {
