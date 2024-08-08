@@ -42,7 +42,7 @@ if (projectsEntries.some((entry) => entry === null)) {
         <h3 class="mt-1 text-sm screen-max-a4:text-base">{entry.data.name}</h3>
         <Prose class="text-2xs a4:prose-li:my-0 screen-max-a4:text-xs print:prose-li:my-0">
           <ul>
-            {entry.data.description && <li>{entry.data.description}</li>}
+            <li>{entry.data.shortDescription ?? entry.data.description}</li>
             {entry.data.repo && (
               <li>
                 Repository:{" "}

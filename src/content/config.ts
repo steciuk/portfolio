@@ -157,7 +157,8 @@ const projectsCollection = defineCollection({
       repo: z.string().url().optional(),
       start: monthDate,
       end: monthDate.optional(),
-      description: z.string().optional(),
+      description: z.string(),
+      shortDescription: z.string().optional(),
       image: imageObject(image).optional(),
     }),
 });

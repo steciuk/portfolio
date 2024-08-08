@@ -10,9 +10,7 @@ interface Props {
 const { entries } = Astro.props;
 ---
 
-<div
-  class="sticky top-0 grid h-screen items-end pb-4 lg:h-screen lg:items-center lg:pb-0"
->
+<div class="sticky top-0 grid h-dvh items-end pb-4 lg:items-center lg:pb-0">
   {
     entries.map((entry) => {
       const id = getEntryDetailsElementId(entry);

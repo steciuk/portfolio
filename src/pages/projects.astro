@@ -13,7 +13,7 @@ projects.sort((a, b) => sortByDate(b.data.end, a.data.end));
   <main class="container">
     <!-- TODO: style the h1 -->
     <H1>Projects</H1>
-    <section class="flex flex-col gap-2">
+    <section class="mx-auto flex max-w-6xl flex-col gap-8">
       {
         projects.map((entry) => (
           <ProjectCard entry={entry} class="bg-card text-card-foreground" />
