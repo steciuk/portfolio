@@ -5,7 +5,7 @@ import { breakifyLink } from "@src/utils";
 import { getEntry } from "astro:content";
 
 const projectsToShow = [
-  "stateviz",
+  "state-viz",
   "freebici",
   "qrnamic",
   "vite-plugin-inline-imports",
@@ -14,9 +14,13 @@ const projectsToShow = [
   // "bwt"
 ] as const;
 
-const projectsEntries = (
-  await Promise.all(projectsToShow.map((slug) => getEntry("projects", slug)))
-).filter((entry) => !!entry);
+const projectsEntries = await Promise.all(
+  projectsToShow.map((slug) => getEntry("projects", slug))
+);
+
+if (projectsEntries.some((entry) => entry === null)) {
+  throw new Error("Some projects were not found");
+}
 ---
 
 <Section title="Relevant Projects">
