@@ -1,4 +1,0 @@
-- Designed, developed and maintained the company's website (https://www.geotecenergy.pro) ensuring a seamless user experience and optimal performance.
-- Managed the company's domain and hosting services.
-- Set up and managed Microsoft 365 Business accounts for the company.
-- Developed internal tools to enhance operational efficiency.

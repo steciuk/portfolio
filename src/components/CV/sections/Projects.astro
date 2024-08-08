@@ -1,5 +1,6 @@
 ---
 import Section from "@components/CV/ui/Section.astro";
+import { Button } from "@components/ui/button";
 import Prose from "@components/ui/prose/Prose.astro";
 import { breakifyLink } from "@src/utils";
 import { getEntry } from "astro:content";
@@ -26,14 +27,14 @@ if (projectsEntries.some((entry) => entry === null)) {
 <Section title="Relevant Projects">
   <p class="text-2xs" slot="right">
     See more at{" "}
-    <a
+    <Button
       href="https://steciuk.dev/projects"
       target="_blank"
-      rel="noopener"
-      class="text-accent underline"
+      variant="link"
+      size="inline"
     >
       steciuk.dev
-    </a>
+    </Button>
   </p>
   {
     projectsEntries.map((entry) => (
@@ -45,17 +46,27 @@ if (projectsEntries.some((entry) => entry === null)) {
             {entry.data.repo && (
               <li>
                 Repository:{" "}
-                <a href={entry.data.repo} target="_blank" rel="noopener">
+                <Button
+                  href={entry.data.repo}
+                  target="_blank"
+                  size="inline"
+                  variant="link"
+                >
                   <Fragment set:html={breakifyLink(entry.data.repo)} />
-                </a>
+                </Button>
               </li>
             )}
             {entry.data.deployed && (
               <li>
                 Avaliable at:{" "}
-                <a href={entry.data.deployed} target="_blank" rel="noopener">
+                <Button
+                  href={entry.data.deployed}
+                  target="_blank"
+                  size="inline"
+                  variant="link"
+                >
                   <Fragment set:html={breakifyLink(entry.data.deployed)} />
-                </a>
+                </Button>
               </li>
             )}
             <li>{entry.data.technology.join(", ")}.</li>

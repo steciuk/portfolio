@@ -8,11 +8,6 @@ interface Props {
 const { class: className } = Astro.props;
 ---
 
-<div
-  class={cn(
-    "prose text-foreground prose-a:font-normal prose-a:text-link",
-    className
-  )}
->
+<div class={cn("prose text-foreground prose-a:no-underline", className)}>
   <slot />
 </div>
