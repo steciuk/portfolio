@@ -17,6 +17,13 @@ const config = {
       xs: "375px",
       ...defaultTheme.screens,
       a4: "21cm",
+
+      "max-sm": { max: "640px" },
+      "max-md": { max: "768px" },
+      "max-lg": { max: "1024px" },
+      "max-xl": { max: "1280px" },
+      "max-2xl": { max: "1536px" },
+
       "max-a4": { max: "21cm" },
       "screen-max-a4": { raw: "only screen and (max-width: 21cm)" },
     },

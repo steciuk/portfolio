@@ -17,25 +17,67 @@ const { entry, class: className, isTimeline } = Astro.props;
 ---
 
 <EntryCard image={entry.data.image} class={className} {isTimeline}>
-  <div class="flex justify-start gap-2">
-    {
-      entry.data.repo && (
-        <Button href={entry.data.repo} target="_blank" variant="outline">
-          <Github class="mr-2" /> GitHub
-        </Button>
-      )
-    }
-    {
-      entry.data.deployed && (
-        <Button href={entry.data.deployed} target="_blank" variant="outline">
-          <Globe class="mr-2" /> Live
-        </Button>
-      )
-    }
-  </div>
-  <EntryTitle>{entry.data.name}</EntryTitle>
-  <EntryDescription>{entry.data.description}</EntryDescription>
-  <div class="flex w-full flex-wrap gap-2">
-    {entry.data.technology.map((tech) => <Badge name={tech} />)}
+  <div
+    class="grid h-full w-full grid-cols-[1fr_auto] grid-rows-[auto_1fr_auto_auto] gap-2"
+    class:list={[isTimeline ? "" : ""]}
+  >
+    <div
+      class="col-span-2 col-start-1 row-start-1"
+      class:list={[isTimeline ? "sm:max-lg:col-span-1" : "md:col-span-1"]}
+    >
+      <EntryTitle>{entry.data.name}</EntryTitle>
+    </div>
+    <div
+      class="col-span-2 col-start-1 row-start-4 mt-4 flex gap-2 justify-self-stretch"
+      class:list={[
+        isTimeline
+          ? "sm:max-lg:col-start-2 sm:max-lg:row-span-1 sm:max-lg:row-start-1 sm:max-lg:mt-0 sm:max-lg:justify-self-end"
+          : "md:col-start-2 md:row-span-1 md:row-start-1 md:mt-0 md:justify-self-end",
+      ]}
+    >
+      {
+        entry.data.repo && (
+          <Button
+            href={entry.data.repo}
+            target="_blank"
+            variant="outline"
+            size="sm"
+            class="flex-grow basis-0"
+            class:list={[
+              isTimeline ? "sm:max-lg:flex-grow-0" : "md:flex-grow-0",
+            ]}
+          >
+            <Github class="mr-2" /> GitHub
+          </Button>
+        )
+      }
+      {
+        entry.data.deployed && (
+          <Button
+            href={entry.data.deployed}
+            target="_blank"
+            variant="outline"
+            size="sm"
+            class="flex-grow basis-0"
+            class:list={[
+              isTimeline ? "sm:max-lg:flex-grow-0" : "md:flex-grow-0",
+            ]}
+          >
+            <Globe class="mr-2" /> Live
+          </Button>
+        )
+      }
+    </div>
+    <div class="col-span-2 col-start-1 row-start-2">
+      <EntryDescription class="flex-grow">
+        {entry.data.description}
+      </EntryDescription>
+    </div>
+    <div
+      class="col-span-2 col-start-1 row-span-1 row-start-3 flex w-full flex-wrap gap-2"
+      class:list={[isTimeline ? "sm:max-lg:row-span-2" : "md:row-span-2"]}
+    >
+      {entry.data.technology.map((tech) => <Badge name={tech} />)}
+    </div>
   </div>
 </EntryCard>

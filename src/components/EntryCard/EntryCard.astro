@@ -12,37 +12,30 @@ interface Props {
 const { image, class: className, isTimeline } = Astro.props;
 ---
 
-<div class="@container">
+<div
+  class="max flex flex-col gap-4 rounded-sm bg-card p-4 text-left text-card-foreground shadow-md"
+  class:list={[className, isTimeline ? "sm:max-lg:flex-row" : "md:flex-row"]}
+>
   <div
-    class="flex flex-col gap-2 rounded-sm bg-card p-2 text-left text-card-foreground shadow-md md:p-4"
-    class:list={[
-      className,
-      isTimeline ? "sm:flex-row lg:flex-col" : "@2xl:flex-row",
-    ]}
+    class="aspect-video w-full max-w-full flex-shrink-0 overflow-hidden rounded-sm"
+    class:list={[isTimeline ? "sm:max-lg:max-w-[17rem]" : "md:max-w-[17rem]"]}
   >
-    <div
-      class="aspect-video w-full max-w-full flex-shrink-0 overflow-hidden rounded-sm"
-      class:list={[
-        isTimeline ? "sm:max-w-[13rem] lg:max-w-full" : "@2xl:max-w-[13rem]",
-      ]}
-    >
-      {
-        image ? (
-          <Image
-            src={image.src}
-            alt={image.alt}
-            quality="high"
-            width={720}
-            height={405}
-            class="h-full w-full max-w-full object-cover"
-          />
-        ) : (
-          <div class="grid h-full w-full place-items-center bg-accent bg-opacity-20">
-            <Logo class="h-4/5 w-4/5" />
-          </div>
-        )
-      }
-    </div>
-    <div class="w-full"><slot /></div>
+    {
+      image ? (
+        <Image
+          src={image.src}
+          alt={image.alt}
+          quality="high"
+          width={720}
+          height={405}
+          class="h-full w-full max-w-full object-cover"
+        />
+      ) : (
+        <div class="grid h-full w-full place-items-center bg-accent bg-opacity-20">
+          <Logo class="h-4/5 w-4/5" />
+        </div>
+      )
+    }
   </div>
+  <div class="w-full"><slot /></div>
 </div>
