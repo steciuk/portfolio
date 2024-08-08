@@ -1,0 +1,33 @@
+---
+import Prose from "@components/ui/prose/Prose.astro";
+import type { AstroComponentFactory } from "astro/runtime/server/index.js";
+import type { CollectionKey } from "astro:content";
+import { getEntry } from "astro:content";
+
+interface Props {
+  reference?: { collection: CollectionKey; slug: string };
+  class?: string;
+}
+
+const { reference, class: className } = Astro.props;
+let Content: AstroComponentFactory | null = null;
+
+if (reference) {
+  const entry = await getEntry(reference);
+  if (!entry) {
+    throw new Error(
+      `Entry not found: ${reference.collection}/${reference.slug}`
+    );
+  }
+
+  Content = (await entry.render()).Content;
+}
+---
+
+{
+  Content && (
+    <Prose class={className}>
+      <Content />
+    </Prose>
+  )
+}

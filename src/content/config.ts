@@ -2,6 +2,7 @@ import {
   defineCollection,
   reference,
   z,
+  type ContentCollectionKey,
   type ImageFunction,
 } from "astro:content";
 

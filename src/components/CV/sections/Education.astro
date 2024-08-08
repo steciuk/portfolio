@@ -5,6 +5,7 @@ import Side from "@components/CV/ui/Side.astro";
 import SpaceBetween from "@components/CV/ui/SpaceBetween.astro";
 import Prose from "@components/ui/prose/Prose.astro";
 import ProseEntry from "@components/ui/prose/ProseEntry.astro";
+import ProseReference from "@components/ui/prose/ProseReference.astro";
 import {
   sortByDate,
   groupEntriesByDataField,
@@ -29,7 +30,7 @@ const groupedEducation = groupEntriesByDataField<"education">(
       <>
         <GroupSubHeader>{group}</GroupSubHeader>
         <div class="space-y-1">
-          {education.map(async (entry) => (
+          {education.map((entry) => (
             <div>
               <SpaceBetween>
                 <h4 class="text-sm italic" slot="left">
@@ -44,12 +45,10 @@ const groupedEducation = groupEntriesByDataField<"education">(
                   <li>Average grade: {entry.data.grade}/5.00.</li>
                 </ul>
               </Prose>
-              {entry.data.descriptionReference && (
-                <ProseEntry
-                  entry={await getEntry(entry.data.descriptionReference.cv)}
-                  class="text-xs a4:prose-li:my-0 print:prose-li:my-0"
-                />
-              )}
+              <ProseReference
+                reference={entry.data.descriptionReference?.cv}
+                class="text-xs a4:prose-li:my-0 print:prose-li:my-0"
+              />
             </div>
           ))}
         </div>

@@ -6,9 +6,7 @@ import EntryCard from "@components/EntryCard/EntryCard.astro";
 import ProjectCard from "@components/ProjectCard.astro";
 import EntryDescription from "@components/EntryCard/EntryDescription.astro";
 import EntryTitle from "@components/EntryCard/EntryTitle.astro";
-import { Button } from "@components/ui/button";
-import ProseEntry from "@components/ui/prose/ProseEntry.astro";
-import { getEntry } from "astro:content";
+import ProseReference from "@components/ui/prose/ProseReference.astro";
 
 interface Props {
   entry: TimelineableEntry;
@@ -26,27 +24,22 @@ let dateString = formatPeriod(entry.data.start, entry.data.end);
       <EntryRole role={entry.data.degree} dateString={dateString} />
       <ul>
         <li>Average grade: {entry.data.grade}/5.00.</li>
-        {(async () =>
-          entry.data.descriptionReference && (
-            <li>
-              <ProseEntry
-                entry={await getEntry(entry.data.descriptionReference.page)}
-                class="prose-a:no-underline prose-a:hover:underline"
-              />
-            </li>
-          ))()}
+        <li>
+          <ProseReference
+            reference={entry.data.descriptionReference?.page}
+            class="prose-a:no-underline prose-a:hover:underline"
+          />
+        </li>
       </ul>
     </EntryCard>
   ) : entry.collection === "jobs" ? (
     <EntryCard image={entry.data.logo} isTimeline={true}>
       <EntryTitle>{entry.data.company}</EntryTitle>
       <EntryRole role={entry.data.role} dateString={dateString} />
-      {(async () => (
-        <ProseEntry
-          entry={await getEntry(entry.data.descriptionReference.page)}
-          class="prose-a:no-underline prose-a:hover:underline"
-        />
-      ))()}
+      <ProseReference
+        reference={entry.data.descriptionReference.page}
+        class="prose-a:no-underline prose-a:hover:underline"
+      />
     </EntryCard>
   ) : entry.collection === "projects" ? (
     <ProjectCard entry={entry} isTimeline={true} />
