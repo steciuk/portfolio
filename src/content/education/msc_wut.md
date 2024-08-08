@@ -1,7 +1,7 @@
 ---
 school: "Warsaw University of Technology"
 logo: 
-  src: "./images/WUT.jpg"
+  src: "./images/wut.jpg"
   alt: "Warsaw University of Technology logo"
 faculty: "Faculty of Electronics and Information Technology"
 degree: "MSc in Computer Science"

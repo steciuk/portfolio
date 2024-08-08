@@ -1,7 +1,7 @@
 ---
 company: "SoftwarePlant"
 logo: 
-  src: "./images/SoftwarePlant.png"
+  src: "./images/software-plant.png"
   alt: "SoftwarePlant logo"
 role: "Intern Front-End Developer"
 location:
@@ -15,6 +15,6 @@ end:
   year: 2021
 group: "Appfire (BigPicture)"
 descriptionReference:
-  cv: "softwareplant"
-  page: "softwareplant"
+  cv: "software-plant"
+  page: "software-plant"
 ---

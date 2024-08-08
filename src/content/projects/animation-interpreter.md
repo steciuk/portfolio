@@ -10,6 +10,6 @@ end:
   year: 2021
 description: "Interpreter for a custom animation language."
 image:
-  src: "./images/AnimationInterpreter.png"
+  src: "./images/animation-interpreter.png"
   alt: "Screenshot of the animation code and its result in the browser"
 ---

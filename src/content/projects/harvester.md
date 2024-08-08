@@ -10,6 +10,6 @@ end:
   year: 2021
 description: "3D model of a drivable harvester with functional camera and headlight system."
 image:
-  src: "./images/Harvester.png"
+  src: "./images/harvester.png"
   alt: "OpenGL 3D harvester model screenshot"
 ---

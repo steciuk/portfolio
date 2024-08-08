@@ -1,7 +1,7 @@
 ---
 company: "PolSource"
 logo: 
-  src: "./images/PolSource.jpeg"
+  src: "./images/pol-source.jpeg"
   alt: "PolSource logo"
 role: "Intern Full-Stack Developer"
 location:
@@ -15,6 +15,6 @@ end:
   year: 2021
 group: "PolSource"
 descriptionReference:
-  cv: "polsource"
-  page: "polsource"
+  cv: "pol-source"
+  page: "pol-source"
 ---

@@ -1,7 +1,7 @@
 ---
 company: "GeoTec Energy Sp. z o. o."
 logo: 
-  src: "./images/GeotecEnergy.jpeg"
+  src: "./images/geotec-energy.jpeg"
   alt: "GeoTec Energy logo"
 role: "Web Developer and IT Administrator"
 location:
@@ -15,6 +15,6 @@ end:
   year: 2024
 group: "GeoTec Energy Sp. z o. o."
 descriptionReference:
-  cv: "geotecenergy-cv"
-  page: "geotecenergy-page"
+  cv: "geotec-energy-cv"
+  page: "geotec-energy-page"
 ---
