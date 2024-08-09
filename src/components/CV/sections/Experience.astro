@@ -11,7 +11,7 @@ import {
   formatLocation,
   formatPeriod,
 } from "@content/utils";
-import { getCollection, getEntry } from "astro:content"; 
+import { getCollection } from "astro:content"; 
 
 const jobsEntries = await getCollection("jobs");
 jobsEntries.sort((a, b) => {
