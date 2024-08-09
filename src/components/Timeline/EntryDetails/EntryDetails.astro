@@ -3,10 +3,11 @@ import EntryRole from "@components/Timeline/EntryDetails/EntryRole.astro";
 import { formatPeriod } from "@content/utils";
 import type { TimelineableEntry } from "@components/Timeline/types";
 import EntryCard from "@components/EntryCard/EntryCard.astro";
-import ProjectCard from "@components/ProjectCard.astro";
+import ProjectCard from "@components/EntryCard/ProjectCard.astro";
 import EntryDescription from "@components/EntryCard/EntryDescription.astro";
 import EntryTitle from "@components/EntryCard/EntryTitle.astro";
-import ProseReference from "@components/ui/prose/ProseReference.astro";
+import Prose from "@components/ui/Prose.astro";
+import Render from "@components/ui/Render.astro";
 
 interface Props {
   entry: TimelineableEntry;
@@ -23,18 +24,24 @@ let dateString = formatPeriod(entry.data.start, entry.data.end);
       <EntryTitle>{entry.data.school}</EntryTitle>
       <EntryDescription>{entry.data.faculty}</EntryDescription>
       <EntryRole role={entry.data.degree} dateString={dateString} />
-      <ul>
-        <li>Average grade: {entry.data.grade}/5.00.</li>
-        <li>
-          <ProseReference reference={entry.data.descriptionReference?.page} />
-        </li>
-      </ul>
+      <Prose>
+        <ul>
+          <li>Average grade: {entry.data.grade}/5.00.</li>
+          {entry.data.descriptionReference && (
+            <li>
+              <Render entry={entry.data.descriptionReference.page} />
+            </li>
+          )}
+        </ul>
+      </Prose>
     </EntryCard>
   ) : entry.collection === "jobs" ? (
     <EntryCard image={entry.data.logo} isTimeline={true} class={className}>
       <EntryTitle>{entry.data.company}</EntryTitle>
       <EntryRole role={entry.data.role} dateString={dateString} />
-      <ProseReference reference={entry.data.descriptionReference.page} />
+      <Prose>
+        <Render entry={entry.data.descriptionReference.page} />
+      </Prose>
     </EntryCard>
   ) : entry.collection === "projects" ? (
     <ProjectCard entry={entry} isTimeline={true} class={className} />

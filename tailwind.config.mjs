@@ -76,6 +76,7 @@ const config = {
       primary: {
         DEFAULT: "hsl(var(--primary) / <alpha-value>)",
         foreground: "hsl(var(--primary-foreground) / <alpha-value>)",
+        highlight: "hsl(var(--primary-highlight) / <alpha-value>)",
       },
       secondary: {
         DEFAULT: "hsl(var(--secondary) / <alpha-value>)",

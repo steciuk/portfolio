@@ -3,8 +3,8 @@ import GroupSubHeader from "@components/CV/ui/GroupSubHeader.astro";
 import Section from "@components/CV/ui/Section.astro";
 import Side from "@components/CV/ui/Side.astro";
 import SpaceBetween from "@components/CV/ui/SpaceBetween.astro";
-import ProseEntry from "@components/ui/prose/ProseEntry.astro";
-import ProseReference from "@components/ui/prose/ProseReference.astro";
+import Prose from "@components/ui/Prose.astro";
+import Render from "@components/ui/Render.astro";
 import {
   sortByDate,
   groupEntriesByDataField,
@@ -38,10 +38,9 @@ const groupedJobs = groupEntriesByDataField<"jobs">(jobsEntries, "group");
                 {formatPeriod(job.data.start, job.data.end)}
               </Side>
             </SpaceBetween>
-            <ProseReference
-              reference={job.data.descriptionReference.cv}
-              class="text-xs"
-            />
+            <Prose class="text-xs">
+              <Render entry={job.data.descriptionReference.cv}/>
+            </Prose>
           ))}
         </div>
       </>
