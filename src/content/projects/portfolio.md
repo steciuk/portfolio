@@ -6,6 +6,9 @@ repo: "https://github.com/steciuk/portfolio"
 start:
   month: 7
   year: 2024
+end:
+  month: 8
+  year: 2024
 image:
   src: "./images/portfolio.png"
   alt: "Recursive screenshot of the portfolio website"

@@ -1,6 +1,5 @@
 ---
 import EntryCard from "@components/EntryCard/EntryCard.astro";
-import EntryDescription from "@components/EntryCard/EntryDescription.astro";
 import EntryTitle from "@components/EntryCard/EntryTitle.astro";
 import Badge from "@components/ui/Badge.astro";
 import { Button } from "@components/ui/button";
@@ -29,7 +28,7 @@ const { entry, class: className, isTimeline } = Astro.props;
       {entry.data.name}
     </EntryTitle>
     <div
-      class="col-span-2 col-start-1 row-start-4 mt-4 flex gap-2 justify-self-stretch"
+      class="col-span-2 col-start-1 row-start-4 mt-2 flex gap-2 justify-self-stretch"
       class:list={[
         isTimeline
           ? ""
@@ -65,11 +64,11 @@ const { entry, class: className, isTimeline } = Astro.props;
         )
       }
     </div>
-    <EntryDescription class="col-span-2 col-start-1 row-start-2">
+    <p class="col-span-2 col-start-1 row-start-2">
       {entry.data.description}
-    </EntryDescription>
+    </p>
     <div
-      class="col-span-2 col-start-1 row-span-1 row-start-3 flex w-full flex-wrap gap-2"
+      class="col-span-2 col-start-1 row-span-1 row-start-3 mt-2 flex w-full flex-wrap gap-1"
       class:list={[isTimeline ? "" : "md:row-span-2"]}
     >
       {entry.data.technology.map((tech) => <Badge name={tech} />)}

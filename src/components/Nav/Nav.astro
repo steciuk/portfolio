@@ -164,8 +164,15 @@ if (currentHref !== "/") {
       event.newDocument.getElementById("main-nav-container");
 
     if (newNavContainer) {
-      newNavContainer.dataset.nav = "open";
-      navOpen.set(true);
+      if (navOpen.get()) {
+        newNavContainer.dataset.nav = "open";
+        navOpen.set(true);
+      } else {
+        newNavContainer.dataset.nav = "closed";
+        navOpen.set(false);
+      }
+    } else {
+      navOpen.set(false);
     }
   });
 </script>

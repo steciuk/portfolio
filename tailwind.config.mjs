@@ -82,6 +82,7 @@ const config = {
       secondary: {
         DEFAULT: "hsl(var(--secondary) / <alpha-value>)",
         foreground: "hsl(var(--secondary-foreground) / <alpha-value>)",
+        highlight: "hsl(var(--secondary-highlight) / <alpha-value>)",
       },
       destructive: {
         DEFAULT: "hsl(var(--destructive) / <alpha-value>)",
@@ -94,6 +95,7 @@ const config = {
       accent: {
         DEFAULT: "hsl(var(--accent) / <alpha-value>)",
         foreground: "hsl(var(--accent-foreground) / <alpha-value>)",
+        highlight: "hsl(var(--accent-highlight) / <alpha-value>)",
       },
       // popover: {
       //   DEFAULT: "hsl(var(--popover) / <alpha-value>)",
@@ -105,10 +107,7 @@ const config = {
       },
     },
   },
-  plugins: [
-    require("@tailwindcss/container-queries"),
-    require("@tailwindcss/typography"),
-  ],
+  plugins: [require("@tailwindcss/typography")],
 };
 
 export default config;

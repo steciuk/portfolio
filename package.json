@@ -17,7 +17,6 @@
     "@astrojs/svelte": "^5.7.0",
     "@astrojs/tailwind": "^5.1.0",
     "@fontsource/prompt": "^5.0.14",
-    "@tailwindcss/container-queries": "^0.1.1",
     "astro": "^4.13.1",
     "astro-seo": "^0.8.4",
     "bits-ui": "^0.21.11",
