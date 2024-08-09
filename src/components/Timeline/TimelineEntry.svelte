@@ -6,7 +6,7 @@
 
   export let entry: TimelineableEntry;
 
-  const bgColorClass = getEntryAssociatedColor(entry.collection).bgClass;
+  const {bgClass, hoverClass} = getEntryAssociatedColor(entry.collection);
   getEntryAssociatedColor;
   function handleOpenClick() {
     selectedEntry.set(entry);
@@ -18,7 +18,7 @@
 
 <button
   on:click|stopPropagation={handleOpenClick}
-  class="h-full w-full rounded-sm shadow-sm transition-all {bgColorClass}"
+  class="h-full w-full rounded-sm shadow-sm transition-all {bgClass} {hoverClass}"
   class:scale-x-[140%]={isCurrentEntry}
   class:shadow-xl={isCurrentEntry}
 >
