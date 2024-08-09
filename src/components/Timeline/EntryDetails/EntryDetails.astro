@@ -10,15 +10,16 @@ import ProseReference from "@components/ui/prose/ProseReference.astro";
 
 interface Props {
   entry: TimelineableEntry;
+  class?: string;
 }
 
-const { entry } = Astro.props;
+const { entry, class: className } = Astro.props;
 let dateString = formatPeriod(entry.data.start, entry.data.end);
 ---
 
 {
   entry.collection === "education" ? (
-    <EntryCard image={entry.data.logo} isTimeline={true}>
+    <EntryCard image={entry.data.logo} isTimeline={true} class={className}>
       <EntryTitle>{entry.data.school}</EntryTitle>
       <EntryDescription>{entry.data.faculty}</EntryDescription>
       <EntryRole role={entry.data.degree} dateString={dateString} />
@@ -30,13 +31,13 @@ let dateString = formatPeriod(entry.data.start, entry.data.end);
       </ul>
     </EntryCard>
   ) : entry.collection === "jobs" ? (
-    <EntryCard image={entry.data.logo} isTimeline={true}>
+    <EntryCard image={entry.data.logo} isTimeline={true} class={className}>
       <EntryTitle>{entry.data.company}</EntryTitle>
       <EntryRole role={entry.data.role} dateString={dateString} />
       <ProseReference reference={entry.data.descriptionReference.page} />
     </EntryCard>
   ) : entry.collection === "projects" ? (
-    <ProjectCard entry={entry} isTimeline={true} />
+    <ProjectCard entry={entry} isTimeline={true} class={className} />
   ) : (
     (() => {
       throw new Error("Invalid entry collection");
