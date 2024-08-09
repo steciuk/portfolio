@@ -1,7 +1,7 @@
 ---
 company: "PolSource"
 logo: 
-  src: "./images/PolSource.jpeg"
+  src: "./images/pol-source.jpeg"
   alt: "PolSource logo"
 role: "Intern Full-Stack Developer"
 location:
@@ -14,5 +14,7 @@ end:
   month: 6
   year: 2021
 group: "PolSource"
+descriptionReference:
+  cv: "pol-source"
+  page: "pol-source"
 ---
-- Was learning Salesforce ecosystem through Trailhead platform.

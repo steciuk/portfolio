@@ -1,16 +1,13 @@
 <script lang="ts">
   import { getEntryId } from "@components/Timeline/entryId";
   import { selectedEntry } from "@components/Timeline/selectedEntryStore";
-  import type {
-    EntryMeasurements,
-    TimelinableEntry,
-  } from "@components/Timeline/types";
-  import { getEntryBgColorClass } from "@components/Timeline/utils";
+  import type { TimelineableEntry } from "@components/Timeline/types";
+  import { getEntryAssociatedColor } from "@components/Timeline/utils";
 
-  export let entry: TimelinableEntry & EntryMeasurements;
+  export let entry: TimelineableEntry;
 
-  const bgColorClass = getEntryBgColorClass(entry);
-
+  const bgColorClass = getEntryAssociatedColor(entry.collection).bgClass;
+  getEntryAssociatedColor;
   function handleOpenClick() {
     selectedEntry.set(entry);
   }
@@ -21,8 +18,8 @@
 
 <button
   on:click|stopPropagation={handleOpenClick}
-  class="entry absolute w-full rounded-sm border-2 shadow-md transition-transform {bgColorClass} {isCurrentEntry
-    ? 'border-primary'
-    : 'border-primary/0'}"
-  style="height: {entry.heightPx}px; bottom: {entry.startHeightPx}px; transition: border-color 0.2s"
-/>
+  class="h-full w-full rounded-sm shadow-sm transition-all {bgColorClass}"
+  class:scale-x-[140%]={isCurrentEntry}
+  class:shadow-xl={isCurrentEntry}
+>
+</button>

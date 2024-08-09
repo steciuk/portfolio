@@ -1,0 +1,296 @@
+<div
+  class="animation relative flex w-max select-none items-end justify-center font-mono"
+>
+  <div class="symbol-wrapper">
+    <div class="symbol lt-symbol">
+      <svg
+        width="262.25607"
+        height="360.92667"
+        viewBox="0 0 262.25607 360.92667"
+        version="1.1"
+        xmlns="http://www.w3.org/2000/svg"
+        class="h-full w-full"
+      >
+        <g>
+          <path
+            d="M 262.25606,0 0,155.79568 v 44.14211 L 262.25606,360.92667 V 301.85415 L 54.644149,178.06014 c 0,0 163.576341,-97.292143 207.611911,-123.531655 z"
+            id="text1"
+            aria-label="<"></path>
+        </g>
+      </svg>
+    </div>
+  </div>
+  <div class="text-wrapper text-wrapper-steciuk flex">
+    <span class="character">
+      <span class="character-s">s</span>
+    </span>
+    <span class="character">t</span>
+    <span class="character">e</span>
+    <span class="character">c</span>
+    <span class="character">i</span>
+    <span class="character">u</span>
+    <span class="character">k</span>
+    <span class="character text-foreground">.</span>
+  </div>
+  <div class="text-wrapper text-wrapper-dev flex">
+    <span class="character">d</span>
+    <span class="character">e</span>
+    <span class="character">v</span>
+    <span class="character">
+      <span class="character-slash">/</span>
+    </span>
+  </div>
+  <span class="animation-cursor-wrapper">
+    <span class="animation-cursor-wrapper-2">
+      <span class="animation-cursor">|</span>
+    </span>
+  </span>
+  <div class="symbol-wrapper">
+    <div class="symbol gt-symbol">
+      <svg
+        width="262.25607"
+        height="360.92667"
+        viewBox="0 0 262.25607 360.92667"
+        version="1.1"
+        xmlns="http://www.w3.org/2000/svg"
+        class="h-full w-full"
+      >
+        <g>
+          <path
+            transform="translate(-123.22099,-151.07333)"
+            d="M 123.22099,512 385.47706,356.20432 V 312.06221 L 123.22099,151.07333 v 59.07254 l 207.61192,123.79399 c 0,0 -163.57634,97.29216 -207.61191,123.53165 z"
+            id="text1-6"
+            aria-label="<"></path>
+        </g>
+      </svg>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener("astro:page-load", () => {
+    const animationBox = document.querySelector(".animation");
+    if (animationBox) {
+      animationBox.setAttribute("data-start", "");
+    }
+  });
+</script>
+
+<style>
+  .animation {
+    --font-size: 2rem;
+  }
+
+  @media screen(xs) {
+    .animation {
+      --font-size: 2.5rem;
+    }
+  }
+
+  @media screen(md) {
+    .animation {
+      --font-size: 4rem;
+    }
+  }
+
+  @media screen(lg) {
+    .animation {
+      --font-size: 6rem;
+    }
+  }
+</style>
+
+<style lang="scss">
+  $num-letters-steciuk: 8;
+  $num-letters-dev: 4;
+  $num-letters-total: $num-letters-steciuk + $num-letters-dev;
+
+  $letter-appear-time: 0.1s;
+  $symbol-animation-time: 1s;
+  $cursor-move-time: 1s;
+
+  $animation-delay: 1s; // at the beggining
+  $slash-delay: $animation-delay + $letter-appear-time * $num-letters-dev + 1s; // after dev
+  $cursor-move-delay: $slash-delay + $letter-appear-time + 0.8s; // after slash
+  $steciuk-delay: $cursor-move-delay + $cursor-move-time; // after cursor
+  $symbol-delay: $steciuk-delay + $letter-appear-time * $num-letters-steciuk +
+    1s; // after steciuk
+
+  .animation-cursor-wrapper {
+    position: absolute;
+    right: 0.5ch;
+  }
+
+  $cursor-move-jump: 2%;
+  $num-leters-dev-without-slash: $num-letters-dev - 1;
+  @keyframes cursor-move {
+    @for $i from 0 through $num-leters-dev-without-slash - 1 {
+      #{calc($i * 100% / $num-leters-dev-without-slash)} {
+        transform: translateX($i * -1ch);
+      }
+      #{calc($i * 100% / $num-leters-dev-without-slash + $cursor-move-jump)} {
+        transform: translateX(($i + 1) * -1ch);
+      }
+    }
+    100% {
+      transform: translateX($num-leters-dev-without-slash * -1ch);
+    }
+  }
+
+  .animation-cursor {
+    animation: blink 0.95s infinite;
+  }
+
+  .symbol-wrapper {
+    display: inline-block;
+    width: 1ch;
+    height: 1em;
+  }
+
+  .symbol {
+    display: inline-block;
+    width: 1ch;
+    height: 1ch;
+
+    fill: hsl(var(--foreground));
+  }
+
+  .text-wrapper {
+    font-size: 0;
+
+    & > * {
+      display: inline-block;
+      font-size: var(--font-size);
+    }
+  }
+
+  .character {
+    opacity: 0;
+    position: absolute;
+  }
+
+  @keyframes fade-away {
+    to {
+      opacity: 0;
+    }
+  }
+
+  @keyframes letter-disappear {
+    98% {
+      opacity: 1;
+      position: static;
+    }
+    99% {
+      opacity: 0;
+      position: static;
+    }
+    100% {
+      opacity: 0;
+      position: absolute;
+    }
+  }
+
+  @keyframes letter-appear {
+    80% {
+      opacity: 0;
+      position: absolute;
+    }
+    95% {
+      opacity: 0;
+      position: static;
+    }
+    100% {
+      opacity: 1;
+      position: static;
+    }
+  }
+
+  $symbol-distance-x: 0.2ch;
+  $symbol-distance-y: 0.2ch;
+  $symbol-left-offset: 0.1ch;
+  @keyframes lt-move {
+    to {
+      transform: translate(
+        1ch - $symbol-distance-x - $symbol-left-offset,
+        $symbol-distance-y * -1
+      );
+      fill: hsl(var(--primary));
+    }
+  }
+
+  @keyframes gt-move {
+    to {
+      transform: translate(
+        ($num-letters-total - 1) * -1ch + $symbol-distance-x -
+          $symbol-left-offset,
+        $symbol-distance-y
+      );
+      fill: hsl(var(--primary));
+    }
+  }
+
+  @keyframes steciuk-color {
+    to {
+      color: hsl(var(--primary));
+    }
+  }
+
+  @keyframes blink {
+    50% {
+      opacity: 0;
+    }
+  }
+
+  .animation {
+    font-size: var(--font-size);
+    line-height: 1;
+
+    &[data-start] {
+      .animation-cursor-wrapper {
+        animation: cursor-move $cursor-move-time forwards $cursor-move-delay;
+      }
+
+      .character-slash {
+        animation: letter-disappear $letter-appear-time forwards $slash-delay;
+      }
+
+      .animation-cursor-wrapper-2 {
+        animation: fade-away 1s forwards $symbol-delay;
+      }
+
+      .character-s {
+        animation: fade-away 1s forwards $symbol-delay;
+      }
+
+      @for $i from 1 through $num-letters-steciuk {
+        .text-wrapper-steciuk > .character:nth-child(#{$i}) {
+          animation: letter-appear
+            0.01s
+            forwards
+            ($steciuk-delay + $letter-appear-time * $i);
+        }
+      }
+
+      @for $i from 1 through $num-letters-dev {
+        .text-wrapper-dev > .character:nth-child(#{$i}) {
+          animation: letter-appear
+            0.01s
+            forwards
+            ($animation-delay + $letter-appear-time * $i);
+        }
+      }
+
+      .lt-symbol {
+        animation: lt-move $symbol-animation-time forwards $symbol-delay;
+      }
+
+      .gt-symbol {
+        animation: gt-move $symbol-animation-time forwards $symbol-delay;
+      }
+
+      .text-wrapper-steciuk {
+        animation: steciuk-color $symbol-animation-time forwards $symbol-delay;
+      }
+    }
+  }
+</style>

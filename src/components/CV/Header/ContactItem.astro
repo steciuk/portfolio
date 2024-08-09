@@ -1,4 +1,15 @@
-<li class="contact-item flex items-center gap-2 text-sm">
+---
+import { cn } from "@src/utils";
+import type { ClassValue } from "clsx";
+
+interface Props {
+  class?: ClassValue[] | string;
+}
+
+const { class: className } = Astro.props;
+---
+
+<li class={cn("contact-item flex items-center gap-2 text-sm", className)}>
   <slot />
 </li>
 

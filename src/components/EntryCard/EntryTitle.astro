@@ -1,1 +1,12 @@
-<h3 class="text-lg font-bold"><slot /></h3>
+---
+import { cn } from "@src/utils";
+import type { ClassValue } from "clsx";
+
+interface Props {
+  class?: ClassValue[];
+}
+
+const { class: className } = Astro.props;
+---
+
+<h2 class={cn("text-2xl font-bold text-balance", className)}><slot /></h2>

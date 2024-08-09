@@ -2,6 +2,7 @@
 import type { ImageMetadata } from "astro";
 import type { Technology } from "@content/config";
 import { Image } from "astro:assets";
+import { twMerge } from "tailwind-merge";
 
 interface Props {
   name: Technology;
@@ -22,7 +23,7 @@ if (!images[path])
 <Image
   src={images[path]()}
   alt={`${name} badge`}
-  class={className}
+  class={twMerge([className])}
   quality="low"
   height={20}
   format="svg"

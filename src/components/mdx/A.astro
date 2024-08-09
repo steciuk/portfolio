@@ -1,0 +1,9 @@
+---
+import { Button } from "@components/ui/button";
+
+const props = Astro.props;
+---
+
+<Button {...props} target="_blank" variant="link" size="inline">
+  <slot />
+</Button>

@@ -1,0 +1,33 @@
+---
+import type { CollectionKey, Render as RenderType } from "astro:content";
+import { getEntry } from "astro:content";
+
+type Renderable =
+  | { render(): RenderType[".md" | ".mdx"] }
+  | { collection: CollectionKey; slug: string };
+
+interface Props {
+  entry: Renderable;
+}
+
+const { entry } = Astro.props;
+
+async function getContent(renderable: Renderable) {
+  if ("render" in renderable) {
+    return (await renderable.render()).Content;
+  }
+
+  const entry = await getEntry(renderable);
+  if (!entry) {
+    throw new Error(
+      `Entry not found: ${renderable.collection}/${renderable.slug}`
+    );
+  }
+
+  return (await entry.render()).Content;
+}
+
+const Content = await getContent(entry);
+---
+
+<Content />

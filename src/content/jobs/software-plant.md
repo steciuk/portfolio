@@ -1,7 +1,7 @@
 ---
 company: "SoftwarePlant"
 logo: 
-  src: "./images/SoftwarePlant.png"
+  src: "./images/software-plant.png"
   alt: "SoftwarePlant logo"
 role: "Intern Front-End Developer"
 location:
@@ -14,5 +14,7 @@ end:
   month: 10
   year: 2021
 group: "Appfire (BigPicture)"
+descriptionReference:
+  cv: "software-plant"
+  page: "software-plant"
 ---
-- Was responsible for enabling typescript strict mode in a significant part of a large Angular application.

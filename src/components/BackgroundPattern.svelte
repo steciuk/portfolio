@@ -3,7 +3,7 @@
   import { onMount } from "svelte";
 
   const SIGMOID_SQUISH = 2; // Higher values make the difference between slow and fast movement more pronounced
-  const MOVEMENT_RATE = 0.05; // Higher values make the background move faster
+  const MOVEMENT_RATE = 0.075; // Higher values make the background move faster
 
   let bgPos = { x: 0, y: 0 };
 

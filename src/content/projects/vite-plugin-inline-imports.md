@@ -9,5 +9,6 @@ start:
 end:
   month: 11
   year: 2023
-description: "Vite plugin forcing inline imports for specified modules."
+description: "Vite plugin forcing inline imports for specified modules. Developed with Chrome Extensions in mind, where the content script cannot import external files."
+shortDescription: "Vite plugin forcing inline imports for specified modules."
 ---

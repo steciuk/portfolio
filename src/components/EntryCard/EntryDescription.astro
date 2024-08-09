@@ -1,1 +1,11 @@
-<p class="text-sm"><slot /></p>
+---
+import { cn } from "@src/utils";
+
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+---
+
+<p class={cn(className)}><slot /></p>

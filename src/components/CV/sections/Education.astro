@@ -4,7 +4,7 @@ import Section from "@components/CV/ui/Section.astro";
 import Side from "@components/CV/ui/Side.astro";
 import SpaceBetween from "@components/CV/ui/SpaceBetween.astro";
 import Prose from "@components/ui/Prose.astro";
-import ProseEntry from "@components/ui/ProseEntry.astro";
+import Render from "@components/ui/Render.astro";
 import {
   sortByDate,
   groupEntriesByDataField,
@@ -38,15 +38,14 @@ const groupedEducation = groupEntriesByDataField<"education">(
                   {formatPeriod(entry.data.start, entry.data.end)}
                 </Side>
               </SpaceBetween>
-              <Prose class="a4:prose-li:my-0 text-xs print:prose-li:my-0">
+              <Prose class="text-xs a4:prose-li:my-0 print:prose-li:my-0">
                 <ul>
                   <li>Average grade: {entry.data.grade}/5.00.</li>
                 </ul>
+                {entry.data.descriptionReference && (
+                  <Render entry={entry.data.descriptionReference.cv} />
+                )}
               </Prose>
-              <ProseEntry
-                entry={entry}
-                class="a4:prose-li:my-0 text-xs print:prose-li:my-0"
-              />
             </div>
           ))}
         </div>

@@ -1,12 +1,24 @@
-import type { TimelinableEntry } from "@components/Timeline/types";
+import type { TimelineableCollection } from "@components/Timeline/types";
 
-export function getEntryBgColorClass(entry: TimelinableEntry): string {
-  switch (entry.collection) {
+export function getEntryAssociatedColor(collection: TimelineableCollection) {
+  switch (collection) {
     case "education":
-      return "bg-primary";
+      return {
+        bgClass: "bg-secondary",
+        textClass: "text-secondary",
+        cssVarName: "--secondary",
+      };
     case "jobs":
-      return "bg-secondary";
+      return {
+        bgClass: "bg-primary",
+        textClass: "text-primary",
+        cssVarName: "--primary",
+      };
     case "projects":
-      return "bg-accent";
+      return {
+        bgClass: "bg-accent",
+        textClass: "text-accent",
+        cssVarName: "--accent",
+      };
   }
 }

@@ -9,7 +9,7 @@ start:
 end:
   month: 6
   year: 2023
-description: "Compressive analysis of a Reddit bipartite network, including data collection, cleaning, many network metrics, and visualizations."
+description: "A thorough and detailed examination of a Reddit bipartite network, encompassing extensive data collection, cleaning processes, comprehensive network metrics, and visualizations."
 image:
   src: "./images/reddit-bipartite-network-analysis.png"
   alt: "Part of one of the network visualizations created in the project"

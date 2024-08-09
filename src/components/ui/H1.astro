@@ -1,9 +1,12 @@
 ---
+import { cn } from "@src/utils";
+import type { ClassValue } from "clsx";
+
 interface Props {
-  class?: string;
+  class?: ClassValue[] | string;
 }
 
 const { class: className } = Astro.props;
 ---
 
-<h1 class="text-4xl font-bold" class:list={className}><slot /></h1>
+<h1 class={cn("text-4xl font-bold text-center p-6", className)}><slot /></h1>

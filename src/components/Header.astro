@@ -1,33 +1,33 @@
 ---
 import { Button } from "@components/ui/button";
+import { cn } from "@src/utils";
 import { Menu } from "lucide-svelte";
 
 interface Props {
   class?: string;
+  forceBurger?: boolean;
 }
 
-const { class: className } = Astro.props;
+const { class: className, forceBurger } = Astro.props;
 ---
 
 <header
-  class="bg-white sticky top-0 z-20 bg-primary/30 shadow-md backdrop-blur-md lg:hidden"
-  class:list={className}
+  class={cn(
+    "fixed left-0 top-0 z-20 inline-block",
+    {
+      "lg:hidden": !forceBurger,
+    },
+    className
+  )}
 >
-  <div class="container flex justify-between p-2">
-    <div>
-      <Button
-        size="icon"
-        id="open-main-nav-btn"
-        aria-label="Open main navigation"
-      >
-        <Menu />
-      </Button>
-    </div>
-    <Button variant="ghost" href="/" class="text-xl font-bold">
-      Adam Steciuk
-    </Button>
-    <div></div>
-  </div>
+  <Button
+    size="icon"
+    id="open-main-nav-btn"
+    class="m-2 sm:m-4"
+    aria-label="Open main navigation"
+  >
+    <Menu />
+  </Button>
 </header>
 
 <script>

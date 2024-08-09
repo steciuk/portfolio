@@ -3,9 +3,15 @@ import GroupSubHeader from "@components/CV/ui/GroupSubHeader.astro";
 import Section from "@components/CV/ui/Section.astro";
 import Side from "@components/CV/ui/Side.astro";
 import SpaceBetween from "@components/CV/ui/SpaceBetween.astro";
-import ProseEntry from "@components/ui/ProseEntry.astro";
-import { sortByDate, groupEntriesByDataField, formatLocation, formatPeriod } from "@content/utils";
-import { getCollection } from "astro:content";
+import Prose from "@components/ui/Prose.astro";
+import Render from "@components/ui/Render.astro";
+import {
+  sortByDate,
+  groupEntriesByDataField,
+  formatLocation,
+  formatPeriod,
+} from "@content/utils";
+import { getCollection } from "astro:content"; 
 
 const jobsEntries = await getCollection("jobs");
 jobsEntries.sort((a, b) => {
@@ -17,23 +23,27 @@ const groupedJobs = groupEntriesByDataField<"jobs">(jobsEntries, "group");
 <Section title="Professional Experience">
   {
     Array.from(groupedJobs).map(([group, jobs]) => (
-      <SpaceBetween>
-        <GroupSubHeader slot="left">{group}</GroupSubHeader>
-        <Side slot="right">
-          {formatLocation(jobs[0].data.location)}
-        </Side>
-      </SpaceBetween>
-      <div>
-        {jobs.map((job) => (
-          <SpaceBetween>
-            <h4 class="text-sm italic" slot="left">{job.data.role}</h4>
-            <Side slot="right">
-              {formatPeriod(job.data.start, job.data.end)}
-            </Side>
-          </SpaceBetween>
-          <ProseEntry entry={job} class="text-xs"/>
-        ))}
-      </div>
+      <>
+        <SpaceBetween>
+          <GroupSubHeader slot="left">{group}</GroupSubHeader>
+          <Side slot="right">{formatLocation(jobs[0].data.location)}</Side>
+        </SpaceBetween>
+        <div>
+          {jobs.map((job) => (
+            <SpaceBetween>
+              <h4 class="text-sm italic" slot="left">
+                {job.data.role}
+              </h4>
+              <Side slot="right">
+                {formatPeriod(job.data.start, job.data.end)}
+              </Side>
+            </SpaceBetween>
+            <Prose class="text-xs">
+              <Render entry={job.data.descriptionReference.cv}/>
+            </Prose>
+          ))}
+        </div>
+      </>
     ))
   }
 </Section>

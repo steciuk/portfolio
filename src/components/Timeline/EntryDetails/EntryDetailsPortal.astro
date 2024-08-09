@@ -1,18 +1,18 @@
 ---
 import EntryDetails from "@components/Timeline/EntryDetails/EntryDetails.astro";
-import type { TimelinableEntry } from "@components/Timeline/types";
+import type { TimelineableEntry } from "@components/Timeline/types";
 import { getEntryDetailsElementId } from "@components/Timeline/entryId";
+import { X } from "lucide-svelte";
+import { Button } from "@components/ui/button";
 
 interface Props {
-  entries: TimelinableEntry[];
+  entries: TimelineableEntry[];
 }
 
 const { entries } = Astro.props;
 ---
 
-<div
-  class="pointer-events-none sticky top-16 col-start-1 row-start-1 grid h-[calc(100vh-4rem)] items-end pb-4 lg:top-0 lg:col-start-2 lg:h-screen lg:items-center lg:pb-0"
->
+<div class="sticky top-0 grid h-dvh items-end py-4 lg:items-center">
   {
     entries.map((entry) => {
       const id = getEntryDetailsElementId(entry);
@@ -20,14 +20,57 @@ const { entries } = Astro.props;
       return (
         <div
           {id}
-          class="entry-details pointer-events-auto col-start-1 row-start-1 mx-auto hidden w-full min-w-0 lg:max-w-[640px]"
+          class="entry-details pointer-events-auto col-start-1 row-start-1 mx-auto grid max-h-full w-full min-w-0 overflow-auto lg:max-w-[640px]"
+          data-state="hidden"
         >
-          <EntryDetails {entry} />
+          <EntryDetails {entry} class="col-start-1 row-start-1" />
+          <Button
+            class="close-entry-details-btn col-start-1 row-start-1 m-4 justify-self-end rounded-br-none rounded-tl-none sm:hidden"
+            aria-label="Close entry details"
+            variant="outline"
+            size="icon"
+          >
+            <X />
+          </Button>
         </div>
       );
     })
   }
 </div>
+
+<style lang="scss">
+  .entry-details {
+    &[data-state="hidden"] {
+      display: none;
+    }
+
+    &[data-state="shown"] {
+      animation: show 0.2s ease-in-out;
+    }
+
+    &[data-state="hiding"] {
+      animation: hide 0.2s ease-in-out;
+    }
+  }
+
+  @keyframes show {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes hide {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
+</style>
 
 <script>
   import { getEntryDetailsElementId } from "@components/Timeline/entryId";
@@ -40,18 +83,46 @@ const { entries } = Astro.props;
   document.addEventListener("astro:page-load", () => {
     entryDetailsElements = document.querySelectorAll(".entry-details");
     updateDetailElements(selectedEntry.get());
+
+    const closeEntryDetailsBtns = document.querySelectorAll(
+      ".close-entry-details-btn"
+    );
+
+    closeEntryDetailsBtns.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        selectedEntry.set(null);
+      });
+    });
   });
 
   function updateDetailElements(entry: SelectedEntry) {
     if (entry === null) {
       entryDetailsElements?.forEach((element) => {
-        element.classList.add("hidden");
+        if (element.getAttribute("data-state") === "shown") {
+          element.setAttribute("data-state", "hiding");
+          element.addEventListener(
+            "animationend",
+            () => {
+              element.setAttribute("data-state", "hidden");
+            },
+            { once: true }
+          );
+        }
       });
     } else {
       entryDetailsElements?.forEach((element) => {
-        element.id === getEntryDetailsElementId(entry)
-          ? element.classList.remove("hidden")
-          : element.classList.add("hidden");
+        if (element.id === getEntryDetailsElementId(entry)) {
+          element.setAttribute("data-state", "shown");
+        } else if (element.getAttribute("data-state") === "shown") {
+          element.setAttribute("data-state", "hiding");
+          element.addEventListener(
+            "animationend",
+            () => {
+              element.setAttribute("data-state", "hidden");
+            },
+            { once: true }
+          );
+        }
       });
     }
   }

@@ -1,7 +1,7 @@
 ---
 import ContactItem from "@components/CV/Header/ContactItem.astro";
 import { email, github, linkedin, website } from "@src/links";
-import { Github, Globe, Linkedin, Mail, Phone } from "lucide-svelte";
+import { Github, Globe, Linkedin, Mail, MapPin, Phone } from "lucide-svelte";
 ---
 
 <div
@@ -20,24 +20,23 @@ import { Github, Globe, Linkedin, Mail, Phone } from "lucide-svelte";
       industry trends.
     </p>
   </div>
-  <ul class="flex flex-col items-end screen-max-a4:mt-2">
+  <ul
+    class="grid grid-flow-row grid-cols-1 justify-items-end screen-max-a4:mt-2 screen-max-a4:grid-flow-col screen-max-a4:grid-cols-2 screen-max-a4:grid-rows-3 screen-max-a4:justify-items-center"
+  >
     <ContactItem>
       <a href={`mailto:${email}`}>{email}</a>
       <Mail />
     </ContactItem>
     <ContactItem>
-      <span class="blur-sm">+48 123 456 789</span>
-      {/* <span>+48 123 456 789</span> */}
+      <div class="redacted">
+        <span>+48 123 456 789</span>
+      </div>
       <Phone />
     </ContactItem>
-    {
-      /*
-      <ContactItem>
-        <span>Gdańsk, Poland</span>
-        <MapPin />
-      </ContactItem>
-      */
-    }
+    <ContactItem class="a4:hidden print:hidden">
+      <span>Gdańsk, Poland</span>
+      <MapPin />
+    </ContactItem>
     <ContactItem>
       <a href={linkedin} target="_blank" rel="noopener">
         linedin.com/in/steciuk
@@ -54,3 +53,31 @@ import { Github, Globe, Linkedin, Mail, Phone } from "lucide-svelte";
     </ContactItem>
   </ul>
 </div>
+
+<style>
+  .redacted {
+    position: relative;
+    user-select: none;
+
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .redacted > * {
+    @apply blur-sm;
+  }
+
+  .redacted::after {
+    content: "redacted";
+    position: absolute;
+    width: 100%;
+    left: 0;
+
+    font-size: 0.8em;
+    text-align: center;
+    color: hsl(var(--background));
+    background-color: hsl(var(--foreground));
+    opacity: 0.7;
+    padding: 0 0.5em;
+  }
+</style>

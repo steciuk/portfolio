@@ -60,7 +60,7 @@ export const badgesLinks = {
   Phaser: "https://img.shields.io/badge/Phaser-8320B5?logo=phaser&logoColor=fff&style=flat-square",
   WebSockets: "https://img.shields.io/badge/WebSockets-000?logo=websocket&logoColor=fff&style=flat-square", // no logo
   Gephi: "https://img.shields.io/badge/Gephi-000?logo=gephi&logoColor=fff&style=flat-square", // no logo
-  Cytoscape: "https://img.shields.io/badge/Cytoscape.js-F7DF1E?logo=cytoscapedotjs&logoColor=000&style=flat-square",
+  Cytoscape: "https://img.shields.io/badge/Cytoscape-F7DF1E?logo=cytoscapedotjs&logoColor=000&style=flat-square",
   C: "https://img.shields.io/badge/C-A8B9CC?logo=c&logoColor=fff&style=flat-square",
   "C++": "https://img.shields.io/badge/C%2B%2B-00599C?logo=cplusplus&logoColor=fff&style=flat-square",
   OpenGL: "https://img.shields.io/badge/OpenGL-5586A4?logo=opengl&logoColor=fff&style=flat-square",

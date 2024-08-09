@@ -1,16 +1,19 @@
 ---
+import { cn } from "@src/utils";
+import type { ClassValue } from "clsx";
+
 interface Props {
-  class?: string;
+  class?: ClassValue[] | string;
 }
 
 const { class: className } = Astro.props;
 ---
 
 <div
-  class:list={[
-    "prose text-foreground prose-a:font-normal prose-a:text-primary",
-    className,
-  ]}
+  class={cn(
+    "prose text-foreground prose-a:no-underline leading-normal prose-ul:my-0",
+    className
+  )}
 >
   <slot />
 </div>

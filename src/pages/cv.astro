@@ -8,7 +8,7 @@ import Interests from "@components/CV/sections/Interests.astro";
 import Education from "@components/CV/sections/Education.astro";
 import Projects from "@components/CV/sections/Projects.astro";
 import { Fragment } from "astro/jsx-runtime";
-import H1 from "@components/ui/H1.astro";
+import { Download } from "lucide-svelte";
 ---
 
 <Layout
@@ -17,14 +17,13 @@ import H1 from "@components/ui/H1.astro";
   navClass="print:hidden"
   footerClass="print:hidden"
 >
-  <H1 class="print:hidden">CV</H1>
-  <div class="my-4 flex justify-center print:hidden">
-    <Button href="/Adam_Steciuk_CV.pdf" variant="default" target="_blank">
-      Download PDF
+  <div class="my-6 flex justify-center print:hidden">
+    <Button href="/Adam_Steciuk_CV.pdf" variant="outline" target="_blank">
+      <Download class="mr-2" /> Download PDF
     </Button>
   </div>
   <main
-    class="page mx-auto my-4 min-h-a4 w-a4 max-w-a4 rounded-sm border-2 bg-background p-[0.7cm] shadow-md screen-max-a4:mx-1 screen-max-a4:w-auto screen-max-a4:p-2 print:m-0 print:h-a4 print:overflow-hidden print:rounded-none print:border-0 print:bg-[#fff] print:shadow-none"
+    class="page font-sans-system mx-auto my-4 min-h-a4 w-a4 max-w-a4 rounded-sm border-2 bg-background p-[0.7cm] shadow-md screen-max-a4:mx-1 screen-max-a4:w-auto screen-max-a4:p-2 print:m-0 print:h-a4 print:overflow-hidden print:rounded-none print:border-0 print:bg-[#fff] print:shadow-none"
   >
     <Header />
     <div class="mt-1 grid grid-cols-2 gap-3 screen-max-a4:hidden">

@@ -1,10 +1,12 @@
 ---
 import Section from "@components/CV/ui/Section.astro";
+import { Button } from "@components/ui/button";
 import Prose from "@components/ui/Prose.astro";
+import { breakifyLink } from "@src/utils";
 import { getEntry } from "astro:content";
 
 const projectsToShow = [
-  "stateviz",
+  "state-viz",
   "freebici",
   "qrnamic",
   "vite-plugin-inline-imports",
@@ -13,22 +15,26 @@ const projectsToShow = [
   // "bwt"
 ] as const;
 
-const projectsEntries = (
-  await Promise.all(projectsToShow.map((slug) => getEntry("projects", slug)))
-).filter((entry) => !!entry);
+const projectsEntries = await Promise.all(
+  projectsToShow.map((slug) => getEntry("projects", slug))
+);
+
+if (projectsEntries.some((entry) => entry === null)) {
+  throw new Error("Some projects were not found");
+}
 ---
 
 <Section title="Relevant Projects">
   <p class="text-2xs" slot="right">
-    See other projects at{" "}
-    <a
+    See more at{" "}
+    <Button
       href="https://steciuk.dev/projects"
       target="_blank"
-      rel="noopener"
-      class="text-primary underline"
+      variant="link"
+      size="inline"
     >
       steciuk.dev
-    </a>
+    </Button>
   </p>
   {
     projectsEntries.map((entry) => (
@@ -36,23 +42,31 @@ const projectsEntries = (
         <h3 class="mt-1 text-sm screen-max-a4:text-base">{entry.data.name}</h3>
         <Prose class="text-2xs a4:prose-li:my-0 screen-max-a4:text-xs print:prose-li:my-0">
           <ul>
-            {entry.data.description && <li>{entry.data.description}</li>}
+            <li>{entry.data.shortDescription ?? entry.data.description}</li>
             {entry.data.repo && (
               <li>
                 Repository:{" "}
-                <a href={entry.data.repo} target="_blank" rel="noopener">
-                  {entry.data.repo}
-                </a>
-                .
+                <Button
+                  href={entry.data.repo}
+                  target="_blank"
+                  size="inline"
+                  variant="link"
+                >
+                  <Fragment set:html={breakifyLink(entry.data.repo)} />
+                </Button>
               </li>
             )}
             {entry.data.deployed && (
               <li>
                 Avaliable at:{" "}
-                <a href={entry.data.deployed} target="_blank" rel="noopener">
-                  {entry.data.deployed}
-                </a>
-                .
+                <Button
+                  href={entry.data.deployed}
+                  target="_blank"
+                  size="inline"
+                  variant="link"
+                >
+                  <Fragment set:html={breakifyLink(entry.data.deployed)} />
+                </Button>
               </li>
             )}
             <li>{entry.data.technology.join(", ")}.</li>

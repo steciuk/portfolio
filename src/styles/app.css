@@ -68,67 +68,55 @@
   }
 } */
 
+/* https://www.realtimecolors.com/?colors=0e0601-fefaf6-ee7b17-7ff5de-508ef2&fonts=Inter-Inter */
+
 @layer base {
   :root {
-    --background: 0 0% 100%; /* hsl(0, 0%, 100%) */
-    --foreground: 222.2 84% 4.9%; /*hsl(222.2, 84%, 4.9%) */
+    --background: 30 80% 98%;
+    --foreground: 23 87% 3%;
 
-    --card: 28 87% 97%; /* hsl(28, 87%, 97%) */
-    --card-foreground: 24 83% 7%; /* hsl(24, 83%, 7%) */
+    --card: 30 10% 95%;
+    --card-foreground: 23 87% 3%;
 
-    --popover: 28 87% 97%; /* hsl(28, 87%, 97%) */
-    --popover-foreground: 24 83% 7%; /* hsl(24, 83%, 7%) */
+    --primary: 28 100% 60%;
+    --primary-highlight: 28 100% 70%;
+    --primary-foreground: 23 87% 3%;
 
-    --primary: 24 83% 54%; /* hsl(24, 83%, 54%) */
-    --primary-foreground: 24 83% 7%; /* hsl(24, 83%, 7%) */
+    --secondary: 168 86% 73%;
+    --secondary-foreground: 23 87% 3%;
 
-    --secondary: 167 83% 73%; /* hsl(167, 83%, 73%) */
-    --secondary-foreground: 24 83% 7%; /* hsl(24, 83%, 7%) */
+    --accent: 217 86% 63%;
+    --accent-foreground: 23 87% 99%;
 
-    --muted: 28 86% 20%; /* hsl(28, 86%, 20%) */
-    --muted-foreground: 24 83% 70%; /* hsl(24, 83%, 70%) */
+    --link: var(--accent);
 
-    --accent: 210 40% 96.1%; /* hsl(210, 40%, 96.1%) */
-    --accent-foreground: 222.2 47.4% 11.2%; /* hsl(222.2, 47.4%, 11.2%) */
-
-    --destructive: 0 85% 60%; /* hsl(0, 85%, 60%) */
-    --destructive-foreground: 24 83% 7%; /* hsl(24, 83%, 7%) */
-
-    --border: 214.3 31.8% 91.4%; /* hsl(214.3, 31.8%, 91.4%) */
-    --input: 214.3 31.8% 91.4%; /* hsl(214.3, 31.8%, 91.4%) */
-    --ring: 209 83% 40%; /* hsl(209, 83%, 40%) */
+    --border: 214.3 31.8% 91.4%;
+    --ring: 217 86% 40%;
 
     --radius: 0.5rem;
   }
 
   .dark {
-    --background: 222.2 84% 4.9%; /* hsl(222.2, 84%, 4.9%) */
-    --foreground: 210 40% 98%; /* hsl(210, 40%, 98%) */
+    --background: 30 80% 2%;
+    --foreground: 23 87% 97%;
 
-    --card: 28 87% 3%; /* hsl(28, 87%, 3%) */
-    --card-foreground: 24 83% 93%; /* hsl(24, 83%, 93%) */
+    --card: 30 10% 12%;
+    --card-foreground: 23 87% 97%;
 
-    --popover: 28 87% 3%; /* hsl(28, 87%, 3%) */
-    --popover-foreground: 24 83% 93%; /* hsl(24, 83%, 93%) */
+    --primary: 28 85% 40%;
+    --primary-highlight: 28 85% 50%;
+    --primary-foreground: 30 80% 99%;
 
-    --primary: 24 83% 46%; /* hsl(24, 83%, 46%) */
-    --primary-foreground: 28 87% 3%; /* hsl(28, 87%, 3%) */
+    --secondary: 168 86% 27%;
+    --secondary-foreground: 23 87% 97%;
 
-    --secondary: 167 83% 27%; /* hsl(167, 83%, 27%) */
-    --secondary-foreground: 28 87% 3%; /* hsl(28, 87%, 3%) */
+    --accent: 217 86% 37%;
+    --accent-foreground: 23 87% 97%;
 
-    --muted: 28 86% 80%; /* hsl(28, 86%, 80%) */
-    --muted-foreground: 24 83% 93%; /* hsl(24, 83%, 93%) */
+    --link: 217 86% 60%;
 
-    --accent: 217.2 32.6% 17.5%; /* hsl(217.2, 32.6%, 17.5%) */
-    --accent-foreground: 210 40% 98%; /* hsl(210, 40%, 98%) */
-
-    --destructive: 0 62% 30%; /* hsl(0, 62%, 30%) */
-    --destructive-foreground: 24 84% 10%; /* hsl(24, 84%, 10%) */
-
-    --border: 217.2 32.6% 17.5%; /* hsl(217.2, 32.6%, 17.5%) */
-    --input: 217.2 32.6% 17.5%; /* hsl(217.2, 32.6%, 17.5%) */
-    --ring: 209 83% 60%; /* hsl(209, 83%, 60%) */
+    --border: 217.2 32.6% 17.5%;
+    --ring: 217 86% 60%;
   }
 }
 
@@ -137,16 +125,7 @@
     @apply border-border;
   }
 
-  html {
-    font-family: system-ui, sans-serif;
-  }
-
   body {
     @apply bg-background text-foreground;
-  }
-
-  code {
-    font-family: Menlo, Monaco, "Lucida Console", "Liberation Mono",
-      "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Courier New", monospace;
   }
 }

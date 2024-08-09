@@ -10,13 +10,13 @@ const { class: className } = Astro.props;
 
 <style>
   .logo {
-    background-image: url("/logo-dark.svg");
+    background-image: url("/logo-light.svg");
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
   }
 
   :global(.dark) .logo {
-    background-image: url("/logo-light.svg");
+    background-image: url("/logo-dark.svg");
   }
 </style>

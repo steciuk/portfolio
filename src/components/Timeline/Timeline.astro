@@ -1,0 +1,137 @@
+---
+import { getCollection } from "astro:content";
+import TimelineEntry from "@components/Timeline/TimelineEntry.svelte";
+import { sortByDate } from "@content/utils";
+import EntryDeselector from "@components/Timeline/EntryDeselector.svelte";
+import MonthMarkers from "@components/Timeline/markers/MonthMarkers.svelte";
+import EntryDetailsPortal from "@components/Timeline/EntryDetails/EntryDetailsPortal.astro";
+import YearMarkers from "@components/Timeline/markers/YearMarkers.astro";
+import Legend from "@components/Timeline/Legend/Legend.astro";
+
+const educationEntries = await getCollection("education");
+const jobsEntries = await getCollection("jobs");
+const projectsEntries = await getCollection("projects");
+
+const allEntries = [...educationEntries, ...jobsEntries, ...projectsEntries];
+
+allEntries.sort((a, b) => {
+  return sortByDate(a.data.start, b.data.start);
+});
+
+const earliestStart = allEntries[0].data.start;
+const latestStart = allEntries[allEntries.length - 1].data.start;
+
+const latestEnd = allEntries.reduce((latest, entry) => {
+  const end = entry.data.end;
+
+  if (!end) {
+    return latest;
+  }
+
+  if (end.year > latest.year) {
+    return end;
+  } else if (end.year === latest.year && end.month > latest.month) {
+    return end;
+  } else {
+    return latest;
+  }
+}, latestStart);
+
+const totalYears = latestEnd.year - earliestStart.year;
+const totalMonths = totalYears * 12 + latestEnd.month - earliestStart.month + 1;
+
+const lines: Array<[number, number, (typeof allEntries)[number]][]> = [];
+
+allEntries.forEach((entry) => {
+  const start = entry.data.start;
+  const end = entry.data.end ?? latestEnd;
+  const startRow =
+    (start.year - earliestStart.year) * 12 +
+    start.month -
+    earliestStart.month +
+    1; // 1 based
+  let endRow =
+    (end.year - earliestStart.year) * 12 + end.month - earliestStart.month + 1; // 1 based
+
+  if (!entry.data.end) {
+    // Lasts until now, so add 2 rows for '...' and 'Now' markers
+    endRow += 2;
+  }
+
+  let line = lines.findIndex((line) => {
+    return line.every(([start, end]) => {
+      return start >= endRow || end <= startRow;
+    });
+  }); // 0 based
+
+  if (line === -1) {
+    line = lines.length;
+    lines.push([[startRow, endRow, entry]]);
+  } else {
+    lines[line].push([startRow, endRow, entry]);
+  }
+});
+
+const numLines = lines.length;
+const numRows = totalMonths + 2; // +2 for '...' and 'Now' rows
+
+const monthDates = Array.from({ length: totalMonths }).map((_, i) => {
+  const month = (totalMonths - i - 1 + earliestStart.month) % 12 || 12;
+  const year = latestEnd.year - Math.floor((i + 12 - latestEnd.month) / 12);
+
+  return { month, year };
+});
+---
+
+<EntryDeselector client:idle />
+<section class="timeline-overgrid container grid gap-x-2 gap-y-0.5 sm:gap-x-4">
+  <div
+    class="col-span-full row-[2_/_-2] grid grid-cols-subgrid grid-rows-subgrid font-bold"
+  >
+    <Legend />
+    <YearMarkers {monthDates} />
+    <MonthMarkers {monthDates} client:visible />
+    {
+      lines.map((line, numLine) =>
+        line.map(([startRow, endRow, entry]) => {
+          return (
+            <div
+              class="relative"
+              style={{
+                gridColumn: numLine + 2,
+                gridRow: `${-startRow} / ${-endRow}`,
+              }}
+            >
+              <TimelineEntry {entry} client:visible />
+            </div>
+          );
+        })
+      )
+    }
+  </div>
+  <div
+    class="pointer-events-none col-span-full row-span-full row-start-1 lg:-col-start-2"
+  >
+    <EntryDetailsPortal entries={allEntries} />
+  </div>
+</section>
+
+<style define:vars={{ numLines, numRows }}>
+  .timeline-overgrid {
+    --timeline-line-width: 1.7rem;
+
+    grid-template-columns:
+      minmax(max-content, auto) repeat(
+        var(--numLines),
+        var(--timeline-line-width)
+      )
+      1fr;
+    grid-template-rows: 1rem repeat(var(--numRows), 60px) 5rem;
+  }
+
+  @media screen(sm) {
+    .timeline-overgrid {
+      --timeline-line-width: 2rem;
+    }
+  }
+</style>

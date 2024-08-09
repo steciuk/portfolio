@@ -1,0 +1,29 @@
+---
+import type { MonthDate } from "@content/config";
+
+interface Props {
+  monthDates: MonthDate[];
+}
+
+const { monthDates } = Astro.props;
+const years: { year: number; row: number }[] = [];
+
+monthDates.forEach((monthDate, i) => {
+  if (monthDate.month === 12) {
+    years.push({ year: monthDate.year, row: i + 3 });
+  }
+});
+---
+
+{
+  years.map((year) => (
+    <div
+      class="col-span-full flex flex-col justify-center text-right text-6xl font-bold text-border"
+      style={{ gridRow: year.row }}
+    >
+      <div>{year.year + 1}</div>
+      <hr class="border-2" />
+      <div>{year.year}</div>
+    </div>
+  ))
+}

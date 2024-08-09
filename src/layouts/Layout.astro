@@ -1,6 +1,11 @@
 ---
-import { SEO } from "astro-seo";
 import "@styles/app.css";
+import "@fontsource/prompt/100.css";
+import "@fontsource/prompt/400.css";
+import "@fontsource/prompt/500.css";
+import "@fontsource/prompt/700.css";
+import "@fontsource/prompt/400-italic.css";
+import { SEO } from "astro-seo";
 import Nav from "@components/Nav/Nav.astro";
 import Header from "@components/Header.astro";
 import BackgroundPattern from "@components/BackgroundPattern.svelte";
@@ -13,12 +18,14 @@ interface Props {
   headerClass?: string;
   navClass?: string;
   footerClass?: string;
+  forceBurger?: boolean;
 }
 
 const description =
   "Frontend web developer with over 2 years of professional experience and extensive work on personal and university projects.";
 
-const { subtitle, headerClass, navClass, footerClass } = Astro.props;
+const { subtitle, headerClass, navClass, footerClass, forceBurger } =
+  Astro.props;
 const title =
   subtitle && subtitle.trim() !== "Adam Steciuk"
     ? `${subtitle} | Adam Steciuk`
@@ -50,15 +57,15 @@ const title =
     <meta name="author" content="Adam Steciuk" />
     <ViewTransitions />
   </head>
-  <body class="grid min-h-svh grid-rows-[auto_1fr]">
+  <body class="grid min-h-svh grid-rows-[auto_1fr] font-sans">
     <div transition:persist>
       <BackgroundPattern client:visible>
-        <Logo class="h-full w-full opacity-5 dark:opacity-10" />
+        <Logo class="h-full w-full opacity-15 dark:opacity-20" />
       </BackgroundPattern>
     </div>
-    <Header class={headerClass} />
+    <Header class={headerClass} {forceBurger} />
     <div class="flex">
-      <Nav class={navClass} />
+      <Nav class={navClass} {forceBurger} />
       <div class="relative flex-grow">
         <slot />
         <Footer class={footerClass} />

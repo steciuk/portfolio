@@ -1,0 +1,1 @@
+- Was responsible for enabling typescript strict mode in a significant part of a large Angular application.
