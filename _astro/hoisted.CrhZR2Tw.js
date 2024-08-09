@@ -1,1 +1,0 @@
-import"./hoisted.CP-ZAFUf.js";import"./navOpenStore.B4XpCuHK.js";import"./index.Mc1atRao.js";document.addEventListener("astro:page-load",()=>{const t=document.querySelector(".animation");t&&t.setAttribute("data-start","")});
