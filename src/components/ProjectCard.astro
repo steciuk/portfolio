@@ -19,7 +19,6 @@ const { entry, class: className, isTimeline } = Astro.props;
 <EntryCard image={entry.data.image} class={className} {isTimeline}>
   <div
     class="grid h-full w-full grid-cols-[1fr_auto] grid-rows-[auto_1fr_auto_auto] gap-2"
-    class:list={[isTimeline ? "" : ""]}
   >
     <div
       class="col-span-2 col-start-1 row-start-1"

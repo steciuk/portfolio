@@ -13,7 +13,7 @@ const { image, class: className, isTimeline } = Astro.props;
 ---
 
 <div
-  class="max flex flex-col gap-4 rounded-sm bg-card p-4 text-left text-card-foreground shadow-md"
+  class="flex flex-col gap-4 rounded-sm bg-card p-4 text-left text-card-foreground shadow-md"
   class:list={[className, isTimeline ? "sm:max-lg:flex-row" : "md:flex-row"]}
 >
   <div
