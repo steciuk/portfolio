@@ -12,6 +12,7 @@ import BackgroundPattern from "@components/BackgroundPattern.svelte";
 import Footer from "@components/Footer.astro";
 import Logo from "@components/ui/Logo.astro";
 import { ViewTransitions } from "astro:transitions";
+import { website } from "@src/links";
 
 interface Props {
   subtitle?: string;
@@ -43,7 +44,7 @@ const title =
         basic: {
           title: title,
           type: "website",
-          image: "// TODO: Add an image",
+          image: `${website}/og-image.png`,
         },
         optional: {
           description: description,
