@@ -6,7 +6,7 @@
 
   export let entry: TimelineableEntry;
 
-  const {bgClass, hoverClass} = getEntryAssociatedColor(entry.collection);
+  const { bgClass, hoverClass } = getEntryAssociatedColor(entry.collection);
   getEntryAssociatedColor;
   function handleOpenClick() {
     selectedEntry.set(entry);
@@ -14,6 +14,14 @@
 
   $: isCurrentEntry =
     $selectedEntry && getEntryId($selectedEntry) === getEntryId(entry);
+
+  const { data, collection } = entry;
+  const ariaLabel =
+    collection === "education"
+      ? `my ${data.degree} at ${data.school}`
+      : collection === "jobs"
+        ? `me being ${data.role.toLowerCase()} at ${data.company}`
+        : `${data.name} project`;
 </script>
 
 <button
@@ -21,5 +29,6 @@
   class="h-full w-full rounded-sm shadow-sm transition-all {bgClass} {hoverClass}"
   class:scale-x-[140%]={isCurrentEntry}
   class:shadow-xl={isCurrentEntry}
+  aria-label="Open details about {ariaLabel}"
 >
 </button>
