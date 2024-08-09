@@ -35,7 +35,7 @@ const groupedJobs = groupEntriesByDataField<"jobs">(jobsEntries, "group");
                 {job.data.role}
               </h4>
               <Side slot="right">
-                {formatPeriod(job.data.start, job.data.end)}
+                {formatPeriod(job.data.start, job.data.end, true)}
               </Side>
             </SpaceBetween>
             <Prose class="text-xs">

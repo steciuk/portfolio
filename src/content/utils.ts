@@ -1,17 +1,18 @@
 import type { Location, MonthDate } from "@content/config";
 import { type CollectionEntry, type CollectionKey } from "astro:content";
 
-export function formatDate(date: MonthDate): string {
+export function formatDate(date: MonthDate, long?: boolean): string {
   const month = date.month < 10 ? `0${date.month}` : date.month;
-  const year = `${date.year}`.slice(-2);
+  const year = long ? date.year : `${date.year}`.slice(-2);
   return `${month}/${year}`;
 }
 
 export function formatPeriod(
   start: MonthDate,
   end?: MonthDate | undefined,
+  long?: boolean,
 ): string {
-  return `${formatDate(start)} - ${end ? formatDate(end) : "Now"}`;
+  return `${formatDate(start, long)} - ${end ? formatDate(end, long) : "Now"}`;
 }
 
 export function sortByDate(
