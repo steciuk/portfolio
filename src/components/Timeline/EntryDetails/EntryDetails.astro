@@ -4,7 +4,6 @@ import { formatPeriod } from "@content/utils";
 import type { TimelineableEntry } from "@components/Timeline/types";
 import EntryCard from "@components/EntryCard/EntryCard.astro";
 import ProjectCard from "@components/EntryCard/ProjectCard.astro";
-import EntryDescription from "@components/EntryCard/EntryDescription.astro";
 import EntryTitle from "@components/EntryCard/EntryTitle.astro";
 import Render from "@components/ui/Render.astro";
 import EntryDetailsProse from "@components/Timeline/EntryDetails/EntryDetailsProse.astro";
@@ -22,8 +21,12 @@ let dateString = formatPeriod(entry.data.start, entry.data.end);
   entry.collection === "education" ? (
     <EntryCard image={entry.data.logo} isTimeline={true} class={className}>
       <EntryTitle>{entry.data.school}</EntryTitle>
-      <EntryDescription>{entry.data.faculty}</EntryDescription>
-      <EntryRole role={entry.data.degree} dateString={dateString} />
+      <p class="text-balance font-bold md:text-lg">{entry.data.faculty}</p>
+      <EntryRole
+        role={entry.data.degree}
+        dateString={dateString}
+        class="mb-3"
+      />
       <EntryDetailsProse>
         <ul>
           <li>Average grade: {entry.data.grade}/5.00.</li>
@@ -38,7 +41,7 @@ let dateString = formatPeriod(entry.data.start, entry.data.end);
   ) : entry.collection === "jobs" ? (
     <EntryCard image={entry.data.logo} isTimeline={true} class={className}>
       <EntryTitle>{entry.data.company}</EntryTitle>
-      <EntryRole role={entry.data.role} dateString={dateString} />
+      <EntryRole role={entry.data.role} dateString={dateString} class="mb-3" />
       <EntryDetailsProse>
         <Render entry={entry.data.descriptionReference.page} />
       </EntryDetailsProse>

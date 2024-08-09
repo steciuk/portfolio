@@ -3,7 +3,8 @@ import { type CollectionEntry, type CollectionKey } from "astro:content";
 
 export function formatDate(date: MonthDate): string {
   const month = date.month < 10 ? `0${date.month}` : date.month;
-  return `${month}/${date.year}`;
+  const year = `${date.year}`.slice(-2);
+  return `${month}/${year}`;
 }
 
 export function formatPeriod(

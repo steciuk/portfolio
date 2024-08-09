@@ -9,4 +9,6 @@ interface Props {
 const { class: className } = Astro.props;
 ---
 
-<h2 class={cn("text-2xl font-bold text-balance", className)}><slot /></h2>
+<h2 class={cn("text-xl md:text-2xl font-bold text-balance", className)}>
+  <slot />
+</h2>
