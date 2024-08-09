@@ -18,7 +18,11 @@ const { image, class: className, isTimeline } = Astro.props;
 >
   <div
     class="aspect-video w-full max-w-full flex-shrink-0 overflow-hidden rounded-sm"
-    class:list={[isTimeline ? "sm:max-lg:max-w-[17rem]" : "md:max-w-[17rem]"]}
+    class:list={[
+      isTimeline
+        ? "sm:max-lg:max-w-[13rem]"
+        : "md:max-w-[13rem] xl:max-w-[17rem]",
+    ]}
   >
     {
       image ? (

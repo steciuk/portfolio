@@ -1,8 +1,9 @@
 ---
 import { cn } from "@src/utils";
+import type { ClassValue } from "clsx";
 
 interface Props {
-  class?: string;
+  class?: ClassValue[] | string;
 }
 
 const { class: className } = Astro.props;

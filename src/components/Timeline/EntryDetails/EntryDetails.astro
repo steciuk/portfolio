@@ -8,6 +8,7 @@ import EntryDescription from "@components/EntryCard/EntryDescription.astro";
 import EntryTitle from "@components/EntryCard/EntryTitle.astro";
 import Prose from "@components/ui/Prose.astro";
 import Render from "@components/ui/Render.astro";
+import EntryDetailsProse from "@components/Timeline/EntryDetails/EntryDetailsProse.astro";
 
 interface Props {
   entry: TimelineableEntry;
@@ -24,7 +25,7 @@ let dateString = formatPeriod(entry.data.start, entry.data.end);
       <EntryTitle>{entry.data.school}</EntryTitle>
       <EntryDescription>{entry.data.faculty}</EntryDescription>
       <EntryRole role={entry.data.degree} dateString={dateString} />
-      <Prose>
+      <EntryDetailsProse>
         <ul>
           <li>Average grade: {entry.data.grade}/5.00.</li>
           {entry.data.descriptionReference && (
@@ -33,15 +34,15 @@ let dateString = formatPeriod(entry.data.start, entry.data.end);
             </li>
           )}
         </ul>
-      </Prose>
+      </EntryDetailsProse>
     </EntryCard>
   ) : entry.collection === "jobs" ? (
     <EntryCard image={entry.data.logo} isTimeline={true} class={className}>
       <EntryTitle>{entry.data.company}</EntryTitle>
       <EntryRole role={entry.data.role} dateString={dateString} />
-      <Prose>
+      <EntryDetailsProse>
         <Render entry={entry.data.descriptionReference.page} />
-      </Prose>
+      </EntryDetailsProse>
     </EntryCard>
   ) : entry.collection === "projects" ? (
     <ProjectCard entry={entry} isTimeline={true} class={className} />
