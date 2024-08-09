@@ -41,6 +41,7 @@ const config = {
       },
       fontFamily: {
         sans: ["Prompt", ...defaultTheme.fontFamily.sans],
+        "sans-system": [...defaultTheme.fontFamily.sans],
         mono: [...defaultTheme.fontFamily.mono],
       },
       fontSize: {
