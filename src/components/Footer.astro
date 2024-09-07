@@ -10,7 +10,7 @@ const { class: className } = Astro.props;
 const year = new Date().getFullYear();
 ---
 
-<div class="mt-8 p-2 text-center" class:list={className}>
+<footer class="mt-8 p-2 text-center" class:list={className}>
   &copy; <span id="footer-year">{year}</span>
   <Button
     href={website}
@@ -20,7 +20,7 @@ const year = new Date().getFullYear();
   >
     Adam Steciuk
   </Button>
-</div>
+</footer>
 <script>
   const year = new Date().getFullYear();
   const footerYear = document.getElementById("footer-year");
