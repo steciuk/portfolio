@@ -99,6 +99,7 @@ export const technologies = [
   // Databases:
   "MongoDB",
   "Firestore",
+  "IndexedDB",
   // Devops:
   "Vercel",
   "Heroku",
@@ -116,6 +117,7 @@ export const technologies = [
   "Emotion",
   "shadcn",
   "MUI",
+  "Angular Material",
   // Other:
   "Git",
   "Gerrit",
