@@ -9,7 +9,12 @@ interface Props {
 const { class: className } = Astro.props;
 ---
 
-<li class={cn("contact-item flex items-center gap-2 text-sm", className)}>
+<li
+  class={cn(
+    "contact-item flex items-center gap-1 sm:gap-2 text-xs sm:text-sm text-right",
+    className
+  )}
+>
   <slot />
 </li>
 

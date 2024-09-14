@@ -1,6 +1,7 @@
 import type { Technology } from "@content/config";
 
 // https://badges.pages.dev/
+// https://simpleicons.org/
 
 // prettier-ignore
 export const badgesLinks = {
@@ -32,6 +33,7 @@ export const badgesLinks = {
   Svelte: "https://img.shields.io/badge/Svelte-FF3E00?logo=svelte&logoColor=fff&style=flat-square",
   Astro: "https://img.shields.io/badge/Astro-BC52EE?logo=astro&logoColor=fff&style=flat-square",
   Angular: "https://img.shields.io/badge/Angular-0F0F11?logo=angular&logoColor=fff&style=flat-square",
+  "Angular Material": "https://img.shields.io/badge/Angular%20Material-d7e3ff?logo=angular&logoColor=000&style=flat-square",
   "Node.js": "https://img.shields.io/badge/Node.js-5FA04E?logo=nodedotjs&logoColor=fff&style=flat-square",
   Express: "https://img.shields.io/badge/Express-000?logo=express&logoColor=fff&style=flat-square",
   MongoDB: "https://img.shields.io/badge/MongoDB-47A248?logo=mongodb&logoColor=fff&style=flat-square",
@@ -75,4 +77,5 @@ export const badgesLinks = {
   Git: "https://img.shields.io/badge/Git-F05032?logo=git&logoColor=fff&style=flat-square",
   Gerrit: "https://img.shields.io/badge/Gerrit-EEE?logo=gerrit&logoColor=000&style=flat-square",
   Sass: "https://img.shields.io/badge/Sass-C69?logo=sass&logoColor=fff&style=flat-square",
+  IndexedDB: "https://img.shields.io/badge/IndexedDB-4D4D4D?logo=indexeddb&logoColor=fff&style=flat-square", // no logo
 } as const satisfies { [key in Technology]: string };
