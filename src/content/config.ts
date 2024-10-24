@@ -93,13 +93,18 @@ export const technologies = [
   "Svelte",
   "Astro",
   "Angular",
+  // State management
+  "TanStack Query",
   // Back-end frameworks
   "Node.js",
   "Express",
+  "tRPC",
   // Databases:
   "MongoDB",
   "Firestore",
   "IndexedDB",
+  "Drizzle",
+  "PostgreSQL",
   // Devops:
   "Vercel",
   "Heroku",
@@ -132,6 +137,7 @@ export const technologies = [
   "WebSockets",
   "Gephi",
   "Cytoscape",
+  "Zod",
   // C
   "C",
   "C++",

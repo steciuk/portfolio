@@ -1,13 +1,13 @@
 ---
-import EntryCard from "@components/EntryCard/EntryCard.astro";
-import EntryTitle from "@components/EntryCard/EntryTitle.astro";
-import Badge from "@components/ui/Badge.astro";
-import { Button } from "@components/ui/button";
-import type { CollectionEntry } from "astro:content";
-import { Github, Globe } from "lucide-svelte";
+import EntryCard from '@components/EntryCard/EntryCard.astro';
+import EntryTitle from '@components/EntryCard/EntryTitle.astro';
+import Badge from '@components/ui/Badge.astro';
+import { Button } from '@components/ui/button';
+import type { CollectionEntry } from 'astro:content';
+import { Github, Globe } from 'lucide-svelte';
 
 interface Props {
-  entry: CollectionEntry<"projects">;
+  entry: CollectionEntry<'projects'>;
   class?: string;
   isTimeline?: boolean;
 }
@@ -17,59 +17,64 @@ const { entry, class: className, isTimeline } = Astro.props;
 
 <EntryCard image={entry.data.image} class={className} {isTimeline}>
   <div
-    class="grid h-full w-full grid-cols-[1fr_auto] grid-rows-[auto_1fr_auto_auto] gap-2"
+    class='grid h-full w-full grid-cols-[1fr_auto] gap-2'
+    class:list={[
+      entry.data.repo || entry.data.deployed
+        ? 'grid-rows-[auto_1fr_auto_auto]'
+        : 'grid-rows-[auto_1fr_auto]',
+    ]}
   >
     <EntryTitle
       class={[
-        "col-span-2 col-start-1 row-start-1",
-        isTimeline ? "" : "md:col-span-1",
+        'col-span-2 col-start-1 row-start-1',
+        isTimeline ? '' : 'md:col-span-1',
       ]}
     >
       {entry.data.name}
     </EntryTitle>
-    <div
-      class="col-span-2 col-start-1 row-start-4 mt-2 flex gap-2 justify-self-stretch"
-      class:list={[
-        isTimeline
-          ? ""
-          : "md:col-span-1 md:col-start-2 md:row-span-1 md:row-start-1 md:mt-0 md:justify-self-end",
-      ]}
-    >
-      {
-        entry.data.repo && (
-          <Button
-            href={entry.data.repo}
-            target="_blank"
-            variant="outline"
-            size="sm"
-            class="flex-grow basis-0"
-            class:list={[isTimeline ? "" : "md:flex-grow-0"]}
-          >
-            <Github class="mr-2" /> GitHub
-          </Button>
-        )
-      }
-      {
-        entry.data.deployed && (
-          <Button
-            href={entry.data.deployed}
-            target="_blank"
-            variant="outline"
-            size="sm"
-            class="flex-grow basis-0"
-            class:list={[isTimeline ? "" : "md:flex-grow-0"]}
-          >
-            <Globe class="mr-2" /> Live
-          </Button>
-        )
-      }
-    </div>
-    <p class="col-span-2 col-start-1 row-start-2">
+    {
+      (entry.data.repo || entry.data.deployed) && (
+        <div
+          class='col-span-2 col-start-1 row-start-4 mt-2 flex gap-2 justify-self-stretch'
+          class:list={[
+            isTimeline
+              ? ''
+              : 'md:col-span-1 md:col-start-2 md:row-span-1 md:row-start-1 md:mt-0 md:justify-self-end',
+          ]}
+        >
+          {entry.data.repo && (
+            <Button
+              href={entry.data.repo}
+              target='_blank'
+              variant='outline'
+              size='sm'
+              class='flex-grow basis-0'
+              class:list={[isTimeline ? '' : 'md:flex-grow-0']}
+            >
+              <Github class='mr-2' /> GitHub
+            </Button>
+          )}
+          {entry.data.deployed && (
+            <Button
+              href={entry.data.deployed}
+              target='_blank'
+              variant='outline'
+              size='sm'
+              class='flex-grow basis-0'
+              class:list={[isTimeline ? '' : 'md:flex-grow-0']}
+            >
+              <Globe class='mr-2' /> Live
+            </Button>
+          )}
+        </div>
+      )
+    }
+    <p class='col-span-2 col-start-1 row-start-2'>
       {entry.data.description}
     </p>
     <div
-      class="col-span-2 col-start-1 row-span-1 row-start-3 mt-2 flex w-full flex-wrap gap-1"
-      class:list={[isTimeline ? "" : "md:row-span-2"]}
+      class='col-span-2 col-start-1 row-span-1 row-start-3 mt-2 flex w-full flex-wrap gap-1'
+      class:list={[isTimeline ? '' : 'md:row-span-2']}
     >
       {entry.data.technology.map((tech) => <Badge name={tech} />)}
     </div>
