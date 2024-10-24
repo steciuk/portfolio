@@ -1,6 +1,6 @@
 ---
 name: "Eclat & dEclat"
-technology: ["Python", "Jupyter", "React", "TypeScript", "D3.js", "AG Grid", "MUI", "Emotion", "Vite"]
+technology: ["Python", "Jupyter", "React", "TypeScript", "D3.js", "AG Grid", "MUI", "Emotion"]
 deployed: "https://declat.steciuk.dev"
 repo: "https://github.com/steciuk/MED-dEclat-1"
 start:

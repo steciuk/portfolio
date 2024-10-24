@@ -1,76 +1,79 @@
 ---
-import Section from "@components/CV/ui/Section.astro";
-import type { Technology } from "@content/config";
+import Section from '@components/CV/ui/Section.astro';
+import type { Technology } from '@content/config';
 
 const techSkills: Array<{
   group: string;
   skills: Technology[];
 }> = [
   {
-    group: "Web development",
+    group: 'Web development',
     skills: [
-      "React",
-      "Angular",
-      "Astro",
-      "Svelte",
-      "TypeScript",
-      "JavaScript",
-      "Tailwind CSS",
-      "HTML",
-      "CSS",
-      "Sass",
-      "RxJS",
-      "Vite",
-      "Vitest",
-      "Jest",
-      "Cypress",
+      'React',
+      'Angular',
+      'Astro',
+      'Svelte',
+      'TypeScript',
+      'JavaScript',
+      'Tailwind CSS',
+      'Drizzle',
+      'TanStack Query',
+      'tRPC',
+      'HTML',
+      'CSS',
+      'Sass',
+      'RxJS',
+      'Vite',
+      'Vitest',
+      'Jest',
+      'Cypress',
       // "React Native",
-      "EJS",
-      "Chrome Extensions",
-      "Express",
-      "Phaser",
+      'EJS',
+      'Chrome Extensions',
+      'Express',
+      'Phaser',
     ],
   },
   {
-    group: "Data science & analytics",
+    group: 'Data science & analytics',
     skills: [
-      "Python",
-      "pandas",
-      "NumPy",
-      "Matplotlib",
-      "Seaborn",
-      "scikit-learn",
-      "Jupyter",
-      "NetworkX",
+      'Python',
+      'pandas',
+      'NumPy',
+      'Matplotlib',
+      'Seaborn',
+      'scikit-learn',
+      'Jupyter',
+      'NetworkX',
     ],
   },
   {
-    group: "Other",
-    skills: ["Git", "Gerrit", "Firestore", "MongoDB", "Linux", "Docker"],
+    group: 'Other',
+    skills: ['Git', 'Gerrit', 'Firestore', 'MongoDB', 'Linux', 'Docker'],
   },
 ];
 
 const skills = [
   ...techSkills,
   {
-    group: "Languages",
+    group: 'Languages',
     skills: [
-      "Polish (native)",
-      "English (fluent)",
-      "Spanish (intermediate)",
-      "Russian (elementary)",
+      'Polish (native)',
+      'English (fluent)',
+      'Spanish (intermediate)',
+      'Russian (elementary)',
     ],
   },
 ];
 ---
 
-<Section title="Skills">
-  <div class="space-y-1">
+<Section title='Skills'>
+  <div class='space-y-1'>
     {
       skills.map(({ group, skills }) => (
         <div>
-          <h3 class="mt-1 text-sm screen-max-a4:text-base">{group}</h3>
-          <div class="text-2xs screen-max-a4:text-xs">{skills.join(" ∙ ")}</div>
+          <h3 class='mt-1 text-sm screen-max-a4:text-base'>{group}</h3>
+          <div class='text-2xs screen-max-a4:text-xs'>{skills.join(' ∙ ')}</div>
         </div>
       ))
     }

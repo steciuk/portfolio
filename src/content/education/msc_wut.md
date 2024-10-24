@@ -14,7 +14,7 @@ start:
 end:
   month: 6
   year: 2024
-grade: 4.96
+grade: "4.96/5.00"
 descriptionReference:
   cv: "msc-wut-cv"
   page: "msc-wut-page"

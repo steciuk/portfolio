@@ -1,6 +1,6 @@
 ---
 name: "FreeBici"
-technology: ["React", "TypeScript", "OpenStreetMap", "Leaflet", "Nx", "Emotion", "MUI", "Vite", "Python"]
+technology: ["React", "TypeScript", "OpenStreetMap", "Leaflet", "Nx", "Emotion", "MUI",  "Python"]
 deployed: "https://freebici.steciuk.dev"
 repo: "https://github.com/steciuk/freebici"
 start:

@@ -14,5 +14,5 @@ start:
 end:
   month: 7
   year: 2020
-grade: 4.82
+grade: "8.66/10.00"
 ---
