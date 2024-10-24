@@ -1,6 +1,6 @@
 ---
 name: General Intelligence Assessment
-technology: ["Astro", "React", "TypeScript", "Tailwind CSS", "Vite", "shadcn"]
+technology: ["Astro", "React", "TypeScript", "Tailwind CSS",  "shadcn"]
 deployed: "https://gia.steciuk.dev"
 repo: "https://github.com/steciuk/general-intelligence-assessment"
 start:

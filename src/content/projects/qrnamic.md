@@ -1,6 +1,6 @@
 ---
 name: "QRnamic"
-technology: ["React", "TypeScript", "Firestore", "Emotion", "Vite", "MUI"]
+technology: ["React", "TypeScript", "Firestore", "Emotion",  "MUI"]
 deployed: "https://qrnamic.steciuk.dev"
 repo: "https://github.com/steciuk/qrnamic"
 start:
