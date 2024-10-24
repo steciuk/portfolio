@@ -14,7 +14,7 @@ start:
 end:
   month: 7
   year: 2022
-grade: 4.87
+grade: "4.87/5.00"
 descriptionReference:
   cv: "bsc-wut-cv"
   page: "bsc-wut-page"

@@ -18,7 +18,7 @@ educationEntries.sort((a, b) => {
 });
 const groupedEducation = groupEntriesByDataField<"education">(
   educationEntries,
-  "school"
+  "school",
 );
 ---
 
@@ -40,7 +40,7 @@ const groupedEducation = groupEntriesByDataField<"education">(
               </SpaceBetween>
               <Prose class="text-xs a4:prose-li:my-0 print:prose-li:my-0">
                 <ul>
-                  <li>Average grade: {entry.data.grade}/5.00.</li>
+                  <li>Average grade: {entry.data.grade}.</li>
                 </ul>
                 {entry.data.descriptionReference && (
                   <Render entry={entry.data.descriptionReference.cv} />

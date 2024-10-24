@@ -32,7 +32,7 @@ const educationCollection = defineCollection({
       location: location,
       start: monthDate,
       end: monthDate,
-      grade: z.number().min(0).max(5),
+      grade: z.string(),
       descriptionReference: z
         .object({
           cv: reference("descriptions"),

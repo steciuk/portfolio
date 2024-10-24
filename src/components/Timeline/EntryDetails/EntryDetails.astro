@@ -29,7 +29,7 @@ let dateString = formatPeriod(entry.data.start, entry.data.end);
       />
       <EntryDetailsProse>
         <ul>
-          <li>Average grade: {entry.data.grade}/5.00.</li>
+          <li>Average grade: {entry.data.grade}.</li>
           {entry.data.descriptionReference && (
             <li>
               <Render entry={entry.data.descriptionReference.page} />
