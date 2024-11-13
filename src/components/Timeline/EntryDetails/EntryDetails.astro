@@ -1,12 +1,12 @@
 ---
-import EntryRole from "@components/Timeline/EntryDetails/EntryRole.astro";
-import { formatPeriod } from "@content/utils";
-import type { TimelineableEntry } from "@components/Timeline/types";
-import EntryCard from "@components/EntryCard/EntryCard.astro";
-import ProjectCard from "@components/EntryCard/ProjectCard.astro";
-import EntryTitle from "@components/EntryCard/EntryTitle.astro";
-import Render from "@components/ui/Render.astro";
-import EntryDetailsProse from "@components/Timeline/EntryDetails/EntryDetailsProse.astro";
+import EntryRole from '@components/Timeline/EntryDetails/EntryRole.astro';
+import { formatPeriod } from '@content/utils';
+import type { TimelineableEntry } from '@components/Timeline/types';
+import EntryCard from '@components/EntryCard/EntryCard.astro';
+import ProjectCard from '@components/EntryCard/ProjectCard.astro';
+import EntryTitle from '@components/EntryCard/EntryTitle.astro';
+import Render from '@components/ui/Render.astro';
+import EntryDetailsProse from '@components/Timeline/EntryDetails/EntryDetailsProse.astro';
 
 interface Props {
   entry: TimelineableEntry;
@@ -14,18 +14,17 @@ interface Props {
 }
 
 const { entry, class: className } = Astro.props;
-let dateString = formatPeriod(entry.data.start, entry.data.end);
 ---
 
 {
-  entry.collection === "education" ? (
+  entry.collection === 'education' ? (
     <EntryCard image={entry.data.logo} isTimeline={true} class={className}>
       <EntryTitle>{entry.data.school}</EntryTitle>
-      <p class="text-balance font-bold md:text-lg">{entry.data.faculty}</p>
+      <p class='text-balance font-bold md:text-lg'>{entry.data.faculty}</p>
       <EntryRole
         role={entry.data.degree}
-        dateString={dateString}
-        class="mb-3"
+        periods={entry.data.periods}
+        class='mb-3'
       />
       <EntryDetailsProse>
         <ul>
@@ -38,19 +37,23 @@ let dateString = formatPeriod(entry.data.start, entry.data.end);
         </ul>
       </EntryDetailsProse>
     </EntryCard>
-  ) : entry.collection === "jobs" ? (
+  ) : entry.collection === 'jobs' ? (
     <EntryCard image={entry.data.logo} isTimeline={true} class={className}>
       <EntryTitle>{entry.data.company}</EntryTitle>
-      <EntryRole role={entry.data.role} dateString={dateString} class="mb-3" />
+      <EntryRole
+        role={entry.data.role}
+        periods={entry.data.periods}
+        class='mb-3'
+      />
       <EntryDetailsProse>
         <Render entry={entry.data.descriptionReference.page} />
       </EntryDetailsProse>
     </EntryCard>
-  ) : entry.collection === "projects" ? (
+  ) : entry.collection === 'projects' ? (
     <ProjectCard entry={entry} isTimeline={true} class={className} />
   ) : (
     (() => {
-      throw new Error("Invalid entry collection");
+      throw new Error('Invalid entry collection');
     })()
   )
 }

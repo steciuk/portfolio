@@ -7,12 +7,16 @@ role: "Web Developer and IT Administrator"
 location:
   city: "(remote)"
   country: "Poland"
-start:
-  month: 12
-  year: 2023
-end:
-  month: 5
-  year: 2024
+periods:
+  - start:
+      month: 12
+      year: 2023
+    end:
+      month: 5
+      year: 2024
+  - start:
+      month: 11
+      year: 2024
 group: "GeoTec Energy Sp. z o. o."
 descriptionReference:
   cv: "geotec-energy-cv"

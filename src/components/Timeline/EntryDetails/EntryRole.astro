@@ -1,22 +1,26 @@
 ---
-import { cn } from "@src/utils";
-import type { ClassValue } from "clsx";
+import type { Period } from '@content/config';
+import { formatPeriod } from '@content/utils';
+import { cn } from '@src/utils';
+import type { ClassValue } from 'clsx';
 
 interface Props {
   role: string;
-  dateString: string;
+  periods: Period[];
   class?: ClassValue[] | string;
 }
 
-const { role, dateString, class: className } = Astro.props;
+const { role, periods, class: className } = Astro.props;
 ---
 
 <div
   class={cn(
-    "flex justify-between gap-4 md:text-lg italic items-center",
+    'flex justify-between gap-4 md:text-lg italic items-start',
     className
   )}
 >
   <p>{role}</p>
-  <p class="text-nowrap text-right text-foreground/40">{dateString}</p>
+  <div class='text-nowrap text-right text-foreground/40'>
+    {periods.map((period) => <p>{formatPeriod(period.start, period.end)}</p>)}
+  </div>
 </div>

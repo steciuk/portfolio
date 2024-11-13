@@ -1,28 +1,38 @@
 ---
-import { getCollection } from "astro:content";
-import TimelineEntry from "@components/Timeline/TimelineEntry.svelte";
-import { sortByDate } from "@content/utils";
-import EntryDeselector from "@components/Timeline/EntryDeselector.svelte";
-import MonthMarkers from "@components/Timeline/markers/MonthMarkers.svelte";
-import EntryDetailsPortal from "@components/Timeline/EntryDetails/EntryDetailsPortal.astro";
-import YearMarkers from "@components/Timeline/markers/YearMarkers.astro";
-import Legend from "@components/Timeline/Legend/Legend.astro";
+import { getCollection } from 'astro:content';
+import TimelineEntry from '@components/Timeline/TimelineEntry.svelte';
+import { sortByDate } from '@content/utils';
+import EntryDeselector from '@components/Timeline/EntryDeselector.svelte';
+import MonthMarkers from '@components/Timeline/markers/MonthMarkers.svelte';
+import EntryDetailsPortal from '@components/Timeline/EntryDetails/EntryDetailsPortal.astro';
+import YearMarkers from '@components/Timeline/markers/YearMarkers.astro';
+import Legend from '@components/Timeline/Legend/Legend.astro';
+import TimelineEntryConnector from '@components/Timeline/TimelineEntryConnector.svelte';
+import { getEntryId } from '@components/Timeline/entryId';
 
-const educationEntries = await getCollection("education");
-const jobsEntries = await getCollection("jobs");
-const projectsEntries = await getCollection("projects");
+const educationEntries = await getCollection('education');
+const jobsEntries = await getCollection('jobs');
+const projectsEntries = await getCollection('projects');
 
 const allEntries = [...educationEntries, ...jobsEntries, ...projectsEntries];
 
 allEntries.sort((a, b) => {
-  return sortByDate(a.data.start, b.data.start);
+  return sortByDate(a.data.periods[0].start, b.data.periods[0].start);
 });
 
-const earliestStart = allEntries[0].data.start;
-const latestStart = allEntries[allEntries.length - 1].data.start;
+const earliestStart = allEntries[0].data.periods[0].start;
+const latestStart = allEntries.reduce((latest, entry) => {
+  const start = entry.data.periods.at(-1)!.start;
+  if (start.year > latest.year) {
+    return start;
+  } else if (start.year === latest.year && start.month > latest.month) {
+    return start;
+  }
+  return latest;
+}, earliestStart);
 
 const latestEnd = allEntries.reduce((latest, entry) => {
-  const end = entry.data.end;
+  const end = entry.data.periods.at(-1)!.end;
 
   if (!end) {
     return latest;
@@ -32,44 +42,62 @@ const latestEnd = allEntries.reduce((latest, entry) => {
     return end;
   } else if (end.year === latest.year && end.month > latest.month) {
     return end;
-  } else {
-    return latest;
   }
+  return latest;
 }, latestStart);
 
 const totalYears = latestEnd.year - earliestStart.year;
 const totalMonths = totalYears * 12 + latestEnd.month - earliestStart.month + 1;
 
-const lines: Array<[number, number, (typeof allEntries)[number]][]> = [];
+const lines: Array<[startRow: number, endRow: number][]> = [];
+const timelinedEntries: Array<{
+  line: number;
+  periodRows: Array<[startRow: number, endRow: number]>;
+  entry: (typeof allEntries)[number];
+}> = [];
 
 allEntries.forEach((entry) => {
-  const start = entry.data.start;
-  const end = entry.data.end ?? latestEnd;
-  const startRow =
-    (start.year - earliestStart.year) * 12 +
-    start.month -
-    earliestStart.month +
-    1; // 1 based
-  let endRow =
-    (end.year - earliestStart.year) * 12 + end.month - earliestStart.month + 1; // 1 based
+  const periodRows = entry.data.periods.map(({ start, end }) => {
+    const noEnd = !end;
+    end ??= latestEnd;
 
-  if (!entry.data.end) {
-    // Lasts until now, so add 2 rows for '...' and 'Now' markers
-    endRow += 2;
-  }
+    const startRow =
+      (start.year - earliestStart.year) * 12 +
+      start.month -
+      earliestStart.month +
+      1; // 1 based
+    let endRow =
+      (end.year - earliestStart.year) * 12 +
+      end.month -
+      earliestStart.month +
+      1; // 1 based
 
-  let line = lines.findIndex((line) => {
-    return line.every(([start, end]) => {
-      return start >= endRow || end <= startRow;
-    });
-  }); // 0 based
+    if (noEnd) {
+      // Lasts until now, so add 2 rows for '...' and 'Now' markers
+      endRow += 2;
+    }
+
+    return [startRow, endRow] as [start: number, end: number];
+  });
+
+  let line = lines.findIndex((line) =>
+    line.every(([start, end]) =>
+      periodRows.every(
+        ([startRow, endRow]) => start >= endRow || end <= startRow
+      )
+    )
+  ); // 0 based
 
   if (line === -1) {
     line = lines.length;
-    lines.push([[startRow, endRow, entry]]);
-  } else {
-    lines[line].push([startRow, endRow, entry]);
+    lines.push([]);
   }
+
+  periodRows.forEach(([startRow, endRow]) => {
+    lines[line].push([startRow, endRow]);
+  });
+
+  timelinedEntries.push({ line, periodRows, entry });
 });
 
 const numLines = lines.length;
@@ -84,33 +112,50 @@ const monthDates = Array.from({ length: totalMonths }).map((_, i) => {
 ---
 
 <EntryDeselector client:idle />
-<section class="timeline-overgrid container grid gap-x-2 gap-y-0.5 sm:gap-x-4">
+<section class='timeline-overgrid container grid gap-x-2 gap-y-0.5 sm:gap-x-4'>
   <div
-    class="col-span-full row-[2_/_-2] grid grid-cols-subgrid grid-rows-subgrid font-bold"
+    class='col-span-full row-[2_/_-2] grid grid-cols-subgrid grid-rows-subgrid font-bold'
   >
     <Legend />
     <YearMarkers {monthDates} />
     <MonthMarkers {monthDates} client:visible />
     {
-      lines.map((line, numLine) =>
-        line.map(([startRow, endRow, entry]) => {
-          return (
+      timelinedEntries.map(({ entry, periodRows, line }) =>
+        periodRows.map(([startRow, endRow], i) => (
+          <>
             <div
-              class="relative"
+              class='relative'
               style={{
-                gridColumn: numLine + 2,
+                gridColumn: line + 2,
                 gridRow: `${-startRow} / ${-endRow}`,
               }}
             >
               <TimelineEntry {entry} client:visible />
             </div>
-          );
-        })
+
+            {/* Connectors */}
+            {i < periodRows.length - 1 && (
+              <div
+                class='justify-self-center'
+                style={{
+                  gridColumn: line + 2,
+                  gridRow: `${-endRow} / ${-periodRows[i + 1][0]}`,
+                }}
+              >
+                <TimelineEntryConnector
+                  entryId={getEntryId(entry)}
+                  collection={entry.collection}
+                  client:visible
+                />
+              </div>
+            )}
+          </>
+        ))
       )
     }
   </div>
   <div
-    class="pointer-events-none col-span-full row-span-full row-start-1 lg:-col-start-2"
+    class='pointer-events-none col-span-full row-span-full row-start-1 lg:-col-start-2'
   >
     <EntryDetailsPortal entries={allEntries} />
   </div>

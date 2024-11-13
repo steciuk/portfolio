@@ -1,4 +1,4 @@
-import type { CollectionEntry, CollectionKey } from "astro:content";
+import type { TimelineableEntry } from "@components/Timeline/types";
 import { atom } from "nanostores";
 
 function createSelectedEntryStore() {
@@ -11,4 +11,4 @@ function createSelectedEntryStore() {
 }
 
 export const selectedEntry = createSelectedEntryStore();
-export type SelectedEntry = CollectionEntry<CollectionKey> | null
+export type SelectedEntry = TimelineableEntry | null;
