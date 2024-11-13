@@ -2,12 +2,13 @@
 name: "Maze generator and solver"
 technology: ["Python"]
 repo: "https://github.com/steciuk/PSZT-maze-solver"
-start:
-  month: 10
-  year: 2020
-end:
-  month: 11
-  year: 2020
+periods:
+  - start:
+      month: 10
+      year: 2020
+    end:
+      month: 11
+      year: 2020
 description: "Comparison of BFS, DFS and IDFS search algorithms efficiency in randomly generated maze."
 image: 
   src: "./images/maze-solver.png"

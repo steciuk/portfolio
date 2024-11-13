@@ -10,6 +10,11 @@ const monthDate = z.object({
   year: z.number().min(1900).max(2100),
 });
 
+const period = z.object({
+  start: monthDate,
+  end: monthDate.optional(),
+});
+
 const location = z.object({
   city: z.string(),
   country: z.string(),
@@ -162,8 +167,7 @@ const projectsCollection = defineCollection({
       technology: z.array(z.enum(technologies)),
       deployed: z.string().url().optional(),
       repo: z.string().url().optional(),
-      start: monthDate,
-      end: monthDate.optional(),
+      periods: z.array(period),
       description: z.string(),
       shortDescription: z.string().optional(),
       image: imageObject(image).optional(),
