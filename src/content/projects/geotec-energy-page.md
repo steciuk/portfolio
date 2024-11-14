@@ -1,6 +1,6 @@
 ---
 name: "Web page for GeoTec Energy"
-technology: ["Astro", "TypeScript", "Tailwind CSS" ]
+technology: ["Astro", "TypeScript", "Tailwind CSS", "Markdown"]
 deployed: "https://geotecenergy.pro"
 periods:
   - start:

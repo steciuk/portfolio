@@ -141,6 +141,8 @@ export const technologies = [
   "Gephi",
   "Cytoscape",
   "Zod",
+  "Markdown",
+  "MDX",
   // C
   "C",
   "C++",

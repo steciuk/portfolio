@@ -1,6 +1,6 @@
 ---
 name: Portfolio (this website)
-technology: ["Astro", "Svelte", "TypeScript", "Tailwind CSS",  "shadcn"]
+technology: ["Astro", "Svelte", "TypeScript", "Tailwind CSS",  "shadcn", "Markdown", "MDX"]
 deployed: "https://steciuk.dev"
 repo: "https://github.com/steciuk/portfolio"
 periods:
