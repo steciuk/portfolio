@@ -15,6 +15,9 @@ periods:
       month: 5
       year: 2024
   - start:
+      month: 10
+      year: 2024
+    end:
       month: 11
       year: 2024
 group: "GeoTec Energy Sp. z o. o."

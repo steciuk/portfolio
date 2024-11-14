@@ -10,6 +10,9 @@ periods:
       month: 2
       year: 2024
   - start:
+      month: 10
+      year: 2024
+    end:
       month: 11
       year: 2024
 description: "Static, internationalized website for a geothermal energy solutions company, featuring company information, services, contact details, and a blog generated from markdown files for easy content management and updates."
