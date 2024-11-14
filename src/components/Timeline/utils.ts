@@ -7,21 +7,24 @@ export function getEntryAssociatedColor(collection: TimelineableCollection) {
         bgClass: "bg-secondary",
         textClass: "text-secondary",
         cssVarName: "--secondary",
-        hoverClass: "hover:bg-secondary-highlight",
+        highlightCssVarName: "--secondary-highlight",
+        selectedCssVarName: "--secondary-selected",
       };
     case "jobs":
       return {
         bgClass: "bg-primary",
         textClass: "text-primary",
         cssVarName: "--primary",
-        hoverClass: "hover:bg-primary-highlight",
+        highlightCssVarName: "--primary-highlight",
+        selectedCssVarName: "--primary-selected",
       };
     case "projects":
       return {
         bgClass: "bg-accent",
         textClass: "text-accent",
         cssVarName: "--accent",
-        hoverClass: "hover:bg-accent-highlight",
+        highlightCssVarName: "--accent-highlight",
+        selectedCssVarName: "--accent-selected",
       };
   }
 }

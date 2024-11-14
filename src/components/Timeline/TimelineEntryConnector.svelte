@@ -13,7 +13,8 @@
 </script>
 
 <div
-  class="h-full border-0 border-l-2 border-dashed"
-  class:scale-x-105={isCurrentEntry}
-  style="border-color: hsl(var({cssVarName}))"
+  class="-z-10 h-full border-0 border-l-[3px] border-dashed transition-opacity {isCurrentEntry
+    ? 'opacity-100'
+    : 'opacity-30 dark:opacity-50'}"
+  style="border-color: hsl(var({cssVarName}));"
 ></div>

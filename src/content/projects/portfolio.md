@@ -10,6 +10,9 @@ periods:
     end:
       month: 8
       year: 2024
+  - start:
+      month: 11
+      year: 2024
 image:
   src: "./images/portfolio.png"
   alt: "Recursive screenshot of the portfolio website"

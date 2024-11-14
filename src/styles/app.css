@@ -16,14 +16,17 @@
 
     --primary: 28 100% 60%;
     --primary-highlight: 28 100% 70%;
+    --primary-selected: 28 100% 50%;
     --primary-foreground: 23 87% 3%;
 
-    --secondary: 168 86% 73%;
-    --secondary-highlight: 168 86% 83%;
+    --secondary: 168 86% 63%;
+    --secondary-highlight: 168 86% 73%;
+    --secondary-selected: 168 86% 47%;
     --secondary-foreground: 23 87% 3%;
 
     --accent: 217 86% 63%;
     --accent-highlight: 217 86% 73%;
+    --accent-selected: 217 86% 53%;
     --accent-foreground: 23 87% 99%;
 
     --link: var(--accent);
@@ -44,15 +47,18 @@
     --card-foreground: 23 87% 97%;
 
     --primary: 28 85% 40%;
-    --primary-highlight: 28 85% 50%;
+    --primary-highlight: 28 85% 32%;
+    --primary-selected: 28 85% 50%;
     --primary-foreground: 30 80% 99%;
 
     --secondary: 168 86% 27%;
-    --secondary-highlight: 168 86% 37%;
+    --secondary-highlight: 168 86% 22%;
+    --secondary-selected: 168 86% 37%;
     --secondary-foreground: 23 87% 97%;
 
     --accent: 217 86% 37%;
-    --accent-highlight: 217 86% 47%;
+    --accent-highlight: 217 86% 30%;
+    --accent-selected: 217 86% 50%;
     --accent-foreground: 23 87% 97%;
 
     --link: 217 86% 60%;

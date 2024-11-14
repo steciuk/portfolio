@@ -6,7 +6,8 @@
 
   export let entry: TimelineableEntry;
 
-  const { bgClass, hoverClass } = getEntryAssociatedColor(entry.collection);
+  const { bgClass, highlightCssVarName, selectedCssVarName } =
+    getEntryAssociatedColor(entry.collection);
   getEntryAssociatedColor;
   function handleOpenClick() {
     selectedEntry.set(entry);
@@ -26,9 +27,25 @@
 
 <button
   on:click|stopPropagation={handleOpenClick}
-  class="h-full w-full rounded-sm shadow-sm transition-all {bgClass} {hoverClass}"
+  class="timeline-entry h-full w-full rounded-sm transition-all {bgClass}"
+  class:timeline-entry--current-entry={isCurrentEntry}
   class:scale-x-[140%]={isCurrentEntry}
-  class:shadow-xl={isCurrentEntry}
+  style="--highlight-color: hsl(var({highlightCssVarName})); --selected-color: hsl(var({selectedCssVarName}));"
   aria-label="Open details about {ariaLabel}"
 >
 </button>
+
+<style>
+  .timeline-entry {
+    @apply shadow-sm;
+  }
+
+  .timeline-entry:hover:not(.timeline-entry--current-entry) {
+    background-color: var(--highlight-color);
+  }
+
+  .timeline-entry--current-entry {
+    @apply shadow-xl;
+    background-color: var(--selected-color);
+  }
+</style>
