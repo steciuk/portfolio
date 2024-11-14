@@ -1,0 +1,37 @@
+---
+interface Props {
+  colorCSSVar: string;
+}
+
+const { colorCSSVar } = Astro.props;
+---
+
+<svg
+  width='64'
+  height='60'
+  viewBox='0 0 16.933 15.875'
+  class='h-full w-full'
+  preserveAspectRatio='xMinYMin'
+  version='1.1'
+  id='svg376'
+  xmlns='http://www.w3.org/2000/svg'
+>
+  <defs id='defs372'>
+    <marker id='prefix__a' refX='0' refY='0' orient='auto' overflow='visible'>
+      <path
+        d='m -5.231,-2.42 6.555,2.41 -6.554,2.411 c 1.047,-1.423 1.041,-3.37 0,-4.821 z'
+        fill='context-stroke'
+        fill-rule='evenodd'
+        stroke='context-stroke'
+        stroke-width='0.375'
+        stroke-linejoin='round'
+        id='path369'></path>
+    </marker>
+  </defs>
+  <path
+    d='m 15.90414,15.874436 c -0.007,-4.051001 -0.039,-5.436001 -2.777,-7.3500004 -2.74,-1.9129999 -12.1470003,-0.792 -12.1470003,-0.792'
+    fill='none'
+    stroke={`hsl(var(${colorCSSVar}))`}
+    stroke-width='.653'
+    marker-end='url(#prefix__a)'></path>
+</svg>

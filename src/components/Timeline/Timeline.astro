@@ -111,20 +111,23 @@ const monthDates = Array.from({ length: totalMonths }).map((_, i) => {
 });
 ---
 
-<EntryDeselector client:idle />
 <section class='timeline-overgrid container grid gap-x-2 gap-y-0.5 sm:gap-x-4'>
   <div
-    class='col-span-full row-[2_/_-2] grid grid-cols-subgrid grid-rows-subgrid font-bold'
+    class='isolate col-span-full row-[2_/_-2] grid grid-cols-subgrid grid-rows-subgrid font-bold'
   >
-    <Legend />
+    {/* z-index: 20 */}
+    <EntryDeselector client:idle />
     <YearMarkers {monthDates} />
     <MonthMarkers {monthDates} client:visible />
+    {/* z-index: 10 */}
+    <Legend />
     {
       timelinedEntries.map(({ entry, periodRows, line }) =>
         periodRows.map(([startRow, endRow], i) => (
           <>
+            {/* z-index: 30 */}
             <div
-              class='relative'
+              class='relative z-30'
               style={{
                 gridColumn: line + 2,
                 gridRow: `${-startRow} / ${-endRow}`,
