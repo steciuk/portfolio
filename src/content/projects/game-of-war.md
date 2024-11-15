@@ -7,6 +7,12 @@ periods:
       month: 10
       year: 2022
     end:
+      month: 12
+      year: 2022
+  - start:
+      month: 1
+      year: 2023
+    end:
       month: 2
       year: 2023
 description: "Comprehensive system aimed at facilitating the testing of diverse strategies in the card Game of War."

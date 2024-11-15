@@ -8,7 +8,7 @@ periods:
       month: 10
       year: 2022
     end:
-      month: 12
+      month: 11
       year: 2022
 description: "Web app visualizing encoding and decoding steps in Burrows-Wheeler transform."
 image:
