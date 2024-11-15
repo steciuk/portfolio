@@ -16,7 +16,7 @@ const period = z.object({
 });
 
 const location = z.object({
-  city: z.string(),
+  city: z.string().optional(),
   country: z.string(),
 });
 

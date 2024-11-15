@@ -5,7 +5,6 @@ logo:
   alt: "GeoTec Energy logo"
 role: "Web Developer and IT Administrator"
 location:
-  city: "(remote)"
   country: "Poland"
 periods:
   - start:

@@ -15,7 +15,7 @@ import { getCollection } from "astro:content";
 
 const jobsEntries = await getCollection("jobs");
 jobsEntries.sort((a, b) => {
-  return sortByDate(b.data.start, a.data.start);
+  return sortByDate(b.data.periods.at(-1)!.start, a.data.periods.at(-1)!.start);
 });
 const groupedJobs = groupEntriesByDataField<"jobs">(jobsEntries, "group");
 ---
@@ -34,9 +34,13 @@ const groupedJobs = groupEntriesByDataField<"jobs">(jobsEntries, "group");
               <h4 class="text-sm italic" slot="left">
                 {job.data.role}
               </h4>
-              <Side slot="right">
-                {formatPeriod(job.data.start, job.data.end, true)}
-              </Side>
+              <div slot="right">
+                {[...job.data.periods].reverse().map((period) => (
+                  <Side>
+                    {formatPeriod(period.start, period.end, true)}
+                  </Side>
+                ))}
+              </div>
             </SpaceBetween>
             <Prose class="text-xs">
               <Render entry={job.data.descriptionReference.cv}/>

@@ -1,37 +1,37 @@
 ---
-import Section from "@components/CV/ui/Section.astro";
-import { Button } from "@components/ui/button";
-import Prose from "@components/ui/Prose.astro";
-import { breakifyLink } from "@src/utils";
-import { getEntry } from "astro:content";
+import Section from '@components/CV/ui/Section.astro';
+import { Button } from '@components/ui/button';
+import Prose from '@components/ui/Prose.astro';
+import { breakifyLink } from '@src/utils';
+import { getEntry } from 'astro:content';
 
 const projectsToShow = [
-  "state-viz",
-  "freebici",
-  "qrnamic",
-  "vite-plugin-inline-imports",
-  "card-game",
-  "quote-shake",
+  'state-viz',
+  'freebici',
+  'qrnamic',
+  'vite-plugin-inline-imports',
+  'card-game',
+  // "quote-shake",
   // "bwt"
 ] as const;
 
 const projectsEntries = await Promise.all(
-  projectsToShow.map((slug) => getEntry("projects", slug))
+  projectsToShow.map((slug) => getEntry('projects', slug))
 );
 
 if (projectsEntries.some((entry) => entry === null)) {
-  throw new Error("Some projects were not found");
+  throw new Error('Some projects were not found');
 }
 ---
 
-<Section title="Relevant Projects">
-  <p class="text-2xs" slot="right">
-    See more at{" "}
+<Section title='Relevant Projects'>
+  <p class='text-2xs' slot='right'>
+    See more at{' '}
     <Button
-      href="https://steciuk.dev/projects"
-      target="_blank"
-      variant="link"
-      size="inline"
+      href='https://steciuk.dev/projects'
+      target='_blank'
+      variant='link'
+      size='inline'
     >
       steciuk.dev
     </Button>
@@ -39,18 +39,18 @@ if (projectsEntries.some((entry) => entry === null)) {
   {
     projectsEntries.map((entry) => (
       <>
-        <h3 class="mt-1 text-sm screen-max-a4:text-base">{entry.data.name}</h3>
-        <Prose class="text-2xs a4:prose-li:my-0 screen-max-a4:text-xs print:prose-li:my-0">
+        <h3 class='mt-1 text-sm screen-max-a4:text-base'>{entry.data.name}</h3>
+        <Prose class='text-2xs a4:prose-li:my-0 screen-max-a4:text-xs print:prose-li:my-0'>
           <ul>
             <li>{entry.data.shortDescription ?? entry.data.description}</li>
             {entry.data.repo && (
               <li>
-                Repository:{" "}
+                Repository:{' '}
                 <Button
                   href={entry.data.repo}
-                  target="_blank"
-                  size="inline"
-                  variant="link"
+                  target='_blank'
+                  size='inline'
+                  variant='link'
                 >
                   <Fragment set:html={breakifyLink(entry.data.repo)} />
                 </Button>
@@ -58,18 +58,18 @@ if (projectsEntries.some((entry) => entry === null)) {
             )}
             {entry.data.deployed && (
               <li>
-                Avaliable at:{" "}
+                Avaliable at:{' '}
                 <Button
                   href={entry.data.deployed}
-                  target="_blank"
-                  size="inline"
-                  variant="link"
+                  target='_blank'
+                  size='inline'
+                  variant='link'
                 >
                   <Fragment set:html={breakifyLink(entry.data.deployed)} />
                 </Button>
               </li>
             )}
-            <li>{entry.data.technology.join(", ")}.</li>
+            <li>{entry.data.technology.join(', ')}.</li>
           </ul>
         </Prose>
       </>

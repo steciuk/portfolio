@@ -27,7 +27,9 @@ export function sortByDate(
 }
 
 export function formatLocation(location: Location): string {
-  return `${location.city}, ${location.country}`;
+  return location.city
+    ? `${location.city}, ${location.country}`
+    : location.country;
 }
 
 export function groupEntriesByDataField<T extends CollectionKey>(
