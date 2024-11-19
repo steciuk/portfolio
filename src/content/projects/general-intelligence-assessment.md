@@ -3,12 +3,13 @@ name: General Intelligence Assessment
 technology: ["Astro", "React", "TypeScript", "Tailwind CSS",  "shadcn"]
 deployed: "https://gia.steciuk.dev"
 repo: "https://github.com/steciuk/general-intelligence-assessment"
-start:
-  month: 9
-  year: 2024
-end:
-  month: 10
-  year: 2024
+periods:
+  - start:
+      month: 9
+      year: 2024
+    end:
+      month: 10
+      year: 2024
 image:
   src: "./images/general-intelligence-assessment.png"
   alt: "Screenshot of the General Intelligence Assessment website test selection screen"

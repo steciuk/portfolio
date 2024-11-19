@@ -1,18 +1,19 @@
 ---
-import ContactItem from "@components/CV/Header/ContactItem.astro";
-import { email, github, linkedin, website } from "@src/links";
-import { Github, Globe, Linkedin, Mail, MapPin, Phone } from "lucide-svelte";
+import ContactItem from '@components/CV/Header/ContactItem.astro';
+import { email, github, linkedin, website } from '@src/links';
+import { breakifyLink } from '@src/utils';
+import { Github, Globe, Linkedin, Mail, MapPin, Phone } from 'lucide-svelte';
 ---
 
 <div
-  class="grid screen-max-a4:block"
+  class='grid screen-max-a4:block'
   style={{
-    gridTemplateColumns: "2fr 1fr",
+    gridTemplateColumns: '2fr 1fr',
   }}
 >
-  <div class="flex flex-col justify-between">
-    <h1 class="text-4xl">Adam Steciuk</h1>
-    <p class="text-justify text-sm screen-max-a4:max-w-[80ch]">
+  <div class='flex flex-col justify-between'>
+    <h1 class='text-4xl'>Adam Steciuk</h1>
+    <p class='text-justify text-sm screen-max-a4:max-w-[80ch]'>
       Frontend web developer with over 2 years of professional experience and
       extensive work on personal and university projects. Passionate about
       creating dynamic, user-friendly web applications. Curious and ambitious,
@@ -21,33 +22,33 @@ import { Github, Globe, Linkedin, Mail, MapPin, Phone } from "lucide-svelte";
     </p>
   </div>
   <ul
-    class="grid grid-flow-row grid-cols-1 justify-items-end screen-max-a4:mt-2 screen-max-a4:grid-flow-col screen-max-a4:grid-cols-2 screen-max-a4:grid-rows-3 screen-max-a4:justify-items-center"
+    class='grid grid-flow-row grid-cols-1 justify-items-end screen-max-a4:mt-2 screen-max-a4:grid-flow-col screen-max-a4:grid-cols-2 screen-max-a4:grid-rows-3 screen-max-a4:justify-items-center'
   >
     <ContactItem>
-      <a href={`mailto:${email}`}>{email}</a>
+      <a href={`mailto:${email}`}>{breakifyLink(email)}</a>
       <Mail />
     </ContactItem>
     <ContactItem>
-      <div class="redacted">
+      <div class='redacted'>
         <span>+48 123 456 789</span>
       </div>
       <Phone />
     </ContactItem>
-    <ContactItem class="a4:hidden print:hidden">
+    <ContactItem class='a4:hidden print:hidden'>
       <span>Gdańsk, Poland</span>
       <MapPin />
     </ContactItem>
     <ContactItem>
-      <a href={website} target="_blank" rel="noopener">steciuk.dev</a>
+      <a href={website} target='_blank' rel='noopener'>steciuk.dev</a>
       <Globe />
     </ContactItem>
     <ContactItem>
-      <a href={github} target="_blank" rel="noopener">github.com/steciuk</a>
+      <a href={github} target='_blank' rel='noopener'>github.com/steciuk</a>
       <Github />
     </ContactItem>
     <ContactItem>
-      <a href={linkedin} target="_blank" rel="noopener">
-        linedin.com/in/steciuk
+      <a href={linkedin} target='_blank' rel='noopener'>
+        linkedin.com/in/steciuk
       </a>
       <Linkedin />
     </ContactItem>
@@ -68,10 +69,11 @@ import { Github, Globe, Linkedin, Mail, MapPin, Phone } from "lucide-svelte";
   }
 
   .redacted::after {
-    content: "redacted";
+    content: 'redacted';
     position: absolute;
     width: 100%;
     left: 0;
+    top: 0;
 
     font-size: 0.8em;
     text-align: center;

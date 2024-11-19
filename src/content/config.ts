@@ -10,8 +10,13 @@ const monthDate = z.object({
   year: z.number().min(1900).max(2100),
 });
 
+const period = z.object({
+  start: monthDate,
+  end: monthDate.optional(),
+});
+
 const location = z.object({
-  city: z.string(),
+  city: z.string().optional(),
   country: z.string(),
 });
 
@@ -30,8 +35,7 @@ const educationCollection = defineCollection({
       faculty: z.string(),
       logo: imageObject(image),
       location: location,
-      start: monthDate,
-      end: monthDate,
+      periods: z.array(period).nonempty(),
       grade: z.string(),
       descriptionReference: z
         .object({
@@ -51,8 +55,7 @@ const jobsCollection = defineCollection({
       role: z.string(),
       location: location,
       logo: imageObject(image),
-      start: monthDate,
-      end: monthDate.optional(),
+      periods: z.array(period).nonempty(),
       descriptionReference: z.object({
         cv: reference("descriptions"),
         page: reference("descriptions"),
@@ -138,6 +141,8 @@ export const technologies = [
   "Gephi",
   "Cytoscape",
   "Zod",
+  "Markdown",
+  "MDX",
   // C
   "C",
   "C++",
@@ -162,8 +167,7 @@ const projectsCollection = defineCollection({
       technology: z.array(z.enum(technologies)),
       deployed: z.string().url().optional(),
       repo: z.string().url().optional(),
-      start: monthDate,
-      end: monthDate.optional(),
+      periods: z.array(period).nonempty(),
       description: z.string(),
       shortDescription: z.string().optional(),
       image: imageObject(image).optional(),
@@ -183,3 +187,4 @@ export type MonthDate = z.infer<typeof monthDate>;
 export type Location = z.infer<typeof location>;
 export type Technology = (typeof technologies)[number];
 export type ImageObject = z.infer<ReturnType<typeof imageObject>>;
+export type Period = z.infer<typeof period>;

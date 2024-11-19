@@ -80,7 +80,9 @@ export const badgesLinks = {
   IndexedDB: "https://img.shields.io/badge/IndexedDB-4D4D4D?logo=indexeddb&logoColor=fff&style=flat-square", // no logo
   tRPC: "https://img.shields.io/badge/tRPC-2596BE?logo=trpc&logoColor=fff&style=flat-square",
   "TanStack Query": "https://img.shields.io/badge/TanStack%20Query-ff4154?logo=react&logoColor=fff&style=flat-square",
-  "Drizzle": "https://img.shields.io/badge/Drizzle-C5F74F?logo=drizzle&logoColor=000&style=flat-square",
-  "PostgreSQL": "https://img.shields.io/badge/PostgreSQL-4169E1?logo=postgresql&logoColor=fff&style=flat-square",
-  "Zod": "https://img.shields.io/badge/Zod-3E67B1?logo=zod&logoColor=fff&style=flat-square",
+  Drizzle: "https://img.shields.io/badge/Drizzle-C5F74F?logo=drizzle&logoColor=000&style=flat-square",
+  PostgreSQL: "https://img.shields.io/badge/PostgreSQL-4169E1?logo=postgresql&logoColor=fff&style=flat-square",
+  Zod: "https://img.shields.io/badge/Zod-3E67B1?logo=zod&logoColor=fff&style=flat-square",
+  Markdown: "https://img.shields.io/badge/Markdown-000?logo=markdown&logoColor=fff&style=flat-square",
+  MDX: "https://img.shields.io/badge/MDX-1B1F24?logo=mdx&logoColor=fff&style=flat-square"
 } as const satisfies { [key in Technology]: string };

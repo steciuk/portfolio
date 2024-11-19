@@ -8,12 +8,13 @@ degree: "BSc in Computer Science"
 location:
   city: "Warsaw"
   country: "Poland"
-start:
-  month: 10
-  year: 2018
-end:
-  month: 7
-  year: 2022
+periods:
+  - start:
+      month: 10
+      year: 2018
+    end:
+      month: 7
+      year: 2022
 grade: "4.87/5.00"
 descriptionReference:
   cv: "bsc-wut-cv"

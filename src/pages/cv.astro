@@ -1,43 +1,43 @@
 ---
-import Layout from "@layouts/Layout.astro";
-import { Button } from "@components/ui/button";
-import Header from "@components/CV/Header/Header.astro";
-import Experience from "@components/CV/sections/Experience.astro";
-import Skills from "@components/CV/sections/Skills.astro";
-import Interests from "@components/CV/sections/Interests.astro";
-import Education from "@components/CV/sections/Education.astro";
-import Projects from "@components/CV/sections/Projects.astro";
-import { Fragment } from "astro/jsx-runtime";
-import { Download } from "lucide-svelte";
+import Layout from '@layouts/Layout.astro';
+import { Button } from '@components/ui/button';
+import Header from '@components/CV/Header/Header.astro';
+import Experience from '@components/CV/sections/Experience.astro';
+import Skills from '@components/CV/sections/Skills.astro';
+import Interests from '@components/CV/sections/Interests.astro';
+import Education from '@components/CV/sections/Education.astro';
+import Projects from '@components/CV/sections/Projects.astro';
+import { Fragment } from 'astro/jsx-runtime';
+import { Download } from 'lucide-svelte';
 ---
 
 <Layout
-  subtitle="CV"
-  headerClass="print:hidden"
-  navClass="print:hidden"
-  footerClass="print:hidden"
+  subtitle='CV'
+  headerClass='print:hidden'
+  navClass='print:hidden'
+  footerClass='print:hidden'
 >
-  <div class="my-6 flex justify-center print:hidden">
-    <Button href="/Adam_Steciuk_CV.pdf" variant="outline" target="_blank">
-      <Download class="mr-2" /> Download PDF
+  <div class='my-6 flex justify-center print:hidden'>
+    <Button href='/Adam_Steciuk_CV.pdf' variant='outline' target='_blank'>
+      <Download class='mr-2' /> Download PDF
     </Button>
   </div>
   <main
-    class="page font-sans-system mx-auto my-4 min-h-a4 w-a4 max-w-a4 rounded-sm border-2 bg-background p-[0.7cm] shadow-md screen-max-a4:mx-1 screen-max-a4:w-auto screen-max-a4:p-2 print:m-0 print:h-a4 print:overflow-hidden print:rounded-none print:border-0 print:bg-[#fff] print:shadow-none"
+    class='page mx-auto my-4 min-h-a4 w-a4 max-w-a4 rounded-sm border-2 bg-background p-[0.7cm] font-sans-system shadow-md screen-max-a4:mx-1 screen-max-a4:w-auto screen-max-a4:p-2 print:m-0 print:h-a4 print:overflow-hidden print:rounded-none print:border-0 print:bg-[#fff] print:shadow-none'
   >
     <Header />
-    <div class="mt-1 grid grid-cols-2 gap-3 screen-max-a4:hidden">
+    <div class='mt-1 grid grid-cols-2 gap-3 screen-max-a4:hidden'>
       <div>
         <Experience />
         <Skills />
-        <Interests />
       </div>
       <div>
         <Education />
         <Projects />
+        <Interests />
       </div>
     </div>
-    <div class="mt-1 a4:hidden print:hidden">
+    <div class='mt-1 a4:hidden print:hidden'>
       <Experience />
       <Education />
       <Projects />

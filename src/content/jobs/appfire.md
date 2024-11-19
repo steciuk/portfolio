@@ -7,12 +7,13 @@ role: "Front-End Developer"
 location:
   city: "Warsaw"
   country: "Poland"
-start:
-  month: 10
-  year: 2021
-end:
-  month: 12
-  year: 2022
+periods:
+  - start:
+      month: 10
+      year: 2021
+    end:
+      month: 12
+      year: 2022
 group: "Appfire (BigPicture)"
 descriptionReference:
   cv: "appfire"
