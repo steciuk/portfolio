@@ -1,1 +1,1 @@
-- Was learning Salesforce ecosystem through Trailhead platform.
+- Was learning Salesforce ecosystem through Trailhead.
