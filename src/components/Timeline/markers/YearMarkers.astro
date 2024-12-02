@@ -9,7 +9,10 @@ const { monthDates } = Astro.props;
 const years: { year: number; row: number }[] = [];
 
 monthDates.forEach((monthDate, i) => {
-  if (monthDate.month === 12) {
+  if (
+    monthDate.month === 12 &&
+    i > 0 // Don't show if it's the first month
+  ) {
     years.push({ year: monthDate.year, row: i + 3 });
   }
 });
