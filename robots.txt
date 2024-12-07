@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://steciuk.dev/sitemap-index.xml
