@@ -16,6 +16,6 @@ periods:
       year: 2025
 group: "Svevn"
 descriptionReference:
-  cv: "svevn"
-  page: "svevn"
+  cv: "svevn-cv"
+  page: "svevn-page"
 ---

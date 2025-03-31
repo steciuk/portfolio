@@ -3,7 +3,7 @@ company: Canonical
 logo: 
   src: "./images/canonical.webp"
   alt: "Canonical logo"
-role: "Web Engineer"
+role: "Software Engineer"
 location:
   country: "Poland"
 periods:

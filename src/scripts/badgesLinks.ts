@@ -84,5 +84,10 @@ export const badgesLinks = {
   PostgreSQL: "https://img.shields.io/badge/PostgreSQL-4169E1?logo=postgresql&logoColor=fff&style=flat-square",
   Zod: "https://img.shields.io/badge/Zod-3E67B1?logo=zod&logoColor=fff&style=flat-square",
   Markdown: "https://img.shields.io/badge/Markdown-000?logo=markdown&logoColor=fff&style=flat-square",
-  MDX: "https://img.shields.io/badge/MDX-1B1F24?logo=mdx&logoColor=fff&style=flat-square"
+  MDX: "https://img.shields.io/badge/MDX-1B1F24?logo=mdx&logoColor=fff&style=flat-square",
+  SQLite: "https://img.shields.io/badge/SQLite-003B57?logo=sqlite&logoColor=fff&style=flat-square",
+  MariaDB: "https://img.shields.io/badge/MariaDB-003545?logo=mariadb&logoColor=fff&style=flat-square",
+  SQLAlchemy: "https://img.shields.io/badge/SQLAlchemy-D71F00?logo=sqlalchemy&logoColor=fff&style=flat-square",
+  Alembic: "https://img.shields.io/badge/Alembic-000?logo=alembic&logoColor=fff&style=flat-square", // no logo
+  Vuex: "https://img.shields.io/badge/Vuex-4FC08D?logo=vuedotjs&logoColor=fff&style=flat-square",
 } as const satisfies { [key in Technology]: string };
