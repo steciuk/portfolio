@@ -1,5 +1,5 @@
 ---
-import SpaceBetween from "@components/CV/ui/SpaceBetween.astro";
+import SpaceBetween from '@components/CV/ui/SpaceBetween.astro';
 
 interface Props {
   title: string;
@@ -8,13 +8,13 @@ interface Props {
 const { title } = Astro.props;
 ---
 
-<section class="mt-2 screen-max-a4:mt-6">
+<section class='mb-2 screen-max-a4:mt-6'>
   <SpaceBetween>
-    <h2 class="text-lg/[22px] uppercase" slot="left">
+    <h2 class='text-lg/[22px] uppercase' slot='left'>
       {title}
     </h2>
-    <slot name="right" slot="right" />
+    <slot name='right' slot='right' />
   </SpaceBetween>
-  <hr class="border-t-2 border-foreground/50" />
+  <hr class='border-t-2 border-foreground/50' />
   <slot />
 </section>
