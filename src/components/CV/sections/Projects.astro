@@ -8,11 +8,11 @@ import { getEntry } from 'astro:content';
 const projectsToShow = [
   'state-viz',
   'freebici',
-  'qrnamic',
-  'vite-plugin-inline-imports',
-  'card-game',
+  // 'qrnamic',
+  // 'vite-plugin-inline-imports',
+  // 'card-game',
   // 'quote-shake',
-  // "bwt"
+  // 'bwt',
 ] as const;
 
 const projectsEntries = await Promise.all(
@@ -24,9 +24,9 @@ if (projectsEntries.some((entry) => entry === null)) {
 }
 ---
 
-<Section title='Relevant Projects'>
+<Section title='My Projects'>
   <p class='text-2xs' slot='right'>
-    See more at{' '}
+    See much more at{' '}
     <Button
       href='https://steciuk.dev/projects'
       target='_blank'
@@ -40,10 +40,10 @@ if (projectsEntries.some((entry) => entry === null)) {
     projectsEntries.map((entry) => (
       <>
         <h3 class='mt-1 text-sm screen-max-a4:text-base'>{entry.data.name}</h3>
-        <Prose class='text-[0.65rem] leading-4 a4:prose-li:my-0 screen-max-a4:text-xs print:prose-li:my-0'>
+        <Prose class='text-2xs prose-li:my-0 screen-max-a4:text-xs screen-max-a4:prose-li:my-1'>
           <ul>
             <li>{entry.data.shortDescription ?? entry.data.description}</li>
-            {entry.data.repo && (
+            {/* {entry.data.repo && (
               <li>
                 Repository:{' '}
                 <Button
@@ -69,7 +69,7 @@ if (projectsEntries.some((entry) => entry === null)) {
                 </Button>
               </li>
             )}
-            <li>{entry.data.technology.join(', ')}.</li>
+            <li>{entry.data.technology.join(', ')}.</li> */}
           </ul>
         </Prose>
       </>

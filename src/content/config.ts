@@ -98,6 +98,7 @@ export const technologies = [
   "Angular",
   // State management
   "TanStack Query",
+  "Vuex",
   // Back-end frameworks
   "Node.js",
   "Express",
@@ -108,6 +109,10 @@ export const technologies = [
   "IndexedDB",
   "Drizzle",
   "PostgreSQL",
+  "SQLite",
+  "MariaDB",
+  "SQLAlchemy",
+  "Alembic",
   // Devops:
   "Vercel",
   "Heroku",
